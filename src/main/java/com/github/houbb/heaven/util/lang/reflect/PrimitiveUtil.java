@@ -15,17 +15,20 @@ import java.util.Map;
  */
 public final class PrimitiveUtil {
 
-    private static final Map<Class<?>, Class<?>> primitiveWrapperTypeMap = new IdentityHashMap<>(8);
+    /**
+     * 类型集合
+     */
+    private static final Map<Class<?>, Class<?>> TYPE_MAP = new IdentityHashMap<>(8);
 
     static {
-        primitiveWrapperTypeMap.put(Boolean.class, Boolean.TYPE);
-        primitiveWrapperTypeMap.put(Byte.class, Byte.TYPE);
-        primitiveWrapperTypeMap.put(Character.class, Character.TYPE);
-        primitiveWrapperTypeMap.put(Double.class, Double.TYPE);
-        primitiveWrapperTypeMap.put(Float.class, Float.TYPE);
-        primitiveWrapperTypeMap.put(Integer.class, Integer.TYPE);
-        primitiveWrapperTypeMap.put(Long.class, Long.TYPE);
-        primitiveWrapperTypeMap.put(Short.class, Short.TYPE);
+        TYPE_MAP.put(Boolean.class, Boolean.TYPE);
+        TYPE_MAP.put(Byte.class, Byte.TYPE);
+        TYPE_MAP.put(Character.class, Character.TYPE);
+        TYPE_MAP.put(Double.class, Double.TYPE);
+        TYPE_MAP.put(Float.class, Float.TYPE);
+        TYPE_MAP.put(Integer.class, Integer.TYPE);
+        TYPE_MAP.put(Long.class, Long.TYPE);
+        TYPE_MAP.put(Short.class, Short.TYPE);
     }
 
     /**
@@ -34,7 +37,7 @@ public final class PrimitiveUtil {
      * @return 基本类型
      */
     public static Class<?> getPrimitiveType(final Class<?> classType) {
-        return primitiveWrapperTypeMap.get(classType);
+        return TYPE_MAP.get(classType);
     }
 
 }

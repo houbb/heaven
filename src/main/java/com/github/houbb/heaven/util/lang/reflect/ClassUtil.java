@@ -295,17 +295,12 @@ public final class ClassUtil {
         Class resolvedPrimitive;
         if (sourceType.isPrimitive()) {
             resolvedPrimitive = PrimitiveUtil.getPrimitiveType(targetType);
-            if (sourceType == resolvedPrimitive) {
-                return true;
-            }
+            return sourceType == resolvedPrimitive;
         } else {
             resolvedPrimitive = PrimitiveUtil.getPrimitiveType(targetType);
-            if (resolvedPrimitive != null && sourceType.isAssignableFrom(resolvedPrimitive)) {
-                return true;
-            }
+            return resolvedPrimitive != null && sourceType.isAssignableFrom(resolvedPrimitive);
         }
 
-        return false;
     }
 
     /**

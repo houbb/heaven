@@ -6,6 +6,7 @@
 package com.github.houbb.heaven.util.util;
 
 import com.github.houbb.heaven.support.handler.IHandler;
+import com.github.houbb.heaven.util.lang.ObjectUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -93,6 +94,7 @@ public final class CollectionUtil {
 
     /**
      * 构建结果集合
+     * 1. 如果转换的结果为 null，会被跳过。
      * @param targets 原始信息
      * @param handler 处理接口
      * @param <T> 入参
@@ -103,10 +105,36 @@ public final class CollectionUtil {
         if(isEmpty(targets)) {
             return Collections.emptyList();
         }
-        Collection<R> rList = new ArrayList<>(targets.size());
+        Collection<R> rList = new ArrayList<>();
         for(T t : targets) {
             R r = handler.handle(t);
-            rList.add(r);
+            if(ObjectUtil.isNotNull(r)) {
+                rList.add(r);
+            }
+        }
+        return rList;
+    }
+
+    /**
+     * 构建结果集合
+     * 1. 如果转换的结果为 null，会被跳过。
+     * @param targets 原始信息
+     * @param handler 处理接口
+     * @param <T> 入参
+     * @param <R> 出参
+     * @return 结果
+     * @since 0.0.2
+     */
+    public static <T, R> Collection<R> buildCollection(final T[] targets, final IHandler<T, R> handler) {
+        if(ArrayUtil.isEmpty(targets)) {
+            return Collections.emptyList();
+        }
+        Collection<R> rList = new ArrayList<>();
+        for(T t : targets) {
+            R r = handler.handle(t);
+            if(ObjectUtil.isNotNull(r)) {
+                rList.add(r);
+            }
         }
         return rList;
     }
