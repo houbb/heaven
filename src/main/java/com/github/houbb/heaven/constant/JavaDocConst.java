@@ -12,6 +12,9 @@ package com.github.houbb.heaven.constant;
  */
 public final class JavaDocConst {
 
+    /**    
+     *  java document const    
+     */    
     private JavaDocConst(){}
 
     /**

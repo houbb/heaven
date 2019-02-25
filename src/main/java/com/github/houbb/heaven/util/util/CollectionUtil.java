@@ -18,6 +18,9 @@ import java.util.*;
  */
 public final class CollectionUtil {
 
+    /**    
+     *  collection util    
+     */    
     private CollectionUtil(){}
 
     /**
