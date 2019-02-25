@@ -115,6 +115,7 @@ public final class ArrayUtil {
      * 查询对应元素的下标
      * @param array 数组信息
      * @param objectToFind 待发现的对象
+     * @param startIndex 开始下标
      * @return 下标
      * @since 0.0.1
      */
