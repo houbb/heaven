@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.lang;
 
+import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
@@ -137,14 +138,19 @@ public final class ObjectUtil {
             return false;
         }
 
+        final Class exceptClass = except.getClass();
+        final Class realClass = except.getClass();
+
         //2. 基本类型
-        if (ClassUtil.isPrimitive(except) && ClassUtil.isPrimitive(real)
+        if (exceptClass.isPrimitive()
+                && realClass.isPrimitive()
                 && except != real) {
             return false;
         }
 
         //3. 数组
-        if (ClassUtil.isArray(except) && ClassUtil.isArray(real)) {
+        if (ClassTypeUtil.isArray(exceptClass)
+                && ClassTypeUtil.isArray(realClass)) {
             Object[] exceptArray = (Object[]) except;
             Object[] realArray = (Object[]) real;
             return Arrays.equals(exceptArray, realArray);
@@ -153,7 +159,7 @@ public final class ObjectUtil {
         //3. Collection
 
         //4. map
-        if (ClassUtil.isMap(except) && ClassUtil.isMap(real)) {
+        if (ClassTypeUtil.isMap(exceptClass) && ClassTypeUtil.isMap(realClass)) {
             Map exceptMap = (Map) except;
             Map realMap = (Map) real;
             return exceptMap.equals(realMap);

@@ -8,11 +8,7 @@ package com.github.houbb.heaven.util.util;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 集合工具类
@@ -152,4 +148,42 @@ public final class CollectionUtil {
 
         collection.addAll(Arrays.asList(array));
     }
+
+    /**
+     * 可遍历的元素对象的某个元素，转换为列表
+     * @param values 遍历对象
+     * @param keyFunction 转换方式
+     * @param <K> k 泛型
+     * @param <V> v 泛型
+     * @return 结果列表
+     */
+    public static <K, V> List<K> toList(final Iterable<V> values, IHandler<? super V, K> keyFunction) {
+        if(ObjectUtil.isNull(values)) {
+            return Collections.emptyList();
+        }
+        return toList(values.iterator(), keyFunction);
+    }
+
+    /**
+     * 可遍历的元素对象的某个元素，转换为列表
+     * @param values 遍历对象
+     * @param keyFunction 转换方式
+     * @param <K> k 泛型
+     * @param <V> v 泛型
+     * @return 结果列表
+     */
+    public static  <K,V> List<K> toList(Iterator<V> values, IHandler<? super V, K> keyFunction) {
+        if(ObjectUtil.isNull(values)) {
+            return Collections.emptyList();
+        }
+
+        List<K> list = new ArrayList<>();
+        while (values.hasNext()) {
+            V value = values.next();
+            final K key = keyFunction.handle(value);
+            list.add(key);
+        }
+        return list;
+    }
+
 }
