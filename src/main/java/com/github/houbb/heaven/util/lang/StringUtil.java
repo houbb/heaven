@@ -31,7 +31,7 @@ public final class StringUtil {
      * @param string 待检验字符
      * @return 是否为大写
      */
-    public static boolean isUppperCase(final String string) {
+    public static boolean isUpperCase(final String string) {
         if(StringUtil.isEmpty(string)) {
             return false;
         }

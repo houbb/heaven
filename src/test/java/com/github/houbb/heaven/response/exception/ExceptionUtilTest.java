@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 public class ExceptionUtilTest {
 
     /**
-    *
-    * Method: unwrapThrowable(wrapped)
-    */
+     *
+     * Method: unwrapThrowable(wrapped)
+     */
     @Test
     public void unwrapThrowableTest() throws Exception {
     }

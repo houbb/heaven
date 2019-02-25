@@ -8,6 +8,8 @@ package com.github.houbb.heaven.util.common;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
+import java.math.BigDecimal;
+
 /**
  * 参数工具类
  *
@@ -56,39 +58,6 @@ public final class ArgUtil {
     }
 
     /**
-     * 判断是否为null
-     *
-     * @param object 待判断的对象
-     * @return {@code true} 为空
-     */
-    public static Boolean isNull(Object object) {
-        return null == object;
-    }
-
-    /**
-     * 判断是否为非 null
-     * @param object 待判断的对象
-     * @return {@code true} 为非空
-     */
-    public static Boolean isNotNull(Object object) {
-        return !isNull(object);
-    }
-
-    /**
-     * 断言: real 与 except 相等
-     * @param except    期望值
-     * @param real  实际值
-     * @param msg   错误消息
-     */
-    public static void equals(String except, String real, String msg) {
-        if(!real.equals(except)) {
-            String errorMsg = buildErrorMsg(except, real, msg);
-            throw new IllegalArgumentException(errorMsg);
-        }
-    }
-
-
-    /**
      * 断言: real 与 except 相等
      * @param except    期望值
      * @param real  实际值
@@ -104,17 +73,18 @@ public final class ArgUtil {
 
     /**
      * 指定长度是否等于某个值
-     * 1.空值校验通过。
+     * 1.空值校验则认为长度为0；
      * 2.想对空值校验,请使用判断非空。
      * @param string 字符串
      * @param len 期望长度
      * @return  {@code true} 是
      */
     public static boolean isEqualsLen(String string, int len) {
-        if(null != string) {
-            return string.length() == len;
+        if(StringUtil.isEmpty(string)) {
+            return 0 ==len;
         }
-        return true;
+
+        return string.length() == len;
     }
 
     /**
@@ -127,18 +97,19 @@ public final class ArgUtil {
         return !isEqualsLen(string, len);
     }
 
-
     /**
      * 字符串是否满足最大长度
+     * 1. 认为 null 字段长度为 0
+     * 2. 比较校验
      * @param string 字符串
      * @param maxLen 最大长度
      * @return {@code true} 是
      */
     public static boolean isFitMaxLen(String string, int maxLen) {
-        if(null != string) {
-            return string.length() <= maxLen;
+        if(StringUtil.isEmpty(string)) {
+            return 0 <= maxLen;
         }
-        return true;
+        return string.length() <= maxLen;
     }
 
     /**
@@ -154,15 +125,16 @@ public final class ArgUtil {
 
     /**
      * 满足最小长度
+     * 1. 如果为 null，则认为长度为0
      * @param string 字符串
      * @param minLen 最小长度
      * @return {@code true} 是
      */
     public static boolean isFitMinLen(String string, int minLen) {
-        if(null != string) {
-            return string.length() >= minLen;
+        if(StringUtil.isEmpty(string)) {
+            return 0 >= minLen;
         }
-        return true;
+        return string.length() >= minLen;
     }
 
     /**
@@ -177,19 +149,19 @@ public final class ArgUtil {
 
     /**
      * 校验字符串是否满足全是数字
-     * 1.不进行null校验。
-     * 2."" 是通过的。
+     * 1. null 值通过
+     * 2.
      * @param number 数字字符串
      * @return {@code true} 是
      */
     public static Boolean isNumber(String number) {
-        if(null != number) {
-            for(int i = 0; i < number.length(); i++) {
-                if(!Character.isDigit(number.charAt(i))) {
-                    return false;
-                }
+        if(ObjectUtil.isNotNull(number)) {
+            try {
+                new BigDecimal(number);
+                return true;
+            } catch (Exception e) {
+                return false;
             }
-            return true;
         }
         return true;
     }

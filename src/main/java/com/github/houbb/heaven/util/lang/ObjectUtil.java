@@ -32,11 +32,16 @@ public final class ObjectUtil {
      * isInstance
      * isAssignableFrom
      *
+     * 注意：任何一个元素为 null，则认为是不同类型。
      * @param one 第一个元素
      * @param two 第二个元素
      * @return 是否为同一对象
      */
     public static boolean isSameType(Object one, Object two) {
+        if(ObjectUtil.isNull(one)
+            || ObjectUtil.isNull(two)) {
+            return false;
+        }
         Class clazzOne = one.getClass();
 
         return clazzOne.isInstance(two);
