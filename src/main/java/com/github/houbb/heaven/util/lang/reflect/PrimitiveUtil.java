@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.lang.reflect;
 
+import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
@@ -20,7 +21,26 @@ public final class PrimitiveUtil {
      */
     private static final Map<Class<?>, Class<?>> TYPE_MAP = new IdentityHashMap<>(8);
 
+    /**
+     * 基本类型引用类型集合
+     * @since 0.0.3
+     */
+    private static final Map<Class, Class> PRIMITIVE_REFERENCE_MAP = new HashMap<>();
+
     static {
+        /**
+         * @since 0.0.3
+         */
+        PRIMITIVE_REFERENCE_MAP.put(int.class, Integer.class);
+        PRIMITIVE_REFERENCE_MAP.put(boolean.class, Boolean.class);
+        PRIMITIVE_REFERENCE_MAP.put(byte.class, Byte.class);
+        PRIMITIVE_REFERENCE_MAP.put(char.class, Character.class);
+        PRIMITIVE_REFERENCE_MAP.put(short.class, Short.class);
+        PRIMITIVE_REFERENCE_MAP.put(long.class, Long.class);
+        PRIMITIVE_REFERENCE_MAP.put(float.class, Float.class);
+        PRIMITIVE_REFERENCE_MAP.put(double.class, Double.class);
+        PRIMITIVE_REFERENCE_MAP.put(void.class, Void.class);
+
         TYPE_MAP.put(Boolean.class, Boolean.TYPE);
         TYPE_MAP.put(Byte.class, Byte.TYPE);
         TYPE_MAP.put(Character.class, Character.TYPE);
@@ -38,6 +58,19 @@ public final class PrimitiveUtil {
      */
     public static Class<?> getPrimitiveType(final Class<?> classType) {
         return TYPE_MAP.get(classType);
+    }
+
+    /**
+     * 获取基础类型的引用类型
+     * @param clazz 基础类型
+     * @return 引用类型
+     * @since 0.0.3
+     */
+    public static Class getReferenceType(final Class clazz) {
+        if(clazz.isPrimitive()) {
+            return PRIMITIVE_REFERENCE_MAP.get(clazz);
+        }
+        return clazz;
     }
 
 }

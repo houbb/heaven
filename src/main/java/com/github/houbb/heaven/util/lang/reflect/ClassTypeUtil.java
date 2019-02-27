@@ -9,7 +9,7 @@ import java.util.Map;
  * class 类型工具类
  * @author binbin.hou
  * date 2019/2/24
- * @since 0.2.0
+ * @since 0.0.2
  */
 public class ClassTypeUtil {
 
@@ -26,9 +26,10 @@ public class ClassTypeUtil {
      *
      * @param clazz 对象类型
      * @return 是否为 map class
+     * @since 0.0.3 fixed
      */
     public static boolean isMap(final Class<?> clazz) {
-        return Map.class.equals(clazz);
+        return Map.class.isAssignableFrom(clazz);
     }
 
     /**
