@@ -123,7 +123,8 @@ public class ClassTypeUtil {
                 && !clazz.isAnnotation()
                 && !clazz.isSynthetic()
                 && !clazz.isPrimitive()
-                && isIterable(clazz);
+                && !isIterable(clazz)
+                && !isMap(clazz);
     }
 
     /**
