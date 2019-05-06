@@ -1,25 +1,47 @@
 package com.github.houbb.heaven.util.trick;
 
+import org.junit.Test;
+
 /**
 * <p> ConsoleProgressBar Tester. </p>
-* <p> 2019-02-25 16:31:39.707 </p>
+* <p> 2019-05-06 17:55:10.044 </p>
 *
 * @author binbin.hou
-* @version 0.0.2-SNAPSHOT
+* @version 0.0.5-SNAPSHOT
 */
 public class ConsoleProgressBarTest {
 
     /**
-     * 显示进度
-     * @param args 方法入参
-     * @throws InterruptedException if any
-     */
-    public static void main(String[] args) throws InterruptedException {
-        ConsoleProgressBar cpb = new ConsoleProgressBar(0, 100, 100, '=');
-        for (int i = 1; i <= 100; i++) {
-            cpb.show(i);
-            Thread.sleep(20);
-        }
+    *
+    * Method: ConsoleProgressBar()
+    */
+    @Test
+    public void ConsoleProgressBarTest() throws Exception {
     }
+
+    /**
+    *
+    * Method: ConsoleProgressBar(minimum, maximum, barLen)
+    */
+    @Test
+    public void ConsoleProgressBarMinimumMaximumBarLenTest() throws Exception {
+    }
+
+    /**
+    *
+    * Method: ConsoleProgressBar(minimum, maximum, barLen, showChar)
+    */
+    @Test
+    public void ConsoleProgressBarMinimumMaximumBarLenShowCharTest() throws Exception {
+    }
+
+    /**
+    *
+    * Method: show(value)
+    */
+    @Test
+    public void showTest() throws Exception {
+    }
+
 
 }

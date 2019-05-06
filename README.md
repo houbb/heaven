@@ -31,7 +31,7 @@
 
 ## 需要 
 
-jdk1.8+
+jdk1.7+
 
 maven 3.x+
 
@@ -41,6 +41,6 @@ maven 3.x+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>heaven</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.5</version>
 </dependency>
 ```

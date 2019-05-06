@@ -1,13 +1,13 @@
 package com.github.houbb.heaven.constant;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
 * <p> MavenConst Tester. </p>
-* <p> 2019-02-20 22:09:41.553 </p>
+* <p> 2019-05-06 17:55:10.090 </p>
 *
-* @author houbinbin
-* @version 0.0.1-SNAPSHOT
+* @author binbin.hou
+* @version 0.0.5-SNAPSHOT
 */
 public class MavenConstTest {
 

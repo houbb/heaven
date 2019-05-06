@@ -1,13 +1,13 @@
 package com.github.houbb.heaven.util.lang.reflect;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
 * <p> ReflectArrayUtil Tester. </p>
-* <p> 2019-02-25 16:31:39.712 </p>
+* <p> 2019-05-06 17:55:10.147 </p>
 *
 * @author binbin.hou
-* @version 0.0.2-SNAPSHOT
+* @version 0.0.5-SNAPSHOT
 */
 public class ReflectArrayUtilTest {
 

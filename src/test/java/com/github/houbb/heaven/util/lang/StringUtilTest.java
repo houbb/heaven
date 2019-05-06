@@ -1,22 +1,22 @@
 package com.github.houbb.heaven.util.lang;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
 * <p> StringUtil Tester. </p>
-* <p> 2019-02-20 22:09:41.581 </p>
+* <p> 2019-05-06 17:55:09.974 </p>
 *
-* @author houbinbin
-* @version 0.0.1-SNAPSHOT
+* @author binbin.hou
+* @version 0.0.5-SNAPSHOT
 */
 public class StringUtilTest {
 
     /**
     *
-    * Method: isUppperCase(string)
+    * Method: isUpperCase(string)
     */
     @Test
-    public void isUppperCaseTest() throws Exception {
+    public void isUpperCaseTest() throws Exception {
     }
 
     /**

@@ -1,20 +1,20 @@
 package com.github.houbb.heaven.response.exception;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
 * <p> ExceptionUtil Tester. </p>
-* <p> 2019-02-20 22:09:41.580 </p>
+* <p> 2019-05-06 17:55:10.121 </p>
 *
-* @author houbinbin
-* @version 0.0.1-SNAPSHOT
+* @author binbin.hou
+* @version 0.0.5-SNAPSHOT
 */
 public class ExceptionUtilTest {
 
     /**
-     *
-     * Method: unwrapThrowable(wrapped)
-     */
+    *
+    * Method: unwrapThrowable(wrapped)
+    */
     @Test
     public void unwrapThrowableTest() throws Exception {
     }

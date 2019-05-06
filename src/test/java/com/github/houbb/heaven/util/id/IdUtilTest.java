@@ -1,13 +1,13 @@
 package com.github.houbb.heaven.util.id;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
 * <p> IdUtil Tester. </p>
-* <p> 2019-02-20 22:09:41.571 </p>
+* <p> 2019-05-06 17:55:10.129 </p>
 *
-* @author houbinbin
-* @version 0.0.1-SNAPSHOT
+* @author binbin.hou
+* @version 0.0.5-SNAPSHOT
 */
 public class IdUtilTest {
 

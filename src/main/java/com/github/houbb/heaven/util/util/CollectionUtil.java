@@ -7,6 +7,7 @@ package com.github.houbb.heaven.util.util;
 
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
+import com.github.houbb.heaven.util.lang.StringUtil;
 
 import java.util.*;
 
@@ -187,6 +188,22 @@ public final class CollectionUtil {
             list.add(key);
         }
         return list;
+    }
+
+    /**
+     * 按照任意空格拆分
+     * @param string 字符串
+     * @return 拆分后的列表
+     * @since 0.0.5
+     */
+    public static List<String> splitByAnyBlank(String string) {
+        if (StringUtil.isEmpty(string)) {
+            return Collections.emptyList();
+        } else {
+            String pattern = "\\s+";
+            String[] strings = string.split(pattern);
+            return new ArrayList<>(Arrays.asList(strings));
+        }
     }
 
 }

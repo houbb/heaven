@@ -4,7 +4,7 @@
 
     <groupId>com.github.houbb</groupId>
     <artifactId>heaven</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.5</version>
 
     <properties>
         <!--============================== All Plugins START ==============================-->
@@ -23,13 +23,14 @@
 
         <!--============================== MAIN ==============================-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.compiler.level>1.8</project.compiler.level>
+        <project.compiler.level>1.7</project.compiler.level>
 
         <!--============================== INTER ==============================-->
         <plugin.gen.version>1.0.6</plugin.gen.version>
 
         <!--============================== OTHER ==============================-->
         <junit5.version>5.2.0</junit5.version>
+        <junit.version>4.12</junit.version>
         <apiguardian-api.version>1.0.0</apiguardian-api.version>
     </properties>
 
@@ -40,11 +41,10 @@
         <dependencies>
             <!--============================== OTHER ==============================-->
             <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>${junit5.version}</version>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
                 <scope>test</scope>
-                <optional>true</optional>
             </dependency>
 
             <dependency>
@@ -60,8 +60,8 @@
     <dependencies>
         <!--============================== OTHER ==============================-->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
 
         <dependency>
@@ -97,7 +97,7 @@
                 <artifactId>gen-maven-plugin</artifactId>
                 <version>${plugin.gen.version}</version>
                 <configuration>
-                    <junitVersion>5</junitVersion>
+                    <junitVersion>4</junitVersion>
                     <isOverwriteWhenExists>false</isOverwriteWhenExists>
                 </configuration>
             </plugin>

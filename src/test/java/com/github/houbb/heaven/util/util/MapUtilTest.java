@@ -1,13 +1,13 @@
 package com.github.houbb.heaven.util.util;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
 * <p> MapUtil Tester. </p>
-* <p> 2019-02-20 22:09:41.570 </p>
+* <p> 2019-05-06 17:55:10.058 </p>
 *
-* @author houbinbin
-* @version 0.0.1-SNAPSHOT
+* @author binbin.hou
+* @version 0.0.5-SNAPSHOT
 */
 public class MapUtilTest {
 
@@ -25,6 +25,22 @@ public class MapUtilTest {
     */
     @Test
     public void isNotEmptyTest() throws Exception {
+    }
+
+    /**
+    *
+    * Method: toMap(values, keyFunction)
+    */
+    @Test
+    public void toMapTest() throws Exception {
+    }
+
+    /**
+    *
+    * Method: toMap(values, keyFunction)
+    */
+    @Test
+    public void toMapValuesKeyFunctionTest() throws Exception {
     }
 
 

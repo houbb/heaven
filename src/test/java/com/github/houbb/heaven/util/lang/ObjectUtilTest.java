@@ -1,16 +1,13 @@
 package com.github.houbb.heaven.util.lang;
 
-import com.github.houbb.heaven.util.common.ArgUtil;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Test;
 
 /**
 * <p> ObjectUtil Tester. </p>
-* <p> 2019-02-20 22:09:41.569 </p>
+* <p> 2019-05-06 17:55:10.115 </p>
 *
-* @author houbinbin
-* @version 0.0.1-SNAPSHOT
+* @author binbin.hou
+* @version 0.0.5-SNAPSHOT
 */
 public class ObjectUtilTest {
 
@@ -20,7 +17,6 @@ public class ObjectUtilTest {
     */
     @Test
     public void isSameTypeTest() throws Exception {
-
     }
 
     /**
@@ -32,23 +28,19 @@ public class ObjectUtilTest {
     }
 
     /**
-     *
-     * Method: isNull(object)
-     */
+    *
+    * Method: isNull(object)
+    */
     @Test
     public void isNullTest() throws Exception {
-        assertEquals(true, ObjectUtil.isNull(null));
-        assertEquals(false, ObjectUtil.isNull(""));
     }
 
     /**
-     *
-     * Method: isNotNull(object)
-     */
+    *
+    * Method: isNotNull(object)
+    */
     @Test
     public void isNotNullTest() throws Exception {
-        assertEquals(false, ObjectUtil.isNotNull(null));
-        assertEquals(true, ObjectUtil.isNotNull(""));
     }
 
     /**

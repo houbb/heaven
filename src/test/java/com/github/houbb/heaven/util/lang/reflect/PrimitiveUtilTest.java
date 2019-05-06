@@ -1,13 +1,13 @@
 package com.github.houbb.heaven.util.lang.reflect;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
 * <p> PrimitiveUtil Tester. </p>
-* <p> 2019-02-20 22:09:41.551 </p>
+* <p> 2019-05-06 17:55:10.154 </p>
 *
-* @author houbinbin
-* @version 0.0.1-SNAPSHOT
+* @author binbin.hou
+* @version 0.0.5-SNAPSHOT
 */
 public class PrimitiveUtilTest {
 
@@ -17,6 +17,14 @@ public class PrimitiveUtilTest {
     */
     @Test
     public void getPrimitiveTypeTest() throws Exception {
+    }
+
+    /**
+    *
+    * Method: getReferenceType(clazz)
+    */
+    @Test
+    public void getReferenceTypeTest() throws Exception {
     }
 
 

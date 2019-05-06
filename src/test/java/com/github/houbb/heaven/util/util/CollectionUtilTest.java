@@ -1,13 +1,13 @@
 package com.github.houbb.heaven.util.util;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
 * <p> CollectionUtil Tester. </p>
-* <p> 2019-02-20 22:09:41.560 </p>
+* <p> 2019-05-06 17:55:10.133 </p>
 *
-* @author houbinbin
-* @version 0.0.1-SNAPSHOT
+* @author binbin.hou
+* @version 0.0.5-SNAPSHOT
 */
 public class CollectionUtilTest {
 
@@ -61,10 +61,42 @@ public class CollectionUtilTest {
 
     /**
     *
+    * Method: buildCollection(targets, handler)
+    */
+    @Test
+    public void buildCollectionTargetsHandlerTest() throws Exception {
+    }
+
+    /**
+    *
     * Method: addArray(collection, array)
     */
     @Test
     public void addArrayTest() throws Exception {
+    }
+
+    /**
+    *
+    * Method: toList(values, keyFunction)
+    */
+    @Test
+    public void toListTest() throws Exception {
+    }
+
+    /**
+    *
+    * Method: toList(values, keyFunction)
+    */
+    @Test
+    public void toListValuesKeyFunctionTest() throws Exception {
+    }
+
+    /**
+    *
+    * Method: splitByAnyBlank(string)
+    */
+    @Test
+    public void splitByAnyBlankTest() throws Exception {
     }
 
 

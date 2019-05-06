@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.lang.reflect;
 
+import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.util.MapUtil;
 
 import java.lang.reflect.Field;
@@ -61,7 +62,12 @@ public final class ClassUtil {
      */
     public static Map<String, Field> getAllFieldLMap(final Class clazz) {
         List<Field> fieldList = ClassUtil.getAllFieldList(clazz);
-        return MapUtil.toMap(fieldList, Field::getName);
+        return MapUtil.toMap(fieldList, new IHandler<Field, String>() {
+            @Override
+            public String handle(Field field) {
+                return field.getName();
+            }
+        });
     }
 
 
