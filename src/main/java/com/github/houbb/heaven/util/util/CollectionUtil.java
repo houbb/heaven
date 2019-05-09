@@ -5,6 +5,8 @@
 
 package com.github.houbb.heaven.util.util;
 
+import com.github.houbb.heaven.support.condition.ICondition;
+import com.github.houbb.heaven.support.filter.IFilter;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
@@ -204,6 +206,73 @@ public final class CollectionUtil {
             String[] strings = string.split(pattern);
             return new ArrayList<>(Arrays.asList(strings));
         }
+    }
+
+    /**
+     * 执行列表过滤
+     * @param list 原始列表
+     * @param filter 过滤器
+     * @return 过滤后的结果
+     * @since 0.0.6
+     */
+    public static <T> List<T> filterList(final List<T> list, final IFilter<T> filter) {
+        if(isEmpty(list)) {
+            return Collections.emptyList();
+        }
+
+        List<T> resultList = new ArrayList<>();
+        for(T t : list) {
+            if(filter.filter(t)) {
+                continue;
+            }
+
+            resultList.add(t);
+        }
+        return resultList;
+    }
+
+    /**
+     * 执行列表过滤
+     * @param list 原始列表
+     * @param condition 条件过滤器
+     * @return 过滤后的结果
+     * @since 0.0.6
+     */
+    public static <T> List<T> conditionList(final List<T> list, final ICondition<T> condition) {
+        if(isEmpty(list)) {
+            return Collections.emptyList();
+        }
+
+        List<T> resultList = new ArrayList<>();
+        for(T t : list) {
+            if(condition.condition(t)) {
+                resultList.add(t);
+            }
+        }
+        return resultList;
+    }
+
+    /**
+     * 对象列表转换为 toString 列表
+     * 1. 会跳过所有的 null 对象。
+     * 2. 建议放在 collectUtil 下。
+     * @param pathList 原始对象
+     * @return 结果
+     * @since 0.0.6
+     */
+    public static List<String> toStringList(final List<?> pathList) {
+        if(CollectionUtil.isEmpty(pathList)) {
+            return Collections.emptyList();
+        }
+
+        List<String> stringList = new ArrayList<>(pathList.size());
+        for(Object object : pathList) {
+            if(ObjectUtil.isNotNull(object)) {
+                stringList.add(object.toString());
+            }
+        }
+
+        return stringList;
     }
 
 }
