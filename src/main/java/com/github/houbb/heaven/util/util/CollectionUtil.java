@@ -212,6 +212,7 @@ public final class CollectionUtil {
      * 执行列表过滤
      * @param list 原始列表
      * @param filter 过滤器
+     * @param <T> 泛型
      * @return 过滤后的结果
      * @since 0.0.6
      */
@@ -235,6 +236,7 @@ public final class CollectionUtil {
      * 执行列表过滤
      * @param list 原始列表
      * @param condition 条件过滤器
+     * @param <T> 泛型
      * @return 过滤后的结果
      * @since 0.0.6
      */
