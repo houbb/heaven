@@ -1,7 +1,6 @@
 package com.github.houbb.heaven.util.lang.reflect;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.Collection;
 import java.util.Map;
 
@@ -155,6 +154,18 @@ public class ClassTypeUtil {
             }
         }
         return false;
+    }
+
+    /**
+     * 获取列表字段对应的类型
+     * @param field 字段
+     * @return 返回对应的 class 类型
+     * @since 0.0.7
+     */
+    public static Class getListType(Field field) {
+        ParameterizedType listGenericType = (ParameterizedType) field.getGenericType();
+        Type[] listActualTypeArguments = listGenericType.getActualTypeArguments();
+        return (Class) listActualTypeArguments[0];
     }
 
 }

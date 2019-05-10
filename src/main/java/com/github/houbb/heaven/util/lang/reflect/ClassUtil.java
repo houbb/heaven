@@ -6,9 +6,15 @@
 package com.github.houbb.heaven.util.lang.reflect;
 
 import com.github.houbb.heaven.support.handler.IHandler;
+import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
 
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.*;
 
 /**
@@ -104,6 +110,29 @@ public final class ClassUtil {
         } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 获取所有字段的 read 方法列表
+     * @param clazz 类信息
+     * @throws IntrospectionException if any
+     * @return 方法列表
+     * @since 0.0.7
+     */
+    public static List<Method> getAllFieldsReadMethods(final Class clazz) throws IntrospectionException {
+        List<Field> fieldList = getAllFieldList(clazz);
+        if(CollectionUtil.isEmpty(fieldList)) {
+            return Collections.emptyList();
+        }
+
+        List<Method> methods = new ArrayList<>();
+        for(Field field : fieldList) {
+            PropertyDescriptor pd = new PropertyDescriptor(field.getName(), clazz);
+            //获得get方法
+            Method getMethod = pd.getReadMethod();
+            methods.add(getMethod);
+        }
+        return methods;
     }
 
 }

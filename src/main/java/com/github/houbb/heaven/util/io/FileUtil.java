@@ -24,7 +24,7 @@ import java.util.Objects;
 
 /**
  * 文件工具类
- *
+ * 1. 用于获取文件的内容
  * @author bbhou
  * @since 0.0.1
  */

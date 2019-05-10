@@ -1,14 +1,18 @@
 package com.github.houbb.heaven.util.nio;
 
+import com.github.houbb.heaven.constant.FileTypeConst;
+import com.github.houbb.heaven.constant.PathConst;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -193,6 +197,165 @@ public final class PathUtil {
         }
 
         return pathList;
+    }
+
+    /**
+     * 获得对应的PATH列表。
+     * @param dir 文件夹
+     * @param glob 文件正则
+     * @return 路径列表
+     */
+    public static List<Path> getPathList(String dir, String glob)
+    {
+        List<Path> list = new LinkedList<>();
+        Path root = Paths.get(dir);
+
+        try(DirectoryStream<Path> stream = Files.newDirectoryStream(root, glob)){
+            for (Path path : stream) {
+                list.add(path);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
+    /**
+     * 获取指定文件夹下对应的某类型文件
+     * @param dir 文件夹路径
+     * @param glob 文件正则表达式
+     * @return path list
+     */
+    public static List<Path> getDirFileNames(String dir, String glob) {
+        List<Path> list = new LinkedList<>();
+        Path root = Paths.get(dir);
+
+        try(DirectoryStream<Path> stream = Files.newDirectoryStream(root, glob)){
+            for (Path path : stream) {
+                list.add(path.getFileName());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
+
+    /** 获取某一路径下的所有文件
+     * @see #getDirFileNames(String, String) 指定此处的glob为 *.*
+     * @param dir 文件夹
+     * @return 路径列表
+     */
+    public static List<Path> getAllDirFileNames(String dir)
+    {
+        return getDirFileNames(dir, FileTypeConst.Glob.ALL);
+    }
+
+
+    /**
+     * 获得列表下对应的文件字符串形式
+     * @param dir 文件夹
+     * @param glob 文件正则
+     * @return 文件名称列表
+     */
+    public static List<String> getDirFileNameStrs(String dir, String glob)
+    {
+        List<String> list = new LinkedList<>();
+        Path root = Paths.get(dir);
+
+        try(DirectoryStream<Path> stream = Files.newDirectoryStream(root, glob)){
+            for (Path path : stream) {
+                list.add(path.getFileName().toString());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
+    /**
+     * 结果不确定
+     * @deprecated (因为结果具有不确定性)
+     * @return  路径
+     * @since 0.0.7
+     */
+    public static String getPath() {
+        return System.getProperty("user.dir");
+    }
+
+    /**
+     * 获取的target路径
+     * @return 路径
+     * @since 0.0.7
+     */
+    public static String getRootPath() {
+        return Class.class.getClass().getResource("/").getPath();
+    }
+
+    /**
+     * 获取项目根路径。
+     * @return 本项目中返回: /Users/houbinbin/IT/code/script-generator
+     * since 0.0.7
+     */
+    public static String getAppRootPath() {
+        File emptyFile = new File("");
+        return emptyFile.getAbsolutePath();
+    }
+
+    /**
+     * 获取资源文件默认存放路径。
+     * @return 根路径+/src/main/resources
+     */
+    public static String getAppResourcesPath() {
+        return getAppRootPath()+ PathConst.SRC_MAIN_RESOURCES_PATH;
+    }
+
+    /**
+     * 获取测试类
+     * @return  转换后的路径
+     */
+    public static String getAppTestResourcesPath() {
+        return getAppRootPath()+"/src/test/resources";
+    }
+
+    /**
+     * 类似getPath(Class), 只是不包含类的路径,而是获取到当前类包的根路径。
+     * 如:
+     * filelist:/Users/houbinbin/IT/code/script-generator/script-generator-tool/target/classes/
+     * 转化为:
+     * /Users/houbinbin/IT/code/script-generator/script-generator-tool/src/main/java
+     * @param clazz 类
+     * @return 转换后的路径
+     */
+    public static String getRootPath(Class clazz) {
+        String uriPath = clazz.getResource(PathConst.ROOT_PATH).toString();
+        return uriPath.replace(PathConst.FILE_PATH_PREFIX, "")
+                .replace(PathConst.TARGET_CLASSES_PATH_SUFFIX, PathConst.SRC_MAIN_JAVA_PATH);
+    }
+
+    /**
+     * 直接class.getResource("")拿到的是编译后的路径。
+     * 如:
+     * filelist:/Users/houbinbin/IT/code/script-generator/script-generator-tool/target/classes/com/ryo/script-generator/util/
+     * 转化成:
+     * /Users/houbinbin/IT/code/script-generator/script-generator-tool/src/main/java/com/ryo/script-generator/util/
+     * @param clazz 类
+     * @return 转换后的路径
+     */
+    public static String getPath(Class clazz) {
+        String uriPath = clazz.getResource("").toString();
+        return uriPath.replace(PathConst.FILE_PATH_PREFIX, "")
+                .replace(PathConst.TARGET_CLASSES_PATH_SUFFIX, PathConst.SRC_MAIN_JAVA_PATH);
+    }
+
+    /**
+     * 将包名称转化为对应的路径
+     * com.github.houbinbin TO: com/github/houbinbin
+     * @param packagePath 包名称
+     * @return 转换后的路径
+     */
+    public static String packageToPath(final String packagePath) {
+        return packagePath.replaceAll("\\.", "/");
     }
 
 }
