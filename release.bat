@@ -14,9 +14,9 @@ SET version=0.0.7
 :::: 新版本名称
 SET newVersion=0.0.8
 :::: 组织名称
-SET groupName=heaven
+SET groupName=com.github.houbb
 :::: 项目名称
-SET projectName=junitperf
+SET projectName=heaven
 
 :: release 项目版本
 :::: snapshot 版本号
