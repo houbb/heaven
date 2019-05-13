@@ -25,7 +25,7 @@ public final class Optional<T> {
     /**
      * Constructs an empty instance.
      *
-     * @implNote Generally only one empty instance, {@link Optional#EMPTY},
+     * Generally only one empty instance, {@link Optional#EMPTY},
      * should exist per VM.
      */
     private Optional() {
@@ -36,7 +36,7 @@ public final class Optional<T> {
      * Returns an empty {@code Optional} instance.  No value is present for this
      * Optional.
      *
-     * @apiNote Though it may be tempting to do so, avoid testing if an object
+     * Though it may be tempting to do so, avoid testing if an object
      * is empty by comparing with {@code ==} against instances returned by
      * {@code Option.empty()}. There is no guarantee that it is a singleton.
      * Instead, use {@link #isPresent()}.
@@ -117,7 +117,7 @@ public final class Optional<T> {
      * Return the contained value, if present, otherwise throw an exception
      * to be created by the provided supplier.
      *
-     * @apiNote A method reference to the exception constructor with an empty
+     * A method reference to the exception constructor with an empty
      * argument list can be used as the supplier. For example,
      * {@code IllegalStateException::new}
      *
@@ -179,7 +179,7 @@ public final class Optional<T> {
      * debugging. The exact presentation format is unspecified and may vary
      * between implementations and versions.
      *
-     * @implSpec If a value is present the result must include its string
+     * If a value is present the result must include its string
      * representation in the result. Empty and present Optionals must be
      * unambiguously differentiable.
      *
