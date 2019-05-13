@@ -7,6 +7,7 @@ package com.github.houbb.heaven.util.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 日期工具类
@@ -61,4 +62,14 @@ public final class DateUtil {
         return new SimpleDateFormat(SIMPLE_TIME_FORMAT).format(now);
     }
 
+    /**
+     * 毫秒转化为纳秒
+     * 1. 如果时间格式小于0，则视为0
+     * @param ms 毫秒
+     * @return 纳秒
+     * @since 0.0.7 on 2019-5-13 15:02:43
+     */
+    public static long convertMsToNs(long ms) {
+        return TimeUnit.NANOSECONDS.convert(ms > 0 ? ms : 0, TimeUnit.MILLISECONDS);
+    }
 }
