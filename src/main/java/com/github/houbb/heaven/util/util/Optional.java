@@ -121,7 +121,7 @@ public final class Optional<T> {
      * argument list can be used as the supplier. For example,
      * {@code IllegalStateException::new}
      *
-     * @param <X> Type of the exception to be thrown be thrown
+     * @param throwable Type of the exception to be thrown be thrown
      *
      * @return the present value
      * @throws X if there is no value present
