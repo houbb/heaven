@@ -16,6 +16,11 @@ public final class PunctuationConst {
     private PunctuationConst(){}
 
     /**
+     * char 小数点
+     */
+    public static final char C_DOT = '.';
+
+    /**
      * 逗号
      */
     public static final String COMMA = ",";
