@@ -5,6 +5,10 @@
 
 package com.github.houbb.heaven.util.lang;
 
+import com.github.houbb.heaven.util.util.CollectionUtil;
+
+import java.util.List;
+
 /**
  * 字符串工具类
  *
@@ -305,6 +309,25 @@ public final class StringUtil {
 
             return buf.toString();
         }
+    }
+
+    /**
+     * 字符串拼接
+     * @param stringList 字符串列表
+     * @param splitter 分隔符
+     * @return 结果
+     * @since 0.1.1
+     */
+    public static String join(final List<String> stringList, final String splitter) {
+        if(CollectionUtil.isEmpty(stringList)) {
+            return StringUtil.EMPTY;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(stringList.get(0));
+        for(int i = 1; i < stringList.size(); i++) {
+            stringBuilder.append(splitter).append(stringList.get(i));
+        }
+        return stringBuilder.toString();
     }
 
     /**

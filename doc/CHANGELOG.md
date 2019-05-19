@@ -57,3 +57,13 @@
 | 序号 | 变更类型 | 说明 | 时间 | 备注 |
 |:---|:---|:---|:---|:--|
 | 1 | A | 添加 Optional 工具类 | 2019-5-13 20:15:24 | |
+
+# release_0.1.1
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 添加 EncodeUtil/StreamUtil/AbbreviationUtil/LangEnum/HttpRespCodeEnum | 2019-5-19 14:41:16 | |
+| 1 | A | 添加 StringUtil.join(), NetUtil.assertOnline() | 2019-5-19 14:41:16 | |
+
+
+

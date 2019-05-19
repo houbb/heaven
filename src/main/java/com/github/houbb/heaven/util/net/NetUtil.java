@@ -1,6 +1,7 @@
 package com.github.houbb.heaven.util.net;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
  * 网络工具类
@@ -41,4 +42,17 @@ public final class NetUtil {
         return reachable;
     }
 
+    /**
+     * 断言处于联网状态
+     * 1. 这里可能会有一个问题，如果用户的 hosts 文件中有这个网址
+     */
+    public static void assertOnLine() {
+        final String address = "translate.google.cn";
+        try {
+            InetAddress inetAddress = InetAddress.getByName(address);
+        } catch (UnknownHostException e) {
+            throw new RuntimeException("The net work is broken, " +
+                    "check your network or set isCommentWhenNetworkBroken=true.");
+        }
+    }
 }
