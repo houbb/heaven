@@ -122,7 +122,7 @@ public final class Optional<T> {
      * {@code IllegalStateException::new}
      *
      * @param throwable Type of the exception to be thrown be thrown
-     *
+     * @param <X> 泛型
      * @return the present value
      * @throws X if there is no value present
      * @throws NullPointerException if no value is present and
