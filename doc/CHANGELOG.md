@@ -65,5 +65,13 @@
 | 1 | A | 添加 EncodeUtil/StreamUtil/AbbreviationUtil/LangEnum/HttpRespCodeEnum | 2019-5-19 14:41:16 | |
 | 1 | A | 添加 StringUtil.join(), NetUtil.assertOnline() | 2019-5-19 14:41:16 | |
 
+# release_0.1.2
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 添加 MathConst/Pipeline/DefaultPipeline | 2019-5-21 19:38:24 | |
+| 1 | A | 添加 ArgUtil.positive(XXX)/notNegative(XXX), DateUtil.now()/DateUtil.costTimeInMills() | 2019-5-21 19:38:24 | |
+
+
 
 

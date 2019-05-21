@@ -72,4 +72,25 @@ public final class DateUtil {
     public static long convertMsToNs(long ms) {
         return TimeUnit.NANOSECONDS.convert(ms > 0 ? ms : 0, TimeUnit.MILLISECONDS);
     }
+
+    /**
+     * 返回当前时间
+     * @return 当前时间
+     * @since 0.1.2
+     */
+    public static Date now() {
+        return new Date();
+    }
+
+    /**
+     * 计算消耗的毫秒
+     * @param start 开始时间
+     * @param end 结束时间
+     * @return 结果
+     * @since 0.1.2
+     */
+    public static long costTimeInMills(final Date start, final Date end) {
+        return end.getTime() - start.getTime();
+    }
+
 }

@@ -214,4 +214,76 @@ public final class ArgUtil {
         return String.format("Except:<%s>, Real:<%s>, Msg:<%s>", except, real, resultMsg);
     }
 
+    /**
+     * 断言为正整数
+     * @param number 入参
+     * @param paramName 参数名称
+     * @since 0.1.2
+     */
+    public static void positive(final int number, final String paramName) {
+        if(number <= 0) {
+            throw new IllegalArgumentException(paramName + " must be > 0!");
+        }
+    }
+
+    /**
+     * 断言为非负整数
+     * @param number 入参
+     * @param paramName 参数名称
+     * @since 0.1.2
+     */
+    public static void notNegative(final int number, final String paramName) {
+        if(number < 0) {
+            throw new IllegalArgumentException(paramName + " must be >= 0!");
+        }
+    }
+
+    /**
+     * 断言为长正整数
+     * @param number 入参
+     * @param paramName 参数名称
+     * @since 0.1.2
+     */
+    public static void positive(final long number, final String paramName) {
+        if(number <= 0) {
+            throw new IllegalArgumentException(paramName + " must be > 0!");
+        }
+    }
+
+    /**
+     * 断言为非负长整数
+     * @param number 入参
+     * @param paramName 参数名称
+     * @since 0.1.2
+     */
+    public static void notNegative(final long number, final String paramName) {
+        if(number < 0) {
+            throw new IllegalArgumentException(paramName + " must be >= 0!");
+        }
+    }
+
+    /**
+     * 断言为正 double
+     * @param number 入参
+     * @param paramName 参数名称
+     * @since 0.1.2
+     */
+    public static void positive(final double number, final String paramName) {
+        if(number < 0) {
+            throw new IllegalArgumentException(paramName + " must be > 0!");
+        }
+    }
+
+    /**
+     * 断言为非负 double
+     * @param number 入参
+     * @param paramName 参数名称
+     * @since 0.1.2
+     */
+    public static void notNegative(final double number, final String paramName) {
+        if(number < 0) {
+            throw new IllegalArgumentException(paramName + " must be >= 0!");
+        }
+    }
+
 }
