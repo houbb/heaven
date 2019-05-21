@@ -78,7 +78,7 @@ public interface Pipeline<T> {
     List<T> list();
 
     /**
-     * 进行 slice 分片返回一个从 startIndex=>endIndex 的新列表
+     * 进行 slice 分片返回一个从 startIndex~endIndex 的新列表
      * 1. 如果超过数组下标则直接报错
      * @param startIndex 开始下标
      * @param endIndex 结束下标
