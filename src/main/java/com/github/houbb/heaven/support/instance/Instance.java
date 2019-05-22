@@ -39,4 +39,15 @@ public interface Instance {
      */
     <T> T multiple(final Class<T> tClass);
 
+    /**
+     * 线程安全对象
+     * 1. 判断当前类是否拥有 {@link com.github.houbb.heaven.annotation.ThreadSafe} 注解，
+     * 如果有，则直接创建单例对象。如果不是，则创建多例对象。
+     * @param tClass class 类型
+     * @param <T> 泛型
+     * @return 实例化对象
+     * @since 0.1.3
+     */
+    <T> T threadSafe(final Class<T> tClass);
+
 }

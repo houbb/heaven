@@ -85,6 +85,14 @@ public final class InstanceFactory implements Instance {
         }
     }
 
+    @Override
+    public <T> T threadSafe(Class<T> tClass) {
+        if(tClass.isAnnotationPresent(ThreadSafe.class)) {
+            return this.singleton(tClass);
+        }
+        return this.multiple(tClass);
+    }
+
     /**
      * 获取单例对象
      * @param tClass class 类型
