@@ -115,4 +115,19 @@ public final class ExceptionUtil {
         return false;
     }
 
+    /**
+     * 获取确切的异常信息
+     * 1. 主要针对代理报错
+     * @param throwable 异常
+     * @return 确切的异常信息
+     * @since 0.1.4
+     */
+    public static Throwable getActualThrowable(final Throwable throwable) {
+        if(InvocationTargetException.class.equals(throwable.getClass())) {
+            InvocationTargetException exception = (InvocationTargetException) throwable;
+            return exception.getTargetException();
+        }
+        return throwable;
+    }
+
 }
