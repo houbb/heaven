@@ -5,6 +5,9 @@
 
 package com.github.houbb.heaven.util.util;
 
+import com.github.houbb.heaven.util.lang.reflect.ClassGenericUtil;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -146,4 +149,22 @@ public final class ArrayUtil {
         }
     }
 
+    /**
+     * 列表转数组
+     * @param list 列表
+     * @param <R> 泛型
+     * @return 结果
+     * @since 0.1.4
+     */
+    public static <R> R[] listToArray(final List<R> list) {
+        //1. 判断是否为空
+        final Class elemClass = ClassGenericUtil.getGenericClass(list);
+        R[] array = (R[]) Array.newInstance(elemClass, list.size());
+
+        for(int i = 0; i < list.size(); i++) {
+            Array.set(array, i, list.get(i));
+        }
+
+        return array;
+    }
 }

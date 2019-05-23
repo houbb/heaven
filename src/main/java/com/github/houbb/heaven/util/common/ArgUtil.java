@@ -7,8 +7,11 @@ package com.github.houbb.heaven.util.common;
 
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
+import com.github.houbb.heaven.util.util.ArrayUtil;
+import com.github.houbb.heaven.util.util.CollectionUtil;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 
 /**
  * 参数工具类
@@ -283,6 +286,68 @@ public final class ArgUtil {
     public static void notNegative(final double number, final String paramName) {
         if(number < 0) {
             throw new IllegalArgumentException(paramName + " must be >= 0!");
+        }
+    }
+
+    /**
+     * 断言为 true
+     *
+     * @param condition 结果
+     * @param name      参数名称
+     * @since 0.1.4
+     */
+    public static void assertTrue(final boolean condition,
+                                  final String name) {
+        if (!condition) {
+            throw new IllegalArgumentException(name + " excepted true but is false!");
+        }
+    }
+
+    /**
+     * 断言为 false
+     *
+     * @param condition 结果
+     * @param name 参数名称
+     * @since 0.1.4
+     */
+    public static void assertFalse(boolean condition,
+                                   final String name) {
+        if (condition) {
+            throw new IllegalArgumentException(name + " excepted false but is true!");
+        }
+    }
+
+    /**
+     * 禁止为空，并且判断其中元素不准为空
+     * @param array 数组
+     * @param name 名称
+     * @since 0.1.4
+     */
+    public static void notEmpty(final Object[] array,
+                                final String name) {
+        if(ArrayUtil.isEmpty(array)) {
+            throw new IllegalArgumentException(name + " excepted is not empty!");
+        }
+
+        for(Object object : array) {
+            ArgUtil.notNull(object, name + " element ");
+        }
+    }
+
+    /**
+     * 禁止为空，并且判断其中元素不准为空
+     * @param collection 集合
+     * @param name 名称
+     * @since 0.1.4
+     */
+    public static void notEmpty(final Collection<?> collection,
+                                final String name) {
+        if(CollectionUtil.isEmpty(collection)) {
+            throw new IllegalArgumentException(name + " excepted is not empty!");
+        }
+
+        for(Object object : collection) {
+            ArgUtil.notNull(object, name + " element ");
         }
     }
 

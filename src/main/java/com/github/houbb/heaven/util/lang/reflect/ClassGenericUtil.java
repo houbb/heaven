@@ -7,6 +7,7 @@ package com.github.houbb.heaven.util.lang.reflect;
 
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
+import com.github.houbb.heaven.util.util.CollectionUtil;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -74,5 +75,24 @@ public final class ClassGenericUtil {
         }
 
         return Object.class;
+    }
+
+    /**
+     * 获取元素的泛型
+     * @param list 列表
+     * @return 泛型
+     * @since 0.1.4
+     */
+    public static Class getGenericClass(final List<?> list){
+        if(CollectionUtil.isEmpty(list)) {
+            return null;
+        }
+
+        for(Object object : list) {
+            if(ObjectUtil.isNotNull(object)) {
+                return object.getClass();
+            }
+        }
+        return null;
     }
 }
