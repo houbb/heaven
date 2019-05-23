@@ -15,6 +15,7 @@ public interface IMethodHandler {
      * @param method  方法
      * @param args 参数
      * @return 结果
+     * @throws Throwable if any
      */
     Object handle(final Object proxy,
                   final Method method,
