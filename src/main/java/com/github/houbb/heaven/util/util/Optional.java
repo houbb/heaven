@@ -137,6 +137,19 @@ public final class Optional<T> {
     }
 
     /**
+     * Return the contained value, if present, otherwise return null.
+     * @return the present value or null
+     * @since 0.1.5
+     */
+    public T orElseNull() {
+        if (value != null) {
+            return value;
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * Indicates whether some other object is "equal to" this Optional. The
      * other object is considered equal if:
      * <ul>

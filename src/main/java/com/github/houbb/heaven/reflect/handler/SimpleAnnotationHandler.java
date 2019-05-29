@@ -7,6 +7,7 @@ import com.github.houbb.heaven.support.handler.IHandler;
 import java.lang.annotation.Annotation;
 
 /**
+ * 默认的注解实现类
  * @author binbin.hou
  * @since 0.1.5
  */
@@ -15,7 +16,9 @@ public class SimpleAnnotationHandler implements IHandler<Annotation, SimpleAnnot
 
     @Override
     public SimpleAnnotation handle(Annotation annotation) {
-        return null;
+        SimpleAnnotation simpleAnnotation = new SimpleAnnotation();
+        simpleAnnotation.type(annotation.annotationType());
+        return simpleAnnotation;
     }
 
 }

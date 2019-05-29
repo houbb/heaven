@@ -1,29 +1,114 @@
 package com.github.houbb.heaven.reflect.simple;
 
 import com.github.houbb.heaven.reflect.api.IField;
+import com.github.houbb.heaven.util.common.ArgUtil;
+import com.github.houbb.heaven.util.util.CollectionUtil;
+import com.github.houbb.heaven.util.util.Optional;
+
+import java.lang.annotation.Annotation;
+import java.util.List;
 
 /**
  * @author binbin.hou
  * @since 0.1.5
  */
 public class SimpleField implements IField {
+
+    private List<Annotation> annotations;
+
+    private String name;
+
+    private String fullName;
+
+    private Class type;
+
+    private int access;
+
+    /**
+     * 字段对应得值
+     */
+    private Object value;
+
+    @Override
+    public List<Annotation> annotations() {
+        return annotations;
+    }
+
+    @Override
+    public Optional<Annotation> annotationOpt(Class type) {
+        ArgUtil.notNull(type, "type");
+
+        if(CollectionUtil.isEmpty(this.annotations)) {
+            return Optional.empty();
+        }
+        for(Annotation annotation : annotations) {
+            if(type.equals(annotation.getClass())) {
+                return Optional.of(annotation);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Annotation annotation(Class type) {
+        ArgUtil.notNull(type, "type");
+
+        Optional<Annotation> annotationOptional = this.annotationOpt(type);
+        return annotationOptional.orElseNull();
+    }
+
+    public SimpleField annotations(List<Annotation> annotations) {
+        this.annotations = annotations;
+        return this;
+    }
+
     @Override
     public String name() {
-        return null;
+        return name;
+    }
+
+    public SimpleField name(String name) {
+        this.name = name;
+        return this;
     }
 
     @Override
     public String fullName() {
-        return null;
+        return fullName;
+    }
+
+    public SimpleField fullName(String fullName) {
+        this.fullName = fullName;
+        return this;
     }
 
     @Override
     public Class type() {
-        return null;
+        return type;
+    }
+
+    public SimpleField type(Class type) {
+        this.type = type;
+        return this;
     }
 
     @Override
     public int access() {
-        return 0;
+        return access;
+    }
+
+    public SimpleField access(int access) {
+        this.access = access;
+        return this;
+    }
+
+    @Override
+    public Object value() {
+        return value;
+    }
+
+    public SimpleField value(Object value) {
+        this.value = value;
+        return this;
     }
 }
