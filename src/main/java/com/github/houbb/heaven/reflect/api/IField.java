@@ -3,6 +3,7 @@ package com.github.houbb.heaven.reflect.api;
 import com.github.houbb.heaven.util.util.Optional;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.util.List;
 
 /**
@@ -11,6 +12,19 @@ import java.util.List;
  * @since 0.1.5
  */
 public interface IField extends IMember {
+
+    /**
+     * 原始字段信息
+     * @return 原始字段信息
+     */
+    Field field();
+
+    /**
+     * 设置值
+     * @param value 值
+     * @return this
+     */
+    IField value(final Object value);
 
     /**
      * 当前字段的值

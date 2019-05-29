@@ -6,6 +6,7 @@ import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.Optional;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.util.List;
 
 /**
@@ -13,6 +14,11 @@ import java.util.List;
  * @since 0.1.5
  */
 public class SimpleField implements IField {
+
+    /**
+     * 原始字段信息
+     */
+    private Field field;
 
     private List<Annotation> annotations;
 
@@ -42,7 +48,7 @@ public class SimpleField implements IField {
             return Optional.empty();
         }
         for(Annotation annotation : annotations) {
-            if(type.equals(annotation.getClass())) {
+            if(type.equals(annotation.annotationType())) {
                 return Optional.of(annotation);
             }
         }
@@ -107,8 +113,19 @@ public class SimpleField implements IField {
         return value;
     }
 
+    @Override
     public SimpleField value(Object value) {
         this.value = value;
+        return this;
+    }
+
+    @Override
+    public Field field() {
+        return field;
+    }
+
+    public SimpleField field(Field field) {
+        this.field = field;
         return this;
     }
 }

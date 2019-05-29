@@ -490,4 +490,30 @@ public final class StringUtil {
         return isPre ? filledStr.concat(str) : str.concat(filledStr);
     }
 
+    /**
+     * 对象转换为字符串
+     * @param object 对象
+     * @param defaultWhenNull 对象为空时的默认值
+     * @return 结果
+     * @since 0.1.5
+     */
+    public static String objectToString(final Object object,
+                             final String defaultWhenNull) {
+        if(ObjectUtil.isNull(object)) {
+            return defaultWhenNull;
+        }
+        return object.toString();
+    }
+
+    /**
+     * 对象转换为字符串
+     * 1. 默认为空时返回 null
+     * @param object 对象
+     * @return 结果
+     * @since 0.1.5
+     */
+    public static String objectToString(final Object object) {
+        return objectToString(object, null);
+    }
+
 }

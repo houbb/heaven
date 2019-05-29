@@ -1,11 +1,13 @@
 package com.github.houbb.heaven.reflect.util;
 
+import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.reflect.api.IField;
-import com.github.houbb.heaven.reflect.bean.FieldBean;
+import com.github.houbb.heaven.reflect.exception.ReflectRumtionException;
 import com.github.houbb.heaven.reflect.handler.SimpleFieldHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
+import com.github.houbb.heaven.util.util.CollectionUtil;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -24,24 +26,40 @@ public final class Classes {
 
     /**
      * 获取所有的字段信息
-     * @param object 类
+     * @param clazz 类
      * @return iField 信息列表
      */
-    public static List<IField> getFields(final Object object) {
-        ArgUtil.notNull(object, "object");
+    public static List<IField> getFields(final Class clazz) {
+        ArgUtil.notNull(clazz, "clazz");
 
-        List<Field> fieldList = ClassUtil.getAllFieldList(object.getClass());
+        List<Field> fieldList = ClassUtil.getAllFieldList(clazz);
         List<IField> resultList = Guavas.newArrayList(fieldList.size());
 
         final SimpleFieldHandler handler = new SimpleFieldHandler();
         for(Field field : fieldList) {
-            FieldBean bean = new FieldBean();
-            bean.field(field).target(object);
-
-            IField result = handler.handle(bean);
+            IField result = handler.handle(field);
             resultList.add(result);
         }
         return resultList;
+    }
+
+    /**
+     * 初始化字段值
+     * @param target 目标对象
+     * @param fieldList 字段列表
+     */
+    public static void initFieldValue(final Object target,
+                                final List<IField> fieldList) {
+        if(CollectionUtil.isNotEmpty(fieldList)) {
+            try {
+                for(IField field : fieldList) {
+                    final Object value = field.field().get(target);
+                    field.value(value);
+                }
+            } catch (IllegalAccessException e) {
+                throw new ReflectRumtionException(e);
+            }
+        }
     }
 
 }

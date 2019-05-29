@@ -72,6 +72,11 @@
 | 1 | A | 添加 MathConst/Pipeline/DefaultPipeline | 2019-5-21 19:38:24 | |
 | 1 | A | 添加 ArgUtil.positive(XXX)/notNegative(XXX), DateUtil.now()/DateUtil.costTimeInMills() | 2019-5-21 19:38:24 | |
 
+# release_0.1.5
 
-
-
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 添加自定义反射相关 | 2019-5-29 19:22:04 | |
+| 2 | A | 添加 StringUtil.objectToString() | 2019-5-29 19:22:04 | |
+| 3 | A | 添加 Cache 相关 | 2019-5-29 19:22:04 | |
+| 4 | O | InstanceFactory 添加新方法 | 2019-5-29 19:22:04 | |

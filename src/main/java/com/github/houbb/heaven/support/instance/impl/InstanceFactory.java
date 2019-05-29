@@ -3,6 +3,7 @@ package com.github.houbb.heaven.support.instance.impl;
 
 
 import com.github.houbb.heaven.annotation.ThreadSafe;
+import com.github.houbb.heaven.constant.PunctuationConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.instance.Instance;
 import com.github.houbb.heaven.util.common.ArgUtil;
@@ -45,6 +46,11 @@ public final class InstanceFactory implements Instance {
      */
     public static InstanceFactory getInstance() {
         return SingletonHolder.INSTANCE_FACTORY;
+    }
+
+    @Override
+    public <T> T singleton(Class<T> tClass, String groupName) {
+        return getSingleton(tClass, groupName, singletonMap);
     }
 
     @Override
@@ -112,6 +118,27 @@ public final class InstanceFactory implements Instance {
         return instance;
     }
 
+    /**
+     * 获取单例对象
+     * @param tClass 查询 tClass
+     * @param group 分组信息
+     * @param instanceMap 实例化对象 map
+     * @return 单例对象
+     */
+    @SuppressWarnings("unchecked")
+    private <T> T getSingleton(final Class<T> tClass,
+                               final String group, final Map<String, Object> instanceMap) {
+        this.notNull(tClass);
+        ArgUtil.notEmpty(group, "key");
+
+        final String fullClassName = tClass.getName()+ PunctuationConst.MIDDLE_LINE+group;
+        T instance = (T) instanceMap.get(fullClassName);
+        if(ObjectUtil.isNull(instance)) {
+            instance = this.multiple(tClass);
+            instanceMap.put(fullClassName, instance);
+        }
+        return instance;
+    }
 
     /**
      * 断言参数不可为 null

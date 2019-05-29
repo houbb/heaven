@@ -12,6 +12,18 @@ public interface Instance {
     /**
      * 获取对象的单例对象
      * 1. 需要保证对象的线程安全性。
+     * 2. 只有在同一个分组返回的对象才会是单例，否则返回 newInstance()
+     * @param tClass class 类型
+     * @param groupName 分组名称
+     * @param <T> 泛型
+     * @return 实例化对象
+     */
+    <T> T singleton(final Class<T> tClass,
+                    final String groupName);
+
+    /**
+     * 获取对象的单例对象
+     * 1. 需要保证对象的线程安全性。
      * @param tClass class 类型
      * @param <T> 泛型
      * @return 实例化对象
