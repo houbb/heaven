@@ -277,4 +277,36 @@ public final class CollectionUtil {
         return stringList;
     }
 
+    /**
+     * 找到第一个不为 null 的元素
+     * @param list 列表
+     * @param <T> 泛型
+     * @return 不为 null 的元素
+     * @since 0.1.6
+     */
+    public static <T> Optional<T> firstNotNullElem(List<T> list) {
+        if(CollectionUtil.isEmpty(list)) {
+            return Optional.empty();
+        }
+
+        for(T elem : list) {
+            if(ObjectUtil.isNotNull(elem)) {
+                return Optional.of(elem);
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * 将 stringList 内容按照 connector 连接起来
+     * @param stringList 字符串列表
+     * @param connector 连接符号
+     * @return 结果
+     * @since 0.1.6
+     */
+    public static String join(final List<String> stringList,
+                              final String connector) {
+        return StringUtil.join(stringList, connector);
+    }
+
 }

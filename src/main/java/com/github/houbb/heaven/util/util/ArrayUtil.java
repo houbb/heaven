@@ -167,4 +167,15 @@ public final class ArrayUtil {
 
         return array;
     }
+
+    /**
+     * 数组转列表
+     * @param array 数组
+     * @param <E> 泛型原型
+     * @return 列表
+     * @since 0.1.6
+     */
+    public static <E> List<E> arrayToList(final E[] array) {
+        return Arrays.asList(array);
+    }
 }

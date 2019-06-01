@@ -75,4 +75,23 @@ public final class MapUtil {
         return map;
     }
 
+    /**
+     * key 是元素的索引
+     * @param values 值
+     * @param <V> 元素泛型
+     * @return 结果 map
+     */
+    public static <V> Map<Integer, V> toIndexMap(Collection<V> values) {
+        if(ObjectUtil.isNull(values)) {
+            return Collections.emptyMap();
+        }
+
+        Map<Integer,V> map = new HashMap<>(values.size());
+
+        for(V v : values) {
+            map.put(map.size(), v);
+        }
+        return map;
+    }
+
 }

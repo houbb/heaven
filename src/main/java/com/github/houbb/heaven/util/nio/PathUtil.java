@@ -1,13 +1,18 @@
 package com.github.houbb.heaven.util.nio;
 
+import com.github.houbb.heaven.constant.CharsetConst;
 import com.github.houbb.heaven.constant.FileTypeConst;
 import com.github.houbb.heaven.constant.PathConst;
+import com.github.houbb.heaven.response.exception.CommonRuntimeException;
+import com.github.houbb.heaven.util.common.ArgUtil;
+import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
@@ -356,6 +361,54 @@ public final class PathUtil {
      */
     public static String packageToPath(final String packagePath) {
         return packagePath.replaceAll("\\.", "/");
+    }
+
+    /**
+     * 读取文件所有行的内容
+     * @param pathStr 路径
+     * @return 列表
+     * @since 0.1.6
+     */
+    public static List<String> readAllLines(final String pathStr) {
+        return readAllLines(pathStr, CharsetConst.UTF8);
+    }
+
+    /**
+     * 读取文件所有行的内容
+     * @param pathStr 路径
+     * @param charset 编码
+     * @return 列表
+     * @since 0.1.6
+     */
+    public static List<String> readAllLines(final String pathStr,
+                                            final String charset) {
+        return readAllLines(pathStr, charset, 0, Integer.MAX_VALUE);
+    }
+
+    /**
+     * 读取文件所有的行
+     * @param pathStr 路径
+     * @param charset 编码
+     * @param startIndex 开始行下标
+     * @param endIndex 结束行下标
+     * @return 列表内容
+     * @since 0.1.6
+     */
+    public static List<String> readAllLines(final String pathStr,
+                                            final String charset,
+                                            final int startIndex,
+                                            final int endIndex) {
+        ArgUtil.notEmpty(pathStr, "pathStr");
+        ArgUtil.notEmpty(charset, "charset");
+        ArgUtil.assertTrue(endIndex >= startIndex, "endIndex >= startIndex");
+
+        Path path = Paths.get(pathStr);
+        try {
+            List<String> allLines = Files.readAllLines(path, Charset.forName(charset));
+            return allLines.subList(startIndex, endIndex);
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
     }
 
 }

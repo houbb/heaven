@@ -114,6 +114,16 @@ public final class Optional<T> {
     }
 
     /**
+     * Return {@code true} if there is a value not present, otherwise {@code false}.
+     *
+     * @return {@code true} if there is a value not present, otherwise {@code false}
+     * @since 0.1.6
+     */
+    public boolean isNotPresent() {
+        return value == null;
+    }
+
+    /**
      * Return the contained value, if present, otherwise throw an exception
      * to be created by the provided supplier.
      *
