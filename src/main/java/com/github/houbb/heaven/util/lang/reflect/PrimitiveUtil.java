@@ -17,6 +17,11 @@ import java.util.Map;
 public final class PrimitiveUtil {
 
     /**
+     * @since 0.1.7
+     */
+    private PrimitiveUtil(){}
+
+    /**
      * 类型集合
      */
     private static final Map<Class<?>, Class<?>> TYPE_MAP = new IdentityHashMap<>(8);

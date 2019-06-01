@@ -397,7 +397,7 @@ public final class PathUtil {
     public static List<String> readAllLines(final String pathStr,
                                             final String charset,
                                             final int startIndex,
-                                            final int endIndex) {
+                                            int endIndex) {
         ArgUtil.notEmpty(pathStr, "pathStr");
         ArgUtil.notEmpty(charset, "charset");
         ArgUtil.assertTrue(endIndex >= startIndex, "endIndex >= startIndex");
@@ -405,6 +405,10 @@ public final class PathUtil {
         Path path = Paths.get(pathStr);
         try {
             List<String> allLines = Files.readAllLines(path, Charset.forName(charset));
+            final int size = allLines.size();
+            if(endIndex > size) {
+                endIndex = size;
+            }
             return allLines.subList(startIndex, endIndex);
         } catch (IOException e) {
             throw new CommonRuntimeException(e);

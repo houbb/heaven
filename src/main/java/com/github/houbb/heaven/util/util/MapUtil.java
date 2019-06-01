@@ -44,31 +44,16 @@ public final class MapUtil {
      * @param <K> key 泛型
      * @param <V> value 泛型
      * @return map 结果
+     * @since 0.1.7
      */
-    public static  <K,V> Map<K,V> toMap(Iterable<V> values, IHandler<? super V, K> keyFunction) {
+    public static  <K,V> Map<K,V> toMap(Collection<V> values, IHandler<? super V, K> keyFunction) {
         if(ObjectUtil.isNull(values)) {
-            return Collections.EMPTY_MAP;
-        }
-        return toMap(values.iterator(), keyFunction);
-    }
-
-    /**
-     * 可遍历的结合转换为 map
-     * @param values 可遍历的元素 Iterator
-     * @param keyFunction 转化方式
-     * @param <K> key 泛型
-     * @param <V> value 泛型
-     * @return map 结果
-     */
-    public static  <K,V> Map<K,V> toMap(Iterator<V> values, IHandler<? super V, K> keyFunction) {
-        if(ObjectUtil.isNull(values)) {
-            return Collections.EMPTY_MAP;
+            return Collections.emptyMap();
         }
 
-        Map<K,V> map = new HashMap<>();
+        Map<K,V> map = new HashMap<>(values.size());
 
-        while (values.hasNext()) {
-            V value = values.next();
+        for(V value : values) {
             final K key = keyFunction.handle(value);
             map.put(key, value);
         }
