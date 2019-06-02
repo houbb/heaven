@@ -20,6 +20,7 @@ public final class Base64 {
      * 128位是指二进制位。二进制太长，所以一般都改写成16进制，
      * 每一位16进制数可以代替4位二进制数，所以128位二进制数写成16进制就变成了128/4=32位。
      * @param bytes 字节流
+     * @return 字符串
      */
     public static String toBase64String(byte[] bytes){
         StringBuilder sb = new StringBuilder();
