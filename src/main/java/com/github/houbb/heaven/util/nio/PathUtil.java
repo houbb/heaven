@@ -15,10 +15,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 路径工具类
@@ -415,4 +412,73 @@ public final class PathUtil {
         }
     }
 
+    /**
+     * 写入行内容到指定列
+     * @param pathStr 路径
+     * @param lines 行内容数组
+     * @since 0.1.8
+     */
+    public static void writeLines(final String pathStr,
+                                  final String ... lines) {
+        List<String> stringList = Arrays.asList(lines);
+        writeLines(pathStr, stringList, CharsetConst.UTF8);
+    }
+
+    /**
+     * 写入行内容到指定文件
+     * @param pathStr 路径
+     * @param lines 行内容
+     * @since 0.1.8
+     */
+    public static void writeLines(final String pathStr,
+                                  final Collection<String> lines) {
+        writeLines(pathStr, lines, CharsetConst.UTF8);
+    }
+
+    /**
+     * 行内容添加到到指定列
+     * @param pathStr 路径
+     * @param lines 行内容数组
+     * @since 0.1.8
+     */
+    public static void appendLines(final String pathStr,
+                                  final String ... lines) {
+        List<String> stringList = Arrays.asList(lines);
+        writeLines(pathStr, stringList, CharsetConst.UTF8, StandardOpenOption.APPEND);
+    }
+
+    /**
+     * 行内容添加到到指定文件
+     * @param pathStr 路径
+     * @param lines 行内容
+     * @since 0.1.8
+     */
+    public static void appendLines(final String pathStr,
+                                  final Collection<String> lines) {
+        writeLines(pathStr, lines, CharsetConst.UTF8, StandardOpenOption.APPEND);
+    }
+
+    /**
+     * 写入行内容到指定列
+     * @param pathStr 路径
+     * @param charset 编码
+     * @param lines 行内容
+     * @param openOptions 操作
+     * @since 0.1.8
+     */
+    public static void writeLines(final String pathStr,
+                                  final Collection<String> lines,
+                                  final String charset,
+                                  final OpenOption ... openOptions) {
+        ArgUtil.notEmpty(pathStr, "pathStr");
+        ArgUtil.notEmpty(charset, "charset");
+        ArgUtil.notEmpty(lines, "lines");
+
+        try {
+            Path path = Paths.get(pathStr);
+            Files.write(path, lines, Charset.forName(charset), openOptions);
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
 }

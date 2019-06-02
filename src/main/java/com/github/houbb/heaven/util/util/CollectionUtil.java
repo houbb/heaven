@@ -309,4 +309,21 @@ public final class CollectionUtil {
         return StringUtil.join(stringList, connector);
     }
 
+    /**
+     * 循环处理集合
+     * @param collection 集合
+     * @param handler 处理器
+     * @param <E> 泛型元素
+     * @since 0.1.8
+     */
+    public static <E> void foreach(final Collection<E> collection, IHandler<E, Void> handler) {
+        if(CollectionUtil.isEmpty(collection)) {
+            return;
+        }
+
+        for(E e : collection) {
+            handler.handle(e);
+        }
+    }
+
 }

@@ -48,6 +48,30 @@ public final class InstanceFactory implements Instance {
         return SingletonHolder.INSTANCE_FACTORY;
     }
 
+    /**
+     * 静态方法单例
+     * @param tClass 类信息
+     * @param <T> 泛型
+     * @return 结果
+     * @since 0.1.8
+     */
+    public static <T> T singletion(Class<T> tClass) {
+        return getInstance().singleton(tClass);
+    }
+
+    /**
+     * 静态方法单例
+     * @param tClass 类信息
+     * @param groupName 分组名称
+     * @param <T> 泛型
+     * @return 结果
+     * @since 0.1.8
+     */
+    public static <T> T singletion(Class<T> tClass, final String groupName) {
+        return getInstance().singleton(tClass, groupName);
+    }
+
+
     @Override
     public <T> T singleton(Class<T> tClass, String groupName) {
         return getSingleton(tClass, groupName, singletonMap);
