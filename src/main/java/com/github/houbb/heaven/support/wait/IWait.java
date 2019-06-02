@@ -14,6 +14,6 @@ public interface IWait {
      * @param time 时间
      * @param timeUnit 单位
      */
-    void wait(final long time, final TimeUnit timeUnit);
+    void waits(final long time, final TimeUnit timeUnit);
 
 }

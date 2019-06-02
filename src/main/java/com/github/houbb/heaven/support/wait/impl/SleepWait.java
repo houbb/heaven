@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class SleepWait implements IWait {
 
     @Override
-    public void wait(long time, TimeUnit timeUnit) {
+    public void waits(long time, TimeUnit timeUnit) {
         try {
             timeUnit.sleep(time);
         } catch (InterruptedException e) {

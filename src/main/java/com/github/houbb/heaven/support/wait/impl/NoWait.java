@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class NoWait implements IWait {
 
     @Override
-    public void wait(long time, TimeUnit timeUnit) {
+    public void waits(long time, TimeUnit timeUnit) {
 
     }
     
