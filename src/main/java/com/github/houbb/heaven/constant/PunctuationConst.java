@@ -126,4 +126,10 @@ public final class PunctuationConst {
      */
     public static final String MIDDLE_LINE = "-";
 
+    /**
+     * 问号
+     * @since 0.1.9
+     */
+    public static final String QUESTION_MARK = "?";
+
 }

@@ -8,6 +8,7 @@ package com.github.houbb.heaven.util.util;
 import com.github.houbb.heaven.support.condition.ICondition;
 import com.github.houbb.heaven.support.filter.IFilter;
 import com.github.houbb.heaven.support.handler.IHandler;
+import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
@@ -324,6 +325,24 @@ public final class CollectionUtil {
         for(E e : collection) {
             handler.handle(e);
         }
+    }
+
+    /**
+     * 填充信息
+     * @param size 大小
+     * @param elem 单个元素
+     * @param <E> 泛型
+     * @return 列表
+     * @since 0.1.9
+     */
+    public static <E> List<E> fill(final int size,
+                                   final E elem) {
+        List<E> list = Guavas.newArrayList(size);
+
+        for(int i = 0; i <size; i++) {
+            list.add(elem);
+        }
+        return list;
     }
 
 }

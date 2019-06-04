@@ -516,4 +516,27 @@ public final class StringUtil {
         return objectToString(object, null);
     }
 
+    /**
+     * 对 single 的信息重复多次
+     * @param single 单个字符
+     * @param times 重复次数
+     * @return 结果
+     * @since 0.1.9
+     */
+    public static String times(final String single,
+                               final int times) {
+        if(StringUtil.isEmpty(single)) {
+            return single;
+        }
+        if(times <= 0) {
+            return single;
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = 0; i < times; i++) {
+            stringBuilder.append(single);
+        }
+        return stringBuilder.toString();
+    }
+
 }
