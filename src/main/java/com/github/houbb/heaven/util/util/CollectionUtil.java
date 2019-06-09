@@ -6,6 +6,7 @@
 package com.github.houbb.heaven.util.util;
 
 import com.github.houbb.heaven.support.condition.ICondition;
+import com.github.houbb.heaven.support.filler.IFiller;
 import com.github.houbb.heaven.support.filter.IFilter;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.guava.Guavas;
@@ -179,7 +180,7 @@ public final class CollectionUtil {
      * @param <V> v 泛型
      * @return 结果列表
      */
-    public static  <K,V> List<K> toList(Iterator<V> values, IHandler<? super V, K> keyFunction) {
+    public static  <K,V> List<K> toList(final Iterator<V> values, IHandler<? super V, K> keyFunction) {
         if(ObjectUtil.isNull(values)) {
             return Collections.emptyList();
         }
@@ -192,6 +193,26 @@ public final class CollectionUtil {
         }
         return list;
     }
+
+    /**
+     * 遍历填充对象
+     * @param values 遍历对象
+     * @param filler 对象填充器
+     * @param <E> e 泛型
+     * @since 0.1.10
+     */
+    public static <E> List<E> fillList(final List<E> values, IFiller<E> filler) {
+        if(ObjectUtil.isNull(values)) {
+            return values;
+        }
+
+        for(E e : values){
+            filler.fill(e);
+        }
+
+        return values;
+    }
+
 
     /**
      * 按照任意空格拆分
@@ -344,5 +365,21 @@ public final class CollectionUtil {
         }
         return list;
     }
+
+    /**
+     * 获取第一个元素
+     * 1. 避免 NPE
+     * @param list 列表
+     * @param <E> 泛型
+     * @return 结果
+     * @since 0.1.10
+     */
+    public static <E> E getFirst(final List<E> list) {
+        if(CollectionUtil.isEmpty(list)) {
+            return null;
+        }
+        return list.get(0);
+    }
+
 
 }
