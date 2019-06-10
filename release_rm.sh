@@ -2,8 +2,8 @@
 echo "============================= RELEASE START..."
 
 ## 版本号信息(需要手动指定)
-oldVersion="0.0.4"
-newVersion="0.0.4"
+oldVersion="0.1.11"
+newVersion="0.1.11"
 projectName="heaven"
 
 # 删除分支
