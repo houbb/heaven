@@ -539,4 +539,23 @@ public final class StringUtil {
         return stringBuilder.toString();
     }
 
+    /**
+     * 首字母大写
+     * @param string 字符串
+     * @return 大写的结果
+     * @since 0.1.11
+     */
+    public static String capitalFirst(final String string) {
+        if(StringUtil.isEmpty(string)) {
+            return string;
+        }
+
+        if(string.length() <= 1) {
+            return string.toUpperCase();
+        }
+
+        char capitalChar = Character.toUpperCase(string.charAt(0));
+        return capitalChar + string.substring(1);
+    }
+
 }
