@@ -46,7 +46,6 @@ import java.util.List;
  *
  * @author binbin.hou
  * @since 0.1.12
- * @see 19 位 uuid https://pittlu.iteye.com/blog/2093880
  */
 @ThreadSafe
 public class UUID8 implements Id {
