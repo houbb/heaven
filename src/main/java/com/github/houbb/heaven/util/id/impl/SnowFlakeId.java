@@ -3,9 +3,10 @@
  * heaven All rights reserved.
  */
 
-package com.github.houbb.heaven.util.id.support;
+package com.github.houbb.heaven.util.id.impl;
 
 
+import com.github.houbb.heaven.util.id.Id;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
 import java.lang.management.ManagementFactory;
@@ -14,25 +15,32 @@ import java.net.NetworkInterface;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * <p> 序列号 </p>
+ * <p> 雪花算法  19 位 </p>
  *
  * <pre> Created: 2018/6/15 上午11:41  </pre>
  * <pre> Project: heaven  </pre>
+ * [理解分布式id生成算法SnowFlake](https://segmentfault.com/a/1190000011282426?utm_source=tag-newest)
  *
  * @author houbinbin
- * @since 0.0.1
+ * @since 0.1.12
  */
-@Deprecated
-public class Sequence {
+public class SnowFlakeId implements Id {
 
     /**
      * 机器标识位数
      */
-    private final long workerIdBits     = 5L;
-    private final long datacenterIdBits = 5L;
-    private final long maxWorkerId      = -1L ^ (-1L << workerIdBits);
-    private final long maxDatacenterId  = -1L ^ (-1L << datacenterIdBits);
-    private       long workerId;
+    private static final long workerIdBits = 5L;
+
+    private static final long datacenterIdBits = 5L;
+
+    private static final long maxWorkerId = -1L ^ (-1L << workerIdBits);
+
+    private static final long maxDatacenterId = -1L ^ (-1L << datacenterIdBits);
+
+    /**
+     * worker 唯一标识
+     */
+    private long workerId;
 
     /**
      * 数据标识id部分
@@ -41,13 +49,13 @@ public class Sequence {
     /**
      * 并发控制
      */
-    private long sequence      = 0L;
+    private long sequence = 0L;
     /**
      * 上次生产id时间戳
      */
     private long lastTimestamp = -1L;
 
-    public Sequence() {
+    public SnowFlakeId() {
         this.datacenterId = getDatacenterId(maxDatacenterId);
         this.workerId = getMaxWorkerId(datacenterId, maxWorkerId);
     }
@@ -56,7 +64,7 @@ public class Sequence {
      * @param workerId     工作机器ID
      * @param datacenterId 序列号
      */
-    public Sequence(long workerId, long datacenterId) {
+    public SnowFlakeId(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
             throw new RuntimeException(String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
         }
@@ -70,8 +78,9 @@ public class Sequence {
 
     /**
      * 获取 maxWorkerId
+     *
      * @param datacenterId 客户端编号
-     * @param maxWorkerId 机器标识
+     * @param maxWorkerId  机器标识
      * @return 最大机器标识
      */
     protected static long getMaxWorkerId(long datacenterId, long maxWorkerId) {
@@ -92,6 +101,7 @@ public class Sequence {
 
     /**
      * 数据标识id部分
+     *
      * @param maxDatacenterId 最大标识
      * @return 最大标识
      */
@@ -120,7 +130,7 @@ public class Sequence {
      *
      * @return next id
      */
-    public synchronized long nextId() {
+    private synchronized long nextId() {
         long timestamp = timeGen();
         //闰秒
         if (timestamp < lastTimestamp) {
@@ -173,6 +183,11 @@ public class Sequence {
                 | sequence;
     }
 
+    /**
+     * 等待直到下一个毫秒
+     * @param lastTimestamp 等待直到下一个毫秒
+     * @return 等待直到下一个毫秒
+     */
     protected long tilNextMillis(long lastTimestamp) {
         long timestamp = timeGen();
         while (timestamp <= lastTimestamp) {
@@ -181,7 +196,17 @@ public class Sequence {
         return timestamp;
     }
 
+    /**
+     * 生成时间
+     * @return 时间
+     */
     protected long timeGen() {
         return System.currentTimeMillis();
     }
+
+    @Override
+    public String genId() {
+        return String.valueOf(this.nextId());
+    }
+
 }

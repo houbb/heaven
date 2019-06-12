@@ -16,6 +16,7 @@ import com.github.houbb.heaven.util.id.support.Sequence;
  * @author houbinbin
  * @since 0.0.1
  */
+@Deprecated
 public final class IdUtil {
 
     /**
