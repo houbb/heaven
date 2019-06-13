@@ -1,5 +1,10 @@
 package com.github.houbb.heaven.util.util;
 
+import com.github.houbb.heaven.response.exception.CommonRuntimeException;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -19,6 +24,44 @@ public final class RandomUtil {
 
     /** 用于随机选的字符和数字 */
     private static final String BASE_CHAR_NUMBER = BASE_CHAR + BASE_NUMBER;
+
+    /**
+     * 获取随机数生成器对象<br>
+     * ThreadLocalRandom是JDK 7之后提供并发产生随机数，能够解决多个线程发生的竞争争夺。
+     *
+     * @return {@link ThreadLocalRandom}
+     * @since 0.1.13
+     */
+    public static ThreadLocalRandom getRandom() {
+        return ThreadLocalRandom.current();
+    }
+
+    /**
+     * 获取{@link SecureRandom}，类提供加密的强随机数生成器 (RNG)
+     *
+     * @return {@link SecureRandom}
+     * @since 0.1.13
+     */
+    public static SecureRandom getSecureRandom() {
+        try {
+            return SecureRandom.getInstance("SHA1PRNG");
+        } catch (NoSuchAlgorithmException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 获取随机数产生器
+     *
+     * @param isSecure 是否为强随机数生成器 (RNG)
+     * @return {@link Random}
+     * @since 0.1.13
+     * @see #getSecureRandom()
+     * @see #getRandom()
+     */
+    public static Random getRandom(boolean isSecure) {
+        return isSecure ? getSecureRandom() : getRandom();
+    }
 
     /**
      * 随机的字符
