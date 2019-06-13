@@ -1,5 +1,8 @@
 package com.github.houbb.heaven.util.guava;
 
+import com.github.houbb.heaven.util.util.ArrayUtil;
+import com.github.houbb.heaven.util.util.CollectionUtil;
+
 import java.util.*;
 
 /**
@@ -29,6 +32,18 @@ public final class Guavas {
      */
     public static <E> List<E> newArrayList(final int size) {
         return new ArrayList<>(size);
+    }
+
+    /**
+     * 新建数组链表
+     * @param <E> 元素
+     * @param elems 元素数组
+     * @return 链表
+     */
+    public static <E> List<E> newArrayList(E ... elems) {
+        List<E> list = Guavas.newArrayList(elems.length);
+        list.addAll(Arrays.asList(elems));
+        return list;
     }
 
     /**

@@ -382,5 +382,22 @@ public final class CollectionUtil {
         return list.get(0);
     }
 
+    /**
+     * 去重集合
+     *
+     * @param <T> 集合元素类型
+     * @param collection 集合
+     * @return {@link ArrayList}
+     * @since 0.1.13
+     */
+    public static <T> List<T> distinct(Collection<T> collection) {
+        if (isEmpty(collection)) {
+            return Collections.emptyList();
+        } else if (collection instanceof Set) {
+            return new ArrayList<>(collection);
+        } else {
+            return new ArrayList<>(new LinkedHashSet<>(collection));
+        }
+    }
 
 }
