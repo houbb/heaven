@@ -365,6 +365,7 @@ public final class StringUtil {
      * 注意：如果有 null 属性，会导致直接报错。此处不再处理。
      * @param collection 集合信息
      * @param splitter 分隔符
+     * @param <E> 泛型
      * @return 结果
      * @since 0.1.14
      */
