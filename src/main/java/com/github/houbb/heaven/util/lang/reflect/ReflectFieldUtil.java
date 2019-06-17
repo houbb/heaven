@@ -188,8 +188,8 @@ public final class ReflectFieldUtil {
      * 主要作用于集合类型
      * <pre>
      * String[] 返回 String
-     * Collection<String> 返回 String
-     * Map<String, Integer> 返回 0: String, 1: Integer
+     * Collection&lt;String&gt; 返回 String
+     * Map&lt;String, Integer&gt; 返回 0: String, 1: Integer
      * </pre>
      * @param field 集合类型的字段
      * @param typeIndex 类型的下标

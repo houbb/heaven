@@ -334,6 +334,7 @@ public final class StringUtil {
      * @param splitter 分隔符
      * @param startIndex 开始下标
      * @param endIndex 结束下标
+     * @param <E> 泛型
      * @return 结果
      * @since 0.1.14
      */
