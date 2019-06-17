@@ -5,9 +5,13 @@
 
 package com.github.houbb.heaven.util.lang;
 
+import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
+import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * 字符串工具类
@@ -271,6 +275,17 @@ public final class StringUtil {
         return string;
     }
 
+    /**
+     * 将数组进行连接
+     * @param array      object array
+     * @param separator  分隔符
+     * @return join string
+     * @since 0.1.14
+     */
+    public static String join(Object[] array, String separator) {
+        final int endIndex = ArrayUtil.getEndIndex(-1, array);
+        return join(array, separator, 0, endIndex);
+    }
 
     /**
      * 将数组进行连接
@@ -313,21 +328,48 @@ public final class StringUtil {
 
     /**
      * 字符串拼接
-     * @param stringList 字符串列表
+     * (1) v0.1.14 将其范围扩展到对象列表
+     * 注意：如果有 null 属性，会导致直接报错。此处不再处理。
+     * @param collection 集合列表
      * @param splitter 分隔符
+     * @param startIndex 开始下标
+     * @param endIndex 结束下标
      * @return 结果
-     * @since 0.1.1
+     * @since 0.1.14
      */
-    public static String join(final List<String> stringList, final String splitter) {
-        if(CollectionUtil.isEmpty(stringList)) {
+    public static <E> String join(final Collection<E> collection, final String splitter,
+                              final int startIndex, final int endIndex) {
+        if(CollectionUtil.isEmpty(collection)) {
             return StringUtil.EMPTY;
         }
+
+        final String actualSplitter = StringUtil.nullToDefault(splitter, StringUtil.EMPTY);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(stringList.get(0));
-        for(int i = 1; i < stringList.size(); i++) {
-            stringBuilder.append(splitter).append(stringList.get(i));
+
+        Iterator<E> iterator = collection.iterator();
+        // 循环直到 startIndex
+        for(int i = 0; i < startIndex; i++) {
+            iterator.next();
+        }
+        stringBuilder.append(iterator.next().toString());
+        for(int i = startIndex; i < endIndex; i++) {
+            stringBuilder.append(actualSplitter).append(iterator.next().toString());
         }
         return stringBuilder.toString();
+    }
+
+    /**
+     * 字符串拼接
+     * (1) v0.1.14 将其范围扩展到对象列表
+     * 注意：如果有 null 属性，会导致直接报错。此处不再处理。
+     * @param collection 集合信息
+     * @param splitter 分隔符
+     * @return 结果
+     * @since 0.1.14
+     */
+    public static <E> String join(final Collection<E> collection, final String splitter) {
+        final int endIndex = CollectionUtil.getEndIndex(-1, collection);
+        return join(collection, splitter, 0, endIndex);
     }
 
     /**
@@ -492,6 +534,7 @@ public final class StringUtil {
 
     /**
      * 对象转换为字符串
+     * 1. 对数组特殊处理 {@link java.util.Arrays#toString(Object[])} 避免打印无意义的信息（v0.1.14）
      * @param object 对象
      * @param defaultWhenNull 对象为空时的默认值
      * @return 结果
@@ -501,6 +544,11 @@ public final class StringUtil {
                              final String defaultWhenNull) {
         if(ObjectUtil.isNull(object)) {
             return defaultWhenNull;
+        }
+        Class type = object.getClass();
+        if(ClassTypeUtil.isArray(type)) {
+            Object[] arrays = (Object[])object;
+            return Arrays.toString(arrays);
         }
         return object.toString();
     }
@@ -557,5 +605,7 @@ public final class StringUtil {
         char capitalChar = Character.toUpperCase(string.charAt(0));
         return capitalChar + string.substring(1);
     }
+
+
 
 }

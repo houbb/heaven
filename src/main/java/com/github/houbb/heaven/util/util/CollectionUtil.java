@@ -400,4 +400,51 @@ public final class CollectionUtil {
         }
     }
 
+    /**
+     * 获取开始的下标
+     * （1）默认为0
+     * （2）如果为负数，或者超过 arrays.length-1，则使用 0
+     * （3）正常返回 startIndex
+     * @param startIndex 开始下标
+     * @param collection 集合信息
+     * @return 尽可能安全的下标范围。如果为空，则返回 0;
+     * @since 0.1.14
+     */
+    public static int getStartIndex(final int startIndex,
+                                    final Collection<?> collection) {
+        if(CollectionUtil.isEmpty(collection)) {
+            return 0;
+        }
+        if(startIndex < 0
+                || startIndex > collection.size()-1) {
+            return 0;
+        }
+
+        return startIndex;
+    }
+
+    /**
+     * 获取开始的下标
+     * （1）默认为0
+     * （2）如果为负数，或者超过 arrays.length-1，则使用 arrays.length-1
+     * （3）正常返回 endIndex
+     * @param endIndex 结束下标
+     * @param collection 集合信息
+     * @return 尽可能安全的下标范围。如果为空，则返回 0;
+     * @since 0.1.14
+     */
+    public static int getEndIndex(final int endIndex,
+                                  final Collection<?> collection) {
+        if(CollectionUtil.isEmpty(collection)) {
+            return 0;
+        }
+        final int maxIndex = collection.size()-1;
+        if(endIndex < 0
+                || endIndex > maxIndex) {
+            return maxIndex;
+        }
+
+        return endIndex;
+    }
+
 }

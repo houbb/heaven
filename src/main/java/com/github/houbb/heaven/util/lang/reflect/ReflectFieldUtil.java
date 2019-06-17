@@ -9,6 +9,7 @@ import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
+import sun.reflect.generics.reflectiveObjects.WildcardTypeImpl;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -132,7 +133,28 @@ public final class ReflectFieldUtil {
                 return null;
             }
 
-            return (Class<?>)types[paramIndex];
+            // 判断是否为通配符(?)
+            Type type = types[paramIndex];
+            if(ClassTypeUtil.isWildcardGenericType(type)) {
+                WildcardTypeImpl wildcardType = (WildcardTypeImpl)type;
+
+                //lower
+                Type[] lowerBounds = wildcardType.getLowerBounds();
+                if(ArrayUtil.isNotEmpty(lowerBounds)) {
+                    return (Class<?>)lowerBounds[0];
+                }
+
+                //upper
+                Type[] upperBounds = wildcardType.getUpperBounds();
+                if(ArrayUtil.isNotEmpty(upperBounds)) {
+                    return (Class<?>)upperBounds[0];
+                }
+
+                // 默认返回 object 对象类型
+                return Object.class;
+            }
+
+            return (Class<?>)type;
         }
         return null;
     }
@@ -159,6 +181,51 @@ public final class ReflectFieldUtil {
             }
         }
         return false;
+    }
+
+    /**
+     * 获取字段的类型
+     * 主要作用于集合类型
+     * <pre>
+     * String[] 返回 String
+     * Collection<String> 返回 String
+     * Map<String, Integer> 返回 0: String, 1: Integer
+     * </pre>
+     * @param field 集合类型的字段
+     * @param typeIndex 类型的下标
+     * @return 对应的类型
+     * @since 0.1.14
+     */
+    public static Class getComponentType(final Field field,
+                                         final int typeIndex) {
+        final Class fieldType = field.getType();
+
+        // 数组
+        if(ClassTypeUtil.isArray(fieldType)) {
+            return fieldType.getComponentType();
+        }
+
+        // 集合
+        if(ClassTypeUtil.isCollection(fieldType)) {
+            return getGenericParamType(field, 0);
+        }
+
+        // map 信息
+        if(ClassTypeUtil.isMap(fieldType)) {
+            return getGenericParamType(field, typeIndex);
+        }
+
+        return fieldType;
+    }
+
+    /**
+     * 获取字段的类型
+     * @param field 集合类型的字段
+     * @return 对应的类型
+     * @since 0.1.14
+     */
+    public static Class getComponentType(final Field field) {
+        return getComponentType(field, 0);
     }
 
 }

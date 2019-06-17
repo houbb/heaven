@@ -1,8 +1,12 @@
 package com.github.houbb.heaven.util.lang.reflect;
 
+import sun.reflect.generics.reflectiveObjects.WildcardTypeImpl;
+
 import java.lang.reflect.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * class 类型工具类
@@ -88,8 +92,19 @@ public class ClassTypeUtil {
      * @return 是否为抽象类
      * @since 0.0.2
      */
-    private static boolean isAbstract(Class<?> clazz) {
+    public static boolean isAbstract(Class<?> clazz) {
         return Modifier.isAbstract(clazz.getModifiers());
+    }
+
+    /**
+     * 是抽象类或者接口
+     * @param clazz 类信息
+     * @return 是否
+     * @since 0.1.14
+     */
+    public static boolean isAbstractOrInterface(Class<?> clazz) {
+        return isAbstract(clazz)
+                || clazz.isInterface();
     }
 
     /**
@@ -166,6 +181,37 @@ public class ClassTypeUtil {
         ParameterizedType listGenericType = (ParameterizedType) field.getGenericType();
         Type[] listActualTypeArguments = listGenericType.getActualTypeArguments();
         return (Class) listActualTypeArguments[0];
+    }
+
+    /**
+     * 是否为通配符泛型
+     * @param type 类型
+     * @return 是否
+     * @since 0.1.14
+     */
+    public static boolean isWildcardGenericType(final Type type) {
+        final Class clazz = type.getClass();
+        return WildcardTypeImpl.class.equals(clazz);
+    }
+
+    /**
+     * 是否为列表
+     * @param clazz 类型
+     * @return 结果
+     * @since 0.1.14
+     */
+    public static boolean isList(final Class clazz) {
+        return List.class.isAssignableFrom(clazz);
+    }
+
+    /**
+     * 是否为 set
+     * @param clazz 类型
+     * @return 结果
+     * @since 0.1.14
+     */
+    public static boolean isSet(final Class clazz) {
+        return Set.class.isAssignableFrom(clazz);
     }
 
 }

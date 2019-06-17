@@ -178,4 +178,52 @@ public final class ArrayUtil {
     public static <E> List<E> arrayToList(final E[] array) {
         return Arrays.asList(array);
     }
+
+    /**
+     * 获取开始的下标
+     * （1）默认为0
+     * （2）如果为负数，或者超过 arrays.length-1，则使用 0
+     * （3）正常返回 startIndex
+     * @param startIndex 开始下标
+     * @param arrays 数组信息
+     * @return 尽可能安全的数组范围。如果为空，则返回 0;
+     * @since 0.1.14
+     */
+    public static int getStartIndex(final int startIndex,
+                                    final Object[] arrays) {
+        if(ArrayUtil.isEmpty(arrays)) {
+            return 0;
+        }
+        if(startIndex < 0
+            || startIndex > arrays.length-1) {
+            return 0;
+        }
+
+        return startIndex;
+    }
+
+    /**
+     * 获取开始的下标
+     * （1）默认为0
+     * （2）如果为负数，或者超过 arrays.length-1，则使用 arrays.length-1
+     * （3）正常返回 endIndex
+     * @param endIndex 结束下标
+     * @param arrays 数组信息
+     * @return 尽可能安全的数组范围。如果为空，则返回 0;
+     * @since 0.1.14
+     */
+    public static int getEndIndex(final int endIndex,
+                                    final Object[] arrays) {
+        if(ArrayUtil.isEmpty(arrays)) {
+            return 0;
+        }
+        final int maxIndex = arrays.length-1;
+        if(endIndex < 0
+                || endIndex > maxIndex) {
+            return maxIndex;
+        }
+
+        return endIndex;
+    }
+
 }
