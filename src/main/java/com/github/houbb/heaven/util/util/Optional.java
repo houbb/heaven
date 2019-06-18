@@ -160,6 +160,20 @@ public final class Optional<T> {
     }
 
     /**
+     * Return the contained value, if present, otherwise return default value.
+     * @param defaultVal default value
+     * @return the present value or default value
+     * @since 0.1.15
+     */
+    public T orDefault(final T defaultVal) {
+        if (value != null) {
+            return value;
+        } else {
+            return defaultVal;
+        }
+    }
+
+    /**
      * Indicates whether some other object is "equal to" this Optional. The
      * other object is considered equal if:
      * <ul>
