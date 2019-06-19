@@ -23,10 +23,11 @@ import java.util.*;
  */
 public final class CollectionUtil {
 
-    /**    
-     *  collection util    
-     */    
-    private CollectionUtil(){}
+    /**
+     * collection util
+     */
+    private CollectionUtil() {
+    }
 
     /**
      * 空列表
@@ -35,7 +36,8 @@ public final class CollectionUtil {
 
     /**
      * 是否为空
-     * @param collection    集合
+     *
+     * @param collection 集合
      * @return {@code true} 是
      */
     public static boolean isEmpty(Collection collection) {
@@ -45,8 +47,9 @@ public final class CollectionUtil {
 
     /**
      * 是否不为空
-     * @param collection    集合
-     * @return  {@code true} 是
+     *
+     * @param collection 集合
+     * @return {@code true} 是
      * @since 1.1.2
      */
     public static boolean isNotEmpty(Collection collection) {
@@ -55,11 +58,12 @@ public final class CollectionUtil {
 
     /**
      * 根据数组返回对应列表
+     *
      * @param array string array
      * @return string list
      */
     public static List<String> arrayToList(String[] array) {
-        if(ArrayUtil.isEmpty(array)) {
+        if (ArrayUtil.isEmpty(array)) {
             return Collections.emptyList();
         }
         return Arrays.asList(array);
@@ -68,6 +72,7 @@ public final class CollectionUtil {
 
     /**
      * 列表转数组
+     *
      * @param stringList string list
      * @return string array
      */
@@ -99,20 +104,21 @@ public final class CollectionUtil {
     /**
      * 构建结果集合
      * 1. 如果转换的结果为 null，会被跳过。
+     *
      * @param targets 原始信息
      * @param handler 处理接口
-     * @param <T> 入参
-     * @param <R> 出参
+     * @param <T>     入参
+     * @param <R>     出参
      * @return 结果
      */
     public static <T, R> Collection<R> buildCollection(final Collection<T> targets, final IHandler<T, R> handler) {
-        if(isEmpty(targets)) {
+        if (isEmpty(targets)) {
             return Collections.emptyList();
         }
         Collection<R> rList = new ArrayList<>();
-        for(T t : targets) {
+        for (T t : targets) {
             R r = handler.handle(t);
-            if(ObjectUtil.isNotNull(r)) {
+            if (ObjectUtil.isNotNull(r)) {
                 rList.add(r);
             }
         }
@@ -122,21 +128,22 @@ public final class CollectionUtil {
     /**
      * 构建结果集合
      * 1. 如果转换的结果为 null，会被跳过。
+     *
      * @param targets 原始信息
      * @param handler 处理接口
-     * @param <T> 入参
-     * @param <R> 出参
+     * @param <T>     入参
+     * @param <R>     出参
      * @return 结果
      * @since 0.0.2
      */
     public static <T, R> Collection<R> buildCollection(final T[] targets, final IHandler<T, R> handler) {
-        if(ArrayUtil.isEmpty(targets)) {
+        if (ArrayUtil.isEmpty(targets)) {
             return Collections.emptyList();
         }
         Collection<R> rList = new ArrayList<>();
-        for(T t : targets) {
+        for (T t : targets) {
             R r = handler.handle(t);
-            if(ObjectUtil.isNotNull(r)) {
+            if (ObjectUtil.isNotNull(r)) {
                 rList.add(r);
             }
         }
@@ -145,12 +152,13 @@ public final class CollectionUtil {
 
     /**
      * 将数组的内容添加到集合
+     *
      * @param collection 集合
-     * @param array 数组
-     * @param <T> 泛型
+     * @param array      数组
+     * @param <T>        泛型
      */
     public static <T> void addArray(final Collection<T> collection, final T[] array) {
-        if(ArrayUtil.isEmpty(array)) {
+        if (ArrayUtil.isEmpty(array)) {
             return;
         }
 
@@ -159,14 +167,15 @@ public final class CollectionUtil {
 
     /**
      * 可遍历的元素对象的某个元素，转换为列表
-     * @param values 遍历对象
+     *
+     * @param values      遍历对象
      * @param keyFunction 转换方式
-     * @param <K> k 泛型
-     * @param <V> v 泛型
+     * @param <K>         k 泛型
+     * @param <V>         v 泛型
      * @return 结果列表
      */
     public static <K, V> List<K> toList(final Iterable<V> values, IHandler<? super V, K> keyFunction) {
-        if(ObjectUtil.isNull(values)) {
+        if (ObjectUtil.isNull(values)) {
             return Collections.emptyList();
         }
         return toList(values.iterator(), keyFunction);
@@ -174,14 +183,15 @@ public final class CollectionUtil {
 
     /**
      * 可遍历的元素对象的某个元素，转换为列表
-     * @param values 遍历对象
+     *
+     * @param values      遍历对象
      * @param keyFunction 转换方式
-     * @param <K> k 泛型
-     * @param <V> v 泛型
+     * @param <K>         k 泛型
+     * @param <V>         v 泛型
      * @return 结果列表
      */
-    public static  <K,V> List<K> toList(final Iterator<V> values, IHandler<? super V, K> keyFunction) {
-        if(ObjectUtil.isNull(values)) {
+    public static <K, V> List<K> toList(final Iterator<V> values, IHandler<? super V, K> keyFunction) {
+        if (ObjectUtil.isNull(values)) {
             return Collections.emptyList();
         }
 
@@ -196,18 +206,19 @@ public final class CollectionUtil {
 
     /**
      * 遍历填充对象
+     *
      * @param values 遍历对象
      * @param filler 对象填充器
-     * @param <E> e 泛型
+     * @param <E>    e 泛型
      * @return 返回类表
      * @since 0.1.10
      */
     public static <E> List<E> fillList(final List<E> values, IFiller<E> filler) {
-        if(ObjectUtil.isNull(values)) {
+        if (ObjectUtil.isNull(values)) {
             return values;
         }
 
-        for(E e : values){
+        for (E e : values) {
             filler.fill(e);
         }
 
@@ -217,6 +228,7 @@ public final class CollectionUtil {
 
     /**
      * 按照任意空格拆分
+     *
      * @param string 字符串
      * @return 拆分后的列表
      * @since 0.0.5
@@ -233,20 +245,21 @@ public final class CollectionUtil {
 
     /**
      * 执行列表过滤
-     * @param list 原始列表
+     *
+     * @param list   原始列表
      * @param filter 过滤器
-     * @param <T> 泛型
+     * @param <T>    泛型
      * @return 过滤后的结果
      * @since 0.0.6
      */
     public static <T> List<T> filterList(final List<T> list, final IFilter<T> filter) {
-        if(isEmpty(list)) {
+        if (isEmpty(list)) {
             return Collections.emptyList();
         }
 
         List<T> resultList = new ArrayList<>();
-        for(T t : list) {
-            if(filter.filter(t)) {
+        for (T t : list) {
+            if (filter.filter(t)) {
                 continue;
             }
 
@@ -257,20 +270,21 @@ public final class CollectionUtil {
 
     /**
      * 执行列表过滤
-     * @param list 原始列表
+     *
+     * @param list      原始列表
      * @param condition 条件过滤器
-     * @param <T> 泛型
+     * @param <T>       泛型
      * @return 过滤后的结果
      * @since 0.0.6
      */
     public static <T> List<T> conditionList(final List<T> list, final ICondition<T> condition) {
-        if(isEmpty(list)) {
+        if (isEmpty(list)) {
             return Collections.emptyList();
         }
 
         List<T> resultList = new ArrayList<>();
-        for(T t : list) {
-            if(condition.condition(t)) {
+        for (T t : list) {
+            if (condition.condition(t)) {
                 resultList.add(t);
             }
         }
@@ -281,18 +295,19 @@ public final class CollectionUtil {
      * 对象列表转换为 toString 列表
      * 1. 会跳过所有的 null 对象。
      * 2. 建议放在 collectUtil 下。
+     *
      * @param pathList 原始对象
      * @return 结果
      * @since 0.0.6
      */
     public static List<String> toStringList(final List<?> pathList) {
-        if(CollectionUtil.isEmpty(pathList)) {
+        if (CollectionUtil.isEmpty(pathList)) {
             return Collections.emptyList();
         }
 
         List<String> stringList = new ArrayList<>(pathList.size());
-        for(Object object : pathList) {
-            if(ObjectUtil.isNotNull(object)) {
+        for (Object object : pathList) {
+            if (ObjectUtil.isNotNull(object)) {
                 stringList.add(object.toString());
             }
         }
@@ -302,18 +317,19 @@ public final class CollectionUtil {
 
     /**
      * 找到第一个不为 null 的元素
+     *
      * @param list 列表
-     * @param <T> 泛型
+     * @param <T>  泛型
      * @return 不为 null 的元素
      * @since 0.1.6
      */
     public static <T> Optional<T> firstNotNullElem(List<T> list) {
-        if(CollectionUtil.isEmpty(list)) {
+        if (CollectionUtil.isEmpty(list)) {
             return Optional.empty();
         }
 
-        for(T elem : list) {
-            if(ObjectUtil.isNotNull(elem)) {
+        for (T elem : list) {
+            if (ObjectUtil.isNotNull(elem)) {
                 return Optional.of(elem);
             }
         }
@@ -322,8 +338,9 @@ public final class CollectionUtil {
 
     /**
      * 将 stringList 内容按照 connector 连接起来
+     *
      * @param stringList 字符串列表
-     * @param connector 连接符号
+     * @param connector  连接符号
      * @return 结果
      * @since 0.1.6
      */
@@ -334,26 +351,28 @@ public final class CollectionUtil {
 
     /**
      * 循环处理集合
+     *
      * @param collection 集合
-     * @param handler 处理器
-     * @param <E> 泛型元素
+     * @param handler    处理器
+     * @param <E>        泛型元素
      * @since 0.1.8
      */
     public static <E> void foreach(final Collection<E> collection, IHandler<E, Void> handler) {
-        if(CollectionUtil.isEmpty(collection)) {
+        if (CollectionUtil.isEmpty(collection)) {
             return;
         }
 
-        for(E e : collection) {
+        for (E e : collection) {
             handler.handle(e);
         }
     }
 
     /**
      * 填充信息
+     *
      * @param size 大小
      * @param elem 单个元素
-     * @param <E> 泛型
+     * @param <E>  泛型
      * @return 列表
      * @since 0.1.9
      */
@@ -361,7 +380,7 @@ public final class CollectionUtil {
                                    final E elem) {
         List<E> list = Guavas.newArrayList(size);
 
-        for(int i = 0; i <size; i++) {
+        for (int i = 0; i < size; i++) {
             list.add(elem);
         }
         return list;
@@ -370,13 +389,14 @@ public final class CollectionUtil {
     /**
      * 获取第一个元素
      * 1. 避免 NPE
+     *
      * @param list 列表
-     * @param <E> 泛型
+     * @param <E>  泛型
      * @return 结果
      * @since 0.1.10
      */
     public static <E> E getFirst(final List<E> list) {
-        if(CollectionUtil.isEmpty(list)) {
+        if (CollectionUtil.isEmpty(list)) {
             return null;
         }
         return list.get(0);
@@ -385,7 +405,7 @@ public final class CollectionUtil {
     /**
      * 去重集合
      *
-     * @param <T> 集合元素类型
+     * @param <T>        集合元素类型
      * @param collection 集合
      * @return {@link ArrayList}
      * @since 0.1.13
@@ -405,6 +425,7 @@ public final class CollectionUtil {
      * （1）默认为0
      * （2）如果为负数，或者超过 arrays.length-1，则使用 0
      * （3）正常返回 startIndex
+     *
      * @param startIndex 开始下标
      * @param collection 集合信息
      * @return 尽可能安全的下标范围。如果为空，则返回 0;
@@ -412,11 +433,11 @@ public final class CollectionUtil {
      */
     public static int getStartIndex(final int startIndex,
                                     final Collection<?> collection) {
-        if(CollectionUtil.isEmpty(collection)) {
+        if (CollectionUtil.isEmpty(collection)) {
             return 0;
         }
-        if(startIndex < 0
-                || startIndex > collection.size()-1) {
+        if (startIndex < 0
+                || startIndex > collection.size() - 1) {
             return 0;
         }
 
@@ -428,23 +449,79 @@ public final class CollectionUtil {
      * （1）默认为0
      * （2）如果为负数，或者超过 arrays.length-1，则使用 arrays.length-1
      * （3）正常返回 endIndex
-     * @param endIndex 结束下标
+     *
+     * @param endIndex   结束下标
      * @param collection 集合信息
      * @return 尽可能安全的下标范围。如果为空，则返回 0;
      * @since 0.1.14
      */
     public static int getEndIndex(final int endIndex,
                                   final Collection<?> collection) {
-        if(CollectionUtil.isEmpty(collection)) {
+        if (CollectionUtil.isEmpty(collection)) {
             return 0;
         }
-        final int maxIndex = collection.size()-1;
-        if(endIndex < 0
+        final int maxIndex = collection.size() - 1;
+        if (endIndex < 0
                 || endIndex > maxIndex) {
             return maxIndex;
         }
 
         return endIndex;
+    }
+
+    /**
+     * 集合的并集
+     *
+     * @param collectionOne 集合1
+     * @param collectionTwo 集合2
+     * @param <E>           泛型
+     * @return 结果集合
+     * @since 0.1.16
+     */
+    public static <E> Collection<E> union(final Collection<E> collectionOne,
+                                          final Collection<E> collectionTwo) {
+        Set<E> set = Guavas.newHashSet();
+        set.addAll(collectionOne);
+        set.addAll(collectionTwo);
+        return set;
+    }
+
+    /**
+     * 集合的差集
+     *
+     * @param collectionOne 集合1
+     * @param collectionTwo 集合2
+     * @param <E>           泛型
+     * @return 结果集合
+     * @since 0.1.16
+     */
+    public static <E> Collection<E> difference(final Collection<E> collectionOne,
+                                               final Collection<E> collectionTwo) {
+        Set<E> set = Guavas.newHashSet();
+        set.addAll(collectionOne);
+        set.removeAll(collectionTwo);
+        return set;
+    }
+
+    /**
+     * 集合的差交集
+     *
+     * @param collectionOne 集合1
+     * @param collectionTwo 集合2
+     * @param <E>           泛型
+     * @return 结果集合
+     * @since 0.1.16
+     */
+    public static <E> Collection<E> interSection(final Collection<E> collectionOne,
+                                                 final Collection<E> collectionTwo) {
+        Set<E> set = Guavas.newHashSet();
+
+        for (E e : collectionOne) {
+            if (collectionTwo.contains(e)) {
+                set.add(e);
+            }
+        }
+        return set;
     }
 
 }
