@@ -693,6 +693,17 @@ public final class StringUtil {
 
     /**
      * 根据下标截取列表
+     *
+     * 【最后的截取问题】
+     * 最后构建的结果：
+     * string=1::2::3:31:::32::4:
+     * index=[1,4,15]
+     * ignore=2
+     *
+     *  每次截取：
+     *  [0,1)
+     *  [1+2,4)
+     *  [15+2,]
      * @param string 原始字符串
      * @param indexCollection 下标列表
      * @param ignoreLength 每次忽略跳过的长度。用于跳过 split 字符。
@@ -712,10 +723,21 @@ public final class StringUtil {
         List<String> resultList = Guavas.newArrayList(indexCollection.size());
         int startIndex = 0;
         for(Integer index : indexCollection) {
+            // 最后的位置添加空字符串
+            if(startIndex > string.length()-1) {
+                resultList.add(StringUtil.EMPTY);
+                break;
+            }
             String subString = string.substring(startIndex, index);
+            resultList.add(subString);
             startIndex = index+ignoreLength;
+        }
+        // 最后的结果信息
+        if(startIndex < string.length()) {
+            String subString = string.substring(startIndex);
             resultList.add(subString);
         }
+
         return resultList;
     }
 

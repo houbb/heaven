@@ -478,12 +478,12 @@ public final class CollectionUtil {
      * @return 结果集合
      * @since 0.1.16
      */
-    public static <E> Collection<E> union(final Collection<E> collectionOne,
+    public static <E> List<E> union(final Collection<E> collectionOne,
                                           final Collection<E> collectionTwo) {
-        Set<E> set = Guavas.newHashSet();
+        Set<E> set = new LinkedHashSet<>();
         set.addAll(collectionOne);
         set.addAll(collectionTwo);
-        return set;
+        return new ArrayList<>(set);
     }
 
     /**
@@ -495,12 +495,12 @@ public final class CollectionUtil {
      * @return 结果集合
      * @since 0.1.16
      */
-    public static <E> Collection<E> difference(final Collection<E> collectionOne,
+    public static <E> List<E> difference(final Collection<E> collectionOne,
                                                final Collection<E> collectionTwo) {
-        Set<E> set = Guavas.newHashSet();
+        Set<E> set = new LinkedHashSet<>();
         set.addAll(collectionOne);
         set.removeAll(collectionTwo);
-        return set;
+        return new ArrayList<>(set);
     }
 
     /**
@@ -512,16 +512,16 @@ public final class CollectionUtil {
      * @return 结果集合
      * @since 0.1.16
      */
-    public static <E> Collection<E> interSection(final Collection<E> collectionOne,
+    public static <E> List<E> interSection(final Collection<E> collectionOne,
                                                  final Collection<E> collectionTwo) {
-        Set<E> set = Guavas.newHashSet();
+        Set<E> set = new LinkedHashSet<>();
 
         for (E e : collectionOne) {
             if (collectionTwo.contains(e)) {
                 set.add(e);
             }
         }
-        return set;
+        return new ArrayList<>(set);
     }
 
 }
