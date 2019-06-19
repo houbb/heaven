@@ -5,13 +5,12 @@
 
 package com.github.houbb.heaven.util.lang;
 
+import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * 字符串工具类
@@ -572,7 +571,9 @@ public final class StringUtil {
      * @param times 重复次数
      * @return 结果
      * @since 0.1.9
+     * @see #repeat(String, int) 重复
      */
+    @Deprecated
     public static String times(final String single,
                                final int times) {
         if(StringUtil.isEmpty(single)) {
@@ -608,6 +609,152 @@ public final class StringUtil {
         return capitalChar + string.substring(1);
     }
 
+    /**
+     * 严格拆分
+     * 【传统拆分】
+     * 1:2:3:31::32:4 结果是：[1, 2, 3, 31, , 32, 4]
+     *
+     * 【严格拆分】
+     * 严格匹配 : 拆分符，如果有多个，则不进行拆分。
+     * 结果：[1, 2, 3, 31::32, 4]
+     *
+     * 实现逻辑：
+     * （1）根据 index 获取所有的下标。+length（当前步长）
+     * （2）获取当前的所有拆分下标，获取 times+1 的拆分下标
+     * （3）从当前下标中移除 times+1 的下标。并且移除连续的信息。
+     * 连续：times+1 的下标，后续的 times 步长。如果不连续，则中断。
+     * （4）根据过滤后的列表生成最后的结果。
+     *
+     * @param string 原始字符串
+     * @param splitUnit 分隔单元
+     * @param times 次数
+     * @return 结果
+     * @since 0.1.16
+     */
+    public static List<String> splitStrictly(final String string,
+                                             final char splitUnit,
+                                             final int times) {
+        if(StringUtil.isEmpty(string)) {
+            return Collections.emptyList();
+        }
+        if(times <= 0) {
+            return Collections.singletonList(string);
+        }
 
+        // 分别获取索引列表
+        final String split = CharUtil.repeat(splitUnit, times);
+        final String moreSplit = CharUtil.repeat(splitUnit, times+1);
+        final List<Integer> splitIndexList = getIndexList(string, split);
+        final List<Integer> moreSplitIndexList = getIndexList(string, moreSplit);
+
+        // 移除重复下标
+        final List<Integer> removeIndexList = getSerialFilterList(splitIndexList, moreSplitIndexList, times);
+
+        // 构建结果列表
+        Collection<Integer> trimIndexList = CollectionUtil.difference(splitIndexList, removeIndexList);
+        return subStringList(string, trimIndexList, times);
+    }
+
+    /**
+     * 获取满足条件连续的列表
+     * （1）当前信息
+     * （2）连续的索引信息
+     * @param allList 所有的整数
+     * @param filterList 待排除的整数
+     * @param step 步长
+     * @return 结果列表
+     */
+    private static List<Integer> getSerialFilterList(final List<Integer> allList,
+                                              final List<Integer> filterList,
+                                               final int step) {
+        List<Integer> resultList = Guavas.newArrayList();
+
+        resultList.addAll(filterList);
+        // 根据 index+times 为步长进行连续判断。不存在则跳过
+        for(Integer filter : filterList) {
+            // 从匹配的下一个元素开始
+            final int startIndex = allList.indexOf(filter)+1;
+            int stepTimes = 1;
+            for(int i = startIndex; i < allList.size(); i++) {
+                final Integer indexVal = allList.get(i);
+                final int nextVal = step*stepTimes+filter;
+                if(indexVal.equals(nextVal)) {
+                    resultList.add(nextVal);
+                } else {
+                    // 跳出当前循环
+                    break;
+                }
+                stepTimes++;
+            }
+        }
+
+        return resultList;
+    }
+
+    /**
+     * 根据下标截取列表
+     * @param string 原始字符串
+     * @param indexCollection 下标列表
+     * @param ignoreLength 每次忽略跳过的长度。用于跳过 split 字符。
+     * @return 结果列表
+     * @since 0.1.16
+     */
+    public static List<String> subStringList(final String string,
+                                             final Collection<Integer> indexCollection,
+                                             final int ignoreLength) {
+        if(StringUtil.isEmpty(string)) {
+            return Collections.emptyList();
+        }
+        if(CollectionUtil.isEmpty(indexCollection)) {
+            return Collections.singletonList(string);
+        }
+
+        List<String> resultList = Guavas.newArrayList(indexCollection.size());
+        int startIndex = 0;
+        for(Integer index : indexCollection) {
+            String subString = string.substring(startIndex, index);
+            startIndex = index+ignoreLength;
+            resultList.add(subString);
+        }
+        return resultList;
+    }
+
+    /**
+     * 获取所有符合条件的下标类表
+     * 【下标】
+     * 1:2:3:31::32:4:
+     *
+     * [1, 3, 5, 8, 9, 12, 14]
+     *
+     * 问题：这个下标没有过滤 split。
+     * 如果想过滤分隔符，应该如下：
+     * (0,1)
+     * (1+split.length, 3)
+     * ...
+     * 1,2,
+     * @param string 原始字符串
+     * @param split 分隔字符串
+     * @return 下标列表
+     * @since 0.1.16
+     */
+    public static List<Integer> getIndexList(final String string,
+                                             final String split) {
+        if(StringUtil.isEmpty(string)
+            || StringUtil.isEmpty(split)) {
+            return Collections.emptyList();
+        }
+
+        List<Integer> indexList = Guavas.newArrayList();
+        int startIndex = 0;
+        while (startIndex < string.length()) {
+            startIndex = string.indexOf(split, startIndex);
+            if(startIndex < 0) {
+                break;
+            }
+            indexList.add(startIndex);
+            startIndex += split.length();
+        }
+        return indexList;
+    }
 
 }
