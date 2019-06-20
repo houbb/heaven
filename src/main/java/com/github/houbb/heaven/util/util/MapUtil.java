@@ -7,6 +7,7 @@ package com.github.houbb.heaven.util.util;
 
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
+import com.github.houbb.heaven.util.lang.StringUtil;
 
 import java.util.*;
 
@@ -77,6 +78,27 @@ public final class MapUtil {
             map.put(map.size(), v);
         }
         return map;
+    }
+
+    /**
+     * 获取对应的映射信息
+     * （1）如果对应的值不存在，则返回 key 本身
+     * （2）如果 map 为空，则返回
+     * @param map map
+     * @param key key
+     * @return value
+     * @since 0.1.17
+     */
+    public static String getMapValue(final Map<String, String> map,
+                                     final String key) {
+        if(MapUtil.isEmpty(map)) {
+            return key;
+        }
+        final String value = map.get(key);
+        if(StringUtil.isEmpty(value)) {
+            return key;
+        }
+        return value;
     }
 
 }

@@ -127,6 +127,12 @@ public final class PunctuationConst {
     public static final String MIDDLE_LINE = "-";
 
     /**
+     * 等于号
+     * @since 0.1.17
+     */
+    public static final String EQUAL = "=";
+
+    /**
      * 问号
      * @since 0.1.9
      */
