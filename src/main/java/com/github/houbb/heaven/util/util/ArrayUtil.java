@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.util;
 
+import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassGenericUtil;
 
 import java.lang.reflect.Array;
@@ -224,6 +225,26 @@ public final class ArrayUtil {
         }
 
         return endIndex;
+    }
+
+    /**
+     * 找到第一个不为 null 的元素
+     *
+     * @param objects 对象
+     * @return 不为 null 的元素
+     * @since 0.1.18
+     */
+    public static Optional<Object> firstNotNullElem(Object[] objects) {
+        if (ArrayUtil.isEmpty(objects)) {
+            return Optional.empty();
+        }
+
+        for (Object elem : objects) {
+            if (ObjectUtil.isNotNull(elem)) {
+                return Optional.of(elem);
+            }
+        }
+        return Optional.empty();
     }
 
 }

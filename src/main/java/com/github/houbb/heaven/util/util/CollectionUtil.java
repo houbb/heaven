@@ -323,7 +323,7 @@ public final class CollectionUtil {
      * @return 不为 null 的元素
      * @since 0.1.6
      */
-    public static <T> Optional<T> firstNotNullElem(List<T> list) {
+    public static <T> Optional<T> firstNotNullElem(Collection<T> list) {
         if (CollectionUtil.isEmpty(list)) {
             return Optional.empty();
         }

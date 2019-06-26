@@ -184,4 +184,29 @@ public final class ObjectUtil {
         return !isEquals(except, real);
     }
 
+    /**
+     * 对象转字符串
+     * @param object 对象
+     * @return 结果
+     * @since 0.1.18
+     */
+    public static String objectToString(final Object object) {
+        return objectToString(object, null);
+    }
+
+    /**
+     * 对象转字符串
+     * @param object 对象
+     * @param defaultValue 默认值，原始对象为 null 时返回。
+     * @return 结果
+     * @since 0.1.18
+     */
+    public static String objectToString(final Object object,
+                                        final String defaultValue) {
+        if(ObjectUtil.isNull(object)) {
+            return defaultValue;
+        }
+        return object.toString();
+    }
+
 }

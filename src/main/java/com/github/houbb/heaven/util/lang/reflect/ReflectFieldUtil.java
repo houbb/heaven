@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.lang.reflect;
 
+import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
@@ -226,6 +227,22 @@ public final class ReflectFieldUtil {
      */
     public static Class getComponentType(final Field field) {
         return getComponentType(field, 0);
+    }
+
+    /**
+     * 设置字段的值
+     * @param field 字段
+     * @param instance 实例对象
+     * @param fieldValue 值
+     * @since 0.1.18
+     */
+    public static void setValue(final Field field, final Object instance, final Object fieldValue) {
+        try {
+            field.setAccessible(true);
+            field.set(instance, fieldValue);
+        } catch (IllegalAccessException e) {
+            throw new CommonRuntimeException(e);
+        }
     }
 
 }
