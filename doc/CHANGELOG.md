@@ -147,3 +147,10 @@
 | 2 | A | 添加 PunctuationConst#EQUAL | 2019-6-20 19:01:18 |  |
 | 3 | A | 新增 RegexUtil | 2019-6-20 19:01:18 |  |
 
+# release_0.1.18
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 添加 ObjectUtil#objectToString/#objectToString | 2019-6-20 19:01:18 |  |
+| 2 | A | 添加 ArrayUtil#firstNotNullElem | 2019-6-20 19:01:18 |  |
+| 2 | A | 添加 ReflectFieldUtil#setValueg | 2019-6-20 19:01:18 |  |
