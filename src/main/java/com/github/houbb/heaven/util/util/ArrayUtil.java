@@ -247,4 +247,13 @@ public final class ArrayUtil {
         return Optional.empty();
     }
 
+    /**
+     * 返回数组信息
+     * @param objects 数组
+     * @return 结果列表
+     * @since 0.1.20
+     */
+    public static Object[] newArray(Object ... objects) {
+        return objects;
+    }
 }

@@ -153,4 +153,16 @@
 |:---|:---|:---|:---|:--|
 | 1 | A | 添加 ObjectUtil#objectToString/#objectToString | 2019-6-20 19:01:18 |  |
 | 2 | A | 添加 ArrayUtil#firstNotNullElem | 2019-6-20 19:01:18 |  |
-| 2 | A | 添加 ReflectFieldUtil#setValueg | 2019-6-20 19:01:18 |  |
+| 3 | A | 添加 ReflectFieldUtil#setValueg | 2019-6-20 19:01:18 |  |
+
+# release_0.1.18
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 添加 IEnum 接口 | 2019-8-12 19:01:18 |  |
+
+# release_0.1.20
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 添加 ArrayUtil#newArray() | 2019-8-15 12:48:15 |  |
