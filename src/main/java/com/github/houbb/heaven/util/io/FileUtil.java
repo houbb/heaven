@@ -7,17 +7,17 @@ package com.github.houbb.heaven.util.io;
 
 
 import com.github.houbb.heaven.constant.CharsetConst;
+import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+import java.nio.file.OpenOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -295,6 +295,46 @@ public final class FileUtil {
 
         }
 
+    }
+
+    /**
+     * 写入文件信息
+     * （1）默认 utf-8 编码
+     * （2）默认新建一个文件
+     * @since 0.1.22
+     * @param filePath 文件路径
+     * @param lines 行信息
+     */
+    public static void write(final String filePath, final Iterable<? extends CharSequence> lines, OpenOption ... openOptions) {
+        write(filePath, lines, CharsetConst.UTF8, openOptions);
+    }
+
+    /**
+     * 写入文件信息
+     * @since 0.1.22
+     * @param filePath 文件路径
+     * @param lines 行信息
+     * @param charset 文件编码
+     * @param openOptions 文件操作选项
+     */
+    public static void write(final String filePath, final Iterable<? extends CharSequence> lines,
+                             final String charset, OpenOption ... openOptions) {
+        try {
+            // ensure lines is not null before opening file
+            ArgUtil.notNull(lines, "charSequences");
+            CharsetEncoder encoder = Charset.forName(charset).newEncoder();
+            final Path path = Paths.get(filePath);
+
+            OutputStream out = path.getFileSystem().provider().newOutputStream(path, openOptions);
+            try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, encoder))) {
+                for (CharSequence line: lines) {
+                    writer.append(line);
+                    writer.newLine();
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
