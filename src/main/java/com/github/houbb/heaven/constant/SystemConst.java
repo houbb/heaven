@@ -158,7 +158,9 @@ public final class SystemConst {
      * 获取指定配置信息
      * @param key key
      * @return 结果
+     * @see com.github.houbb.heaven.util.util.SystemUtil#getProperty(String) 获取方法属性
      */
+    @Deprecated
     public static String getProperty(final String key) {
         return System.getProperty(key);
     }
