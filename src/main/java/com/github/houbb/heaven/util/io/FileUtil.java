@@ -14,10 +14,7 @@ import com.github.houbb.heaven.util.util.ArrayUtil;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
-import java.nio.file.OpenOption;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -335,6 +332,110 @@ public final class FileUtil {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 创建文件
+     * （1）文件路径为空，则直接返回 false
+     * （2）如果文件已经存在，则返回 true
+     * （3）如果文件不存在，则创建文件夹，然后创建文件。
+     * 3.1 如果父类文件夹创建失败，则直接返回 false.
+     * @param filePath 文件路径
+     * @return 是否成功
+     * @since 0.1.24
+     * @throws RuntimeException 运行时异常，如果创建文件异常。包括的异常为 {@link IOException} 文件异常.
+     */
+    public static boolean createFile(final String filePath) {
+        if(StringUtil.isEmpty(filePath)) {
+            return false;
+        }
+
+        if(FileUtil.exists(filePath)) {
+            return true;
+        }
+
+        File file = new File(filePath);
+
+        // 父类文件夹的处理
+        File dir = file.getParentFile();
+        if(FileUtil.notExists(dir)) {
+            boolean mkdirResult = dir.mkdirs();
+            if(!mkdirResult) {
+                return false;
+            }
+        }
+        // 创建文件
+        try {
+            return file.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 文件是否存在
+     * @param filePath 文件路径
+     * @param options 连接选项
+     * @return 是否存在
+     * @since 0.1.24
+     */
+    public static boolean exists(final String filePath, LinkOption ... options) {
+        if(StringUtil.isEmpty(filePath)) {
+            return false;
+        }
+
+        Path path = Paths.get(filePath);
+        return Files.exists(path, options);
+    }
+
+    /**
+     * 文件是否不存在
+     * @param filePath 文件路径
+     * @param options 连接选项
+     * @return 是否存在
+     * @since 0.1.24
+     */
+    public static boolean notExists(final String filePath, LinkOption ... options) {
+        return !exists(filePath, options);
+    }
+
+
+    /**
+     * 文件是否不存在
+     * @param file 文件
+     * @return 是否存在
+     * @since 0.1.24
+     */
+    public static boolean notExists(final File file) {
+        ArgUtil.notNull(file, "file");
+        return !file.exists();
+    }
+
+    /**
+     * 判断文件是否为空
+     * （1）文件不存在，返回 true
+     * （2）文件存在，且 {@link File#length()} 为0，则认为空。
+     * （3）文件存在，且length大于0，则认为不空
+     * @param filePath 文件路径
+     * @return 内容是否为空
+     * @since 0.1.24
+     */
+    public static boolean isEmpty(final String filePath) {
+        if(StringUtil.isEmpty(filePath)) {
+            return true;
+        }
+        File file = new File(filePath);
+        return file.length() <= 0;
+    }
+
+    /**
+     * 内容是否为不空
+     * @param filePath 文件路径
+     * @return 内容是否为不空
+     * @since 0.1.24
+     */
+    public static boolean isNotEmpty(final String filePath) {
+        return !isEmpty(filePath);
     }
 
 }
