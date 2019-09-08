@@ -21,6 +21,24 @@ public final class PunctuationConst {
     public static final char C_DOT = '.';
 
     /**
+     * char 双引号
+     * @since 0.1.25
+     */
+    public static final char C_DOUBLE_QUOTES = '"';
+
+    /**
+     * char 反斜杠
+     * @since 0.1.25
+     */
+    public static final char C_BACK_SLASH = '\\';
+
+    /**
+     * char 空格
+     * @since 0.1.25
+     */
+    public static final char C_BLANK = ' ';
+
+    /**
      * 逗号
      */
     public static final String COMMA = ",";

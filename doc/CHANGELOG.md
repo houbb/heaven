@@ -192,3 +192,12 @@
 | 1 | A | 新增 FileUtil#createFile | 2019-09-04 23:00:51 |  创建一个文件 |
 | 2 | A | 新增 FileUtil#exists/notExists | 2019-09-04 23:00:51 |  判断文件是否存在 |
 | 3 | A | 新增 FileUtil#isEmpty/isNotEmpty | 2019-09-04 23:00:51 |  判断文件是否为空 |
+
+
+# release_0.1.25
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 ArrayUtil#toList | 2019-9-8 17:27:17 |  数组转列表，map 方式 |
+| 2 | A | 新增 ArrayPrimitiveUtil | 2019-9-8 17:27:17 |  数组基本类型工具类 |
+| 3 | A | 新增 PunctuationConst#C_ 常量 | 2019-9-8 17:27:17 |  常见 char 常量 |

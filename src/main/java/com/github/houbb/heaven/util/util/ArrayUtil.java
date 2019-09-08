@@ -5,6 +5,8 @@
 
 package com.github.houbb.heaven.util.util;
 
+import com.github.houbb.heaven.support.handler.IHandler;
+import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassGenericUtil;
 
@@ -256,4 +258,28 @@ public final class ArrayUtil {
     public static Object[] newArray(Object ... objects) {
         return objects;
     }
+
+    /**
+     * 可遍历的元素对象的某个元素，转换为列表
+     *
+     * @param values      遍历对象数组
+     * @param keyFunction 转换方式
+     * @param <K>         k 泛型
+     * @param <V>         v 泛型
+     * @return 结果列表
+     * @since 0.1.25
+     */
+    public static <K, V> List<K> toList(final V[] values, IHandler<? super V, K> keyFunction) {
+        if (ObjectUtil.isNull(values)) {
+            return Collections.emptyList();
+        }
+
+        List<K> list = Guavas.newArrayList(values.length);
+        for(V value : values) {
+            final K key = keyFunction.handle(value);
+            list.add(key);
+        }
+        return list;
+    }
+
 }

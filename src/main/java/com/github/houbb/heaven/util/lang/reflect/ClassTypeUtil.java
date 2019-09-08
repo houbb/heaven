@@ -14,7 +14,9 @@ import java.util.Set;
  * date 2019/2/24
  * @since 0.0.2
  */
-public class ClassTypeUtil {
+public final class ClassTypeUtil {
+
+    private ClassTypeUtil(){}
 
     /**
      * 常见的基础对象类型
