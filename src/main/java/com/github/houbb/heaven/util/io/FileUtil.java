@@ -301,6 +301,7 @@ public final class FileUtil {
      * @since 0.1.22
      * @param filePath 文件路径
      * @param lines 行信息
+     * @param openOptions 文件选项
      */
     public static void write(final String filePath, final Iterable<? extends CharSequence> lines, OpenOption ... openOptions) {
         write(filePath, lines, CharsetConst.UTF8, openOptions);
