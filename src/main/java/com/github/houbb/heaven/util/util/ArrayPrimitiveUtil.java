@@ -398,4 +398,25 @@ public final class ArrayPrimitiveUtil {
         return list;
     }
 
+    /**
+     * 返回 c 对应的下标
+     * @param chars 原始字符
+     * @param c 目标
+     * @return 结果
+     * @since 0.1.26
+     */
+    public static int indexOf(final char[] chars, final char c) {
+        if(ArrayPrimitiveUtil.isEmpty(chars)) {
+            return -1;
+        }
+
+        for(int i = 0; i < chars.length; i++) {
+            char cs = chars[i];
+            if(cs == c) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }

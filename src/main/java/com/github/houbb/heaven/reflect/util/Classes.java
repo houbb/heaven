@@ -1,6 +1,5 @@
 package com.github.houbb.heaven.reflect.util;
 
-import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.reflect.api.IField;
 import com.github.houbb.heaven.reflect.exception.ReflectRumtionException;
 import com.github.houbb.heaven.reflect.handler.SimpleFieldHandler;
