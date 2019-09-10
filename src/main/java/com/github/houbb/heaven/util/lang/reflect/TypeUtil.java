@@ -1,6 +1,7 @@
 package com.github.houbb.heaven.util.lang.reflect;
 
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
+import com.github.houbb.heaven.support.tuple.impl.Pair;
 
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
@@ -8,6 +9,8 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Type 工具类
@@ -30,6 +33,92 @@ public final class TypeUtil {
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static Collection createCollection(Type type) {
         return createCollection(type, 8);
+    }
+
+    /**
+     * 创建一个 map
+     * @param type 类型
+     * @return 结果
+     * @since 0.1.27
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public static Map<Object, Object> createMap(final Type type) {
+        if (type == Properties.class) {
+            return new Properties();
+        }
+
+        if (type == Hashtable.class) {
+            return new Hashtable();
+        }
+
+        if (type == IdentityHashMap.class) {
+            return new IdentityHashMap();
+        }
+
+        if (type == SortedMap.class || type == TreeMap.class) {
+            return new TreeMap();
+        }
+
+        if (type == ConcurrentMap.class || type == ConcurrentHashMap.class) {
+            return new ConcurrentHashMap();
+        }
+
+        if (type == HashMap.class) {
+            return new HashMap();
+        }
+
+        if (type == LinkedHashMap.class) {
+            return new LinkedHashMap();
+        }
+
+        if (type instanceof ParameterizedType) {
+            ParameterizedType parameterizedType = (ParameterizedType) type;
+
+            Type rawType = parameterizedType.getRawType();
+            if (EnumMap.class.equals(rawType)) {
+                Type[] actualArgs = parameterizedType.getActualTypeArguments();
+                return new EnumMap((Class) actualArgs[0]);
+            }
+
+            return createMap(rawType);
+        }
+
+        Class<?> clazz = (Class<?>) type;
+        if (clazz.isInterface()) {
+            throw new CommonRuntimeException("unsupport type " + type);
+        }
+
+        if ("java.util.Collections$UnmodifiableMap".equals(clazz.getName())) {
+            return new HashMap();
+        }
+
+        try {
+            return (Map<Object, Object>) clazz.newInstance();
+        } catch (Exception e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 根据 map 的类型，获取对应的 key/value 类型
+     * @param mapType map 类型
+     * @return 结果
+     * @since 0.1.27
+     */
+    public static Pair<Type, Type> getMapKeyValueType(final Type mapType) {
+        if (mapType instanceof ParameterizedType) {
+            ParameterizedType parameterizedType = (ParameterizedType) mapType;
+            Type keyType = parameterizedType.getActualTypeArguments()[0];
+            Type valueType = null;
+            if (mapType.getClass().getName().equals("org.springframework.util.LinkedMultiValueMap")) {
+                valueType = List.class;
+            } else {
+                valueType = parameterizedType.getActualTypeArguments()[1];
+            }
+            return Pair.of(keyType, valueType);
+        }
+        final Type objectType = Object.class;
+        return Pair.of(objectType, objectType);
     }
 
     /**

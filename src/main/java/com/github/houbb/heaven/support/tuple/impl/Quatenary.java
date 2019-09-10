@@ -89,4 +89,15 @@ public class Quatenary<A, B, C, D> extends AbstractTuple
     public D getValueFour() {
         return this.d;
     }
+
+    @Override
+    public String toString() {
+        return "Quatenary{" +
+                "a=" + a +
+                ", b=" + b +
+                ", c=" + c +
+                ", d=" + d +
+                '}';
+    }
+
 }

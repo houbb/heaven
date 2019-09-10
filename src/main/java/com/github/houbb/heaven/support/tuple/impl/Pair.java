@@ -57,4 +57,13 @@ public class Pair<A,B> extends AbstractTuple
     public B getValueTwo() {
         return this.b;
     }
+
+    @Override
+    public String toString() {
+        return "Pair{" +
+                "a=" + a +
+                ", b=" + b +
+                '}';
+    }
+
 }

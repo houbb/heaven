@@ -74,4 +74,12 @@ public class Ternary<A, B, C> extends AbstractTuple
         return this.c;
     }
 
+    @Override
+    public String toString() {
+        return "Ternary{" +
+                "a=" + a +
+                ", b=" + b +
+                ", c=" + c +
+                '}';
+    }
 }
