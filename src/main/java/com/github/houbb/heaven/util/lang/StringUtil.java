@@ -5,12 +5,17 @@
 
 package com.github.houbb.heaven.util.lang;
 
+import com.github.houbb.heaven.constant.CharConst;
 import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * 字符串工具类
@@ -780,5 +785,101 @@ public final class StringUtil {
     }
 
 
+    /**
+     * 获取字符串对应的下标信息
+     * @param string 字符串
+     * @param symbol 分隔符
+     * @param ignoreDoubleQuotes 是否忽略双引号中的信息
+     * @return 结果列表
+     * @since 0.1.27
+     */
+    public static List<Integer> getIndexList(final String string,
+                                             final char symbol,
+                                             final boolean ignoreDoubleQuotes) {
+        if(StringUtil.isEmpty(string)) {
+            return Collections.emptyList();
+        }
+
+        List<Integer> resultList = Guavas.newArrayList();
+        char[] chars = string.toCharArray();
+
+        boolean doubleQuotesStart = false;
+        char preChar = CharConst.BLANK;
+        for(int i = 0; i < chars.length; i++) {
+            char currentChar = chars[i];
+
+            preChar = getPreChar(preChar, currentChar);
+            // 上一个字符不是转义，且当前为 "。则进行状态的切换
+            if (CharConst.BACK_SLASH != preChar
+                    && CharConst.DOUBLE_QUOTES == currentChar) {
+                doubleQuotesStart = !doubleQuotesStart;
+            }
+
+            // 等于且不在双引号中。
+            if(currentChar == symbol) {
+                // 忽略双引号中的信息 && 不在双引号中。
+                if(ignoreDoubleQuotes) {
+                    if(!doubleQuotesStart) {
+                        resultList.add(i);
+                    }
+                } else {
+                    resultList.add(i);
+                }
+            }
+        }
+        return resultList;
+    }
+
+    /**
+     * 获取上一个字符
+     *
+     * 保证转义字符的两次抵消。
+     *
+     * @param preChar     上一个字符
+     * @param currentChar 当前字符
+     * @return 结果
+     * @since 0.1.27
+     */
+    private static char getPreChar(final char preChar, final char currentChar) {
+        // 判断前一个字符是什么
+        if (CharConst.BACK_SLASH == preChar
+                && CharConst.BACK_SLASH == currentChar) {
+            return CharConst.BLANK;
+        }
+        return currentChar;
+    }
+
+    /**
+     * 根据索引下标直接拆分
+     * @param string 原始字符串
+     * @param indexList 结果列表
+     * @return 结果
+     * @since 0.1.27
+     */
+    public static List<String> splitByIndexes(final String string, final List<Integer> indexList) {
+        if(StringUtil.isEmpty(string)) {
+            return Collections.emptyList();
+        }
+        if(CollectionUtil.isEmpty(indexList)) {
+            return Collections.singletonList(string);
+        }
+
+        List<String> resultList = Guavas.newArrayList(indexList.size()+1);
+
+        int preIndex = 0;
+        for (Integer anIndexList : indexList) {
+            int currentIndex = anIndexList;
+            if (currentIndex > preIndex) {
+                resultList.add(string.substring(preIndex, currentIndex));
+            }
+            preIndex = currentIndex+1;
+        }
+        // 判断最后一个下标
+        final int lastIndex = indexList.get(indexList.size()-1);
+        if(lastIndex+1 < string.length()) {
+            resultList.add(string.substring(lastIndex+1));
+        }
+        return resultList;
+    }
 
 }

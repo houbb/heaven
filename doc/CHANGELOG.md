@@ -209,3 +209,11 @@
 | 1 | A | 新增 ArrayPrimitiveUtil#indexOf | 2019-09-09 21:47:18 |  数组基本类型工具类 |
 | 2 | A | 新增 NumUtil#数字转换() | 2019-09-09 21:47:18  |  |
 | 3 | A | 新增 TypeUtil#getCollectionItemType | 2019-09-09 21:47:18  |  |
+
+
+# release_0.1.27
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 CharConst | 2019-09-10 23:51:32 |  char 常量 |
+| 2 | A | 新增 StringUtil#getIndexList | 2019-09-10 23:51:32 | 优雅的处理下标问题 |
