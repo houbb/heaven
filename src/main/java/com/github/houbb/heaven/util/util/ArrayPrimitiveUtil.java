@@ -475,9 +475,9 @@ public final class ArrayPrimitiveUtil {
      * @return 结果字符串
      * @since 0.1.28
      */
-    public static List<Character> getCharsBeforeSymbol(final char[] chars, final int startIndex,
+    public static String getStringBeforeSymbol(final char[] chars, final int startIndex,
                                              final char symbol) {
-        List<Character> characters = new ArrayList<>();
+        StringBuilder stringBuilder = new StringBuilder();
 
         boolean doubleQuotesStart = false;
         char preChar = CharConst.BLANK;
@@ -494,12 +494,12 @@ public final class ArrayPrimitiveUtil {
 
             // 不在双引号中，且为特殊符号。则直接返回
             if(!doubleQuotesStart && symbol == currentChar) {
-                return characters;
+                return stringBuilder.toString();
             }
-            characters.add(currentChar);
+            stringBuilder.append(currentChar);
         }
 
-        return characters;
+        return stringBuilder.toString();
     }
 
     /**

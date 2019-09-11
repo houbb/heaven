@@ -1,5 +1,9 @@
 package com.github.houbb.heaven.util.lang;
 
+import com.github.houbb.heaven.util.util.CollectionUtil;
+
+import java.util.List;
+
 /**
  * 字符工具类
  * @author binbin.hou
