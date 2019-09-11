@@ -840,6 +840,7 @@ public final class StringUtil {
      * @return 结果
      * @since 0.1.27
      */
+    @Deprecated
     private static char getPreChar(final char preChar, final char currentChar) {
         // 判断前一个字符是什么
         if (CharConst.BACK_SLASH == preChar

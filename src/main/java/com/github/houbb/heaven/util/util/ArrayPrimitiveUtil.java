@@ -5,7 +5,9 @@
 
 package com.github.houbb.heaven.util.util;
 
+import com.github.houbb.heaven.constant.CharConst;
 import com.github.houbb.heaven.support.handler.IHandler;
+import com.github.houbb.heaven.util.guava.Guavas;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -417,6 +419,106 @@ public final class ArrayPrimitiveUtil {
             }
         }
         return -1;
+    }
+
+    /**
+     * 返回 c 对应的最后下标
+     * @param chars 原始字符
+     * @param c 目标
+     * @return 结果
+     * @since 0.1.28
+     */
+    public static int lastIndexOf(final char[] chars, final char c) {
+        if(ArrayPrimitiveUtil.isEmpty(chars)) {
+            return -1;
+        }
+
+        int lastIndex = -1;
+        for(int i = 0; i < chars.length; i++) {
+            char cs = chars[i];
+            if(cs == c) {
+                lastIndex = i;
+            }
+        }
+        return lastIndex;
+    }
+
+    /**
+     * 返回 c 对应的所有下标
+     * @param chars 原始字符
+     * @param c 目标
+     * @return 结果
+     * @since 0.1.28
+     */
+    public static List<Integer> allIndexOf(final char[] chars, final char c) {
+        if(ArrayPrimitiveUtil.isEmpty(chars)) {
+            return Collections.emptyList();
+        }
+
+        List<Integer> indexList = Guavas.newArrayList();
+        for(int i = 0; i < chars.length; i++) {
+            char cs = chars[i];
+            if(cs == c) {
+                indexList.add(i);
+            }
+        }
+        return indexList;
+    }
+
+    /**
+     * 获取 char 数组指定的
+     * （1）如果一直没有找到指定符号，则一直进行到底。
+     * （2）如果有 " 则忽略内容。
+     * @param chars 字符数组
+     * @param startIndex 开始下标
+     * @param symbol 特殊标志
+     * @return 结果字符串
+     * @since 0.1.28
+     */
+    public static List<Character> getCharsBeforeSymbol(final char[] chars, final int startIndex,
+                                             final char symbol) {
+        List<Character> characters = new ArrayList<>();
+
+        boolean doubleQuotesStart = false;
+        char preChar = CharConst.BLANK;
+
+        for(int i = startIndex; i < chars.length; i++) {
+            char currentChar = chars[i];
+
+            preChar = getPreChar(preChar, currentChar);
+            // 上一个字符不是转义，且当前为 "。则进行状态的切换
+            if (CharConst.BACK_SLASH != preChar
+                    && CharConst.DOUBLE_QUOTES == currentChar) {
+                doubleQuotesStart = !doubleQuotesStart;
+            }
+
+            // 不在双引号中，且为特殊符号。则直接返回
+            if(!doubleQuotesStart && symbol == currentChar) {
+                return characters;
+            }
+            characters.add(currentChar);
+        }
+
+        return characters;
+    }
+
+    /**
+     * 获取上一个字符
+     *
+     * 保证转义字符的两次抵消。
+     *
+     * @param preChar     上一个字符
+     * @param currentChar 当前字符
+     * @return 结果
+     * @since 0.1.27
+     */
+    private static char getPreChar(final char preChar, final char currentChar) {
+        // 判断前一个字符是什么
+        if (CharConst.BACK_SLASH == preChar
+                && CharConst.BACK_SLASH == currentChar) {
+            return CharConst.BLANK;
+        }
+        return currentChar;
     }
 
 }
