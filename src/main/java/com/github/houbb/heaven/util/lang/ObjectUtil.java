@@ -6,6 +6,7 @@
 package com.github.houbb.heaven.util.lang;
 
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
+import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
 
@@ -207,6 +208,30 @@ public final class ObjectUtil {
             return defaultValue;
         }
         return object.toString();
+    }
+
+    /**
+     * 判断所有参数皆为null
+     * @param object 对象
+     * @param others 其他参数
+     * @return 是否都为空
+     * @since 0.1.29
+     * @see #isNull(Object) 增强版本
+     */
+    public static boolean isNull(final Object object, final Object... others) {
+        if(ObjectUtil.isNull(object)) {
+            // 其他列表不为空，则遍历
+            if(ArrayUtil.isNotEmpty(others)) {
+                for(Object other : others) {
+                    if(ObjectUtil.isNotNull(other)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return true;
+        }
+        return false;
     }
 
 }
