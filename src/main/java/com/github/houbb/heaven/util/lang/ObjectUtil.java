@@ -234,4 +234,21 @@ public final class ObjectUtil {
         return false;
     }
 
+    /**
+     * 判断两个元素是否相等或者都为 Null
+     * @param left 元素1
+     * @param right 元素2
+     * @return 是否相等或者都为 Null
+     * @since 0.1.29
+     */
+    public static boolean isEqualsOrNull(final Object left, final Object right) {
+        if(isNull(left, right)) {
+            return true;
+        }
+        if(isNull(left) || isNull(right)) {
+            return false;
+        }
+        return isEquals(left, right);
+    }
+
 }
