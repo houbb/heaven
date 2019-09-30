@@ -225,3 +225,12 @@
 | 1 | A | 新增 ArrayPrimitiveUtil#lastIndexOf | 2019-09-11 23:51:32 |   |
 | 2 | A | 新增 ArrayPrimitiveUtil#allIndexOf | 2019-09-11 23:51:32 |   |
 | 3 | A | 新增 ArrayPrimitiveUtil#getStringBeforeSymbol | 2019-09-11 23:51:32 | 获取指定字符前的字符串  |
+
+# release_0.1.29
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 ObjectUtil#isNull | 2019-9-30 15:00:17 |   |
+| 2 | A | 新增 ObjectUtil#isEqualsOrNull | 2019-9-30 15:00:17 |   |
+
+
