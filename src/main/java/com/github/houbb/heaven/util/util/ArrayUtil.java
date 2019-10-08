@@ -282,4 +282,58 @@ public final class ArrayUtil {
         return list;
     }
 
+    /**
+     * long 可遍历的元素对象的某个元素，转换为列表
+     *
+     * @param arrayObject 数组对象
+     * @param keyFunction 转换方式
+     * @return 结果列表
+     * @since 0.1.30
+     */
+    @SuppressWarnings("unchecked")
+    public static List toList(final Object arrayObject, IHandler keyFunction) {
+        if (ObjectUtil.isNull(arrayObject)) {
+            return Collections.emptyList();
+        }
+
+        // 判断 8 种类型
+        final Class arrayClass = arrayObject.getClass();
+        if (boolean[].class == arrayClass) {
+            boolean[] booleans = (boolean[]) arrayObject;
+            return ArrayPrimitiveUtil.toList(booleans, keyFunction);
+        }
+        if (short[].class == arrayClass) {
+            short[] shorts = (short[]) arrayObject;
+            return ArrayPrimitiveUtil.toList(shorts, keyFunction);
+        }
+        if (byte[].class == arrayClass) {
+            byte[] bytes = (byte[]) arrayObject;
+            return ArrayPrimitiveUtil.toList(bytes, keyFunction);
+        }
+        if (int[].class == arrayClass) {
+            int[] ints = (int[]) arrayObject;
+            return ArrayPrimitiveUtil.toList(ints, keyFunction);
+        }
+        if (float[].class == arrayClass) {
+            float[] floats = (float[]) arrayObject;
+            return ArrayPrimitiveUtil.toList(floats, keyFunction);
+        }
+        if(double[].class == arrayClass) {
+            double[] doubles = (double[]) arrayObject;
+            return ArrayPrimitiveUtil.toList(doubles, keyFunction);
+        }
+        if(char[].class == arrayClass) {
+            char[] chars = (char[]) arrayObject;
+            return ArrayPrimitiveUtil.toList(chars, keyFunction);
+        }
+        if(long[].class == arrayClass) {
+            long[] longs = (long[]) arrayObject;
+            return ArrayPrimitiveUtil.toList(longs, keyFunction);
+        }
+
+        // 直接转换为数组。
+        Object[] objects = (Object[]) arrayObject;
+        return ArrayUtil.toList(objects, keyFunction);
+    }
+
 }

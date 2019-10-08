@@ -5,15 +5,15 @@
 
 package com.github.houbb.heaven.util.lang;
 
+import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
+import com.github.houbb.heaven.util.util.ArrayPrimitiveUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Object 工具类
@@ -249,6 +249,37 @@ public final class ObjectUtil {
             return false;
         }
         return isEquals(left, right);
+    }
+
+    /**
+     * 可遍历的元素对象的某个元素，转换为列表
+     *
+     * @param object  可遍历对象
+     * @param handler 转换方式
+     * @param <R>     R 泛型
+     * @return 结果列表
+     * @since 0.1.25
+     */
+    @SuppressWarnings("unchecked")
+    public static <R> List<R> toList(final Object object, IHandler<Object, R> handler) {
+        if (ObjectUtil.isNull(object)) {
+            return Collections.emptyList();
+        }
+
+        final Class clazz = object.getClass();
+
+        // 集合
+        if (ClassTypeUtil.isCollection(clazz)) {
+            Collection collection = (Collection) object;
+            return CollectionUtil.toList(collection, handler);
+        }
+
+        // 数组
+        if (clazz.isArray()) {
+            return ArrayUtil.toList(object, handler);
+        }
+
+        throw new UnsupportedOperationException("Not support foreach() for class: " + clazz.getName());
     }
 
 }

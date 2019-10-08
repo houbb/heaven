@@ -233,4 +233,12 @@
 | 1 | A | 新增 ObjectUtil#isNull | 2019-9-30 15:00:17 |   |
 | 2 | A | 新增 ObjectUtil#isEqualsOrNull | 2019-9-30 15:00:17 |   |
 
+# release_0.1.30
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 NumUtil#parseLong | 2019-10-8 20:36:18 |   |
+| 2 | A | 新增 ObjectUtil#toList | 2019-10-8 20:36:18 |   |
+| 3 | A | 新增 ArrayUtil#toList(object, handler) | 2019-10-8 20:36:18 |   |
+
 
