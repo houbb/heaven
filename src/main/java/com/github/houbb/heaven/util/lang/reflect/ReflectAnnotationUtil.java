@@ -47,6 +47,7 @@ public final class ReflectAnnotationUtil {
      * 获取值信息
      * @param annotation 注解
      * @param method 方法
+     * @return 获取的属性值
      * @since 0.1.31
      */
     @SuppressWarnings("unchecked")
@@ -63,6 +64,7 @@ public final class ReflectAnnotationUtil {
      * 获取值信息-字符串形式
      * @param annotation 注解
      * @param method 方法
+     * @return 对象值 String 形式
      * @since 0.1.31
      */
     @SuppressWarnings("unchecked")
