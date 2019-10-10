@@ -1,5 +1,6 @@
 package com.github.houbb.heaven.util.lang.reflect;
 
+import com.github.houbb.heaven.util.lang.ObjectUtil;
 import sun.reflect.generics.reflectiveObjects.WildcardTypeImpl;
 
 import java.lang.reflect.*;
@@ -214,6 +215,29 @@ public final class ClassTypeUtil {
      */
     public static boolean isSet(final Class clazz) {
         return Set.class.isAssignableFrom(clazz);
+    }
+
+    /**
+     * 是否为基本类型
+     * @param clazz 对象类型
+     * @return 是否
+     * @since 0.1.31
+     */
+    public static boolean isPrimitive(final Class clazz) {
+        return clazz.isPrimitive();
+    }
+
+    /**
+     * 是否为基本类型
+     * @param object 对象
+     * @return 是否
+     * @since 0.1.31
+     */
+    public static boolean isPrimitive(final Object object) {
+        if(ObjectUtil.isNull(object)) {
+            return false;
+        }
+        return isPrimitive(object.getClass());
     }
 
 }

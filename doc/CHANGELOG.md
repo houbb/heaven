@@ -241,4 +241,13 @@
 | 2 | A | 新增 ObjectUtil#toList | 2019-10-8 20:36:18 |   |
 | 3 | A | 新增 ArrayUtil#toList(object, handler) | 2019-10-8 20:36:18 |   |
 
+# release_0.1.31
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 CharsetUtil | 2019-10-10 19:25:05 |   |
+| 2 | A | 新增 ReflectAnnotationUtil | 2019-10-10 19:25:05 |   |
+| 3 | A | 新增 ReflectFieldUtil#getValue | 2019-10-10 19:25:05 |   |
+| 4 | A | 新增 ClassTypeUtil#isPrimitive | 2019-10-10 19:25:05 |   |
+
 

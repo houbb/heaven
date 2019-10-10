@@ -245,4 +245,20 @@ public final class ReflectFieldUtil {
         }
     }
 
+    /**
+     * 获取对应的值信息
+     * @param field 字段
+     * @param instance 实例
+     * @return 值
+     * @since 0.1.31
+     */
+    public static Object getValue(final Field field, final Object instance) {
+        try {
+            field.setAccessible(true);
+            return field.get(instance);
+        } catch (IllegalAccessException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
 }
