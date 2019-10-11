@@ -41,8 +41,27 @@ public final class Guavas {
      * @return 链表
      */
     public static <E> List<E> newArrayList(E ... elems) {
+        if(ArrayUtil.isEmpty(elems)) {
+            return Collections.emptyList();
+        }
         List<E> list = Guavas.newArrayList(elems.length);
         list.addAll(Arrays.asList(elems));
+        return list;
+    }
+
+    /**
+     * 新建collection链表
+     * @param <E> 元素
+     * @param collection 集合元素
+     * @return 链表
+     * @since 0.1.32
+     */
+    public static <E> List<E> newArrayList(Collection<E> collection) {
+        if(CollectionUtil.isEmpty(collection)) {
+            return Collections.emptyList();
+        }
+        List<E> list = Guavas.newArrayList(collection.size());
+        list.addAll(collection);
         return list;
     }
 

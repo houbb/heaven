@@ -85,6 +85,49 @@ public final class ArrayUtil {
     }
 
     /**
+     * 数组转换为数组
+     * （1）通过一层转换
+     * @param values 集合
+     * @return 对象数组
+     * @since 0.1.32
+     */
+    @SuppressWarnings("unchecked")
+    public static <K, V> K[] toArray(final V[] values, IHandler<? super V, K> keyFunction) {
+        if (ArrayUtil.isEmpty(values)) {
+            return (K[]) new Object[]{};
+        }
+
+        K[] resultArray = (K[]) new Object[values.length];
+        for (int i = 0; i < values.length; i++) {
+            K result = keyFunction.handle(values[i]);
+            resultArray[i] = result;
+        }
+        return resultArray;
+    }
+
+    /**
+     * 数组的并集
+     * @param values 集合
+     * @return 对象数组
+     * @since 0.1.32
+     */
+    @SuppressWarnings("unchecked")
+    public static <K> K[] union(final K[] values, final K ... others) {
+        if(ArrayUtil.isEmpty(values)) {
+            return others;
+        }
+        if (ArrayUtil.isEmpty(others)) {
+            return values;
+        }
+
+        K[] resultArray = (K[]) new Object[others.length];
+
+        // 从 values 的下标开始添加
+        System.arraycopy(others, 0, resultArray, values.length, others.length);
+        return resultArray;
+    }
+
+    /**
      * 是否包含数据
      * @param array 数组信息
      * @param objectToFind 待发现的对象
@@ -173,12 +216,16 @@ public final class ArrayUtil {
 
     /**
      * 数组转列表
+     * （1）如果为空，则直接转为空。
      * @param array 数组
      * @param <E> 泛型原型
      * @return 列表
      * @since 0.1.6
      */
-    public static <E> List<E> arrayToList(final E[] array) {
+    public static <E> List<E> arrayToList(final E... array) {
+        if(ArrayUtil.isEmpty(array)) {
+            return Guavas.newArrayList();
+        }
         return Arrays.asList(array);
     }
 
