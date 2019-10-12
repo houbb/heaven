@@ -42,7 +42,7 @@ public final class Guavas {
      */
     public static <E> List<E> newArrayList(E ... elems) {
         if(ArrayUtil.isEmpty(elems)) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         }
         List<E> list = Guavas.newArrayList(elems.length);
         list.addAll(Arrays.asList(elems));
@@ -58,7 +58,7 @@ public final class Guavas {
      */
     public static <E> List<E> newArrayList(Collection<E> collection) {
         if(CollectionUtil.isEmpty(collection)) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         }
         List<E> list = Guavas.newArrayList(collection.size());
         list.addAll(collection);
