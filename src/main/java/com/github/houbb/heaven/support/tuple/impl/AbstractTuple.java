@@ -1,6 +1,7 @@
 package com.github.houbb.heaven.support.tuple.impl;
 
 import com.github.houbb.heaven.support.tuple.ITuple;
+import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 
 import java.util.*;
@@ -22,7 +23,7 @@ public abstract class AbstractTuple implements ITuple {
      * @param objects 元素数组
      */
     protected AbstractTuple(Object ... objects) {
-        this.valueList = Arrays.asList(objects);
+        this.valueList = Guavas.newArrayList(objects);
     }
 
     @Override

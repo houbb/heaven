@@ -5,6 +5,7 @@ import com.github.houbb.heaven.constant.FileTypeConst;
 import com.github.houbb.heaven.constant.PathConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.util.common.ArgUtil;
+import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
@@ -419,7 +420,7 @@ public final class PathUtil {
      */
     public static void writeLines(final String pathStr,
                                   final String ... lines) {
-        List<String> stringList = Arrays.asList(lines);
+        List<String> stringList = Guavas.newArrayList(lines);
         writeLines(pathStr, stringList, CharsetConst.UTF8);
     }
 
@@ -442,7 +443,7 @@ public final class PathUtil {
      */
     public static void appendLines(final String pathStr,
                                   final String ... lines) {
-        List<String> stringList = Arrays.asList(lines);
+        List<String> stringList = Guavas.newArrayList(lines);
         writeLines(pathStr, stringList, CharsetConst.UTF8, StandardOpenOption.APPEND);
     }
 

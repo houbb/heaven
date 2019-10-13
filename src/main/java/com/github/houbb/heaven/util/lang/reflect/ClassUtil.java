@@ -6,6 +6,7 @@
 package com.github.houbb.heaven.util.lang.reflect;
 
 import com.github.houbb.heaven.support.handler.IHandler;
+import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
 
@@ -13,8 +14,6 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.*;
 
 /**
@@ -49,7 +48,7 @@ public final class ClassUtil {
         List<Field> fieldList = new ArrayList<>() ;
         Class tempClass = clazz;
         while (tempClass != null) {
-            fieldList.addAll(Arrays.asList(tempClass.getDeclaredFields()));
+            fieldList.addAll(Guavas.newArrayList(tempClass.getDeclaredFields()));
             tempClass = tempClass.getSuperclass();
         }
 

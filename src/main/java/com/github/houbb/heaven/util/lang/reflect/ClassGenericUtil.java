@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.lang.reflect;
 
+import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
@@ -34,7 +35,7 @@ public final class ClassGenericUtil {
         // 添加当前类的泛型接口信息
         Type[] types = clazz.getGenericInterfaces();
         if(ArrayUtil.isNotEmpty(types)) {
-            typeSet.addAll(Arrays.asList(types));
+            typeSet.addAll(Guavas.newArrayList(types));
         }
 
         // 当前类的泛型父类信息
@@ -44,7 +45,7 @@ public final class ClassGenericUtil {
             typeSet.add(superType);
         }
 
-        return new ArrayList<>(typeSet);
+        return Guavas.newArrayList(typeSet);
     }
 
 

@@ -12,7 +12,6 @@ import com.github.houbb.heaven.util.lang.reflect.ClassGenericUtil;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,7 +62,7 @@ public final class ArrayUtil {
         }
 
         List<Object> objectList = new ArrayList<>(objects.length);
-        objectList.addAll(Arrays.asList(objects));
+        objectList.addAll(Guavas.newArrayList(objects));
         return objectList;
     }
 
@@ -228,7 +227,7 @@ public final class ArrayUtil {
         if(ArrayUtil.isEmpty(array)) {
             return Guavas.newArrayList();
         }
-        return Arrays.asList(array);
+        return Guavas.newArrayList(array);
     }
 
     /**

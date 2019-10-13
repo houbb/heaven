@@ -64,9 +64,9 @@ public final class CollectionUtil {
      */
     public static List<String> arrayToList(String[] array) {
         if (ArrayUtil.isEmpty(array)) {
-            return Collections.emptyList();
+            return Guavas.newArrayList();
         }
-        return Arrays.asList(array);
+        return Guavas.newArrayList(array);
     }
 
 
@@ -162,7 +162,7 @@ public final class CollectionUtil {
             return;
         }
 
-        collection.addAll(Arrays.asList(array));
+        collection.addAll(Guavas.newArrayList(array));
     }
 
     /**
@@ -239,7 +239,7 @@ public final class CollectionUtil {
         } else {
             String pattern = "\\s+";
             String[] strings = string.split(pattern);
-            return new ArrayList<>(Arrays.asList(strings));
+            return Guavas.newArrayList(strings);
         }
     }
 
