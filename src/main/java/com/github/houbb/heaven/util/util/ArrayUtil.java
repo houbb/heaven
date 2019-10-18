@@ -88,6 +88,8 @@ public final class ArrayUtil {
      * （1）通过一层转换
      * @param values 集合
      * @param keyFunction 处理函数
+     * @param <K> 泛型 K
+     * @param <V> 泛型 V
      * @return 对象数组
      * @since 0.1.32
      */
@@ -110,6 +112,7 @@ public final class ArrayUtil {
      * @param values 集合
      * @param others 其他数组信息
      * @return 对象数组
+     * @param <K> 泛型
      * @since 0.1.32
      */
     @SuppressWarnings("unchecked")
