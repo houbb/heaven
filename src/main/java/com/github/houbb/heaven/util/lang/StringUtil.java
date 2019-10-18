@@ -8,6 +8,7 @@ package com.github.houbb.heaven.util.lang;
 import com.github.houbb.heaven.constant.CharConst;
 import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
+import com.github.houbb.heaven.util.util.ArrayPrimitiveUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 
@@ -881,6 +882,34 @@ public final class StringUtil {
             resultList.add(string.substring(lastIndex+1));
         }
         return resultList;
+    }
+
+    /**
+     * 字符串转字节数组
+     * @param string 字符串
+     * @return 字节数组
+     * @since 0.1.35
+     */
+    public static byte[] stringToBytes(final String string) {
+        if(ObjectUtil.isNull(string)) {
+            return null;
+        }
+
+        return string.getBytes();
+    }
+
+    /**
+     * 字节数组转字符串
+     * @param bytes 字节数组
+     * @return 字符串
+     * @since 0.1.35
+     */
+    public static String bytesToString(final byte[] bytes) {
+        if(ArrayPrimitiveUtil.isEmpty(bytes)) {
+            return null;
+        }
+
+        return new String(bytes);
     }
 
 }

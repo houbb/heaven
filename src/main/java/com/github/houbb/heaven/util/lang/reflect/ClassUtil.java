@@ -5,8 +5,10 @@
 
 package com.github.houbb.heaven.util.lang.reflect;
 
+import com.github.houbb.heaven.support.filter.IFilter;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.guava.Guavas;
+import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
 
@@ -14,6 +16,7 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.*;
 
 /**
@@ -25,6 +28,12 @@ import java.util.*;
 public final class ClassUtil {
 
     private ClassUtil() {}
+
+    /**
+     * 序列版本编号常量
+     * @since 0.1.35
+     */
+    public static final String SERIAL_VERSION_UID = "serialVersionUID";
 
     /**
      * 获取对应类的默认变量名：
@@ -56,6 +65,27 @@ public final class ClassUtil {
             field.setAccessible(true);
         }
         return fieldList;
+    }
+
+    /**
+     * 获取可变更的字段信息
+     * （1）过滤掉 final 的字段信息
+     * @param clazz 类信息
+     * @return 0.1.35
+     */
+    public static List<Field> getModifyableFieldList(final Class clazz) {
+        List<Field> allFieldList = getAllFieldList(clazz);
+        if(CollectionUtil.isEmpty(allFieldList)) {
+            return allFieldList;
+        }
+
+        // 过滤掉 final 的字段
+        return CollectionUtil.filterList(allFieldList, new IFilter<Field>() {
+            @Override
+            public boolean filter(Field field) {
+                return Modifier.isFinal(field.getModifiers());
+            }
+        });
     }
 
     /**

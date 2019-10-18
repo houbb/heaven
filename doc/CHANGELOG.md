@@ -270,3 +270,11 @@
 | 序号 | 变更类型 | 说明 | 时间 | 备注 |
 |:---|:---|:---|:---|:--|
 | 1 | O | 优化 Arrays.asList() 为 Guavas#newArrayList | 2019-10-12 19:25:05 |   |
+
+# release_0.1.35
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 添加 ClassUtil#getModifyableFieldList | 2019-10-18 15:52:21 |   |
+| 2 | A | 添加 StringUtil#stringToBytes | 2019-10-18 15:52:21 |   |
+| 3 | A | 添加 StringUtil#bytesToString | 2019-10-18 15:52:21 |   |
