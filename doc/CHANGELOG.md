@@ -278,3 +278,11 @@
 | 1 | A | 添加 ClassUtil#getModifyableFieldList | 2019-10-18 15:52:21 |   |
 | 2 | A | 添加 StringUtil#stringToBytes | 2019-10-18 15:52:21 |   |
 | 3 | A | 添加 StringUtil#bytesToString | 2019-10-18 15:52:21 |   |
+
+# release_0.1.36
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 Guavas#newConcurrentHashMap | 2019-10-23 14:20:07 |   |
+| 2 | A | 新增 NumUti#toInteger | 2019-10-23 14:20:07 |   |
+| 3 | A | 新增 ReflectMethodUti#isIgnoreMethod | 2019-10-23 14:20:07 |   |
