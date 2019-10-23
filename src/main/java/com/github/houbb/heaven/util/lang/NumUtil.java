@@ -1,5 +1,6 @@
 package com.github.houbb.heaven.util.lang;
 
+import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.util.ArrayPrimitiveUtil;
 import com.github.houbb.heaven.util.util.Optional;
 
@@ -64,6 +65,39 @@ public final class NumUtil {
             return Optional.of(integer);
         } catch (NumberFormatException e) {
             return Optional.empty();
+        }
+    }
+
+    /**
+     * 字符串转化为整形
+     * （1）如果参数不合法，直接抛出异常
+     * @param string 字符串
+     * @return 结果
+     * @since 0.1.36
+     */
+    public static Integer toIntegerThrows(final String string) {
+        ArgUtil.notEmpty(string, "string");
+
+        try {
+            return Integer.valueOf(string);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 转换为整形
+     * （1）如果参数不合法，直接使用默认值
+     * @param string 字符串
+     * @param defaultValue 默认值
+     * @return 结果
+     * @since 0.1.36
+     */
+    public static int toInteger(final String string, final int defaultValue) {
+        try {
+            return Integer.valueOf(string);
+        } catch (Exception e) {
+            return defaultValue;
         }
     }
 

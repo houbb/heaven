@@ -4,6 +4,7 @@ import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * guava 工具类
@@ -85,6 +86,17 @@ public final class Guavas {
      */
     public static <K,V> Map<K,V> newHashMap(final int size) {
         return new HashMap<>(size);
+    }
+
+    /**
+     * 新建 ConcurrentHashMap
+     * @param <K> key
+     * @param <V> value
+     * @return hash Map
+     * @since 0.1.36
+     */
+    public static <K,V> Map<K,V> newConcurrentHashMap() {
+        return new ConcurrentHashMap<>();
     }
 
     /**
