@@ -32,6 +32,20 @@ public final class PrimitiveUtil {
      */
     private static final Map<Class, Class> PRIMITIVE_REFERENCE_MAP = new HashMap<>();
 
+    /**
+     * 基本类型-默认值集合
+     * boolean false
+     * char \u0000(null)
+     * byte (byte)0
+     * short (short)0
+     * int 0
+     * long 0L
+     * float 0.0f
+     * double 0.0d
+     * @since 0.1.37
+     */
+    private static final Map<Class, Object> PRIMITIVE_DEFAULT_MAP = new HashMap<>();
+
     static {
         /**
          * @since 0.0.3
@@ -54,6 +68,15 @@ public final class PrimitiveUtil {
         TYPE_MAP.put(Integer.class, Integer.TYPE);
         TYPE_MAP.put(Long.class, Long.TYPE);
         TYPE_MAP.put(Short.class, Short.TYPE);
+
+        PRIMITIVE_DEFAULT_MAP.put(int.class, 0);
+        PRIMITIVE_DEFAULT_MAP.put(boolean.class, false);
+        PRIMITIVE_DEFAULT_MAP.put(byte.class, (byte)0);
+        PRIMITIVE_DEFAULT_MAP.put(char.class, '\u0000');
+        PRIMITIVE_DEFAULT_MAP.put(short.class, (short)0);
+        PRIMITIVE_DEFAULT_MAP.put(long.class, 0L);
+        PRIMITIVE_DEFAULT_MAP.put(float.class, 0.0f);
+        PRIMITIVE_DEFAULT_MAP.put(double.class, 0.0d);
     }
 
     /**
@@ -76,6 +99,17 @@ public final class PrimitiveUtil {
             return PRIMITIVE_REFERENCE_MAP.get(clazz);
         }
         return clazz;
+    }
+
+    /**
+     * 获取默认值
+     * （1）8大基本类型返回默认值，其他返回 null
+     * @param clazz 类型
+     * @return 结果
+     * @since 0.1.37
+     */
+    public static Object getDefaultValue(final Class clazz) {
+        return PRIMITIVE_DEFAULT_MAP.get(clazz);
     }
 
 }

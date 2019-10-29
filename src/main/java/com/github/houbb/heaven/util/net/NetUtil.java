@@ -1,5 +1,7 @@
 package com.github.houbb.heaven.util.net;
 
+import com.github.houbb.heaven.response.exception.CommonRuntimeException;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -13,6 +15,32 @@ import java.net.UnknownHostException;
 public final class NetUtil {
 
     private NetUtil(){}
+
+    /**
+     * 本地服务地址
+     * @since 0.1.37
+     */
+    private static final String LOCAL_HOST;
+
+    static {
+        InetAddress address = null;
+        try {
+            address = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            throw new CommonRuntimeException(e);
+        }
+
+        LOCAL_HOST = address.getHostAddress();
+    }
+
+    /**
+     * 获取本地 ip 地址
+     * @return ip 地址
+     * @since 0.1.37
+     */
+    public static String getLocalHost() {
+        return LOCAL_HOST;
+    }
 
     /**
      * 传入需要连接的IP，返回是否连接成功
