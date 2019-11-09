@@ -8,14 +8,12 @@ package com.github.houbb.heaven.util.lang.reflect;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
+import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.Optional;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -151,14 +149,13 @@ public final class ReflectMethodUtil {
 
     /**
      * 执行反射调用
-     * @param instance 对象实例
+     * @param instance 对象实例，为空的时候针对 static 方法
      * @param method 方法实例
      * @param args 参数信息
      * @return 调用结果
      * @since 0.1.38
      */
-    public Object invoke(final Object instance, final Method method, Object... args) {
-        ArgUtil.notNull(instance, "instance");
+    public static Object invoke(final Object instance, final Method method, Object... args) {
         ArgUtil.notNull(method, "method");
 
         try {
@@ -166,6 +163,71 @@ public final class ReflectMethodUtil {
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new CommonRuntimeException(e);
         }
+    }
+
+    /**
+     * 直接执行调用无参方法
+     * @param instance 实例对象
+     * @param method 方法信息
+     * @since 0.1.39
+     */
+    public static void invokeNoArgsMethod(final Object instance,
+                                          final Method method) {
+        ArgUtil.notNull(instance, "instance");
+
+        //0. fail-fast
+        if(ObjectUtil.isNull(method)) {
+            return;
+        }
+
+        //1. 信息校验
+        final String methodName = method.getName();
+        Class<?>[] paramTypes = method.getParameterTypes();
+        if(ArrayUtil.isNotEmpty(paramTypes)) {
+            throw new CommonRuntimeException(methodName + " must be has no params.");
+        }
+
+        //2.反射调用
+        ReflectMethodUtil.invoke(instance, method);
+    }
+
+    /**
+     * 直接执行调用无参方法
+     *
+     * 限制如下：
+     * （1）工厂方法必须为静态
+     * （2）工厂方法必须无参
+     * （3）工厂方法必须返回指定对象信息
+     * @param clazz 类信息
+     * @param factoryMethod 工厂方法
+     * @return 对象实例
+     * @since 0.1.39
+     */
+    @SuppressWarnings("unchecked")
+    public static Object invokeFactoryMethod(final Class clazz,
+                                           final Method factoryMethod) {
+        ArgUtil.notNull(clazz, "clazz");
+        ArgUtil.notNull(factoryMethod, "factoryMethod");
+
+        //1. 信息校验
+        //1.1 无参
+        final String methodName = factoryMethod.getName();
+        Class<?>[] paramTypes = factoryMethod.getParameterTypes();
+        if(ArrayUtil.isNotEmpty(paramTypes)) {
+            throw new CommonRuntimeException(methodName + " must be has no params.");
+        }
+        //1.2 静态
+        if(!Modifier.isStatic(factoryMethod.getModifiers())) {
+            throw new CommonRuntimeException(methodName + " must be static.");
+        }
+        //1.3 返回值
+        Class returnType = factoryMethod.getReturnType();
+        if(!returnType.isAssignableFrom(clazz)) {
+            throw new CommonRuntimeException(methodName + " must be return " + returnType.getName());
+        }
+
+        //2.反射调用
+        return ReflectMethodUtil.invoke(null, factoryMethod);
     }
 
 }

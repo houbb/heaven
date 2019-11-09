@@ -15,6 +15,7 @@ import com.github.houbb.heaven.util.util.MapUtil;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -186,6 +187,48 @@ public final class ClassUtil {
         try {
             return currentClassLoader().loadClass(className);
         } catch (ClassNotFoundException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 获取方法信息
+     * @param clazz 类信息
+     * @param methodName 方法名称
+     * @param paramTypes 参数类型
+     * @return 方法信息
+     * @since 0.1.39
+     */
+    @SuppressWarnings("unchecked")
+    public static Method getMethod(final Class clazz,
+                                   final String methodName,
+                                   final Class... paramTypes) {
+        ArgUtil.notNull(clazz, "clazz");
+        ArgUtil.notEmpty(methodName, "methodName");
+
+        try {
+            return clazz.getMethod(methodName, paramTypes);
+        } catch (NoSuchMethodException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 获取构造器信息
+     *
+     * @param clazz      类
+     * @param paramTypes 参数类型数组
+     * @return 构造器
+     * @since 0.1.39
+     */
+    @SuppressWarnings("unchecked")
+    public static Constructor getConstructor(final Class clazz,
+                                             final Class... paramTypes) {
+        ArgUtil.notNull(clazz, "clazz");
+
+        try {
+            return clazz.getConstructor(paramTypes);
+        } catch (NoSuchMethodException e) {
             throw new CommonRuntimeException(e);
         }
     }
