@@ -176,7 +176,9 @@ public final class ClassUtil {
 
     /**
      * 获取类信息
+     * @param className 类名称信息
      * @since 0.1.38
+     * @return 构建后的类信息
      */
     public static Class getClass(final String className) {
         ArgUtil.notEmpty(className, "className");
