@@ -5,10 +5,14 @@
 
 package com.github.houbb.heaven.util.lang.reflect;
 
+import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
+import com.github.houbb.heaven.util.util.Optional;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -122,6 +126,46 @@ public final class ReflectMethodUtil {
             return (Class) parameterArgTypes[genericIndex];
         }
         return null;
+    }
+
+    /**
+     * 获取指定注解的方法
+     * @param tClass 类信息
+     * @param annotationClass 注解信息
+     * @return 方法的 optional 信息
+     * @since 0.1.38
+     */
+    public static Optional<Method> getMethodOptional(final Class tClass, final Class<? extends Annotation> annotationClass) {
+        final Method[] methods = tClass.getMethods();
+
+        if(ArrayUtil.isEmpty(methods)) {
+            return Optional.empty();
+        }
+        for(Method method : methods) {
+            if(method.isAnnotationPresent(annotationClass)) {
+                return Optional.of(method);
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * 执行反射调用
+     * @param instance 对象实例
+     * @param method 方法实例
+     * @param args 参数信息
+     * @return 调用结果
+     * @since 0.1.38
+     */
+    public Object invoke(final Object instance, final Method method, Object... args) {
+        ArgUtil.notNull(instance, "instance");
+        ArgUtil.notNull(method, "method");
+
+        try {
+            return method.invoke(instance, args);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new CommonRuntimeException(e);
+        }
     }
 
 }

@@ -6,13 +6,15 @@
 package com.github.houbb.heaven.response.respcode;
 
 
+import java.io.Serializable;
+
 /**
  * 响应码接口定义
  *
  * @author bbhou
  * @since 0.0.1
  */
-public interface RespCode {
+public interface RespCode extends Serializable {
 
     /**
      * 错误编码

@@ -5,10 +5,11 @@
 
 package com.github.houbb.heaven.util.lang.reflect;
 
+import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.filter.IFilter;
 import com.github.houbb.heaven.support.handler.IHandler;
+import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.guava.Guavas;
-import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
 
@@ -162,6 +163,29 @@ public final class ClassUtil {
             methods.add(getMethod);
         }
         return methods;
+    }
+
+    /**
+     * 获取当前的 class loader
+     * @return 当前的 class loader
+     * @since 0.1.38
+     */
+    public static ClassLoader currentClassLoader() {
+        return Thread.currentThread().getContextClassLoader();
+    }
+
+    /**
+     * 获取类信息
+     * @since 0.1.38
+     */
+    public static Class getClass(final String className) {
+        ArgUtil.notEmpty(className, "className");
+
+        try {
+            return currentClassLoader().loadClass(className);
+        } catch (ClassNotFoundException e) {
+            throw new CommonRuntimeException(e);
+        }
     }
 
 }

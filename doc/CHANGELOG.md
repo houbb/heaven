@@ -286,3 +286,19 @@
 | 1 | A | 新增 Guavas#newConcurrentHashMap | 2019-10-23 14:20:07 |   |
 | 2 | A | 新增 NumUti#toInteger | 2019-10-23 14:20:07 |   |
 | 3 | A | 新增 ReflectMethodUti#isIgnoreMethod | 2019-10-23 14:20:07 |   |
+
+# release_0.1.37
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 Hosts 相关 | 2019-10-29 14:20:07 |   |
+| 2 | A | 新增 Id 相关 | 2019-10-29 14:20:07 |   |
+| 3 | A | 新增 Time 相关 | 2019-10-29 14:20:07 |   |
+
+# release_0.1.38
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 AdviceRespCode 相关 | 2019-11-9 10:21:35 | 带有建议的返回码及其设计  |
+| 2 | A | 新增 ReflectMethodUtil#getMethodOptional()/#invoke() | 2019-11-9 10:21:35 | |
+| 3 | A | 新增 ClassUtil#currentClassLoader()/#getClass() | 2019-11-9 10:21:35 | |
