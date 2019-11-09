@@ -302,3 +302,11 @@
 | 1 | A | 新增 AdviceRespCode 相关 | 2019-11-9 10:21:35 | 带有建议的返回码及其设计  |
 | 2 | A | 新增 ReflectMethodUtil#getMethodOptional()/#invoke() | 2019-11-9 10:21:35 | |
 | 3 | A | 新增 ClassUtil#currentClassLoader()/#getClass() | 2019-11-9 10:21:35 | |
+
+# release_0.1.39
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 ReflectMethodUtil#invokeNoArgsMethod()/#invokeFactoryMethod() | 2019-11-9 16:36:48 | |
+| 2 | A | 新增 ClassUtil#getMethod()/#getConstructor() | 2019-11-9 16:36:48 | |
+| 3 | A | 新增 ReflectConstructorUtil | 2019-11-9 16:36:48 | |
