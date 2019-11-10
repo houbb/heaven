@@ -230,4 +230,23 @@ public final class ReflectMethodUtil {
         return ReflectMethodUtil.invoke(null, factoryMethod);
     }
 
+    /**
+     * 获取泛型参数类型
+     * @param method 方法信息
+     * @param paramIndex 参数下标
+     * @return 结果
+     * @since 0.1.40
+     */
+    public static Class getGenericReturnParamType(final Method method, final int paramIndex) {
+        ArgUtil.notNull(method, "method");
+        ArgUtil.notNegative(paramIndex, "paramIndex");
+
+        Type returnType = method.getGenericReturnType();
+        if(ObjectUtil.isNull(returnType)) {
+            return null;
+        }
+
+        return TypeUtil.getGenericParamType(returnType, paramIndex);
+    }
+
 }

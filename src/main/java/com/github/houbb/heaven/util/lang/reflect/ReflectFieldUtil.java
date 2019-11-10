@@ -113,6 +113,7 @@ public final class ReflectFieldUtil {
      * @param field 字段
      * @param paramIndex 泛型参数的下标
      * @return 泛型信息
+     * @since 0.1.40
      */
     public static Class getGenericParamType(final Field field, final int paramIndex) {
         if(ObjectUtil.isNull(field)) {
@@ -121,43 +122,7 @@ public final class ReflectFieldUtil {
 
         field.setAccessible(true);
         Type genericType = field.getGenericType();
-        if(ObjectUtil.isNull(genericType)) {
-            return null;
-        }
-
-        // 如果是泛型参数的类型
-        if(genericType instanceof ParameterizedType){
-            ParameterizedType parameterizedType = (ParameterizedType) genericType;
-            //得到泛型里的class类型对象
-            Type[] types = parameterizedType.getActualTypeArguments();
-            if(ArrayUtil.isEmpty(types)) {
-                return null;
-            }
-
-            // 判断是否为通配符(?)
-            Type type = types[paramIndex];
-            if(ClassTypeUtil.isWildcardGenericType(type)) {
-                WildcardTypeImpl wildcardType = (WildcardTypeImpl)type;
-
-                //lower
-                Type[] lowerBounds = wildcardType.getLowerBounds();
-                if(ArrayUtil.isNotEmpty(lowerBounds)) {
-                    return (Class<?>)lowerBounds[0];
-                }
-
-                //upper
-                Type[] upperBounds = wildcardType.getUpperBounds();
-                if(ArrayUtil.isNotEmpty(upperBounds)) {
-                    return (Class<?>)upperBounds[0];
-                }
-
-                // 默认返回 object 对象类型
-                return Object.class;
-            }
-
-            return (Class<?>)type;
-        }
-        return null;
+        return TypeUtil.getGenericParamType(genericType, paramIndex);
     }
 
     /**

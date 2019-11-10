@@ -310,3 +310,10 @@
 | 1 | A | 新增 ReflectMethodUtil#invokeNoArgsMethod()/#invokeFactoryMethod() | 2019-11-9 16:36:48 | |
 | 2 | A | 新增 ClassUtil#getMethod()/#getConstructor() | 2019-11-9 16:36:48 | |
 | 3 | A | 新增 ReflectConstructorUtil | 2019-11-9 16:36:48 | |
+
+# release_0.1.40
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A |  新增 ReflectMethodUtil#getGenericReturnParamType() | 2019-11-10 16:36:48 | |
+| 2 | A |  新增 TypeUtil#getGenericParamType()/#cast() | 2019-11-10 16:36:48 | |

@@ -2,12 +2,11 @@ package com.github.houbb.heaven.util.lang.reflect;
 
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.tuple.impl.Pair;
+import com.github.houbb.heaven.util.lang.ObjectUtil;
+import com.github.houbb.heaven.util.util.ArrayUtil;
+import sun.reflect.generics.reflectiveObjects.WildcardTypeImpl;
 
-import java.lang.reflect.GenericArrayType;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
-import java.lang.reflect.WildcardType;
+import java.lang.reflect.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -290,4 +289,196 @@ public final class TypeUtil {
         }
         return typeParameter;
     }
+
+
+    /**
+     * 获取泛型参数类型
+     * @param genericType 类型
+     * @param paramIndex 泛型参数下标
+     * @return 结果
+     * @since 0.1.40
+     */
+    public static Class getGenericParamType(final Type genericType, final int paramIndex) {
+        if(ObjectUtil.isNull(genericType)) {
+            return null;
+        }
+
+        // 如果是泛型参数的类型
+        if(genericType instanceof ParameterizedType){
+            ParameterizedType parameterizedType = (ParameterizedType) genericType;
+            //得到泛型里的class类型对象
+            Type[] types = parameterizedType.getActualTypeArguments();
+            if(ArrayUtil.isEmpty(types)) {
+                return null;
+            }
+
+            // 判断是否为通配符(?)
+            Type type = types[paramIndex];
+            if(ClassTypeUtil.isWildcardGenericType(type)) {
+                WildcardTypeImpl wildcardType = (WildcardTypeImpl)type;
+
+                //lower
+                Type[] lowerBounds = wildcardType.getLowerBounds();
+                if(ArrayUtil.isNotEmpty(lowerBounds)) {
+                    return (Class<?>)lowerBounds[0];
+                }
+
+                //upper
+                Type[] upperBounds = wildcardType.getUpperBounds();
+                if(ArrayUtil.isNotEmpty(upperBounds)) {
+                    return (Class<?>)upperBounds[0];
+                }
+
+                // 默认返回 object 对象类型
+                return Object.class;
+            }
+
+            return (Class<?>)type;
+        }
+
+        // 默认返回 object 对象类型
+        return null;
+    }
+
+    /**
+     * 获取泛型参数类型
+     * @param genericType 类型
+     * @return 结果
+     * @since 0.1.40
+     */
+    public static Class getGenericParamType(final Type genericType) {
+        return getGenericParamType(genericType, 0);
+    }
+
+    /**
+     * 转换为指定的数据类型
+     * @param obj 原始数据
+     * @param type 预期类型
+     * @param <T> 结果泛型
+     * @return 结果
+     * @since 0.1.40
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T cast(Object obj, Type type){
+        //8 大基本类型的默认值处理
+        if(obj == null){
+            if(ClassTypeUtil.isPrimitive(type)) {
+                return (T) PrimitiveUtil.getDefaultValue((Class<T>)type);
+            }
+            return null;
+        }
+        if(type instanceof ParameterizedType){
+            return (T) cast(obj, (ParameterizedType) type);
+        }
+        if(obj instanceof String){
+            String strVal = (String) obj;
+            if(strVal.length() == 0
+                    || "null".equals(strVal)
+                    || "NULL".equals(strVal)){
+                return null;
+            }
+
+            return (T) strVal;
+        }
+
+        // 其他情况，直接类型强转。
+        // 后期可以丰富这里的特性。
+        return (T) obj;
+    }
+
+    /**
+     * 类型转换
+     * @param obj 原始结果
+     * @param type 类型
+     * @param <T> 泛型
+     * @return 转换后的结果
+     * @since 0.1.40
+     */
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private static <T> T cast(Object obj, ParameterizedType type){
+        Type rawTye = type.getRawType();
+
+        if(rawTye == List.class || rawTye == ArrayList.class){
+            Type itemType = type.getActualTypeArguments()[0];
+            if(obj instanceof List){
+                List listObj = (List) obj;
+                List arrayList = new ArrayList(listObj.size());
+
+                for (Object item : listObj) {
+                    Object itemValue;
+                    if (itemType instanceof Class) {
+                        itemValue = cast(item, (Class<T>) itemType);
+                    } else {
+                        itemValue = cast(item, itemType);
+                    }
+
+                    arrayList.add(itemValue);
+                }
+                return (T) arrayList;
+            }
+        }
+
+        if(rawTye == Set.class || rawTye == HashSet.class
+                || rawTye == TreeSet.class
+                || rawTye == Collection.class
+                || rawTye == List.class
+                || rawTye == ArrayList.class){
+            Type itemType = type.getActualTypeArguments()[0];
+            if(obj instanceof Iterable){
+                Collection collection;
+                if(rawTye == Set.class || rawTye == HashSet.class){
+                    collection = new HashSet();
+                } else if(rawTye == TreeSet.class){
+                    collection = new TreeSet();
+                } else{
+                    collection = new ArrayList();
+                }
+                for (Object item : (Iterable) obj) {
+                    Object itemValue;
+                    if (itemType instanceof Class) {
+                        itemValue = cast(item, (Class<T>) itemType);
+                    } else {
+                        itemValue = cast(item, itemType);
+                    }
+
+                    collection.add(itemValue);
+                }
+                return (T) collection;
+            }
+        }
+
+        if(rawTye == Map.class || rawTye == HashMap.class){
+            Type keyType = type.getActualTypeArguments()[0];
+            Type valueType = type.getActualTypeArguments()[1];
+            if(obj instanceof Map){
+                Map map = new HashMap();
+                for(Map.Entry entry : ((Map<?,?>) obj).entrySet()){
+                    Object key = cast(entry.getKey(), keyType);
+                    Object value = cast(entry.getValue(), valueType);
+                    map.put(key, value);
+                }
+                return (T) map;
+            }
+        }
+        if(obj instanceof String){
+            String strVal = (String) obj;
+            if(strVal.length() == 0){
+                return null;
+            }
+        }
+        if(type.getActualTypeArguments().length == 1){
+            Type argType = type.getActualTypeArguments()[0];
+            if(argType instanceof WildcardType){
+                return (T) cast(obj, rawTye);
+            }
+        }
+
+        if (rawTye == Map.Entry.class && obj instanceof Map && ((Map) obj).size() == 1) {
+            Map.Entry entry = (Map.Entry) ((Map) obj).entrySet().iterator().next();
+            return (T) entry;
+        }
+
+        throw new CommonRuntimeException("无法转换为类型： " + type);
+    }
+
 }
