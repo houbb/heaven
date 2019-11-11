@@ -60,6 +60,7 @@ public final class FieldMetas {
      * 构建方法元数据列表
      *
      * @param clazz 类信息
+     * @param instance 实例对象
      * @return 结果列表
      * @since 0.1.41
      */

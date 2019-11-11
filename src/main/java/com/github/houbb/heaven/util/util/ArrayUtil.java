@@ -54,6 +54,7 @@ public final class ArrayUtil {
      * 数组转换为列表
      *
      * @param objects 数组
+     * @param <T> 泛型
      * @return 列表
      * @since 0.1.41
      */
