@@ -55,13 +55,14 @@ public final class ArrayUtil {
      *
      * @param objects 数组
      * @return 列表
+     * @since 0.1.41
      */
-    public static List<Object> toList(final Object[] objects) {
+    public static <T> List<T> toList(final T[] objects) {
         if (ArrayUtil.isEmpty(objects)) {
             return Collections.emptyList();
         }
 
-        List<Object> objectList = new ArrayList<>(objects.length);
+        List<T> objectList = new ArrayList<>(objects.length);
         objectList.addAll(Guavas.newArrayList(objects));
         return objectList;
     }

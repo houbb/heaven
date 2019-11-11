@@ -1,5 +1,7 @@
 package com.github.houbb.heaven.util.util;
 
+import com.github.houbb.heaven.util.lang.ObjectUtil;
+
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
@@ -102,6 +104,22 @@ public final class Optional<T> {
             throw new NoSuchElementException("No value present");
         }
         return value;
+    }
+
+    /**
+     * 获取转换后的类型。
+     * 如果为空，则直接返回 null
+     * @param rClass 类型
+     * @param <R> 泛型
+     * @return 结果
+     * @since 0.1.41
+     */
+    @SuppressWarnings("unchecked")
+    public <R> R getCastOrNull(final Class<R> rClass) {
+        if(ObjectUtil.isNotNull(value)) {
+            return (R)value;
+        }
+        return null;
     }
 
     /**

@@ -10,6 +10,7 @@ import com.github.houbb.heaven.support.filter.IFilter;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.guava.Guavas;
+import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
 
@@ -231,6 +232,35 @@ public final class ClassUtil {
         } catch (NoSuchMethodException e) {
             throw new CommonRuntimeException(e);
         }
+    }
+
+    /**
+     * 获取方法列表
+     * （1）当前类和超类的 public 方法
+     * @param tClass 类型
+     * @return 结果列表
+     * @since 0.1.41
+     */
+    public static List<Method> getMethodList(final Class tClass) {
+        ArgUtil.notNull(tClass, "tClass");
+
+        Method[] methods = tClass.getMethods();
+        return ArrayUtil.toList(methods);
+    }
+
+    /**
+     * 获取方法列表
+     * （1）当前类的方法，包括私有。
+     * （2）暂时不进行递归处理，后期看是否有需要。
+     * @param tClass 类型
+     * @return 结果列表
+     * @since 0.1.41
+     */
+    public static List<Method> getDeclaredMethodList(final Class tClass) {
+        ArgUtil.notNull(tClass, "tClass");
+
+        Method[] methods = tClass.getDeclaredMethods();
+        return ArrayUtil.toList(methods);
     }
 
 }

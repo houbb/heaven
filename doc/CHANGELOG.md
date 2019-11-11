@@ -317,3 +317,13 @@
 |:---|:---|:---|:---|:--|
 | 1 | A |  新增 ReflectMethodUtil#getGenericReturnParamType() | 2019-11-10 16:36:48 | |
 | 2 | A |  新增 TypeUtil#getGenericParamType()/#cast() | 2019-11-10 16:36:48 | |
+
+
+# release_0.1.41
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A |  新增 ClassUtil#getMethodList()/#getDeclaredMethodList() | 2019-11-11 16:36:48 | |
+| 2 | A |  新增 FieldMeta 相关实现类 | 2019-11-11 16:36:48 | |
+| 3 | A |  新增 AttributeContext 相关实现类 | 2019-11-11 16:36:48 | |
+| 4 | A |  新增 Optional#getCastOrNull() 方法 | 2019-11-11 16:36:48 | |
