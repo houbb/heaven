@@ -282,4 +282,17 @@ public final class ObjectUtil {
         throw new UnsupportedOperationException("Not support foreach() for class: " + clazz.getName());
     }
 
+    /**
+     * 获取实体对象对应的 class 信息
+     * @param object 实例对象
+     * @return 对象 class 信息
+     * @since 0.1.41
+     */
+    public static Class getClass(final Object object) {
+        if(ObjectUtil.isNull(object)) {
+            return null;
+        }
+        return object.getClass();
+    }
+
 }

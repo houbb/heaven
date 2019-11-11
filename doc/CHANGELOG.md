@@ -327,3 +327,4 @@
 | 2 | A |  新增 FieldMeta 相关实现类 | 2019-11-11 16:36:48 | |
 | 3 | A |  新增 AttributeContext 相关实现类 | 2019-11-11 16:36:48 | |
 | 4 | A |  新增 Optional#getCastOrNull() 方法 | 2019-11-11 16:36:48 | |
+| 5 | A |  新增 ObjectUtil#getClass() 方法 | 2019-11-11 16:36:48 | |
