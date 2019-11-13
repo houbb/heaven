@@ -2,6 +2,8 @@ package com.github.houbb.heaven.support.attr;
 
 import com.github.houbb.heaven.util.util.Optional;
 
+import java.util.Set;
+
 /**
  * 属性上下文上下文
  *
@@ -106,5 +108,29 @@ public interface IAttributeContext {
      * @since 0.1.41
      */
     Long getAttrLong(final String key);
+
+    /**
+     * 移除属性
+     * @param key key
+     * @param value 值
+     * @return this
+     * @since 0.1.43
+     */
+    IAttributeContext removeAttr(final String key, final Object value);
+
+    /**
+     * 是否包含 key
+     * @param key key
+     * @return this
+     * @since 0.1.43
+     */
+    boolean containsKey(final String key);
+
+    /**
+     * 所有的 key 集合
+     * @return this
+     * @since 0.1.43
+     */
+    Set<String> keySet();
 
 }

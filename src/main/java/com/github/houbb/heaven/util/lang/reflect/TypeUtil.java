@@ -362,7 +362,7 @@ public final class TypeUtil {
     public static <T> T cast(Object obj, Type type){
         //8 大基本类型的默认值处理
         if(obj == null){
-            if(ClassTypeUtil.isPrimitive(type)) {
+            if(ClassTypeUtil.isPrimitive((Class)type)) {
                 return (T) PrimitiveUtil.getDefaultValue((Class<T>)type);
             }
             return null;

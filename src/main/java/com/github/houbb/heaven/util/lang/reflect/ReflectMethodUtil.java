@@ -5,10 +5,12 @@
 
 package com.github.houbb.heaven.util.lang.reflect;
 
+import com.github.houbb.heaven.constant.MethodConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
+import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.Optional;
 
@@ -247,6 +249,36 @@ public final class ReflectMethodUtil {
         }
 
         return TypeUtil.getGenericParamType(returnType, paramIndex);
+    }
+
+    /***
+     * 调用 setter 方法，进行设置值
+     * @param instance 实例信息
+     * @param propertyName 属性名称
+     * @param value 对象值
+     * @since 0.1.43
+     */
+    public static void invokeSetterMethod(final Object instance,
+                                          final String propertyName,
+                                          final Object value) {
+        ArgUtil.notNull(instance, "instance");
+        ArgUtil.notNull(propertyName, "propertyName");
+
+        if(ObjectUtil.isNull(value)) {
+            return;
+        }
+
+        final Class<?> clazz = instance.getClass();
+        String setMethodName = MethodConst.SET_PREFIX + StringUtil.firstToUpperCase(propertyName);
+
+        // 反射获取对应的方法
+        final Class<?> paramType = value.getClass();
+        try {
+            Method method = clazz.getMethod(setMethodName, paramType);
+            method.invoke(instance, value);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            throw new CommonRuntimeException(e);
+        }
     }
 
 }

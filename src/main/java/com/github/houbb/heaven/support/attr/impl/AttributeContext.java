@@ -5,6 +5,7 @@ import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.util.Optional;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -106,6 +107,22 @@ public class AttributeContext implements IAttributeContext {
     public Long getAttrLong(String key) {
         Optional<Object> objectOptional = getAttrOptional(key);
         return objectOptional.getCastOrNull(Long.class);
+    }
+
+    @Override
+    public IAttributeContext removeAttr(String key, Object value) {
+        context.remove(key);
+        return this;
+    }
+
+    @Override
+    public boolean containsKey(String key) {
+        return context.containsKey(key);
+    }
+
+    @Override
+    public Set<String> keySet() {
+        return context.keySet();
     }
 
 }
