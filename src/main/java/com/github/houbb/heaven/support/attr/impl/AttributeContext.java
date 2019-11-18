@@ -1,6 +1,7 @@
 package com.github.houbb.heaven.support.attr.impl;
 
 import com.github.houbb.heaven.support.attr.IAttributeContext;
+import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.util.Optional;
 
@@ -11,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 属性上下文上下文
  *
+ * [一定线程安全吗](https://segmentfault.com/a/1190000018954561?utm_source=tag-newest)
  * @author binbin.hou
  * @since 0.1.41
  */
@@ -24,6 +26,32 @@ public class AttributeContext implements IAttributeContext {
 
     public AttributeContext() {
         this.context = new ConcurrentHashMap<>();
+    }
+
+    public AttributeContext(final Map<String, Object> map) {
+        this.context = new ConcurrentHashMap<>(map);
+    }
+
+    /**
+     * 设置属性 map
+     * @param map map 信息
+     * @return this
+     * @since 0.1.44
+     */
+    protected AttributeContext putAttrMap(final Map<String, Object> map) {
+        ArgUtil.notNull(map, "map");
+
+        this.context.putAll(map);
+        return this;
+    }
+
+    /**
+     * 获取明细集合
+     * @return 明细集合
+     * @since 0.1.44
+     */
+    protected Set<Map.Entry<String, Object>> entrySet() {
+        return this.context.entrySet();
     }
 
     /**

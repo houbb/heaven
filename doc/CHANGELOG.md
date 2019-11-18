@@ -350,3 +350,5 @@
 |:---|:---|:---|:---|:--|
 | 1 | A |  新增 BeanUtil | 2019-11-18 21:06:29 | |
 | 2 | O |  废弃 ClassUtil#beanToMap | 2019-11-18 21:06:29 | |
+| 3 | A |  新增 StreamUtil#getInputStream/#closeStream | 2019-11-18 21:06:29 | |
+| 4 | O |  优化 AttributeContext 相关方法 | 2019-11-18 21:06:29 | |
