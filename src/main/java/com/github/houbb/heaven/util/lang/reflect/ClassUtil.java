@@ -113,7 +113,10 @@ public final class ClassUtil {
      * bean 转换为 map
      * @param bean 原始对象
      * @return 结果
+     * @deprecated 已废弃
+     * @see com.github.houbb.heaven.util.lang.BeanUtil#beanToMap(Object)
      */
+    @Deprecated
     public static Map<String, Object> beanToMap(Object bean) {
         try {
             Map<String, Object> map = new LinkedHashMap<>();

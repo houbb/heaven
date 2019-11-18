@@ -343,3 +343,10 @@
 | 1 | F |  修复 TypeUtil#cast 判断 BUG | 2019-11-13 21:06:29 | |
 | 2 | A |  新增 ReflectMethodUtil#invokeSetterMethod | 2019-11-13 21:06:29 | |
 | 3 | A |  修复 IAttributeContext#removeAttr/#containsKey#keySet | 2019-11-13 21:06:29 | |
+
+# release_0.1.44
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A |  新增 BeanUtil | 2019-11-18 21:06:29 | |
+| 2 | O |  废弃 ClassUtil#beanToMap | 2019-11-18 21:06:29 | |
