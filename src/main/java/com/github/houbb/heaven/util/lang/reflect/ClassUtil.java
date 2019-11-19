@@ -97,8 +97,9 @@ public final class ClassUtil {
      * 1. 还会获取到 serialVersionUID 这个字段。
      * @param clazz 类
      * @return 字段列表 map
+     * @since 0.1.45 修复名称
      */
-    public static Map<String, Field> getAllFieldLMap(final Class clazz) {
+    public static Map<String, Field> getAllFieldMap(final Class clazz) {
         List<Field> fieldList = ClassUtil.getAllFieldList(clazz);
         return MapUtil.toMap(fieldList, new IHandler<Field, String>() {
             @Override

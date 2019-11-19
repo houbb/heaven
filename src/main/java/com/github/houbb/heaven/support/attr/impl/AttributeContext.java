@@ -38,7 +38,7 @@ public class AttributeContext implements IAttributeContext {
      * @return this
      * @since 0.1.44
      */
-    protected AttributeContext putAttrMap(final Map<String, Object> map) {
+    protected AttributeContext putAttrMap(final Map<String, ?> map) {
         ArgUtil.notNull(map, "map");
 
         this.context.putAll(map);
@@ -138,7 +138,7 @@ public class AttributeContext implements IAttributeContext {
     }
 
     @Override
-    public IAttributeContext removeAttr(String key, Object value) {
+    public IAttributeContext removeAttr(String key) {
         context.remove(key);
         return this;
     }

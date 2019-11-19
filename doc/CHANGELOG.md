@@ -352,3 +352,10 @@
 | 2 | O |  废弃 ClassUtil#beanToMap | 2019-11-18 21:06:29 | |
 | 3 | A |  新增 StreamUtil#getInputStream/#closeStream | 2019-11-18 21:06:29 | |
 | 4 | O |  优化 AttributeContext 相关方法 | 2019-11-18 21:06:29 | |
+
+# release_0.1.45
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | F |  修正 ClassUtil#getAllFieldMap 名称 | 2019-11-19 21:06:29 | |
+| 2 | O |  调整 AttributeContext 属性值 | 2019-11-19 21:06:29 | |

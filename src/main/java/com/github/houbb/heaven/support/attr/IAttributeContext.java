@@ -112,11 +112,10 @@ public interface IAttributeContext {
     /**
      * 移除属性
      * @param key key
-     * @param value 值
      * @return this
      * @since 0.1.43
      */
-    IAttributeContext removeAttr(final String key, final Object value);
+    IAttributeContext removeAttr(final String key);
 
     /**
      * 是否包含 key
