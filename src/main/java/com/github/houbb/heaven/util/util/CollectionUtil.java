@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.util;
 
+import com.github.houbb.heaven.constant.PunctuationConst;
 import com.github.houbb.heaven.support.condition.ICondition;
 import com.github.houbb.heaven.support.filler.IFiller;
 import com.github.houbb.heaven.support.filter.IFilter;
@@ -337,16 +338,27 @@ public final class CollectionUtil {
     }
 
     /**
-     * 将 stringList 内容按照 connector 连接起来
+     * 将字符串集合内容按照 connector 连接起来
      *
-     * @param stringList 字符串列表
+     * @param stringCollection 字符串集合
      * @param connector  连接符号
      * @return 结果
      * @since 0.1.6
      */
-    public static String join(final List<String> stringList,
+    public static String join(final Collection<String> stringCollection,
                               final String connector) {
-        return StringUtil.join(stringList, connector);
+        return StringUtil.join(stringCollection, connector);
+    }
+
+    /**
+     * 将字符串集合内容按照逗号连接起来
+     *
+     * @param stringCollection 字符串集合
+     * @return 结果
+     * @since 0.1.46
+     */
+    public static String join(final Collection<String> stringCollection) {
+        return StringUtil.join(stringCollection, PunctuationConst.COMMA);
     }
 
     /**

@@ -6,17 +6,14 @@
 package com.github.houbb.heaven.util.lang;
 
 import com.github.houbb.heaven.constant.CharConst;
+import com.github.houbb.heaven.constant.PunctuationConst;
 import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.util.ArrayPrimitiveUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * 字符串工具类
@@ -281,11 +278,22 @@ public final class StringUtil {
     }
 
     /**
+     * 将数组进行逗号连接
+     * @param array  object array
+     * @return join string
+     * @since 0.1.46
+     */
+    public static String join(Object[] array) {
+        return join(array, PunctuationConst.COMMA);
+    }
+
+    /**
      * 将数组进行连接
      * @param array      object array
      * @param separator  分隔符
      * @return join string
      * @since 0.1.14
+     * @see #join(Object[], String, int, int) 核心实现
      */
     public static String join(Object[] array, String separator) {
         final int endIndex = ArrayUtil.getEndIndex(-1, array);
@@ -317,7 +325,7 @@ public final class StringUtil {
         } else {
             StringBuilder buf = new StringBuilder(noOfItems * 16);
 
-            for (int i = startIndex; i < endIndex; ++i) {
+            for (int i = startIndex; i <= endIndex; ++i) {
                 if (i > startIndex) {
                     buf.append(separator);
                 }
@@ -377,6 +385,17 @@ public final class StringUtil {
     public static <E> String join(final Collection<E> collection, final String splitter) {
         final int endIndex = CollectionUtil.getEndIndex(-1, collection);
         return join(collection, splitter, 0, endIndex);
+    }
+
+    /**
+     * 字符串按逗号拼接拼接
+     * @param collection 集合信息
+     * @param <E> 泛型
+     * @return 结果
+     * @since 0.1.46
+     */
+    public static <E> String join(final Collection<E> collection) {
+        return join(collection, PunctuationConst.COMMA);
     }
 
     /**
@@ -910,6 +929,31 @@ public final class StringUtil {
         }
 
         return new String(bytes);
+    }
+
+    /**
+     * 拆分为字符串数组
+     * @param string 字符串
+     * @param splitter 拆分符号
+     * @return 字符串数组
+     * @since 0.1.46
+     */
+    public static String[] splitToStringArray(final String string, final String splitter) {
+        if(StringUtil.isEmpty(string)) {
+            return null;
+        }
+
+        return string.split(splitter);
+    }
+
+    /**
+     * 拆分为字符串数组
+     * @param string 字符串
+     * @return 字符串数组
+     * @since 0.1.46
+     */
+    public static String[] splitToStringArray(final String string) {
+        return splitToStringArray(string, PunctuationConst.COMMA);
     }
 
 }

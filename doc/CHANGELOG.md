@@ -359,3 +359,11 @@
 |:---|:---|:---|:---|:--|
 | 1 | F |  修正 ClassUtil#getAllFieldMap 名称 | 2019-11-19 21:06:29 | |
 | 2 | O |  调整 AttributeContext 属性值 | 2019-11-19 21:06:29 | |
+
+# release_0.1.46
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | F |  修复 StringUtil#join(Object[], String, int, int)  | 2019-11-20 21:06:29 | |
+| 2 | A |  新增 CollectionUtil#join | 2019-11-19 21:06:29 | |
+| 3 | A |  新增 StringUtil#join | 2019-11-19 21:06:29 | |
