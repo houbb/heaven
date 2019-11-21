@@ -367,3 +367,9 @@
 | 1 | F |  修复 StringUtil#join(Object[], String, int, int)  | 2019-11-20 21:06:29 | |
 | 2 | A |  新增 CollectionUtil#join | 2019-11-19 21:06:29 | |
 | 3 | A |  新增 StringUtil#join | 2019-11-19 21:06:29 | |
+
+# release_0.1.47
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A |  修复 ClassTypeUtil#isEnum  | 2019-11-21 21:06:29 | 是否为枚举 |

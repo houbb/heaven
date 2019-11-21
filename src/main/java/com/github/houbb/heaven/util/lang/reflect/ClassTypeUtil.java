@@ -1,6 +1,8 @@
 package com.github.houbb.heaven.util.lang.reflect;
 
+import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
+import com.sun.org.apache.xpath.internal.Arg;
 import sun.reflect.generics.reflectiveObjects.WildcardTypeImpl;
 
 import java.lang.reflect.*;
@@ -86,6 +88,17 @@ public final class ClassTypeUtil {
             }
         }
         return false;
+    }
+
+    /**
+     * 是否为枚举
+     * @param clazz 类型
+     * @return 枚举
+     * @since 0.1.47
+     */
+    public static boolean isEnum(Class<?> clazz) {
+        ArgUtil.notNull(clazz, "clazz");
+        return clazz.isEnum();
     }
 
     /**
