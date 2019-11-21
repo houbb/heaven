@@ -1,11 +1,17 @@
 package com.github.houbb.heaven.util.lang;
 
+import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.util.common.ArgUtil;
+import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
+import com.github.houbb.heaven.util.lang.reflect.PrimitiveUtil;
 import com.github.houbb.heaven.util.util.ArrayPrimitiveUtil;
 import com.github.houbb.heaven.util.util.Optional;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 
 /**
  * 数字工具类
@@ -34,7 +40,7 @@ public final class NumUtil {
      * @return 较小的值
      */
     public static int getMin(final int current, final int other) {
-        return current > other ? other : current;
+        return Math.min(current, other);
     }
 
     /**
@@ -45,7 +51,7 @@ public final class NumUtil {
      * @return 较大的值
      */
     public static int getMax(final int current, final int other) {
-        return current > other ? current : other;
+        return Math.max(current, other);
     }
 
     /**
@@ -95,7 +101,7 @@ public final class NumUtil {
      */
     public static int toInteger(final String string, final int defaultValue) {
         try {
-            return Integer.valueOf(string);
+            return Integer.parseInt(string);
         } catch (Exception e) {
             return defaultValue;
         }
@@ -215,5 +221,62 @@ public final class NumUtil {
 
         throw new ClassCastException("Class cast exception for parse long with object: " + object);
     }
+
+    /**
+     * 获取数字格式化
+     * @param number 数字
+     * @param format 格式化
+     * @return 结果
+     * @since 0.1.48
+     */
+    public static String getNumFormat(final Number number, final String format) {
+        ArgUtil.notNull(number, "number");
+        ArgUtil.notEmpty(format, "format");
+
+        NumberFormat numberFormat = new DecimalFormat(format);
+        return numberFormat.format(number);
+    }
+
+    /**
+     * 获取格式化数字
+     * @param number 数字
+     * @param format 格式化
+     * @param numberClazz 数字类型
+     * @return 结果
+     * @since 0.1.48
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T getFormatNum(final String number, final String format,
+                                      final Class<T> numberClazz) {
+        ArgUtil.notNull(number, "number");
+        ArgUtil.notEmpty(format, "format");
+
+        NumberFormat numberFormat = new DecimalFormat(format);
+        try {
+            final Number numValue = numberFormat.parse(number);
+            if(BigDecimal.class == numberClazz) {
+                return (T) BigDecimal.valueOf((Double) numValue);
+            }
+            if(BigInteger.class == numberClazz) {
+                return (T) BigInteger.valueOf((Long) numValue);
+            }
+
+            return (T) numValue;
+        } catch (ParseException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 获取格式化数字
+     * @param number 数字
+     * @param format 格式化
+     * @return 结果
+     * @since 0.1.48
+     */
+    public static Number getFormatNum(final String number, final String format) {
+        return getFormatNum(number, format, Number.class);
+    }
+
 
 }
