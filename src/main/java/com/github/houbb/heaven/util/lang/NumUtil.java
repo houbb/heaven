@@ -242,6 +242,7 @@ public final class NumUtil {
      * @param number 数字
      * @param format 格式化
      * @param numberClazz 数字类型
+     * @param <T> 泛型
      * @return 结果
      * @since 0.1.48
      */
