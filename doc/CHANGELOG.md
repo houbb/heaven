@@ -380,3 +380,11 @@
 |:---|:---|:---|:---|:--|
 | 1 | A |  新增 NumUtil#getNumFormat  | 2019-11-21 21:06:29 |  |
 | 2 | A |  新增 NumUtil#getFormatNum  | 2019-11-21 21:06:29 |  |
+
+# release_0.1.49
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A |  新增 ArrayPrimitiveUtil#toXxxArray  | 2019-11-22 21:06:29 |  |
+| 2 | A |  新增 StringUtil#join/#splitToList  | 2019-11-22 21:06:29 |  |
+| 3 | A |  新增 ArrayUtil#STRING_EMPTY  | 2019-11-21 22:06:29 |  |

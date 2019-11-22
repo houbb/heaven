@@ -521,4 +521,172 @@ public final class ArrayPrimitiveUtil {
         return currentChar;
     }
 
+    /**
+     * 转换为数组
+     * @param list 列表
+     * @param handler 转换实现
+     * @param <E> 泛型
+     * @return 结果
+     * @since 0.1.49
+     */
+    public static <E> int[] toIntArray(final List<E> list, final IHandler<E, Integer> handler) {
+        if(CollectionUtil.isEmpty(list)) {
+            return INT_EMPTY;
+        }
+
+        final int size = list.size();
+        int[] ints = new int[size];
+        for(int i = 0; i < size; i++) {
+            ints[i] = handler.handle(list.get(i));
+        }
+        return ints;
+    }
+
+    /**
+     * 转换为数组
+     * @param list 列表
+     * @param handler 转换实现
+     * @param <E> 泛型
+     * @return 结果
+     * @since 0.1.49
+     */
+    public static <E> boolean[] toBooleanArray(final List<E> list, final IHandler<E, Boolean> handler) {
+        if(CollectionUtil.isEmpty(list)) {
+            return BOOLEAN_EMPTY;
+        }
+
+        final int size = list.size();
+        boolean[] arrays = new boolean[size];
+        for(int i = 0; i < size; i++) {
+            arrays[i] = handler.handle(list.get(i));
+        }
+        return arrays;
+    }
+
+    /**
+     * 转换为数组
+     * @param list 列表
+     * @param handler 转换实现
+     * @param <E> 泛型
+     * @return 结果
+     * @since 0.1.49
+     */
+    public static <E> char[] toCharArray(final List<E> list, final IHandler<E, Character> handler) {
+        if(CollectionUtil.isEmpty(list)) {
+            return CHAR_EMPTY;
+        }
+
+        final int size = list.size();
+        char[] arrays = new char[size];
+        for(int i = 0; i < size; i++) {
+            arrays[i] = handler.handle(list.get(i));
+        }
+        return arrays;
+    }
+
+    /**
+     * 转换为数组
+     * @param list 列表
+     * @param handler 转换实现
+     * @param <E> 泛型
+     * @return 结果
+     * @since 0.1.49
+     */
+    public static <E> byte[] toByteArray(final List<E> list, final IHandler<E, Byte> handler) {
+        if(CollectionUtil.isEmpty(list)) {
+            return BYTE_EMPTY;
+        }
+
+        final int size = list.size();
+        byte[] arrays = new byte[size];
+        for(int i = 0; i < size; i++) {
+            arrays[i] = handler.handle(list.get(i));
+        }
+        return arrays;
+    }
+
+    /**
+     * 转换为数组
+     * @param list 列表
+     * @param handler 转换实现
+     * @param <E> 泛型
+     * @return 结果
+     * @since 0.1.49
+     */
+    public static <E> short[] toShortArray(final List<E> list, final IHandler<E, Short> handler) {
+        if(CollectionUtil.isEmpty(list)) {
+            return SHORT_EMPTY;
+        }
+
+        final int size = list.size();
+        short[] arrays = new short[size];
+        for(int i = 0; i < size; i++) {
+            arrays[i] = handler.handle(list.get(i));
+        }
+        return arrays;
+    }
+
+    /**
+     * 转换为数组
+     * @param list 列表
+     * @param handler 转换实现
+     * @param <E> 泛型
+     * @return 结果
+     * @since 0.1.49
+     */
+    public static <E> long[] toLongArray(final List<E> list, final IHandler<E, Long> handler) {
+        if(CollectionUtil.isEmpty(list)) {
+            return LONG_EMPTY;
+        }
+
+        final int size = list.size();
+        long[] arrays = new long[size];
+        for(int i = 0; i < size; i++) {
+            arrays[i] = handler.handle(list.get(i));
+        }
+        return arrays;
+    }
+
+    /**
+     * 转换为数组
+     * @param list 列表
+     * @param handler 转换实现
+     * @param <E> 泛型
+     * @return 结果
+     * @since 0.1.49
+     */
+    public static <E> float[] toFloatArray(final List<E> list, final IHandler<E, Float> handler) {
+        if(CollectionUtil.isEmpty(list)) {
+            return FLOAT_EMPTY;
+        }
+
+        final int size = list.size();
+        float[] arrays = new float[size];
+        for(int i = 0; i < size; i++) {
+            arrays[i] = handler.handle(list.get(i));
+        }
+        return arrays;
+    }
+
+    /**
+     * 转换为数组
+     * @param list 列表
+     * @param handler 转换实现
+     * @param <E> 泛型
+     * @return 结果
+     * @since 0.1.49
+     */
+    public static <E> double[] toDoubleArray(final List<E> list, final IHandler<E, Double> handler) {
+        if(CollectionUtil.isEmpty(list)) {
+            return DOUBLE_EMPTY;
+        }
+
+        final int size = list.size();
+        double[] arrays = new double[size];
+        for(int i = 0; i < size; i++) {
+            arrays[i] = handler.handle(list.get(i));
+        }
+        return arrays;
+    }
+
 }

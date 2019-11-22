@@ -26,6 +26,12 @@ public final class ArrayUtil {
     }
 
     /**
+     * 空字符串列表
+     * @since 0.1.49
+     */
+    public static final String[] STRING_EMPTY = new String[0];
+
+    /**
      * 数组是否为空
      *
      * @param objects 数组对象

@@ -7,6 +7,8 @@ package com.github.houbb.heaven.util.lang;
 
 import com.github.houbb.heaven.constant.CharConst;
 import com.github.houbb.heaven.constant.PunctuationConst;
+import com.github.houbb.heaven.support.handler.IHandler;
+import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.util.ArrayPrimitiveUtil;
@@ -954,6 +956,225 @@ public final class StringUtil {
      */
     public static String[] splitToStringArray(final String string) {
         return splitToStringArray(string, PunctuationConst.COMMA);
+    }
+
+    /**
+     * 数组拼接为字符串
+     * @param array 数组
+     * @param splitters 分隔符
+     * @return 拼接结果
+     * @since 0.1.49
+     */
+    public static String join(final byte[] array, final String ... splitters) {
+        if(ArrayPrimitiveUtil.isEmpty(array)) {
+            return StringUtil.EMPTY;
+        }
+
+        String splitter = getSplitter(splitters);
+        List<Byte> lists = ArrayPrimitiveUtil.toList(array, new IHandler<Byte, Byte>() {
+            @Override
+            public Byte handle(Byte value) {
+                return value;
+            }
+        });
+        return join(lists, splitter);
+    }
+
+    /**
+     * 数组拼接为字符串
+     * @param array 数组
+     * @param splitters 分隔符
+     * @return 拼接结果
+     * @since 0.1.49
+     */
+    public static String join(final char[] array, final String ... splitters) {
+        if(ArrayPrimitiveUtil.isEmpty(array)) {
+            return StringUtil.EMPTY;
+        }
+
+        String splitter = getSplitter(splitters);
+        List<Character> lists = ArrayPrimitiveUtil.toList(array, new IHandler<Character, Character>() {
+            @Override
+            public Character handle(Character value) {
+                return value;
+            }
+        });
+        return join(lists, splitter);
+    }
+
+    /**
+     * 数组拼接为字符串
+     * @param array 数组
+     * @param splitters 分隔符
+     * @return 拼接结果
+     * @since 0.1.49
+     */
+    public static String join(final short[] array, final String ... splitters) {
+        if(ArrayPrimitiveUtil.isEmpty(array)) {
+            return StringUtil.EMPTY;
+        }
+
+        String splitter = getSplitter(splitters);
+        List<Short> lists = ArrayPrimitiveUtil.toList(array, new IHandler<Short, Short>() {
+            @Override
+            public Short handle(Short value) {
+                return value;
+            }
+        });
+        return join(lists, splitter);
+    }
+
+    /**
+     * 数组拼接为字符串
+     * @param array 数组
+     * @param splitters 分隔符
+     * @return 拼接结果
+     * @since 0.1.49
+     */
+    public static String join(final long[] array, final String ... splitters) {
+        if(ArrayPrimitiveUtil.isEmpty(array)) {
+            return StringUtil.EMPTY;
+        }
+
+        String splitter = getSplitter(splitters);
+        List<Long> lists = ArrayPrimitiveUtil.toList(array, new IHandler<Long, Long>() {
+            @Override
+            public Long handle(Long value) {
+                return value;
+            }
+        });
+        return join(lists, splitter);
+    }
+
+    /**
+     * 数组拼接为字符串
+     * @param array 数组
+     * @param splitters 分隔符
+     * @return 拼接结果
+     * @since 0.1.49
+     */
+    public static String join(final float[] array, final String ... splitters) {
+        if(ArrayPrimitiveUtil.isEmpty(array)) {
+            return StringUtil.EMPTY;
+        }
+
+        String splitter = getSplitter(splitters);
+        List<Float> lists = ArrayPrimitiveUtil.toList(array, new IHandler<Float, Float>() {
+            @Override
+            public Float handle(Float value) {
+                return value;
+            }
+        });
+        return join(lists, splitter);
+    }
+
+    /**
+     * 数组拼接为字符串
+     * @param array 数组
+     * @param splitters 分隔符
+     * @return 拼接结果
+     * @since 0.1.49
+     */
+    public static String join(final double[] array, final String ... splitters) {
+        if(ArrayPrimitiveUtil.isEmpty(array)) {
+            return StringUtil.EMPTY;
+        }
+
+        String splitter = getSplitter(splitters);
+        List<Double> lists = ArrayPrimitiveUtil.toList(array, new IHandler<Double, Double>() {
+            @Override
+            public Double handle(Double value) {
+                return value;
+            }
+        });
+        return join(lists, splitter);
+    }
+
+    /**
+     * 数组拼接为字符串
+     * @param array 数组
+     * @param splitters 分隔符
+     * @return 拼接结果
+     * @since 0.1.49
+     */
+    public static String join(final boolean[] array, final String ... splitters) {
+        if(ArrayPrimitiveUtil.isEmpty(array)) {
+            return StringUtil.EMPTY;
+        }
+
+        String splitter = getSplitter(splitters);
+        List<Boolean> lists = ArrayPrimitiveUtil.toList(array, new IHandler<Boolean, Boolean>() {
+            @Override
+            public Boolean handle(Boolean value) {
+                return value;
+            }
+        });
+        return join(lists, splitter);
+    }
+
+    /**
+     * 数组拼接为字符串
+     * @param array 数组
+     * @param splitters 分隔符
+     * @return 拼接结果
+     * @since 0.1.49
+     */
+    public static String join(final int[] array, final String ... splitters) {
+        if(ArrayPrimitiveUtil.isEmpty(array)) {
+            return StringUtil.EMPTY;
+        }
+
+        String splitter = getSplitter(splitters);
+        List<Integer> integers = ArrayPrimitiveUtil.toList(array, new IHandler<Integer, Integer>() {
+            @Override
+            public Integer handle(Integer integer) {
+                return integer;
+            }
+        });
+        return join(integers, splitter);
+    }
+
+    /**
+     * 获取指定的分隔符
+     * @param splitters 分隔符
+     * @return 字符串
+     * @since 0.1.49
+     */
+    private static String getSplitter(final String ... splitters) {
+        if(ArrayUtil.isEmpty(splitters)) {
+            return PunctuationConst.COMMA;
+        }
+
+        return splitters[0];
+    }
+
+    /**
+     * 拆分为列表
+     * @param string 字符串
+     * @param splitter 分隔符号
+     * @return 字符串列表
+     * @since 0.1.49
+     */
+    public static List<String> splitToList(final String string,
+                                           final String splitter) {
+        ArgUtil.notEmpty(splitter, "splitter");
+
+        if(StringUtil.isEmpty(string)) {
+            return Guavas.newArrayList();
+        }
+
+        String[] strings = string.split(splitter);
+        return ArrayUtil.toList(strings);
+    }
+
+    /**
+     * 拆分为列表
+     * @param string 字符串
+     * @return 字符串列表
+     * @since 0.1.49
+     */
+    public static List<String> splitToList(final String string) {
+        return splitToList(string, PunctuationConst.COMMA);
     }
 
 }
