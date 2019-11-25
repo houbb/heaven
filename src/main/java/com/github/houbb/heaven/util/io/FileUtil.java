@@ -7,9 +7,11 @@ package com.github.houbb.heaven.util.io;
 
 
 import com.github.houbb.heaven.constant.CharsetConst;
+import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
+import com.sun.org.apache.xpath.internal.Arg;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -373,6 +375,8 @@ public final class FileUtil {
         }
     }
 
+
+
     /**
      * 文件是否存在
      * @param filePath 文件路径
@@ -437,6 +441,145 @@ public final class FileUtil {
      */
     public static boolean isNotEmpty(final String filePath) {
         return !isEmpty(filePath);
+    }
+
+    /**
+     * 获取文件字节数组
+     * @param file 文件信息
+     * @return 字节数组
+     * @since 0.1.50
+     */
+    public static byte[] getFileBytes(final File file) {
+        ArgUtil.notNull(file, "file");
+
+        try(FileInputStream fis = new FileInputStream(file);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream(1024)) {
+            byte[] b = new byte[1024];
+            int n;
+            while ((n = fis.read(b)) != -1) {
+                bos.write(b, 0, n);
+            }
+            return bos.toByteArray();
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 获取文件字节流
+     * @param filePath 文件路径
+     * @return 字节数组
+     * @since 0.1.50
+     */
+    public static byte[] getFileBytes(final String filePath) {
+        ArgUtil.notNull(filePath, "filePath");
+
+        File file = new File(filePath);
+        return getFileBytes(file);
+    }
+
+    /**
+     * 根据字节信息创建文件
+     * @param filePath 文件路径
+     * @param bytes 字节数组
+     * @since 0.1.50
+     * @see #createFileAssertSuccess 断言创建成功
+     */
+    public static void createFile(final String filePath, final byte[] bytes) {
+        File file = createFileAssertSuccess(filePath);
+        try(FileOutputStream fos = new FileOutputStream(file);
+            BufferedOutputStream bos = new BufferedOutputStream(fos);){
+            bos.write(bytes);
+        } catch (Exception e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 创建文件
+     * @param filePath 文件路径
+     * @return 文件信息
+     * @since 0.1.50
+     * @throws RuntimeException 运行时异常，如果创建文件异常。包括的异常为 {@link IOException} 文件异常.
+     */
+    public static File createFileAssertSuccess(final String filePath) {
+        ArgUtil.notEmpty(filePath, "filePath");
+
+        // 判断文件是否存在
+        File file = new File(filePath);
+        if(file.exists()) {
+            return file;
+        }
+
+        // 父类文件夹的处理
+        File dir = file.getParentFile();
+        if(FileUtil.notExists(dir)) {
+            boolean mkdirResult = dir.mkdirs();
+            if(!mkdirResult) {
+                throw new CommonRuntimeException("Parent file create fail " + filePath);
+            }
+        }
+
+        try {
+            // 创建文件
+            boolean createFile = file.createNewFile();
+            if(!createFile) {
+                throw new CommonRuntimeException("Create new file fail for path " + filePath);
+            }
+            return file;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 删除文件
+     * @param file 文件信息
+     * @since 0.1.50
+     */
+    public static void deleteFile(final File file) {
+        ArgUtil.notNull(file, "file");
+
+        if(file.exists()) {
+            boolean result = file.delete();
+            if(!result) {
+                throw new CommonRuntimeException("Delete file fail for path " + file.getAbsolutePath());
+            }
+        }
+    }
+
+    /**
+     * 创建临时文件
+     * @param name 文件名称
+     * @param suffix 文件后缀
+     * @return 临时文件
+     * @since 0.1.50
+     */
+    public static File createTempFile(final String name, final String suffix) {
+        try {
+            ArgUtil.notEmpty(name, "prefix");
+            ArgUtil.notEmpty(suffix, "suffix");
+
+            return File.createTempFile(name, suffix);
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 创建临时文件
+     * @param nameWithSuffix 文件名称全称
+     * @return 临时文件
+     * @since 0.1.50
+     */
+    public static File createTempFile(final String nameWithSuffix) {
+        try {
+            ArgUtil.notEmpty(nameWithSuffix, "fileName");
+            String[] strings = nameWithSuffix.split("\\.");
+            return File.createTempFile(strings[0], strings[1]);
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
     }
 
 }

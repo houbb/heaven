@@ -388,3 +388,13 @@
 | 1 | A |  新增 ArrayPrimitiveUtil#toXxxArray  | 2019-11-22 21:06:29 |  |
 | 2 | A |  新增 StringUtil#join/#splitToList  | 2019-11-22 21:06:29 |  |
 | 3 | A |  新增 ArrayUtil#STRING_EMPTY  | 2019-11-21 22:06:29 |  |
+
+# release_0.1.50
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A |  新增 FileUtil#getFileBytes  | 2019-11-25 22:00:37 |  |
+| 2 | A |  新增 FileUtil#createFile  | 2019-11-25 21:06:29 |  |
+| 3 | A |  新增 FileUtil#createFileAssertSuccess  | 2019-11-25 21:06:29 |  |
+| 4 | A |  新增 FileUtil#deleteFile  | 2019-11-25 21:06:29 |  |
+| 5 | A |  新增 FileUtil#createTempFile  | 2019-11-25 21:06:29 |  |
