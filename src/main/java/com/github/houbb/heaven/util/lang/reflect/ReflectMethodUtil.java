@@ -5,10 +5,12 @@
 
 package com.github.houbb.heaven.util.lang.reflect;
 
+import com.github.houbb.heaven.annotation.reflect.Param;
 import com.github.houbb.heaven.constant.MethodConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
+import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
@@ -16,13 +18,11 @@ import com.github.houbb.heaven.util.util.Optional;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 反射方法工具类
+ * [MethodHd](https://www.jianshu.com/p/c54503aabc60)
  *
  * @since 0.0.2
  * @author bbhou
@@ -90,6 +90,53 @@ public final class ReflectMethodUtil {
                 return aClass.getName();
             }
         });
+    }
+
+    /**
+     * 获取参数名称
+     *
+     * https://blog.csdn.net/revitalizing/article/details/71036970
+     * @param method 方法信息
+     * @return 方法名称列表
+     * @since 0.1.51
+     * @see Param 参数注解
+     */
+    public static List<String> getParamNames(final Method method) {
+        ArgUtil.notNull(method, "method");
+
+        Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+        if(ArrayUtil.isEmpty(parameterAnnotations)) {
+            return Collections.emptyList();
+        }
+
+        List<String> resultList = Guavas.newArrayList(parameterAnnotations.length);
+        for(Annotation[] annotations : parameterAnnotations) {
+            String paramName = getParamName(annotations);
+            resultList.add(paramName);
+        }
+
+        return resultList;
+    }
+
+    /**
+     * 获取参数名称
+     * @param annotations 注解信息
+     * @return 参数名称
+     * @since 0.1.51
+     */
+    private static String getParamName(final Annotation[] annotations) {
+        if(ArrayUtil.isEmpty(annotations)) {
+            return StringUtil.EMPTY;
+        }
+
+        for(Annotation annotation : annotations) {
+            if(annotation.getClass().equals(Param.class)) {
+                Param param = (Param)annotation;
+                return param.value();
+            }
+        }
+
+        return StringUtil.EMPTY;
     }
 
     /**

@@ -398,3 +398,11 @@
 | 3 | A |  新增 FileUtil#createFileAssertSuccess  | 2019-11-25 21:06:29 |  |
 | 4 | A |  新增 FileUtil#deleteFile  | 2019-11-25 21:06:29 |  |
 | 5 | A |  新增 FileUtil#createTempFile  | 2019-11-25 21:06:29 |  |
+
+# release_0.1.51
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A |  新增 `@Param` 注解  | 2019-11-27 22:00:37 | 初步解决 JDK7 及其以前参数名称难以获得问题 |
+| 2 | A |  新增 SetUtil  | 2019-11-27 22:00:37 | |
+| 3 | A |  新增 ReflectMethodUtil#getParamNames  | 2019-11-27 22:00:37 | |
