@@ -267,4 +267,68 @@ public final class ClassUtil {
         return ArrayUtil.toList(methods);
     }
 
+    /**
+     * 获取所有父类信息
+     * @param clazz 类型
+     * @return 所有父类信息
+     * @since 0.1.53
+     */
+    public static List<Class> getAllSuperClass(final Class clazz) {
+        ArgUtil.notNull(clazz, "clazz");
+
+        Set<Class> classSet = Guavas.newHashSet();
+
+        // 添加所有父类
+        Class tempClass = clazz.getSuperclass();
+        while (tempClass != null) {
+            classSet.add(tempClass);
+            tempClass = tempClass.getSuperclass();
+        }
+
+        return Guavas.newArrayList(classSet);
+    }
+
+    /**
+     * 获取所有接口信息
+     * @param clazz 类型
+     * @return 所有父类信息
+     * @since 0.1.53
+     */
+    public static List<Class> getAllInterfaces(final Class clazz) {
+        ArgUtil.notNull(clazz, "clazz");
+
+        Set<Class> classSet = Guavas.newHashSet();
+
+        // 添加所有父类
+        Class[] interfaces = clazz.getInterfaces();
+        if(ArrayUtil.isNotEmpty(interfaces)) {
+            classSet.addAll(ArrayUtil.toList(interfaces));
+
+            for(Class interfaceClass : interfaces) {
+                List<Class> classList = getAllInterfaces(interfaceClass);
+                if(CollectionUtil.isNotEmpty(classList)) {
+                    classSet.addAll(classList);
+                }
+            }
+        }
+
+        return Guavas.newArrayList(classSet);
+    }
+
+    /**
+     * 获取所有接口信息和父类信息
+     * @param clazz 类型
+     * @return 接口信息和父类信息
+     * @since 0.1.53
+     */
+    public static List<Class> getAllInterfacesAndSuperClass(final Class clazz) {
+        ArgUtil.notNull(clazz, "clazz");
+
+        Set<Class> classSet = Guavas.newHashSet();
+        classSet.addAll(getAllInterfaces(clazz));
+        classSet.addAll(getAllSuperClass(clazz));
+
+        return Guavas.newArrayList(classSet);
+    }
+
 }
