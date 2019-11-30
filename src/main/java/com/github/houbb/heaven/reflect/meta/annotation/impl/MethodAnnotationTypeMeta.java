@@ -3,16 +3,19 @@ package com.github.houbb.heaven.reflect.meta.annotation.impl;
 import com.github.houbb.heaven.util.common.ArgUtil;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
+ * 方法级别注解信息
+ *
  * <p> project: heaven-AnnotationMeta </p>
  * <p> create on 2019/11/29 23:04 </p>
  *
  * @author Administrator
  * @since 0.1.52
  */
-public class ClassAnnotationTypeMeta extends AbstractAnnotationTypeMeta {
+public class MethodAnnotationTypeMeta extends AbstractAnnotationTypeMeta {
 
     /**
      * 注解信息
@@ -21,10 +24,10 @@ public class ClassAnnotationTypeMeta extends AbstractAnnotationTypeMeta {
      */
     private Annotation[] annotations;
 
-    public ClassAnnotationTypeMeta(Class clazz) {
-        ArgUtil.notNull(clazz, "clazz");
+    public MethodAnnotationTypeMeta(final Method method) {
+        ArgUtil.notNull(method, "method");
 
-        annotations = clazz.getAnnotations();
+        annotations = method.getAnnotations();
     }
 
     @Override

@@ -406,3 +406,10 @@
 | 1 | A |  新增 `@Param` 注解  | 2019-11-27 22:00:37 | 初步解决 JDK7 及其以前参数名称难以获得问题 |
 | 2 | A |  新增 SetUtil  | 2019-11-27 22:00:37 | |
 | 3 | A |  新增 ReflectMethodUtil#getParamNames  | 2019-11-27 22:00:37 | |
+
+# release_0.1.52
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A |  新增 ReflectAnnotationUtil#getAnnotation/getAnnotationRefs  | 2019-11-27 22:00:30 | |
+| 2 | A |  新增 IAnnotationTypeMeta 及其相关实现类  | 2019-11-27 22:00:30 | 对注解的进一步抽象 |
