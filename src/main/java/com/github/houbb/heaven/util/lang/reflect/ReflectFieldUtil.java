@@ -211,6 +211,25 @@ public final class ReflectFieldUtil {
     }
 
     /**
+     * 设置字段值
+     * @param instance 实例
+     * @param fieldName 字段名称
+     * @param fieldValue 字段值
+     * @since 0.1.53
+     */
+    public static void setValue(final Object instance, final String fieldName, final Object fieldValue) {
+        ArgUtil.notNull(instance, "instance");
+
+        try {
+            Field field = instance.getClass().getField(fieldName);
+            field.setAccessible(true);
+            field.set(instance, fieldValue);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
      * 获取对应的值信息
      * @param field 字段
      * @param instance 实例
