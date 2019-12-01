@@ -413,3 +413,10 @@
 |:---|:---|:---|:---|:--|
 | 1 | A |  新增 ReflectAnnotationUtil#getAnnotation/getAnnotationRefs  | 2019-11-27 22:00:30 | |
 | 2 | A |  新增 IAnnotationTypeMeta 及其相关实现类  | 2019-11-27 22:00:30 | 对注解的进一步抽象 |
+
+# release_0.1.53
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A |  新增 ReflectFieldUtil#setValue(Object, String, Object)   | 2019-12-01 10:00:30 | 根据字段名称设置值 |
+| 2 | A |  新增 ClassUtil#getAllSuperClass() 相关  | 2019-12-01 10:00:30 | 获取父类即接口相关方法 |

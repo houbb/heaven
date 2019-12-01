@@ -8,16 +8,14 @@ package com.github.houbb.heaven.util.lang.reflect;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
-import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
-import sun.reflect.generics.reflectiveObjects.WildcardTypeImpl;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 反射字段工具类
@@ -200,6 +198,7 @@ public final class ReflectFieldUtil {
      * @param instance 实例对象
      * @param fieldValue 值
      * @since 0.1.18
+     * @see #setValue(Object, String, Object) 设置对象
      */
     public static void setValue(final Field field, final Object instance, final Object fieldValue) {
         try {
@@ -221,10 +220,12 @@ public final class ReflectFieldUtil {
         ArgUtil.notNull(instance, "instance");
 
         try {
-            Field field = instance.getClass().getField(fieldName);
+            final Class clazz = instance.getClass();
+            Map<String, Field> fieldNameMap = ClassUtil.getAllFieldMap(clazz);
+            Field field = fieldNameMap.get(fieldName);
             field.setAccessible(true);
             field.set(instance, fieldValue);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
+        } catch (IllegalAccessException e) {
             throw new CommonRuntimeException(e);
         }
     }
