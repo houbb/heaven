@@ -10,13 +10,17 @@ import com.github.houbb.heaven.support.tuple.impl.Quatenary;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.util.ArrayUtil;
+import sun.tools.jar.resources.jar;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Enumeration;
 import java.util.Set;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 /**
  * 包工具类
@@ -87,6 +91,17 @@ public final class PackageUtil {
                             }
                         }
                     }
+                } else if(FileProtocolConst.JAR.equals(protocol)) {
+                    JarURLConnection jarURLConnection = (JarURLConnection) url.openConnection();
+                    JarFile jarFile = jarURLConnection.getJarFile();
+                    Enumeration<JarEntry> jarEntryEnumeration = jarFile.entries();
+                    jarEntryEnumeration.nextElement();
+                    while (jarEntryEnumeration.hasMoreElements()) {
+                        JarEntry jarEntry = jarEntryEnumeration.nextElement();
+
+                        jarEntry.isDirectory();
+                        System.out.println("jar " + jarEntry.getName());
+                    }
                 } else {
                     //jar 处理
                     System.err.println("Not support protocol: " + protocol);
@@ -136,6 +151,10 @@ public final class PackageUtil {
                 }
             }
         }
+    }
+
+    public static void main(String[] args) {
+        scanPackageClassNameSet("com");
     }
 
 }

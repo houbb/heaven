@@ -25,4 +25,10 @@ public final class FileProtocolConst {
      */
     public static final String FILE = "file";
 
+    /**
+     * jar 文件信息
+     * @since 0.1.55
+     */
+    public static final String JAR = "jar";
+
 }
