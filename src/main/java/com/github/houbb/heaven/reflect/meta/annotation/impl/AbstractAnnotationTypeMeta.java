@@ -6,6 +6,8 @@ import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.reflect.ReflectAnnotationUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
+import com.github.houbb.heaven.util.util.CollectionUtil;
+import com.github.houbb.heaven.util.util.MapUtil;
 import com.github.houbb.heaven.util.util.Optional;
 
 import java.lang.annotation.Annotation;
@@ -57,6 +59,51 @@ public abstract class AbstractAnnotationTypeMeta implements IAnnotationTypeMeta 
         return annotationOptional.orDefault(null);
     }
 
+    @Override
+    public boolean isAnnotatedOrRef(String annotationName) {
+        // 直接注解
+        if(isAnnotated(annotationName)) {
+            return true;
+        }
+
+        // 元注解
+        List<Annotation> annotationRefs = getAnnotationRefs(annotationName);
+        return CollectionUtil.isNotEmpty(annotationRefs);
+    }
+
+    @Override
+    public boolean isAnnotatedOrRef(List<Class> classList) {
+        if(CollectionUtil.isEmpty(classList)) {
+            return false;
+        }
+
+        for(Class clazz : classList) {
+            if(isAnnotatedOrRef(clazz.getName())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public List<Annotation> getAnnotationOrRefs(String annotationName) {
+        Set<Annotation> annotationSet = Guavas.newHashSet();
+
+        // 直接注解
+        Annotation annotation = getAnnotation(annotationName);
+        if(ObjectUtil.isNotNull(annotation)) {
+            annotationSet.add(annotation);
+        }
+
+        // 元注解列表
+        List<Annotation> annotationRefList = getAnnotationRefs(annotationName);
+        annotationSet.addAll(annotationRefList);
+
+        // 构建结果
+        return Guavas.newArrayList(annotationRefList);
+    }
+
     /**
      * 获取注解对应信息
      * @param annotations 注解数组
@@ -65,7 +112,19 @@ public abstract class AbstractAnnotationTypeMeta implements IAnnotationTypeMeta 
      * @since 0.1.52
      */
     private Optional<Annotation> getAnnotationOpt(final Annotation[] annotations, final String annotationName) {
-        if(ArrayUtil.isEmpty(annotations)) {
+        List<Annotation> annotationList = ArrayUtil.toList(annotations);
+        return getAnnotationOpt(annotationList, annotationName);
+    }
+
+    /**
+     * 获取注解对应信息
+     * @param annotations 注解列表
+     * @param annotationName 指定注解名称
+     * @return 结果信息
+     * @since 0.1.53
+     */
+    private Optional<Annotation> getAnnotationOpt(final List<Annotation> annotations, final String annotationName) {
+        if(CollectionUtil.isEmpty(annotations)) {
             return Optional.empty();
         }
 
@@ -116,6 +175,33 @@ public abstract class AbstractAnnotationTypeMeta implements IAnnotationTypeMeta 
         }
 
         return ReflectAnnotationUtil.getAnnotationAttributes(annotation);
+    }
+
+    @Override
+    public Map<String, Object> getAnnotationOrRefAttributes(String annotationName) {
+        ArgUtil.notEmpty(annotationName, "annotationName");
+
+        List<Annotation> annotationList = this.getAnnotationOrRefs(annotationName);
+        if(CollectionUtil.isEmpty(annotationList)) {
+            return null;
+        }
+
+        // 遍历选择第一个直接返回
+        Annotation annotation = annotationList.get(0);
+        return ReflectAnnotationUtil.getAnnotationAttributes(annotation);
+    }
+
+    @Override
+    public Object getAnnotationOrRefAttribute(String annotationName, String attrMethodName) {
+        ArgUtil.notEmpty(annotationName, "annotationName");
+        ArgUtil.notEmpty(attrMethodName, "attrMethodName");
+
+        Map<String, Object> attrMap = getAnnotationOrRefAttributes(annotationName);
+        if(MapUtil.isEmpty(attrMap)) {
+            return null;
+        }
+
+        return attrMap.get(attrMethodName);
     }
 
 }

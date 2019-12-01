@@ -14,7 +14,7 @@ import java.util.Map;
 public interface IAnnotationTypeMeta {
 
     /**
-     * Determine whether the underlying element has an annotation or meta-annotation
+     * Determine whether the underlying element has an annotation
      * of the given type defined.
      * <p>If this method returns {@code true}, then
      * {@link #getAnnotationAttributes} will return a non-null Map.
@@ -26,7 +26,7 @@ public interface IAnnotationTypeMeta {
     boolean isAnnotated(String annotationName);
 
     /**
-     * Determine whether the underlying element has an annotation or meta-annotation
+     * Determine whether the underlying element has an annotation
      * of the given type defined.
      * @param annotationName the fully qualified class name of the annotation
      * type to look for
@@ -34,6 +34,42 @@ public interface IAnnotationTypeMeta {
      * @since 0.1.52
      */
     Annotation getAnnotation(String annotationName);
+
+    /**
+     * Determine whether the underlying element has an annotation or meta-annotation
+     * of the given type defined.
+     * <p>If this method returns {@code true}, then
+     * {@link #getAnnotationAttributes} will return a non-null Map.
+     * @param annotationName the fully qualified class name of the annotation
+     * type to look for
+     * @return whether a matching annotation is defined
+     * @since 0.1.53
+     */
+    boolean isAnnotatedOrRef(String annotationName);
+
+    /**
+     * Determine whether the underlying element has an annotation or meta-annotation
+     * of the given type defined.
+     * <p>If this method returns {@code true}, then
+     * {@link #getAnnotationAttributes} will return a non-null Map.
+     * @param classList the fully qualified class name list of the annotation
+     * type to look for
+     * @return whether a matching annotation is defined
+     * @since 0.1.53
+     */
+    boolean isAnnotatedOrRef(final List<Class> classList);
+
+    /**
+     * Determine whether the underlying element has an annotation or meta-annotation
+     * of the given type defined.
+     * @param annotationName the fully qualified class name of the annotation
+     * type to look for
+     * @return all matching annotation is returned
+     * @since 0.1.53
+     * @see #getAnnotation(String) 直接注解
+     * @see #getAnnotationRefs(String) 元注解-间接饮用
+     */
+    List<Annotation> getAnnotationOrRefs(String annotationName);
 
     /**
      * 获取指定类型的所有相关注解
@@ -55,7 +91,7 @@ public interface IAnnotationTypeMeta {
 
     /**
      * Retrieve the attributes of the annotation of the given type, if any (i.e. if
-     * defined on the underlying element, as direct annotation or meta-annotation),
+     * defined on the underlying element, as direct annotation),
      * also taking attribute overrides on composed annotations into account.
      * @param annotationName the fully qualified class name of the annotation
      * type to look for
@@ -65,5 +101,38 @@ public interface IAnnotationTypeMeta {
      * @since 0.1.52
      */
     Map<String, Object> getAnnotationAttributes(String annotationName);
+
+    /**
+     * Retrieve the attributes of the annotation of the given type, if any (i.e. if
+     * defined on the underlying element, as direct annotation or meta-annotation),
+     * also taking attribute overrides on composed annotations into account.
+     *
+     * 备注：当有多个时，则只会选择一个。
+     *
+     * @param annotationName the fully qualified class name of the annotation
+     * type to look for
+     * @return a Map of attributes, with the attribute name as key (e.g. "value")
+     * and the defined attribute value as Map value. This return value will be
+     * {@code null} if no matching annotation is defined.
+     * @since 0.1.54
+     */
+    Map<String, Object> getAnnotationOrRefAttributes(String annotationName);
+
+    /**
+     * Retrieve the attributes of the annotation of the given type, if any (i.e. if
+     * defined on the underlying element, as direct annotation or meta-annotation),
+     * also taking attribute overrides on composed annotations into account.
+     *
+     * 备注：当有多个时，则只会选择一个。
+     *
+     * @param annotationName the fully qualified class name of the annotation
+     * type to look for
+     * @param attrMethodName the annotation method name to look for
+     * @return a Map of attributes, with the attribute name as key (e.g. "value")
+     * and the defined attribute value as Map value. This return value will be
+     * {@code null} if no matching annotation is defined.
+     * @since 0.1.54
+     */
+    Object getAnnotationOrRefAttribute(String annotationName, final String attrMethodName);
 
 }

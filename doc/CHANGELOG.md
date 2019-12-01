@@ -420,3 +420,11 @@
 |:---|:---|:---|:---|:--|
 | 1 | A |  新增 ReflectFieldUtil#setValue(Object, String, Object)   | 2019-12-01 10:00:30 | 根据字段名称设置值 |
 | 2 | A |  新增 ClassUtil#getAllSuperClass() 相关  | 2019-12-01 10:00:30 | 获取父类即接口相关方法 |
+
+# release_0.1.54
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A |  新增 FileProtocolConst 常量   | 2019-12-01 10:00:30 | |
+| 2 | A |  新增 PackageUtil#scanPackageClassNameSet 扫包方法   | 2019-12-01 10:00:30 | |
+| 3 | A |  新增 IAnnotationTypeMeta#getAnnotationOrRefAttributes 等相关依赖方法   | 2019-12-01 10:00:30 | |
