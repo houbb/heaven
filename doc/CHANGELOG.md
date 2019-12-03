@@ -428,3 +428,10 @@
 | 1 | A |  新增 FileProtocolConst 常量   | 2019-12-01 10:00:30 | |
 | 2 | A |  新增 PackageUtil#scanPackageClassNameSet 扫包方法   | 2019-12-01 10:00:30 | |
 | 3 | A |  新增 IAnnotationTypeMeta#getAnnotationOrRefAttributes 等相关依赖方法   | 2019-12-01 10:00:30 | |
+
+# release_0.1.55
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | F |  修复 AbstractAnnotationTypeMeta#getAnnotationOrRefs BUG | 2019-12-03 10:00:30 | |
+| 2 | A |  新增 FieldAnnotationTypeMeta 实现 | 2019-12-03 10:00:30 | |
