@@ -101,7 +101,7 @@ public abstract class AbstractAnnotationTypeMeta implements IAnnotationTypeMeta 
         annotationSet.addAll(annotationRefList);
 
         // 构建结果
-        return Guavas.newArrayList(annotationRefList);
+        return Guavas.newArrayList(annotationSet);
     }
 
     /**
