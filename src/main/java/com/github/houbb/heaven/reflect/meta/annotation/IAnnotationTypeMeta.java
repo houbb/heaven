@@ -1,5 +1,7 @@
 package com.github.houbb.heaven.reflect.meta.annotation;
 
+import com.github.houbb.heaven.util.lang.ObjectUtil;
+
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +62,14 @@ public interface IAnnotationTypeMeta {
     boolean isAnnotatedOrRef(final List<Class> classList);
 
     /**
+     * 是否被引用了指定的注解
+     * @param clazz 类信息
+     * @return 是否
+     * @since 0.1.56
+     */
+    boolean isAnnotationRef(final Class<? extends Annotation> clazz);
+
+    /**
      * Determine whether the underlying element has an annotation or meta-annotation
      * of the given type defined.
      * @param annotationName the fully qualified class name of the annotation
@@ -116,6 +126,7 @@ public interface IAnnotationTypeMeta {
      * {@code null} if no matching annotation is defined.
      * @since 0.1.54
      */
+    @Deprecated
     Map<String, Object> getAnnotationOrRefAttributes(String annotationName);
 
     /**
@@ -133,6 +144,37 @@ public interface IAnnotationTypeMeta {
      * {@code null} if no matching annotation is defined.
      * @since 0.1.54
      */
+    @Deprecated
     Object getAnnotationOrRefAttribute(String annotationName, final String attrMethodName);
+
+    /**
+     * 获取当前注解对应的属性信息
+     * @param annotation 注解类
+     * @param methodName 方法名称
+     * @return 结果
+     * @since 0.1.56
+     */
+    Object getAnnotationAttr(final Annotation annotation,
+                            final String methodName);
+
+    /**
+     * 获取被当前注解指定的属性信息
+     * @param clazz 注解类
+     * @param methodName 方法名称
+     * @return 结果
+     * @since 0.1.56
+     */
+    Object getAnnotatedAttr(final Class<? extends Annotation> clazz,
+                                final String methodName);
+
+    /**
+     * 获取被当前注解为元注解的的属性信息
+     * @param clazz 注解类
+     * @param methodName 方法名称
+     * @return 结果
+     * @since 0.1.56
+     */
+    Object getAnnotationReferencedAttr(final Class<? extends Annotation> clazz,
+                            final String methodName);
 
 }

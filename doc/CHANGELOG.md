@@ -435,3 +435,12 @@
 |:---|:---|:---|:---|:--|
 | 1 | F |  修复 AbstractAnnotationTypeMeta#getAnnotationOrRefs BUG | 2019-12-03 10:00:30 | |
 | 2 | A |  新增 FieldAnnotationTypeMeta 实现 | 2019-12-03 10:00:30 | |
+
+# release_0.1.56
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A |  新增 AnnotationConst | 2019-12-06 10:00:30 | |
+| 2 | A |  新增 IAnnotationTypeMeta#isAnnotationRef | 2019-12-06 10:00:30 | |
+| 3 | A |  新增 IAnnotationTypeMeta#getAnnotationAttr | 2019-12-06 10:00:30 | |
+| 4 | A |  新增 IAnnotationTypeMeta#getAnnotationReferencedAttr | 2019-12-06 10:00:30 | |

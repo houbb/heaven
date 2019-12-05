@@ -87,6 +87,11 @@ public abstract class AbstractAnnotationTypeMeta implements IAnnotationTypeMeta 
     }
 
     @Override
+    public boolean isAnnotationRef(Class clazz) {
+        return isAnnotatedOrRef(clazz.getName()) && !isAnnotated(clazz.getName());
+    }
+
+    @Override
     public List<Annotation> getAnnotationOrRefs(String annotationName) {
         Set<Annotation> annotationSet = Guavas.newHashSet();
 
@@ -202,6 +207,51 @@ public abstract class AbstractAnnotationTypeMeta implements IAnnotationTypeMeta 
         }
 
         return attrMap.get(attrMethodName);
+    }
+
+    @Override
+    public Object getAnnotationAttr(Annotation annotation, String methodName) {
+        ArgUtil.notNull(annotation, "annotation");
+        ArgUtil.notEmpty(methodName, "methodName");
+
+        Map<String, Object> attrs = ReflectAnnotationUtil.getAnnotationAttributes(annotation);
+        return attrs.get(methodName);
+    }
+
+    @Override
+    public Object getAnnotatedAttr(Class<? extends Annotation> clazz, String methodName) {
+        ArgUtil.notNull(clazz, "clazz");
+        ArgUtil.notEmpty(methodName, "methodName");
+
+        Annotation annotation = getAnnotation(clazz.getName());
+        if(ObjectUtil.isNotNull(annotation)) {
+            return getAnnotationAttr(annotation, methodName);
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object getAnnotationReferencedAttr(Class<? extends Annotation> clazz, String methodName) {
+        ArgUtil.notNull(clazz, "clazz");
+        ArgUtil.notEmpty(methodName, "methodName");
+        final String annotationName = clazz.getName();
+
+        if(ArrayUtil.isNotEmpty(getAnnotations())) {
+            for(Annotation annotation : getAnnotations()) {
+                Annotation[] annotationRefs = annotation.annotationType().getAnnotations();
+
+                if(ArrayUtil.isNotEmpty(annotationRefs)) {
+                    for(Annotation annotationRef : annotationRefs) {
+                        if(annotationName.equals(annotationRef.annotationType().getName())) {
+                            return getAnnotationAttr(annotationRef, methodName);
+                        }
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 
 }
