@@ -444,3 +444,9 @@
 | 2 | A |  新增 IAnnotationTypeMeta#isAnnotationRef | 2019-12-06 10:00:30 | |
 | 3 | A |  新增 IAnnotationTypeMeta#getAnnotationAttr | 2019-12-06 10:00:30 | |
 | 4 | A |  新增 IAnnotationTypeMeta#getAnnotationReferencedAttr | 2019-12-06 10:00:30 | |
+
+# release_0.1.57
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A |  新增 ArrayPrimitiveUtil#newArray | 2019-12-9 20:11:11 | |

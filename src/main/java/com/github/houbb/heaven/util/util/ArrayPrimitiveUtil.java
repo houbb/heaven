@@ -689,4 +689,84 @@ public final class ArrayPrimitiveUtil {
         return arrays;
     }
 
+    /**
+     * 创建 int 数组
+     * @param arrays 数组元素
+     * @return 数组
+     * @since 0.1.57
+     */
+    public static int[] newArray(int ... arrays) {
+        return arrays;
+    }
+
+    /**
+     * 创建 boolean 数组
+     * @param arrays 数组元素
+     * @return 数组
+     * @since 0.1.57
+     */
+    public static boolean[] newArray(boolean ... arrays) {
+        return arrays;
+    }
+
+    /**
+     * 创建 char 数组
+     * @param arrays 数组元素
+     * @return 数组
+     * @since 0.1.57
+     */
+    public static char[] newArray(char ... arrays) {
+        return arrays;
+    }
+
+    /**
+     * 创建 short 数组
+     * @param arrays 数组元素
+     * @return 数组
+     * @since 0.1.57
+     */
+    public static short[] newArray(short ... arrays) {
+        return arrays;
+    }
+
+    /**
+     * 创建 long 数组
+     * @param arrays 数组元素
+     * @return 数组
+     * @since 0.1.57
+     */
+    public static long[] newArray(long ... arrays) {
+        return arrays;
+    }
+
+    /**
+     * 创建 byte 数组
+     * @param arrays 数组元素
+     * @return 数组
+     * @since 0.1.57
+     */
+    public static byte[] newArray(byte ... arrays) {
+        return arrays;
+    }
+
+    /**
+     * 创建 float 数组
+     * @param arrays 数组元素
+     * @return 数组
+     * @since 0.1.57
+     */
+    public static float[] newArray(float ... arrays) {
+        return arrays;
+    }
+
+    /**
+     * 创建 double 数组
+     * @param arrays 数组元素
+     * @return 数组
+     * @since 0.1.57
+     */
+    public static double[] newArray(double ... arrays) {
+        return arrays;
+    }
+
 }
