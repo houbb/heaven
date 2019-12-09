@@ -261,6 +261,12 @@ public final class NumUtil {
             if(BigInteger.class == numberClazz) {
                 return (T) BigInteger.valueOf((Long) numValue);
             }
+            if(Float.class == numberClazz
+                || float.class == numberClazz) {
+
+            }
+
+            //int short byte
 
             return (T) numValue;
         } catch (ParseException e) {
@@ -279,5 +285,8 @@ public final class NumUtil {
         return getFormatNum(number, format, Number.class);
     }
 
+    public static void main(String[] args) {
+
+    }
 
 }
