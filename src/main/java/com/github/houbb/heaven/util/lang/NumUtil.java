@@ -6,6 +6,7 @@ import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.lang.reflect.PrimitiveUtil;
 import com.github.houbb.heaven.util.util.ArrayPrimitiveUtil;
 import com.github.houbb.heaven.util.util.Optional;
+import com.sun.org.apache.bcel.internal.classfile.ClassParser;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -285,8 +286,59 @@ public final class NumUtil {
         return getFormatNum(number, format, Number.class);
     }
 
-    public static void main(String[] args) {
+    /**
+     * 获取类型转换后的金额
+     * @param numberStr 数字字符串
+     * @param format 格式化
+     * @param numberClazz 数字类型
+     * @return 转换后的类型
+     * @since 0.1.58
+     */
+    public static Object getFormatNumCast(final String numberStr,
+                                          final String format,
+                                          final Class numberClazz) {
+        ArgUtil.notEmpty(numberStr, "numberStr");
+        ArgUtil.notEmpty(format, "format");
+        ArgUtil.notNull(numberClazz, "numberClazz");
 
+        Class actualClazz = numberClazz;
+        if(ClassTypeUtil.isPrimitive(actualClazz)) {
+            actualClazz = PrimitiveUtil.getReferenceType(numberClazz);
+        }
+
+        NumberFormat numberFormat = new DecimalFormat(format);
+        try {
+            final Number numValue = numberFormat.parse(numberStr);
+            if(Integer.class == actualClazz) {
+                return numValue.intValue();
+            }
+            if(Long.class == actualClazz) {
+                return numValue.longValue();
+            }
+            if(Float.class == actualClazz) {
+                return numValue.floatValue();
+            }
+            if(Double.class == actualClazz) {
+                return numValue.doubleValue();
+            }
+            if(Short.class == actualClazz) {
+                return numValue.shortValue();
+            }
+            if(Byte.class == actualClazz) {
+                return numValue.byteValue();
+            }
+
+            if(BigDecimal.class == actualClazz) {
+                return BigDecimal.valueOf((Double) numValue);
+            }
+            if(BigInteger.class == actualClazz) {
+                return BigInteger.valueOf((Long) numValue);
+            }
+
+            return numValue;
+        } catch (ParseException e) {
+            throw new CommonRuntimeException(e);
+        }
     }
 
 }
