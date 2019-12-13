@@ -108,6 +108,16 @@ public final class ReflectMethodUtil {
         ArgUtil.notNull(method, "method");
 
         Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+        return getParamNames(parameterAnnotations);
+    }
+
+    /**
+     * 获取参数名称列表
+     * @param parameterAnnotations 参数注解
+     * @return 名称列表
+     * @since 0.1.60
+     */
+    public static List<String> getParamNames(final Annotation[][] parameterAnnotations) {
         if(ArrayUtil.isEmpty(parameterAnnotations)) {
             return Collections.emptyList();
         }
