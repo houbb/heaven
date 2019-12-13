@@ -96,6 +96,9 @@ public final class ReflectMethodUtil {
      * 获取参数名称
      *
      * https://blog.csdn.net/revitalizing/article/details/71036970
+     *
+     * （1）如果没有指定对应的注解信息，则直接返回 argIndex
+     * 比如：arg0 arg1
      * @param method 方法信息
      * @return 方法名称列表
      * @since 0.1.51
@@ -109,9 +112,11 @@ public final class ReflectMethodUtil {
             return Collections.emptyList();
         }
 
-        List<String> resultList = Guavas.newArrayList(parameterAnnotations.length);
-        for(Annotation[] annotations : parameterAnnotations) {
-            String paramName = getParamName(annotations);
+        final int paramSize = parameterAnnotations.length;
+        List<String> resultList = Guavas.newArrayList(paramSize);
+        for(int i = 0; i < paramSize; i++) {
+            Annotation[] annotations = parameterAnnotations[i];
+            String paramName = getParamName(i, annotations);
             resultList.add(paramName);
         }
 
@@ -120,23 +125,25 @@ public final class ReflectMethodUtil {
 
     /**
      * 获取参数名称
+     * @param index 参数的下标
      * @param annotations 注解信息
      * @return 参数名称
      * @since 0.1.51
      */
-    private static String getParamName(final Annotation[] annotations) {
+    private static String getParamName(final int index, final Annotation[] annotations) {
+        final String defaultName = "arg"+index;
         if(ArrayUtil.isEmpty(annotations)) {
-            return StringUtil.EMPTY;
+            return defaultName;
         }
 
         for(Annotation annotation : annotations) {
-            if(annotation.getClass().equals(Param.class)) {
+            if(annotation.annotationType().equals(Param.class)) {
                 Param param = (Param)annotation;
                 return param.value();
             }
         }
 
-        return StringUtil.EMPTY;
+        return defaultName;
     }
 
     /**
