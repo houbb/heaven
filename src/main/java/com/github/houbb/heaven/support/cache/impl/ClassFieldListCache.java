@@ -1,13 +1,9 @@
 package com.github.houbb.heaven.support.cache.impl;
 
-import com.github.houbb.heaven.support.cache.ICache;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
-import com.github.houbb.heaven.util.util.CollectionUtil;
 
 import java.lang.reflect.Field;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <p> project: heaven-ClassFieldListCache </p>
@@ -16,31 +12,32 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Administrator
  * @since 0.1.61
  */
-public class ClassFieldListCache implements ICache<Class, List<Field>> {
+public class ClassFieldListCache extends AbstractCache<Class, List<Field>> {
 
+    /**
+     * 新建单例
+     * @since 0.1.63
+     */
     private static final ClassFieldListCache INSTANCE = new ClassFieldListCache();
 
-    private static final Map<Class, List<Field>> MAP = new ConcurrentHashMap<>();
+    /**
+     * 私有化构造器
+     * @since 0.1.63
+     */
+    private ClassFieldListCache(){}
 
-    public static ClassFieldListCache getInstance(){
+    /**
+     * 获取单例
+     * @return 单例
+     * @since 0.1.63
+     */
+    public static ClassFieldListCache getInstance() {
         return INSTANCE;
     }
 
     @Override
-    public List<Field> get(Class key) {
-        List<Field> fieldList = MAP.get(key);
-        if(CollectionUtil.isNotEmpty(fieldList)) {
-            return fieldList;
-        }
-
-        fieldList = ClassUtil.getAllFieldList(key);
-        MAP.put(key, fieldList);
-        return fieldList;
-    }
-
-    @Override
-    public void set(Class key, List<Field> value) {
-        MAP.put(key, value);
+    protected List<Field> buildValue(Class key) {
+        return ClassUtil.getAllFieldList(key);
     }
 
 }

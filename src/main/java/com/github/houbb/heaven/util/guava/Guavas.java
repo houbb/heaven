@@ -100,6 +100,29 @@ public final class Guavas {
     }
 
     /**
+     * 新建 LinkedHashMap
+     * @param <K> key
+     * @param <V> value
+     * @return hash Map
+     * @since 0.1.63
+     */
+    public static <K,V> Map<K,V> newLinkedHashMap() {
+        return new LinkedHashMap<>();
+    }
+
+    /**
+     * 新建 LinkedHashMap
+     * @param size 大小
+     * @param <K> key
+     * @param <V> value
+     * @return hash Map
+     * @since 0.1.63
+     */
+    public static <K,V> Map<K,V> newLinkedHashMap(final int size) {
+        return new LinkedHashMap<>(size);
+    }
+
+    /**
      * 新建 hash set
      * @param <E> 元素
      * @return 链表

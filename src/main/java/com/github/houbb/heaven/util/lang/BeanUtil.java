@@ -1,8 +1,8 @@
 package com.github.houbb.heaven.util.lang;
 
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
+import com.github.houbb.heaven.support.cache.impl.ClassFieldListCache;
 import com.github.houbb.heaven.util.common.ArgUtil;
-import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
 
 import java.lang.reflect.Field;
@@ -30,7 +30,7 @@ public final class BeanUtil {
 
         try {
             Map<String, Object> map = new LinkedHashMap<>();
-            List<Field> fieldList = ClassUtil.getAllFieldList(bean.getClass());
+            List<Field> fieldList = ClassFieldListCache.getInstance().get(bean.getClass());
 
             for (Field field : fieldList) {
                 final String fieldName = field.getName();
@@ -58,7 +58,7 @@ public final class BeanUtil {
         }
 
         try {
-            List<Field> fieldList = ClassUtil.getAllFieldList(bean.getClass());
+            List<Field> fieldList = ClassFieldListCache.getInstance().get(bean.getClass());
 
             for (Field field : fieldList) {
                 final String fieldName = field.getName();

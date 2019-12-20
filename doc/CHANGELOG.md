@@ -481,3 +481,12 @@
 |:---|:---|:---|:---|:--|
 | 1 | A | 新增 PropertyDescriptorListCache | 2019-12-17 18:53:34 | 属性自省 cache |
 | 2 | A | 新增 PropertyDescriptorUtil | 2019-12-17 18:53:34 | 属性自省类工具 |
+
+# release_0.1.63
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 AbstractCache 抽象缓存实现 | 2019-12-20 18:53:34 | |
+| 2 | O | 优化 ClassFieldListCache 实现 | 2019-12-20 18:53:34 | |
+| 3 | O | 优化 BeanUtil 实现 | 2019-12-20 18:53:34 | |
+| 4 | A | 新增 Guavas#newLinkedHashMap | 2019-12-20 18:53:34 | |
