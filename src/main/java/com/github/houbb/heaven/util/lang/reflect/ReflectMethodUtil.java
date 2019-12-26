@@ -333,7 +333,7 @@ public final class ReflectMethodUtil {
         }
 
         final Class<?> clazz = instance.getClass();
-        String setMethodName = MethodConst.SET_PREFIX + StringUtil.firstToUpperCase(propertyName);
+        String setMethodName = buildSetMethodName(propertyName);
 
         // 反射获取对应的方法
         final Class<?> paramType = value.getClass();
@@ -343,6 +343,38 @@ public final class ReflectMethodUtil {
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             throw new CommonRuntimeException(e);
         }
+    }
+
+    /**
+     * 构建设置方法名称
+     * @param propertyName 属性名称
+     * @return set 方法名称
+     * @since 0.1.64
+     */
+    public static String buildSetMethodName(final String propertyName) {
+        ArgUtil.notEmpty(propertyName, "propertyName");
+
+        return MethodConst.SET_PREFIX + StringUtil.firstToUpperCase(propertyName);
+    }
+
+    /**
+     * 构建设置方法名称
+     * （1）boolean 会变为 isXXX
+     * （2）常规都是 getXXX
+     * @param fieldType 字段类型
+     * @param propertyName 属性名称
+     * @return set 方法名称
+     * @since 0.1.64
+     */
+    public static String buildGetMethodName(final Class fieldType,
+                                            final String propertyName) {
+        ArgUtil.notNull(fieldType, "fieldType");
+        ArgUtil.notEmpty(propertyName, "propertyName");
+
+        if(boolean.class.equals(fieldType)) {
+            return MethodConst.IS_PREFIX + StringUtil.firstToUpperCase(propertyName);
+        }
+        return MethodConst.GET_PREFIX + StringUtil.firstToUpperCase(propertyName);
     }
 
 }

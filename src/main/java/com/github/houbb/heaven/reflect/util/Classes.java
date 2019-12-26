@@ -3,9 +3,9 @@ package com.github.houbb.heaven.reflect.util;
 import com.github.houbb.heaven.reflect.api.IField;
 import com.github.houbb.heaven.reflect.exception.ReflectRumtionException;
 import com.github.houbb.heaven.reflect.handler.SimpleFieldHandler;
+import com.github.houbb.heaven.support.cache.impl.ClassFieldListCache;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.guava.Guavas;
-import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 
 import java.lang.reflect.Field;
@@ -31,7 +31,7 @@ public final class Classes {
     public static List<IField> getFields(final Class clazz) {
         ArgUtil.notNull(clazz, "clazz");
 
-        List<Field> fieldList = ClassUtil.getAllFieldList(clazz);
+        List<Field> fieldList = ClassFieldListCache.getInstance().get(clazz);
         List<IField> resultList = Guavas.newArrayList(fieldList.size());
 
         final SimpleFieldHandler handler = new SimpleFieldHandler();

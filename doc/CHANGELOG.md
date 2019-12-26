@@ -490,3 +490,11 @@
 | 2 | O | 优化 ClassFieldListCache 实现 | 2019-12-20 18:53:34 | |
 | 3 | O | 优化 BeanUtil 实现 | 2019-12-20 18:53:34 | |
 | 4 | A | 新增 Guavas#newLinkedHashMap | 2019-12-20 18:53:34 | |
+
+# release_0.1.64
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 ReflectMethodUtil#buildGetMethod | 2019-12-26 18:53:34 | |
+| 2 | A | 新增 ReflectMethodUtil#buildSetMethod | 2019-12-26 18:53:34 | |
+| 3 | O | 优化 DefaultFieldListCache 实现 | 2019-12-26 18:53:34 | |

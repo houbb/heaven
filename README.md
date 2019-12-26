@@ -6,7 +6,6 @@
 [![Build Status](https://www.travis-ci.org/houbb/heaven.svg?branch=master)](https://www.travis-ci.org/houbb/heaven?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/houbb/heaven/badge.svg?branch=master)](https://coveralls.io/github/houbb/heaven?branch=master)
 
-
 ## 准则
 
 不引入任何三方工具。
