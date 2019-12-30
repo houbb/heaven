@@ -236,6 +236,98 @@ public final class FileUtil {
         return contentList;
     }
 
+    /**
+     * 获取每一行的文件内容
+     * （1）如果文件不存在，直接返回空列表。
+     * @param file 文件信息
+     * @param charset 编码
+     * @param initLine 初始化行
+     * @param endLine 结束航
+     * @param ignoreEmpty 是否跳过空白行
+     * @return 结果列表
+     * @since 0.1.65
+     */
+    public static List<String> readAllLines(final File file,
+                                            final String charset,
+                                            final int initLine,
+                                            final int endLine,
+                                            final boolean ignoreEmpty) {
+        ArgUtil.notNull(file, "file");
+        ArgUtil.notEmpty(charset, "charset");
+
+        List<String> contentList = new LinkedList<>();
+        if (!file.exists()) {
+            return contentList;
+        }
+
+        try (FileInputStream fileInputStream = new FileInputStream(file);
+             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, charset);
+             BufferedReader bufferedReader = new BufferedReader(inputStreamReader)
+        ) {
+            // 用于记录行号
+            int lineNo = 0;
+            while (lineNo < initLine) {
+                lineNo++;
+                String ignore = bufferedReader.readLine();
+            }
+
+            //每一行的内容
+            String dataEachLine;
+            while ((dataEachLine = bufferedReader.readLine()) != null
+                    && lineNo < endLine) {
+                lineNo++;
+
+                // 跳过空白行且内容为空，则不进行计入结果
+                if(ignoreEmpty  && StringUtil.isEmpty(dataEachLine)) {
+                    // ignore
+                    continue;
+                } else {
+                    contentList.add(dataEachLine);
+                }
+            }
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
+
+        return contentList;
+    }
+
+    /**
+     * 获取每一行的文件内容
+     * @param filePath 文件路径
+     * @param charset 文件编码
+     * @param ignoreEmpty 是否跳过空白行
+     * @return 结果列表
+     * @since 0.1.65
+     */
+    public static List<String> readAllLines(final String filePath,
+                                            final String charset,
+                                            final boolean ignoreEmpty) {
+        File file = new File(filePath);
+        return readAllLines(file, charset, 0, Integer.MAX_VALUE, ignoreEmpty);
+    }
+
+    /**
+     * 获取每一行的文件内容
+     * @param filePath 文件路径
+     * @param charset 文件编码
+     * @return 结果列表
+     * @since 0.1.65
+     */
+    public static List<String> readAllLines(final String filePath,
+                                            final String charset) {
+        return readAllLines(filePath, charset, false);
+    }
+
+    /**
+     * 获取每一行的文件内容
+     * @param filePath 文件路径
+     * @return 结果列表
+     * @since 0.1.65
+     */
+    public static List<String> readAllLines(final String filePath) {
+        return readAllLines(filePath, CharsetConst.UTF8);
+    }
 
     /**
      * 复制文件夹
@@ -581,5 +673,7 @@ public final class FileUtil {
             throw new CommonRuntimeException(e);
         }
     }
+
+
 
 }

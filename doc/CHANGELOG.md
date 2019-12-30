@@ -498,3 +498,9 @@
 | 1 | A | 新增 ReflectMethodUtil#buildGetMethod | 2019-12-26 18:53:34 | |
 | 2 | A | 新增 ReflectMethodUtil#buildSetMethod | 2019-12-26 18:53:34 | |
 | 3 | O | 优化 DefaultFieldListCache 实现 | 2019-12-26 18:53:34 | |
+
+# release_0.1.65
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 FileUtil#readAllLines() | 2019-12-30 16:19:12 | |
