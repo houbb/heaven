@@ -504,3 +504,11 @@
 | 序号 | 变更类型 | 说明 | 时间 | 备注 |
 |:---|:---|:---|:---|:--|
 | 1 | A | 新增 FileUtil#readAllLines() | 2019-12-30 16:19:12 | |
+
+# release_0.1.66
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 EncodeUtil#encodeUnicode/#decodeUnicode | 2019-12-30 21:33:22 | |
+| 2 | A | 新增 ArrayUtil#shift | 2019-12-30 21:33:22 | |
+| 3 | A | 新增 StringUtil#toCharacterArray/#toCharacterList | 2019-12-30 21:33:22 | |

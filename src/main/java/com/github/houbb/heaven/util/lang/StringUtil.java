@@ -25,6 +25,18 @@ import java.util.*;
  */
 public final class StringUtil {
 
+    /**
+     * 大写的字母
+     * @since 0.1.66
+     */
+    public static final String LETTERS_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWSXYZ";
+
+    /**
+     * 小写的字母
+     * @since 0.1.66
+     */
+    public static final String LETTERS_LOWER = "abcdefghijklmnopqrstuvwsxyz";
+
     private StringUtil() {
     }
 
@@ -1175,6 +1187,41 @@ public final class StringUtil {
      */
     public static List<String> splitToList(final String string) {
         return splitToList(string, PunctuationConst.COMMA);
+    }
+
+
+    /**
+     * 转换为数组字符
+     * @param string 字符串
+     * @return 结果
+     * @since 0.1.66
+     */
+    public static Character[] toCharacterArray(final String string) {
+        final char[] chars = string.toCharArray();
+        Character[] newArray = new Character[chars.length];
+
+        for(int i = 0; i < chars.length; i++) {
+            newArray[i] = chars[i];
+        }
+
+        return newArray;
+    }
+
+    /**
+     * 转换为列表字符
+     * @param string 字符串
+     * @return 结果
+     * @since 0.1.66
+     */
+    public static List<Character> toCharacterList(final String string) {
+        final char[] chars = string.toCharArray();
+        List<Character> newList = new ArrayList<>(chars.length);
+
+        for (char aChar : chars) {
+            newList.add(aChar);
+        }
+
+        return newList;
     }
 
 }

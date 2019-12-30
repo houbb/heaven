@@ -395,4 +395,28 @@ public final class ArrayUtil {
         return ArrayUtil.toList(objects, keyFunction);
     }
 
+    /**
+     * 执行平移操作
+     * 1. 数组判断空。如果为空，直接返回空
+     * 2. 添加偏移量的 mod
+     * @param array 原始数组
+     * @param offset 偏移量 任意整数。
+     * @return 结果
+     * @since 0.1.66
+     */
+    public static Object[] shift(final Object[] array, final int offset) {
+        if(ArrayUtil.isEmpty(array)) {
+            return array;
+        }
+
+        final int arrayLength = array.length;
+        Object[] newArray = new Object[arrayLength];
+        for(int i = 0; i < arrayLength; i++) {
+            int realIndex = (i+offset) % arrayLength;
+            newArray[i] = array[realIndex];
+        }
+
+        return newArray;
+    }
+
 }
