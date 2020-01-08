@@ -1,11 +1,8 @@
 package com.github.houbb.heaven.util.lang;
 
-import com.github.houbb.heaven.util.util.CollectionUtil;
-
-import java.util.List;
-
 /**
  * 字符工具类
+ * @see Character#isDigit(char) 直接使用这个类的常见方法，此处不再画蛇添足。
  * @author binbin.hou
  * @since 0.1.16
  */
@@ -40,6 +37,73 @@ public final class CharUtil {
     public static String repeat(final char unit, final int times) {
         String component = String.valueOf(unit);
         return StringUtil.repeat(component, times);
+    }
+
+    /**
+     * 全角空格为12288，半角空格为32
+     * 其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
+     *
+     * 将字符串中的全角字符转为半角
+     * @param c 原始字符
+     * @return  转换之后的字符
+     * @since 0.1.68
+     */
+    public static char toHalfWidth(final char c) {
+        char resultChar = c;
+        // 全角空格
+        if (resultChar == 12288) {
+            resultChar = (char) 32;
+        // 其他全角字符
+        } else if (resultChar > 65280 && resultChar < 65375) {
+            resultChar = (char) (resultChar - 65248);
+        }
+
+        return resultChar;
+    }
+
+    /**
+     *
+     * 将半角字符转为全角
+     *
+     * 全角空格为12288，半角空格为32
+     * 其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
+     * @param c 原始字符
+     * @return  转换之后的字符
+     * @since 0.1.68
+     */
+    public static char toFullWidth(final char c) {
+        char resultChar = c;
+        // 半角空格
+        if (resultChar == 32) {
+            resultChar = (char) 12288;
+            // 其他半角字符
+        } else if (resultChar >= 33 && resultChar <= 126) {
+            resultChar = (char) (resultChar + 65248);
+        }
+
+        return resultChar;
+    }
+
+    /**
+     * 使用UnicodeScript方法判断是否为中文字符
+     *
+     * @param c 编码
+     * @return 是否为中文标点符号
+     * @since 0.1.68
+     */
+    public static boolean isChinesePunctuation(char c) {
+        Character.UnicodeScript sc = Character.UnicodeScript.of(c);
+        return sc == Character.UnicodeScript.HAN;
+    }
+
+    /**
+     * 是否为空格
+     * @param c char
+     * @return 是否为空格
+     * @since 0.1.68
+     */
+    public static boolean isSpace(final char c) {
+        return Character.isSpaceChar(c) || '\u0013' == c;
     }
 
 }

@@ -7,6 +7,7 @@ package com.github.houbb.heaven.util.lang;
 
 import com.github.houbb.heaven.constant.CharConst;
 import com.github.houbb.heaven.constant.PunctuationConst;
+import com.github.houbb.heaven.support.condition.ICondition;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.guava.Guavas;
@@ -126,6 +127,77 @@ public final class StringUtil {
         return false;
     }
 
+    /**
+     * 是否全部由字母组成
+     * 1. 大写字母
+     * 2. 小写字母
+     * @param string 字符串
+     * @return 结果
+     * @since 0.1.68
+     */
+    public static boolean isLetter(final String string) {
+        return isCharsCondition(string, new ICondition<Character> (){
+            @Override
+            public boolean condition(Character character) {
+                return Character.isLowerCase(character)
+                        || Character.isUpperCase(character);
+            }
+        });
+    }
+
+    /**
+     * 是否全部为数字
+     * @param string 字符串
+     * @return 是否为数字
+     * @since 0.1.68
+     */
+    public static boolean isDigit(final String string) {
+        return isCharsCondition(string, new ICondition<Character> (){
+            @Override
+            public boolean condition(Character character) {
+                return Character.isDigit(character);
+            }
+        });
+    }
+
+    /**
+     * 是否全部为数字或者字母
+     * @param string 字符串
+     * @return 是否数字或者字母
+     * @since 0.1.68
+     */
+    public static boolean isDigitOrLetter(final String string) {
+        return isCharsCondition(string, new ICondition<Character> (){
+            @Override
+            public boolean condition(Character character) {
+                return Character.isDigit(character)
+                        || Character.isLowerCase(character)
+                        || Character.isUpperCase(character);
+            }
+        });
+    }
+
+    /**
+     * 字符串是否全部满足某一个条件
+     * @param string 原始字符串
+     * @param condition 条件
+     * @return 是否满足
+     * @since 0.1.68
+     */
+    private static boolean isCharsCondition(final String string,
+                                   final ICondition<Character> condition) {
+        if(StringUtil.isEmpty(string)) {
+            return false;
+        }
+
+        char[] chars = string.toCharArray();
+        for(char c : chars) {
+            if(!condition.condition(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * 是否为空
@@ -192,10 +264,44 @@ public final class StringUtil {
             return new String[0];
         }
 
-        final String pattern = "\\s+";
+        final String pattern = "\\s+|\u0013";
         return string.split(pattern);
     }
 
+    /**
+     * 过滤掉所有的空格
+     * （1）trim
+     * （2）移除所有的空格
+     * @param string 原始字符串
+     * @return 过滤后的内容
+     * @since 0.1.68
+     */
+    public static String trimAnyBlank(final String string) {
+        if (StringUtil.isEmpty(string)) {
+            return string;
+        }
+
+        String trim = string.trim();
+        return trim.replaceAll("\\s+|\u0013", "");
+    }
+
+    /**
+     * 过滤掉所有的标点符号
+     * （1）trim
+     * （2）移除标点符号
+     * （3）移除 symbol
+     * @param string 原始字符串
+     * @return 过滤后的内容
+     * @since 0.1.68
+     */
+    public static String trimAnyPunctionAndSymbol(final String string) {
+        if (StringUtil.isEmpty(string)) {
+            return string;
+        }
+
+        String trim = string.trim();
+        return trim.replaceAll("\\p{P}|\\p{S}", "");
+    }
 
     /**
      * 获取的驼峰写法。
@@ -1222,6 +1328,60 @@ public final class StringUtil {
         }
 
         return newList;
+    }
+
+    /**
+     * 将字符串中的全角字符转为半角
+     * @param string 字符串
+     * @return  转换之后的字符串
+     * @since 0.1.68
+     */
+    public static String toHalfWidth(final String string) {
+        return characterHandler(string, new IHandler<Character, Character>() {
+            @Override
+            public Character handle(Character character) {
+                return CharUtil.toHalfWidth(character);
+            }
+        });
+    }
+
+    /**
+     * 将字符串中的半角字符转为全角
+     * @param string 字符串
+     * @return  转换之后的字符串
+     * @since 0.1.68
+     */
+    public static String toFullWidth(final String string) {
+        return characterHandler(string, new IHandler<Character, Character>() {
+            @Override
+            public Character handle(Character character) {
+                return CharUtil.toFullWidth(character);
+            }
+        });
+    }
+
+    /**
+     * 字符的处理
+     * @param string 字符串
+     * @param handler 处理类
+     * @return 结果
+     * @since 0.1.68
+     */
+    private static String characterHandler(final String string,
+                                  final IHandler<Character, Character> handler) {
+        if(StringUtil.isEmpty(string)) {
+            return string;
+        }
+
+        //1. 转换为列表
+        char[] chars = string.toCharArray();
+        char[] resultChars = new char[chars.length];
+        for(int i = 0; i < chars.length; i++) {
+            resultChars[i] = handler.handle(chars[i]);
+        }
+
+        //2. 构建结果
+        return new String(resultChars);
     }
 
 }

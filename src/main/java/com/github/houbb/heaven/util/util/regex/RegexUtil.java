@@ -1,6 +1,5 @@
 package com.github.houbb.heaven.util.util.regex;
 
-import com.github.houbb.heaven.util.io.StreamUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
 import java.util.regex.Pattern;
@@ -21,9 +20,102 @@ public final class RegexUtil {
 
     /**
      * 标点符号正则
+     *
+     * P 其中的小写 p 是 property 的意思，表示 Unicode 属性，用于 Unicode 正表达式的前缀。
+     *
+     * 等价于：
+     *
+     * <pre>
+     * Pattern.compile("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
+     * </pre>
+     * 大写 P 表示 Unicode 字符集七个字符属性之一：标点字符。
+     * 其他六个是
+     * L：字母；
+     * M：标记符号（一般不会单独出现）；
+     * Z：分隔符（比如空格、换行等）；
+     * S：符号（比如数学符号、货币符号等）；
+     * N：数字（比如阿拉伯数字、罗马数字等）；
+     * C：其他字符
+     *
+     * 相关信息：
+     * http://www.unicode.org/reports/tr18/
+     * http://www.unicode.org/Public/UNIDATA/UnicodeData.txt
+     *
      * @since 0.1.68
      */
     private static final Pattern PUNCTUATION_PATTERN = Pattern.compile("\\p{P}");
+
+    /**
+     * 字母-正则模式
+     * @since 0.1.68
+     */
+    private static final Pattern LETTER_PATTERN = Pattern.compile("\\p{L}");
+
+    /**
+     * 标记性-正则模式
+     * @since 0.1.68
+     */
+    private static final Pattern MARKABLE_PATTERN = Pattern.compile("\\p{M}");
+
+    /**
+     * 分隔符-正则模式
+     *
+     * 空格、换行等
+     * @since 0.1.68
+     */
+    private static final Pattern DELIMITER_PATTERN = Pattern.compile("\\p{Z}");
+
+    /**
+     * 符号-正则模式
+     *
+     * 数学符号、货币符号
+     * @since 0.1.68
+     */
+    private static final Pattern SYMBOL_PATTERN = Pattern.compile("\\p{S}");
+
+    /**
+     * 数字-正则模式
+     *
+     * 阿拉伯数字、罗马数字等
+     * @since 0.1.68
+     */
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("\\p{N}");
+
+
+    /**
+     * 其他字符-正则模式
+     * @since 0.1.68
+     */
+    private static final Pattern OTHER_CHARS_PATTERN = Pattern.compile("\\p{C}");
+
+    /**
+     * 邮箱正则表达式
+     *
+     * https://blog.csdn.net/Architect_CSDN/article/details/89478042
+     * @since 0.1.68
+     */
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^([a-z0-9A-Z]+[-|\\\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\\\.)+[a-zA-Z]{2,}$");
+
+    /**
+     * 电话号码正则表达式
+     * @since 0.1.68
+     */
+    private static final Pattern PHONE_PATTERN = Pattern.compile("^(13[4,5,6,7,8,9]|15[0,8,9,1,7]|188|187)\\\\d{8}$");
+
+    /**
+     * URL 正则表达式
+     *
+     * （1）验证http,https,ftp开头
+     * （2）验证一个":"，验证多个"/"
+     * （3）验证网址为 xxx.xxx
+     * （4）验证有0个或1个问号
+     * （5）验证参数必须为xxx=xxx格式，且xxx=空格式通过
+     * （6）验证参数与符号&连续个数为0个或1个
+     *
+     * https://www.cnblogs.com/woaiadu/p/7084250.html
+     * @since 0.1.68
+     */
+    private static final Pattern URL_PATTERN = Pattern.compile("^([hH][tT]{2}[pP]:/*|[hH][tT]{2}[pP][sS]:/*|[fF][tT][pP]:/*)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\\\\/])+(\\\\?{0,1}(([A-Za-z0-9-~]+\\\\={0,1})([A-Za-z0-9-~]*)\\\\&{0,1})*)$");
 
     /**
      * emoji 表情正则表达式
@@ -66,8 +158,79 @@ public final class RegexUtil {
      * @return 结果
      * @since 0.1.68
      */
-    private static boolean isPunctuation(String string) {
-        return PUNCTUATION_PATTERN.matcher(string).find();
+    public static boolean isPunctuation(String string) {
+        return isPatternMatch(string, PUNCTUATION_PATTERN);
+    }
+
+    /**
+     * 是否为可标记的符号
+     * @param string 字符
+     * @return 结果
+     * @since 0.1.68
+     */
+    public static boolean isMarkable(String string) {
+        return isPatternMatch(string, MARKABLE_PATTERN);
+    }
+
+    /**
+     * 是否为字符
+     * @param string 字符
+     * @return 结果
+     * @since 0.1.68
+     */
+    public static boolean isSymbol(String string) {
+        return isPatternMatch(string, SYMBOL_PATTERN);
+    }
+
+    /**
+     * 是否为可标记的符号
+     * @param string 字符
+     * @return 结果
+     * @since 0.1.68
+     */
+    public static boolean isOtherChars(String string) {
+        return isPatternMatch(string, OTHER_CHARS_PATTERN);
+    }
+
+    /**
+     * 是否为数字
+     * @param string 字符
+     * @return 结果
+     * @since 0.1.68
+     */
+    public static boolean isNumber(String string) {
+        return isPatternMatch(string, NUMBER_PATTERN);
+    }
+
+    /**
+     * 是否为邮件
+     * @param string 字符
+     * @return 结果
+     * @since 0.1.68
+     */
+    public static boolean isEmail(final String string) {
+        return isPatternMatch(string, EMAIL_PATTERN);
+    }
+
+    /**
+     * 是否为URL
+     * @param string 字符
+     * @return 结果
+     * @since 0.1.68
+     */
+    public static boolean isUrl(final String string) {
+        return isPatternMatch(string, URL_PATTERN);
+    }
+
+    /**
+     * 验证字符串是否匹配正则表达式
+     * @param string 字符串
+     * @param pattern 正则表达式
+     * @return 是否匹配
+     * @since 0.1.68
+     */
+    private static boolean isPatternMatch(final String string, final Pattern pattern) {
+        return pattern.matcher(string).find();
     }
 
 }
