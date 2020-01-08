@@ -48,4 +48,9 @@ public final class CharConst {
      */
     public static final char BLANK = ' ';
 
+    /**
+     * 星星
+     * @since 0.1.67
+     */
+    public static final char STAR = '*';
 }

@@ -512,3 +512,11 @@
 | 1 | A | 新增 EncodeUtil#encodeUnicode/#decodeUnicode | 2019-12-30 21:33:22 | |
 | 2 | A | 新增 ArrayUtil#shift | 2019-12-30 21:33:22 | |
 | 3 | A | 新增 StringUtil#toCharacterArray/#toCharacterList | 2019-12-30 21:33:22 | |
+
+# release_0.1.67
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 CharConst#STAR | 2020-1-8 10:58:49 | |
+| 2 | A | 新增 CharsetUtil 中文判断相关方法 | 2020-1-8 10:58:49 | |
+| 3 | A | 新增 StreamUtil 流读取相关方法 | 2020-1-8 10:58:49 | |

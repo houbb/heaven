@@ -3,10 +3,14 @@ package com.github.houbb.heaven.util.io;
 import com.github.houbb.heaven.constant.CharsetConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
+import com.github.houbb.heaven.util.lang.StringUtil;
 
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 流工具类
@@ -94,6 +98,59 @@ public class StreamUtil {
             } catch (IOException e) {
                 throw new CommonRuntimeException(e);
             }
+        }
+    }
+
+    /**
+     * 获取数据内容
+     * 例如： /data.txt
+     * @param path resource 下的文件路径
+     * @return 返回数据集合
+     * @since 0.1.67
+     */
+    public static List<String> readAllLines(final String path) {
+        InputStream inputStream = StreamUtil.class.getResourceAsStream(path);
+        return readAllLines(inputStream, CharsetConst.UTF8, true);
+    }
+
+    /**
+     * 构建数据集合
+     * @param is 文件输入流
+     * @return 返回数据集合
+     * @since 0.1.67
+     */
+    public static List<String> readAllLines(final InputStream is) {
+        return readAllLines(is, CharsetConst.UTF8, true);
+    }
+
+    /**
+     * 构建数据集合
+     *
+     * @param is 文件输入流
+     * @param charset 文件编码
+     * @param ignoreEmpty 是否忽略空白行
+     * @return 返回数据集合
+     * @since 0.1.67
+     */
+    public static List<String> readAllLines(InputStream is,
+                                            final String charset,
+                                            final boolean ignoreEmpty) {
+        try {
+            List<String> lines = new ArrayList<>();
+            BufferedReader e = new BufferedReader(new InputStreamReader(is,
+                    Charset.forName(charset)));
+
+            while (e.ready()) {
+                String entry = e.readLine();
+                if (StringUtil.isEmpty(entry)
+                        && ignoreEmpty) {
+                    continue;
+                }
+                lines.add(entry);
+            }
+            return lines;
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
         }
     }
 
