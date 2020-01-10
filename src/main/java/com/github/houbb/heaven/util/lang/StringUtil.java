@@ -170,9 +170,7 @@ public final class StringUtil {
         return isCharsCondition(string, new ICondition<Character> (){
             @Override
             public boolean condition(Character character) {
-                return Character.isDigit(character)
-                        || Character.isLowerCase(character)
-                        || Character.isUpperCase(character);
+                return CharUtil.isDigitOrLetter(character);
             }
         });
     }

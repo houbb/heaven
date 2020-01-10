@@ -106,4 +106,16 @@ public final class CharUtil {
         return Character.isSpaceChar(c) || '\u0013' == c;
     }
 
+    /**
+     * 是数字或者英文字符
+     * @param c 字符
+     * @return 是否
+     * @since 0.1.69
+     */
+    public static boolean isDigitOrLetter(final char c) {
+        return Character.isDigit(c)
+            || Character.isLowerCase(c)
+            || Character.isUpperCase(c);
+    }
+
 }
