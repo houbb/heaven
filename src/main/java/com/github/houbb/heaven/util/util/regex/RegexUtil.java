@@ -92,9 +92,20 @@ public final class RegexUtil {
      * 邮箱正则表达式
      *
      * https://blog.csdn.net/Architect_CSDN/article/details/89478042
+     * https://www.cnblogs.com/lst619247/p/9289719.html
+     *
+     * 只有英文的邮箱。
      * @since 0.1.68
      */
-    private static final Pattern EMAIL_PATTERN = Pattern.compile("^([a-z0-9A-Z]+[-|\\\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\\\.)+[a-zA-Z]{2,}$");
+    private static final Pattern EMAIL_ENGLISH_PATTERN = Pattern.compile("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
+
+    /**
+     * 允许中文前缀的邮箱正则表达式
+     *
+     * https://www.cnblogs.com/lst619247/p/9289719.html
+     * @since 0.1.69
+     */
+    private static final Pattern EMAIL_CHINESE_PATTERN = Pattern.compile("^[A-Za-z0-9\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
 
     /**
      * 电话号码正则表达式
@@ -209,7 +220,7 @@ public final class RegexUtil {
      * @since 0.1.68
      */
     public static boolean isEmail(final String string) {
-        return isPatternMatch(string, EMAIL_PATTERN);
+        return isPatternMatch(string, EMAIL_ENGLISH_PATTERN);
     }
 
     /**

@@ -118,4 +118,16 @@ public final class CharUtil {
             || Character.isUpperCase(c);
     }
 
+    /**
+     * 是否为组成邮箱的相关字符
+     * @param c 字符
+     * @return 是否
+     * @since 0.1.69
+     */
+    public static boolean isEmilChar(final char c) {
+        return CharUtil.isDigitOrLetter(c)
+                || '_' == c || '-' == c
+                || c == '.' || c == '@';
+    }
+
 }
