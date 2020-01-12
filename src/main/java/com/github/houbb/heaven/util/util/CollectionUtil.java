@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.util;
 
+import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.constant.PunctuationConst;
 import com.github.houbb.heaven.support.condition.ICondition;
 import com.github.houbb.heaven.support.filler.IFiller;
@@ -88,13 +89,14 @@ public final class CollectionUtil {
      *
      * @param stringList 原始的列表
      * @return trim 的字符串列表
+     * @since 0.1.70
      */
-    public static Collection<String> trimCollection(final Collection<String> stringList) {
+    public static List<String> trimCollection(final Collection<String> stringList) {
         if (CollectionUtil.isEmpty(stringList)) {
             return Collections.emptyList();
         }
 
-        Collection<String> resultList = new ArrayList<>();
+        List<String> resultList = Guavas.newArrayList(stringList.size());
         for (String original : stringList) {
             resultList.add(original.trim());
         }
@@ -137,11 +139,11 @@ public final class CollectionUtil {
      * @return 结果
      * @since 0.0.2
      */
-    public static <T, R> Collection<R> buildCollection(final T[] targets, final IHandler<T, R> handler) {
+    public static <T, R> List<R> buildCollection(final T[] targets, final IHandler<T, R> handler) {
         if (ArrayUtil.isEmpty(targets)) {
             return Collections.emptyList();
         }
-        Collection<R> rList = new ArrayList<>();
+        List<R> rList = new ArrayList<>(targets.length);
         for (T t : targets) {
             R r = handler.handle(t);
             if (ObjectUtil.isNotNull(r)) {
@@ -433,6 +435,22 @@ public final class CollectionUtil {
     }
 
     /**
+     * 排序
+     *
+     * @param <T> 集合元素类型
+     * @param collection 集合
+     * @return {@link ArrayList}
+     * @since 0.1.13
+     */
+    public static <T extends Comparable> List<T> sort(List<T> collection) {
+        if (isEmpty(collection)) {
+            return Collections.emptyList();
+        }
+        Collections.sort(collection);
+        return new ArrayList<>(collection);
+    }
+
+    /**
      * 获取开始的下标
      * （1）默认为0
      * （2）如果为负数，或者超过 arrays.length-1，则使用 0
@@ -534,6 +552,63 @@ public final class CollectionUtil {
             }
         }
         return new ArrayList<>(set);
+    }
+
+    /**
+     * 包含任何一个
+     * @param firstList 第一个列表
+     * @param secondList 第二个列表
+     * @return 是否包含
+     * @since 0.1.70
+     */
+    public static boolean containAny(final Collection<String> firstList,
+                                        final Collection<String> secondList) {
+        if(CollectionUtil.isEmpty(firstList)
+                || CollectionUtil.isEmpty(secondList)) {
+            return false;
+        }
+
+        for(String second : secondList) {
+            if(firstList.contains(second)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * 获取最后一行
+     * @param resultList 结果列表
+     * @return 最后一行
+     * @since 0.1.70
+     */
+    public static String getLast(final List<String> resultList) {
+        if(CollectionUtil.isEmpty(resultList)) {
+            return StringUtil.EMPTY;
+        }
+
+        return resultList.get(resultList.size()-1);
+    }
+
+    /**
+     * 设置最后一行
+     * @param resultList 结果列表
+     * @param line 最后一行内容
+     * @since 0.1.70
+     */
+    public static void setLast(List<String> resultList,
+                             final String line) {
+        if(resultList == null) {
+            resultList = new ArrayList<>();
+        }
+
+        if(CollectionUtil.isEmpty(resultList)) {
+            resultList.add(line);
+        }
+
+        // 其他直接设置即可
+        resultList.set(resultList.size()-1, line);
     }
 
 }
