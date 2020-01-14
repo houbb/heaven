@@ -30,6 +30,7 @@ public class StreamUtil {
      * @param charset 编码集合
      * @return 字符串
      */
+    @Deprecated
     public static String toString(InputStream is, String charset) {
         try (ByteArrayOutputStream boa = new ByteArrayOutputStream()) {
             int len = 0;
@@ -51,8 +52,43 @@ public class StreamUtil {
      * @param is 流。注意：这里并不会关闭输入流，需要外部自行处理。
      * @return 字符串
      */
+    @Deprecated
     public static String toString(InputStream is) {
         return toString(is, CharsetConst.UTF8);
+    }
+
+    /**
+     * 获取文章内容
+     * @param path 路径
+     * @return 文件内容
+     * @since 0.1.71
+     */
+    public static String getFileContent(final String path) {
+        return getFileContent(path, CharsetConst.UTF8);
+    }
+
+    /**
+     * 获取文章内容
+     * @param path 路径
+     * @param charset 字符集合
+     * @return 文件内容
+     * @since 0.1.71
+     */
+    public static String getFileContent(final String path,
+                                 final String charset) {
+        try (InputStream inputStream = getInputStream(path);
+                ByteArrayOutputStream boa = new ByteArrayOutputStream()) {
+            int len = 0;
+            byte[] buffer = new byte[1024];
+
+            while ((len = inputStream.read(buffer)) != -1) {
+                boa.write(buffer, 0, len);
+            }
+            byte[] result = boa.toByteArray();
+            return new String(result, charset);
+        } catch (Exception e) {
+            throw new CommonRuntimeException(e);
+        }
     }
 
     /**

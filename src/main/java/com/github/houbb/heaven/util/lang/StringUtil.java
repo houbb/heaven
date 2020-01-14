@@ -208,6 +208,21 @@ public final class StringUtil {
     }
 
     /**
+     * 是否为空-进行 trim 之后
+     * @param string 原始字符串
+     * @return 是否
+     * @since 0.1.71
+     */
+    public static boolean isEmptyTrim(final String string) {
+        if(isEmpty(string)) {
+            return true;
+        }
+
+        String trim = trim(string);
+        return isEmpty(trim);
+    }
+
+    /**
      * 是否为非空
      *
      * @param string 字符串

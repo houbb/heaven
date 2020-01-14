@@ -542,3 +542,10 @@
 |:---|:---|:---|:---|:--|
 | 1 | A | 新增 CollectionUtil#containAny() | 2020-1-12 10:58:49 | |
 | 2 | A | 新增 CollectionUtil#getLast()/#setLast() | 2020-1-12 10:58:49 | |
+
+# release_0.1.71
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 StringUtil#isEmptyTrim() | 2020-1-14 10:58:49 | |
+| 2 | A | 新增 StreamUtil#getFileContent() | 2020-1-14 10:58:49 | |
