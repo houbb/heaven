@@ -5,7 +5,6 @@
 
 package com.github.houbb.heaven.util.util;
 
-import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.constant.PunctuationConst;
 import com.github.houbb.heaven.support.condition.ICondition;
 import com.github.houbb.heaven.support.filler.IFiller;
@@ -432,6 +431,18 @@ public final class CollectionUtil {
         } else {
             return new ArrayList<>(new LinkedHashSet<>(collection));
         }
+    }
+
+    /**
+     * 去重并且排序
+     * @param collection 原始集合
+     * @param <T> 泛型
+     * @return 结果
+     * @since 0.1.72
+     */
+    public static <T extends Comparable> List<T> distinctAndSort(final Collection<T> collection) {
+        List<T> list = distinct(collection);
+        return sort(list);
     }
 
     /**
