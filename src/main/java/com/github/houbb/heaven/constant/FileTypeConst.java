@@ -5,6 +5,8 @@
 
 package com.github.houbb.heaven.constant;
 
+import com.github.houbb.heaven.util.lang.StringUtil;
+
 /**
  * 文件类型常量
  * @author bbhou
@@ -48,6 +50,10 @@ public final class FileTypeConst {
 
         public static final String PNG = ".png";
         public static final String JPG = ".jpg";
+        public static final String JPEG = ".jpeg";
+        public static final String GIF = ".gif";
     }
+
+
 
 }

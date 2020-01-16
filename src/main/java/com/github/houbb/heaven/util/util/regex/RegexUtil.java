@@ -129,6 +129,12 @@ public final class RegexUtil {
     private static final Pattern URL_PATTERN = Pattern.compile("^([hH][tT]{2}[pP]:/*|[hH][tT]{2}[pP][sS]:/*|[fF][tT][pP]:/*)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\\\\/])+(\\\\?{0,1}(([A-Za-z0-9-~]+\\\\={0,1})([A-Za-z0-9-~]*)\\\\&{0,1})*)$");
 
     /**
+     * 网址正则
+     * @since 0.1.72
+     */
+    private static final Pattern WEB_SITE_PATTERN = Pattern.compile("^([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,6}$");
+
+    /**
      * emoji 表情正则表达式
      * https://github.com/zly394/EmojiRegex
      * https://github.com/vdurmont/emoji-java
@@ -231,6 +237,16 @@ public final class RegexUtil {
      */
     public static boolean isUrl(final String string) {
         return isPatternMatch(string, URL_PATTERN);
+    }
+
+    /**
+     * 是否为网址
+     * @param string 结果
+     * @return 是否
+     * @since 0.1.73
+     */
+    public static boolean isWebSite(final String string) {
+        return isPatternMatch(string, WEB_SITE_PATTERN);
     }
 
     /**

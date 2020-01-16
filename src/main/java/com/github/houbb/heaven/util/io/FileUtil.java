@@ -7,6 +7,7 @@ package com.github.houbb.heaven.util.io;
 
 
 import com.github.houbb.heaven.constant.CharsetConst;
+import com.github.houbb.heaven.constant.FileTypeConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
@@ -674,6 +675,21 @@ public final class FileUtil {
         }
     }
 
+    /**
+     * 是否为图片格式
+     * @param string 原始字符串
+     * @return 是否为图片
+     * @since 0.1.73
+     */
+    public static boolean isImage(final String string) {
+        if(StringUtil.isEmpty(string)) {
+            return false;
+        }
 
+        return string.endsWith(FileTypeConst.Image.PNG)
+                || string.endsWith(FileTypeConst.Image.JPEG)
+                || string.endsWith(FileTypeConst.Image.JPG)
+                || string.endsWith(FileTypeConst.Image.GIF);
+    }
 
 }
