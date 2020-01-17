@@ -1344,6 +1344,26 @@ public final class StringUtil {
     }
 
     /**
+     * 转换为 char 字符串列表
+     * @param string 字符串
+     * @return 字符串列表
+     * @since 0.1.74
+     */
+    public static List<String> toCharStringList(final String string) {
+        if(StringUtil.isEmpty(string)) {
+            return Guavas.newArrayList();
+        }
+
+        char[] chars = string.toCharArray();
+        return ArrayPrimitiveUtil.toList(chars, new IHandler<Character, String>() {
+            @Override
+            public String handle(Character character) {
+                return String.valueOf(character);
+            }
+        });
+    }
+
+    /**
      * 将字符串中的全角字符转为半角
      * @param string 字符串
      * @return  转换之后的字符串
