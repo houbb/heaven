@@ -109,6 +109,16 @@ public final class DateUtil {
     }
 
     /**
+     * 获取当前日期时间字符串
+     * @return 日期时间字符串
+     * @since 0.1.75
+     */
+    public static String getCurrentDateTimeStr() {
+        Date now = new Date();
+        return new SimpleDateFormat(DATE_TIME_FORMAT).format(now);
+    }
+
+    /**
      * 毫秒转化为纳秒
      * 1. 如果时间格式小于0，则视为0
      * @param ms 毫秒
