@@ -2,7 +2,7 @@ package com.github.houbb.heaven.util.lang;
 
 /**
  * 字符工具类
- * @see Character#isDigit(char) 直接使用这个类的常见方法，此处不再画蛇添足。
+ * @see Character#isDigit(char) 直接使用这个类的常见方法
  * @author binbin.hou
  * @since 0.1.16
  */
@@ -140,6 +140,36 @@ public final class CharUtil {
     public static boolean isWebSiteChar(final char c) {
         return CharUtil.isDigitOrLetter(c)
                 || '-' == c || '.' == c;
+    }
+
+    /**
+     * 是否为中文
+     * @param ch 中文
+     * @return 是否
+     * @since 0.1.76
+     */
+    public static boolean isChinese(final char ch) {
+        return ch >= 0x4E00 && ch <= 0x9FA5;
+    }
+
+    /**
+     * 是否为英文
+     * @param ch 英文
+     * @return 是否
+     * @since 0.1.76
+     */
+    public static boolean isEnglish(final char ch) {
+        return (ch >= 0x0041 && ch <= 0x005A) || (ch >= 0x0061 && ch <= 0x007A);
+    }
+
+    /**
+     * 是否为数字
+     * @param ch 符号
+     * @return 是否
+     * @since 0.1.76
+     */
+    public static boolean isDigit(char ch) {
+        return ch >= 0x0030 && ch <= 0x0039;
     }
 
 }

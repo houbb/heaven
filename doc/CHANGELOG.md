@@ -578,3 +578,12 @@
 |:---|:---|:---|:---|:--|
 | 1 | A | 新增 ThreadUtil 线程工具类 | 2020-1-22 09:15:51 | |
 | 2 | A | 新增 DateUtil#getCurrentDateTimeStr() | 2020-1-22 09:15:51 | |
+
+# release_0.1.76
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 ArrayPrimitiveUtil#contains(char[], char) | 2020-1-28 18:10:19 | |
+| 2 | A | 新增 CharUtil#isEnglish() | 2020-1-28 18:10:19 | |
+| 3 | A | 新增 CharUtil#isChinese() | 2020-1-28 18:10:19 | |
+| 4 | A | 新增 CharUtil#isDigit() | 2020-1-28 18:10:19 | |

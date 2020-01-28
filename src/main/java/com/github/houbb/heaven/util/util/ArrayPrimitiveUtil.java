@@ -422,6 +422,26 @@ public final class ArrayPrimitiveUtil {
     }
 
     /**
+     * 是否包含
+     * @param chars 原始字符
+     * @param c 目标
+     * @return 结果
+     * @since 0.1.76
+     */
+    public static boolean contains(final char[] chars, final char c) {
+        if(ArrayPrimitiveUtil.isEmpty(chars)) {
+            return false;
+        }
+
+        for (char cs : chars) {
+            if (cs == c) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * 返回 c 对应的最后下标
      * @param chars 原始字符
      * @param c 目标
