@@ -4,7 +4,7 @@
 
     <groupId>com.github.houbb</groupId>
     <artifactId>heaven</artifactId>
-    <version>0.1.77-SNAPSHOT</version>
+    <version>0.1.77</version>
 
     <properties>
         <!--============================== All Plugins START ==============================-->
@@ -43,6 +43,7 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+                <optional>true</optional>
                 <scope>test</scope>
             </dependency>
 

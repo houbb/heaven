@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.lang.reflect;
 
+import com.github.houbb.heaven.constant.FieldConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.filter.IFilter;
 import com.github.houbb.heaven.support.handler.IHandler;
@@ -52,22 +53,32 @@ public final class ClassUtil {
     /**
      * 获取类所有的字段信息
      * ps: 这个方法有个问题 如果子类和父类有相同的字段 会不会重复
-     * 1. 还会获取到 serialVersionUID 这个字段。
+     * 1. 还会获取到 serialVersionUID 这个字段。 0.1.77 移除
      * @param clazz 类
      * @return 字段列表
+     * @since 0.1.77
      */
     public static List<Field> getAllFieldList(final Class clazz) {
-        List<Field> fieldList = new ArrayList<>() ;
+        List<Field> allFieldList = new ArrayList<>() ;
         Class tempClass = clazz;
         while (tempClass != null) {
-            fieldList.addAll(Guavas.newArrayList(tempClass.getDeclaredFields()));
+            allFieldList.addAll(Guavas.newArrayList(tempClass.getDeclaredFields()));
             tempClass = tempClass.getSuperclass();
         }
 
-        for(Field field : fieldList) {
+        List<Field> resultList = Guavas.newArrayList(allFieldList.size());
+        for(Field field : allFieldList) {
+            String fieldName = field.getName();
+
+            // 跳过序列化字段
+            if(FieldConst.SERIAL_VERSION_UID.equals(fieldName)) {
+                continue;
+            }
+
             field.setAccessible(true);
+            resultList.add(field);
         }
-        return fieldList;
+        return resultList;
     }
 
     /**
