@@ -594,3 +594,12 @@
 |:---|:---|:---|:---|:--|
 | 1 | A | 新增 FieldConst 类 | 2020-2-10 09:33:14 | 字段常量 |
 | 2 | O | 新增 ClassUtil#getAllFieldList() | 2020-2-10 09:33:14 | 移除序列化 id|
+
+# release_0.1.78
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 FileUtil#write(String, CharSequence) 方法 | 2020-2-13 16:12:49 | 便于单行写入 |
+| 2 | O | 新增 RandomAccessFileUtil | 2020-2-13 09:33:14 | RandomAccessFile 工具类 |
+| 2 | O | 新增 StreamUtil#getFileContent(String, int, int) | 2020-2-13 09:33:14 | 指定下标获取内容 |
+A

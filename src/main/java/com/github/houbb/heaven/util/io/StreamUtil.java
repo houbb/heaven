@@ -9,6 +9,7 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -190,4 +191,44 @@ public class StreamUtil {
         }
     }
 
+    /**
+     * 获取文件内容
+     * @param path 路径
+     * @param startIndex 开始下标
+     * @param endIndex 结束下标
+     * @return 结果
+     * @since 0.1.78
+     */
+    public static String getFileContent(final String path,
+                                        final int startIndex,
+                                        final int endIndex) {
+        return getFileContent(path, startIndex, endIndex, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * 获取文件内容
+     * @param path 路径
+     * @param startIndex 开始下标
+     * @param endIndex 结束下标
+     * @param charset 编码
+     * @return 结果
+     * @since 0.1.78
+     */
+    public static String getFileContent(final String path,
+                                        final int startIndex,
+                                        final int endIndex,
+                                        final Charset charset) {
+        try {
+            InputStream inputStream = StreamUtil.class.getResourceAsStream(path);
+            // 跳过指定长度
+            inputStream.skip(startIndex);
+
+            byte[] bytes = new byte[endIndex-startIndex];
+            inputStream.read(bytes);
+
+            return new String(bytes, charset);
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
 }

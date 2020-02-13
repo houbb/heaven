@@ -12,12 +12,12 @@ import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
-import com.sun.org.apache.xpath.internal.Arg;
 
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.nio.file.*;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -387,6 +387,19 @@ public final class FileUtil {
 
         }
 
+    }
+
+    /**
+     * 写入文件信息
+     * （1）默认 utf-8 编码
+     * （2）默认新建一个文件
+     * （3）默认为一行
+     * @param filePath 文件路径
+     * @param line 行信息
+     * @since 0.1.78
+     */
+    public static void write(final String filePath, final CharSequence line){
+        write(filePath, Collections.singletonList(line));
     }
 
     /**
