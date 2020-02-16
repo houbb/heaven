@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.lang;
 
+import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.constant.CharConst;
 import com.github.houbb.heaven.constant.PunctuationConst;
 import com.github.houbb.heaven.support.condition.ICondition;
@@ -1415,6 +1416,28 @@ public final class StringUtil {
 
         //2. 构建结果
         return new String(resultChars);
+    }
+
+    /**
+     * 过滤掉非中文字符
+     * @param string 字符串
+     * @return 结果
+     * @since 0.1.79
+     */
+    public static String trimNotChinese(final String string) {
+        if(StringUtil.isEmptyTrim(string)) {
+            return StringUtil.EMPTY;
+        }
+
+        char[] chars = string.toCharArray();
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Character character : chars) {
+            if(CharUtil.isChinese(character)) {
+                stringBuilder.append(character);
+            }
+        }
+
+        return stringBuilder.toString();
     }
 
 }
