@@ -622,4 +622,30 @@ public final class CollectionUtil {
         resultList.set(resultList.size()-1, line);
     }
 
+    /**
+     * 获取指定的前几个元素
+     * @param collection 集合
+     * @param size 大小
+     * @param <T> 泛型
+     * @return 结果
+     * @since 0.1.79
+     */
+    public static <T> List<T> getTopK(final Collection<T> collection, final int size) {
+        if(CollectionUtil.isEmpty(collection)) {
+            return Collections.emptyList();
+        }
+
+        int actualSize = Math.min(collection.size(), size);
+        List<T> resultList = Guavas.newArrayList();
+
+        for(T t : collection) {
+            resultList.add(t);
+
+            if(resultList.size() >= actualSize) {
+                break;
+            }
+        }
+        return resultList;
+    }
+
 }
