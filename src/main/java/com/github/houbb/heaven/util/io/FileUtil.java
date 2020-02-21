@@ -38,18 +38,30 @@ public final class FileUtil {
      *
      * @param filePath 文件路径
      * @return 文件不存在或异常等, 直接抛出异常
+     * @since 0.1.80
      */
     public static String getFileContent(String filePath) {
+        return getFileContent(filePath, CharsetConst.UTF8);
+    }
+
+    /**
+     * 获取文件内容
+     *
+     * @param filePath 文件路径
+     * @param charset 文件编码
+     * @return 文件不存在或异常等, 直接抛出异常
+     * @since 0.1.80
+     */
+    public static String getFileContent(String filePath, final String charset) {
         File file = new File(filePath);
         if (file.exists()) {
-            try {
-                InputStream inputStream = new FileInputStream(file);
-                return getFileContent(inputStream);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
+            try(InputStream inputStream = new FileInputStream(file)) {
+                return getFileContent(inputStream, charset);
+            } catch (IOException e) {
+                throw new CommonRuntimeException(e);
             }
         }
-        return StringUtil.EMPTY;
+        throw new CommonRuntimeException(filePath + " is not exists!");
     }
 
     /**
@@ -80,7 +92,7 @@ public final class FileUtil {
             jsonText = new String(bytes, charset);
             return jsonText;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new CommonRuntimeException(e);
         }
     }
 
