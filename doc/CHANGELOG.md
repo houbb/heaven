@@ -609,3 +609,10 @@
 |:---|:---|:---|:---|:--|
 | 1 | A | 新增 CollectionUtil#getTopK() 方法 | 2020-2-16 20:46:32 | |
 | 2 | A | 新增 StringUtil#trimNotChinese() 方法 | 2020-2-16 20:46:32 | |
+
+# release_0.1.80
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 StringUtil#isEmptyJson() 方法 | 2020-2-22 11:02:56 | |
+| 2 | A | 新增 FileUtil#getFileContent(path, charset) 方法 | 2020-2-22 11:02:56 | |

@@ -48,6 +48,12 @@ public final class StringUtil {
     public static final String EMPTY = "";
 
     /**
+     * 空 json
+     * @since 0.1.80
+     */
+    public static final String EMPTY_JSON = "{}";
+
+    /**
      * 空格
      */
     public static final String BLANK = " ";
@@ -221,6 +227,21 @@ public final class StringUtil {
 
         String trim = trim(string);
         return isEmpty(trim);
+    }
+
+    /**
+     * 是否为空的 json
+     * @param json json 信息
+     * @return 是否
+     * @since 0.1.80
+     */
+    public static boolean isEmptyJson(final String json) {
+        if(isEmptyTrim(json)) {
+            return true;
+        }
+
+        String trim = json.trim();
+        return EMPTY_JSON.equals(trim);
     }
 
     /**
