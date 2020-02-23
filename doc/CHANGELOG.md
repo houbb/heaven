@@ -616,3 +616,9 @@
 |:---|:---|:---|:---|:--|
 | 1 | A | 新增 StringUtil#isEmptyJson() 方法 | 2020-2-22 11:02:56 | |
 | 2 | A | 新增 FileUtil#getFileContent(path, charset) 方法 | 2020-2-22 11:02:56 | |
+
+# release_0.1.81
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | O | 使用 TWR 优化 StreamUtil#getFileContent() | 2020-2-23 11:30:402 | 避免内存泄漏|

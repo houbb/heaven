@@ -218,8 +218,7 @@ public class StreamUtil {
                                         final int startIndex,
                                         final int endIndex,
                                         final Charset charset) {
-        try {
-            InputStream inputStream = StreamUtil.class.getResourceAsStream(path);
+        try(InputStream inputStream = StreamUtil.class.getResourceAsStream(path)) {
             // 跳过指定长度
             inputStream.skip(startIndex);
 
