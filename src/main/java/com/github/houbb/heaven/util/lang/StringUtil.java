@@ -668,7 +668,7 @@ public final class StringUtil {
      * @since 0.1.0
      */
     public static String trim(final String original) {
-        if (StringUtil.isBlank(original)) {
+        if (StringUtil.isEmpty(original)) {
             return original;
         }
         return original.trim();
