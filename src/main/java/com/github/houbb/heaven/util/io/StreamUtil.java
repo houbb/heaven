@@ -222,12 +222,21 @@ public class StreamUtil {
             // 跳过指定长度
             inputStream.skip(startIndex);
 
-            byte[] bytes = new byte[endIndex-startIndex];
-            inputStream.read(bytes);
+            // 这个读取的数据可能不正确
+            // InputStream.read(byte[] b) 无法保证读取的结果正确。
+            final int count = endIndex-startIndex;
+            byte[] bytes = new byte[count];
+            // 已经成功读取的字节的个数
+            int readCount = 0;
+            while (readCount < count) {
+                readCount += inputStream.read(bytes, readCount, count - readCount);
+            }
 
             return new String(bytes, charset);
         } catch (IOException e) {
             throw new CommonRuntimeException(e);
         }
     }
+
+
 }
