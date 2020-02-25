@@ -9,18 +9,18 @@ package com.github.houbb.heaven.util.io;
 import com.github.houbb.heaven.constant.CharsetConst;
 import com.github.houbb.heaven.constant.FileTypeConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
+import com.github.houbb.heaven.support.handler.IHandler;
+import com.github.houbb.heaven.support.handler.IMapHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
+import com.github.houbb.heaven.util.util.MapUtil;
 
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.nio.file.*;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 文件工具类
@@ -715,6 +715,63 @@ public final class FileUtil {
                 || string.endsWith(FileTypeConst.Image.JPEG)
                 || string.endsWith(FileTypeConst.Image.JPG)
                 || string.endsWith(FileTypeConst.Image.GIF);
+    }
+
+    /**
+     * 将文件内容转换为 map
+     *
+     * @param path       文件路径
+     * @param charset    文件编码
+     * @param mapHandler 转换实现
+     * @param <K>        key 泛型
+     * @param <V>        value 泛型
+     * @return 结果
+     * @since 0.1.83
+     */
+    public static <K, V> Map<K, V> readToMap(final String path,
+                                             final String charset,
+                                             final IMapHandler<K, V, String> mapHandler) {
+        List<String> allLines = FileUtil.readAllLines(path, charset);
+        return MapUtil.toMap(allLines, mapHandler);
+    }
+
+    /**
+     * 将文件内容转换为 map
+     *
+     * @param path       文件路径
+     * @param mapHandler 转换实现
+     * @param <K>        key 泛型
+     * @param <V>        value 泛型
+     * @return 结果
+     * @since 0.1.83
+     */
+    public static <K, V> Map<K, V> readToMap(final String path,
+                                             final IMapHandler<K, V, String> mapHandler) {
+        return readToMap(path, CharsetConst.UTF8, mapHandler);
+    }
+
+    /**
+     * 将文件内容转换为 map
+     *
+     * （1）直接拆分。取第一个值和第一个值
+     * @param path 文件路径
+     * @param splitter 分隔符号
+     * @return 结果
+     * @since 0.1.83
+     */
+    public static Map<String, String> readToMap(final String path,
+                                               final String splitter) {
+        return readToMap(path, new IMapHandler<String, String, String>() {
+            @Override
+            public String getKey(String o) {
+                return o.split(splitter)[0];
+            }
+
+            @Override
+            public String getValue(String o) {
+                return o.split(splitter)[1];
+            }
+        });
     }
 
 }

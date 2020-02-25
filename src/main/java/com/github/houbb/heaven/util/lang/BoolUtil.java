@@ -10,6 +10,18 @@ public final class BoolUtil {
     private BoolUtil(){}
 
     /**
+     * Y 字符串
+     * @since 0.1.83
+     */
+    public static final String Y = "Y";
+
+    /**
+     * N 字符串
+     * @since 0.1.83
+     */
+    public static final String N = "N";
+
+    /**
      * 获取对应的bool值
      *
      * @param boolStr 布尔字符串

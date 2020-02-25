@@ -6,6 +6,7 @@
 package com.github.houbb.heaven.util.util;
 
 import com.github.houbb.heaven.support.handler.IHandler;
+import com.github.houbb.heaven.support.handler.IMapHandler;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
@@ -56,6 +57,30 @@ public final class MapUtil {
 
         for(V value : values) {
             final K key = keyFunction.handle(value);
+            map.put(key, value);
+        }
+        return map;
+    }
+
+    /**
+     * 可遍历的结合转换为 map
+     * @param values 可遍历的元素 Iterator
+     * @param mapHandler map 转化方式
+     * @param <K> key 泛型
+     * @param <V> value 泛型
+     * @param <O> 原始泛型
+     * @return map 结果
+     * @since 0.1.83
+     */
+    public static  <K,V,O> Map<K,V> toMap(Collection<O> values, IMapHandler<K,V,O> mapHandler) {
+        if(ObjectUtil.isNull(values)) {
+            return Collections.emptyMap();
+        }
+
+        Map<K,V> map = new HashMap<>(values.size());
+        for(O line : values) {
+            final K key = mapHandler.getKey(line);
+            final V value = mapHandler.getValue(line);
             map.put(key, value);
         }
         return map;
