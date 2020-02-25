@@ -85,6 +85,7 @@ public final class FileUtil {
     public static String getFileContent(InputStream inputStream, String charset) {
         try {
             int size = inputStream.available();
+            //TODO: 这里的读取可能也有问题，使用到的时候在做修复。
             byte[] bytes = new byte[size];
             int readSize = inputStream.read(bytes);
             inputStream.close();
