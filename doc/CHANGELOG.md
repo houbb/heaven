@@ -643,3 +643,13 @@
 | 序号 | 变更类型 | 说明 | 时间 | 备注 |
 |:---|:---|:---|:---|:--|
 | 1 | F | 修复 StreamUtil#getFileContent() | 2020-2-25 22:22:37 | |
+
+# release_0.1.85
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | O | 优化 StreamUtil/FileUtil 代码 | 2020-2-29 17:27:27 | |
+| 2 | A | 新增 CollectionUtil#fill(int) | 2020-2-29 17:27:27 | |
+| 3 | A | 新增 CollectionUtil#replaceAll(list,regex,string) | 2020-2-29 17:27:27 | |
+| 4 | A | 新增 MapUtil#toList() | 2020-2-29 17:27:27 | Map 转 列表 |
+| 5 | A | 新增 JsonUtil#getIndexList() | 2020-2-29 17:27:27 | 根据 json 获取索引列表 |

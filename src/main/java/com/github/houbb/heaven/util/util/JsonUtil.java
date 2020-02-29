@@ -1,0 +1,69 @@
+package com.github.houbb.heaven.util.util;
+
+import com.github.houbb.heaven.constant.PunctuationConst;
+import com.github.houbb.heaven.util.guava.Guavas;
+import com.github.houbb.heaven.util.io.FileUtil;
+import com.github.houbb.heaven.util.lang.StringUtil;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Stack;
+
+/**
+ * <p> project: heaven-JsonUtil </p>
+ * <p> create on 2020/2/29 13:27 </p>
+ *
+ * @author binbin.hou
+ * @since 0.1.85
+ */
+public final class JsonUtil {
+
+    private JsonUtil() {
+    }
+
+    /**
+     * 获取索引列表
+     *
+     * @param compressJsonPath 压缩的 json 路径
+     * @param indexPrefixList  索引前缀列表
+     * @return 结果列表
+     * @since 0.1.85
+     */
+    public static List<String> getIndexList(final String compressJsonPath, final List<?> indexPrefixList) {
+        final String json = FileUtil.getFileContent(compressJsonPath);
+        if (StringUtil.isEmptyTrim(json) || CollectionUtil.isEmpty(indexPrefixList)) {
+            return Collections.emptyList();
+        }
+
+        List<String> results = Guavas.newArrayList(indexPrefixList.size());
+        Stack<Integer> stack = new Stack<>();
+        List<String> indexList = Guavas.newArrayList(indexPrefixList.size());
+
+        for (int i = 0; i < json.length(); i++) {
+            final char ch = json.charAt(i);
+
+            if ('{' == ch) {
+                stack.push(i);
+            }
+            if ('}' == ch) {
+                Integer startIndex = stack.pop();
+                int endIndex = i + 1;
+
+                final int byteStartIndex = json.substring(0, startIndex).getBytes().length;
+                final int byteEndIndex = byteStartIndex + json.substring(startIndex, endIndex)
+                        .getBytes().length;
+
+                String result = byteStartIndex + PunctuationConst.COMMA + byteEndIndex;
+                indexList.add(result);
+            }
+        }
+
+
+        for (int i = 0; i < indexPrefixList.size(); i++) {
+            String result = indexPrefixList.get(i) + StringUtil.BLANK + indexList.get(i);
+            results.add(result);
+        }
+
+        return results;
+    }
+}

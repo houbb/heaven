@@ -6,7 +6,9 @@
 package com.github.houbb.heaven.util.util;
 
 import com.github.houbb.heaven.support.handler.IHandler;
+import com.github.houbb.heaven.support.handler.IMapEntryHandler;
 import com.github.houbb.heaven.support.handler.IMapHandler;
+import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
@@ -84,6 +86,29 @@ public final class MapUtil {
             map.put(key, value);
         }
         return map;
+    }
+
+    /**
+     * 可遍历的结合转换为 map
+     * @param map 可遍历的元素 Iterator
+     * @param entryHandler entry 转化方式
+     * @param <K> key 泛型
+     * @param <V> value 泛型
+     * @param <T> 目标泛型
+     * @return list 结果
+     * @since 0.1.85
+     */
+    public static <K,V,T> List<T> toList(Map<K,V> map, IMapEntryHandler<K, V, T> entryHandler) {
+        if(MapUtil.isEmpty(map)) {
+            return Collections.emptyList();
+        }
+
+        List<T> resultList = Guavas.newArrayList(map.size());
+        for(Map.Entry<K,V> entry : map.entrySet()) {
+            final T result = entryHandler.handler(entry);
+            resultList.add(result);
+        }
+        return resultList;
     }
 
     /**

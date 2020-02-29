@@ -400,6 +400,34 @@ public final class CollectionUtil {
     }
 
     /**
+     * 填充信息
+     *
+     * @param size 大小
+     * @param initValue 初始值
+     * @return 列表
+     * @since 0.1.85
+     */
+    public static List<Integer> fill(final int size, final int initValue) {
+        List<Integer> list = Guavas.newArrayList(size);
+
+        for (int i = 0; i < size; i++) {
+            list.add(i + initValue);
+        }
+        return list;
+    }
+
+    /**
+     * 填充信息
+     *
+     * @param size 大小
+     * @return 列表
+     * @since 0.1.85
+     */
+    public static List<Integer> fill(final int size) {
+        return fill(size, 0);
+    }
+
+    /**
      * 获取第一个元素
      * 1. 避免 NPE
      *
@@ -645,6 +673,28 @@ public final class CollectionUtil {
                 break;
             }
         }
+        return resultList;
+    }
+
+    /**
+     * 针对整个集合做替换处理
+     * @param collection 集合
+     * @param regex 正则
+     * @param target 目标
+     * @return 结果
+     * @since 0.1.85
+     */
+    public static List<String> replaceAll(final Collection<String> collection, final String regex, final String target) {
+        if(CollectionUtil.isEmpty(collection)) {
+            return Collections.emptyList();
+        }
+
+        List<String> resultList = Guavas.newArrayList(collection.size());
+        for(String s : collection) {
+            String result = s.replaceAll(regex, target);
+            resultList.add(result);
+        }
+
         return resultList;
     }
 

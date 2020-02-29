@@ -219,24 +219,10 @@ public class StreamUtil {
                                         final int endIndex,
                                         final Charset charset) {
         try(InputStream inputStream = StreamUtil.class.getResourceAsStream(path)) {
-            // 跳过指定长度
-            inputStream.skip(startIndex);
-
-            // 这个读取的数据可能不正确
-            // InputStream.read(byte[] b) 无法保证读取的结果正确。
-            final int count = endIndex-startIndex;
-            byte[] bytes = new byte[count];
-            // 已经成功读取的字节的个数
-            int readCount = 0;
-            while (readCount < count) {
-                readCount += inputStream.read(bytes, readCount, count - readCount);
-            }
-
-            return new String(bytes, charset);
+            return FileUtil.getFileContent(inputStream, startIndex, endIndex, charset);
         } catch (IOException e) {
             throw new CommonRuntimeException(e);
         }
     }
-
 
 }

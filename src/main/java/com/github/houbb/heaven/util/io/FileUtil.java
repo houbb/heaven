@@ -9,7 +9,6 @@ package com.github.houbb.heaven.util.io;
 import com.github.houbb.heaven.constant.CharsetConst;
 import com.github.houbb.heaven.constant.FileTypeConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
-import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.support.handler.IMapHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
@@ -70,6 +69,7 @@ public final class FileUtil {
      *
      * @param inputStream 输入流
      * @return 文件内容
+     * @since 0.1.10
      */
     public static String getFileContent(InputStream inputStream) {
         return getFileContent(inputStream, CharsetConst.UTF8);
@@ -81,19 +81,55 @@ public final class FileUtil {
      * @param inputStream 文件输入流
      * @param charset     文件编码
      * @return 文件内容字符串
+     * @since 0.1.10
      */
     public static String getFileContent(InputStream inputStream, String charset) {
+        Charset charsetVal = Charset.forName(charset);
+        return getFileContent(inputStream, 0, Integer.MAX_VALUE, charsetVal);
+    }
+
+    /**
+     * 获取文件内容
+     * @param inputStream 输入流
+     * @param startIndex 开始下标
+     * @param endIndex 结束下标
+     * @param charset 编码
+     * @return 结果
+     * @since 0.1.85
+     */
+    public static String getFileContent(final InputStream inputStream,
+                                        int startIndex,
+                                        int endIndex,
+                                        final Charset charset) {
         try {
-            int size = inputStream.available();
-            //TODO: 这里的读取可能也有问题，使用到的时候在做修复。
-            byte[] bytes = new byte[size];
-            int readSize = inputStream.read(bytes);
-            inputStream.close();
-            String jsonText;
-            jsonText = new String(bytes, charset);
-            return jsonText;
+            // 参数纠正
+            endIndex = Math.min(endIndex, inputStream.available());
+            startIndex = Math.max(0, startIndex);
+
+            // 跳过指定长度
+            inputStream.skip(startIndex);
+
+            // 这个读取的数据可能不正确
+            // InputStream.read(byte[] b) 无法保证读取的结果正确。
+            final int count = endIndex-startIndex;
+            byte[] bytes = new byte[count];
+            // 已经成功读取的字节的个数
+            int readCount = 0;
+            while (readCount < count) {
+                readCount += inputStream.read(bytes, readCount, count - readCount);
+            }
+
+            return new String(bytes, charset);
         } catch (IOException e) {
             throw new CommonRuntimeException(e);
+        } finally {
+            try {
+                if(inputStream != null) {
+                    inputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
