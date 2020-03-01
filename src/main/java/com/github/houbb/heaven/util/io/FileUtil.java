@@ -811,4 +811,32 @@ public final class FileUtil {
         });
     }
 
+    /**
+     * 获取文件名称
+     * @param path 完整路径
+     * @return 名称
+     * @since 0.1.86
+     */
+    public static String getFileName(final String path) {
+        if(StringUtil.isEmptyTrim(path)) {
+            return StringUtil.EMPTY;
+        }
+
+        File file = new File(path);
+        String name = file.getName();
+
+        return name.substring(0, name.lastIndexOf('.'));
+    }
+
+    /**
+     * 获取父类路径
+     * @param path 当前路径
+     * @return 父类路径
+     * @since 0.1.86
+     */
+    public static String getDirPath(final String path) {
+        Path path1 = Paths.get(path);
+        return path1.getParent().toAbsolutePath().toString()+ File.separator;
+    }
+
 }

@@ -3,6 +3,7 @@ package com.github.houbb.heaven.util.util;
 import com.github.houbb.heaven.constant.PunctuationConst;
 import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.io.FileUtil;
+import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
 import java.util.Collections;
@@ -19,6 +20,23 @@ import java.util.Stack;
 public final class JsonUtil {
 
     private JsonUtil() {
+    }
+
+    /**
+     * 获取索引列表
+     *
+     * @param compressJsonPath 压缩的 json 路径
+     * @return 结果列表
+     * @since 0.1.86
+     */
+    public static List<String> getIndexList(final String compressJsonPath, final int size) {
+        final String json = FileUtil.getFileContent(compressJsonPath);
+        if (StringUtil.isEmptyTrim(json) || size <= 0) {
+            return Collections.emptyList();
+        }
+
+        List<Integer> prefixList = CollectionUtil.fill(size);
+        return getIndexList(compressJsonPath, prefixList);
     }
 
     /**
@@ -58,12 +76,31 @@ public final class JsonUtil {
             }
         }
 
-
         for (int i = 0; i < indexPrefixList.size(); i++) {
-            String result = indexPrefixList.get(i) + StringUtil.BLANK + indexList.get(i);
+            final String prefix = getPrefix(indexPrefixList.get(i));
+            String result = prefix + indexList.get(i);
             results.add(result);
         }
 
         return results;
     }
+
+    /**
+     * 获取前缀
+     * @param object 对象
+     * @return 结果
+     * @since 0.0.1
+     */
+    private static String getPrefix(Object object) {
+        if(ObjectUtil.isNull(object)) {
+            return StringUtil.EMPTY;
+        }
+        String string = object.toString();
+        if(StringUtil.isEmptyTrim(string)) {
+            return StringUtil.EMPTY;
+        }
+
+        return string+StringUtil.BLANK;
+    }
+
 }
