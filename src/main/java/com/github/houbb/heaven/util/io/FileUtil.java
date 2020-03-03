@@ -114,8 +114,9 @@ public final class FileUtil {
             final int count = endIndex-startIndex;
             byte[] bytes = new byte[count];
             // 已经成功读取的字节的个数
+            // -1 也代表结束
             int readCount = 0;
-            while (readCount < count) {
+            while (readCount < count && readCount != -1) {
                 readCount += inputStream.read(bytes, readCount, count - readCount);
             }
 
