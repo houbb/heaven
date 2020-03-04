@@ -1,7 +1,9 @@
 package com.github.houbb.heaven.util.io;
 
+import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.constant.CharsetConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
+import com.github.houbb.heaven.util.id.impl.Ids;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
@@ -10,6 +12,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -223,6 +227,94 @@ public class StreamUtil {
         } catch (IOException e) {
             throw new CommonRuntimeException(e);
         }
+    }
+
+    /**
+     * 文件输入流转 file
+     * https://www.cnblogs.com/asfeixue/p/9065681.html
+     *
+     * @param inputStream 输入流
+     * @param deleteOnExit 退出时删除
+     * @return 文件信息
+     * @since 0.1.87
+     */
+    public static File inputStreamToFile(final InputStream inputStream,
+                                         final boolean deleteOnExit) {
+        if (ObjectUtil.isNull(inputStream)) {
+            return null;
+        }
+
+        try {
+            File temp = File.createTempFile(Ids.uuid32(), "temp");
+            // 退出时删除
+            if(deleteOnExit) {
+                temp.deleteOnExit();
+            }
+
+            // 复制文件流信息到 temp 中
+            Files.copy(inputStream, temp.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            return temp;
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        } finally {
+            StreamUtil.closeStream(inputStream);
+        }
+    }
+
+    /**
+     * 文件输入流转 file
+     * https://www.cnblogs.com/asfeixue/p/9065681.html
+     *
+     * @param inputStream 输入流
+     * @return 文件信息
+     * @since 0.1.87
+     */
+    public static File inputStreamToFile(final InputStream inputStream) {
+        return inputStreamToFile(inputStream, false);
+    }
+
+    /**
+     * 输入流转为字节流
+     * @param inputStream 输入流
+     * @return 字节数组
+     * @since 0.1.87
+     */
+    public static byte[] inputStreamToBytes(final InputStream inputStream) {
+        try(ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+            byte[] buffer = new byte[1024];
+            int n = 0;
+            while (-1 != (n = inputStream.read(buffer))) {
+                output.write(buffer, 0, n);
+            }
+
+            return output.toByteArray();
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 输入流转为字符串
+     * @param inputStream 输入流
+     * @param charsetStr 字符编码
+     * @return 字节数组
+     * @since 0.1.87
+     */
+    public static String inputStreamToString(final InputStream inputStream,
+                                            final String charsetStr) {
+        byte[] bytes = inputStreamToBytes(inputStream);
+        Charset charset = Charset.forName(charsetStr);
+        return new String(bytes, charset);
+    }
+
+    /**
+     * 输入流转为字符串
+     * @param inputStream 输入流
+     * @return 字节数组
+     * @since 0.1.87
+     */
+    public static String inputStreamToString(final InputStream inputStream) {
+        return inputStreamToString(inputStream, CharsetConst.UTF8);
     }
 
 }
