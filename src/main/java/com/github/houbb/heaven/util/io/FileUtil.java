@@ -6,6 +6,7 @@
 package com.github.houbb.heaven.util.io;
 
 
+import com.github.houbb.heaven.constant.CharConst;
 import com.github.houbb.heaven.constant.CharsetConst;
 import com.github.houbb.heaven.constant.FileTypeConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
@@ -360,6 +361,42 @@ public final class FileUtil {
 
     /**
      * 获取每一行的文件内容
+     * @param file 文件路径
+     * @param charset 文件编码
+     * @param ignoreEmpty 是否跳过空白行
+     * @return 结果列表
+     * @since 0.1.88
+     */
+    public static List<String> readAllLines(final File file,
+                                            final String charset,
+                                            final boolean ignoreEmpty) {
+        return readAllLines(file, charset, 0, Integer.MAX_VALUE, ignoreEmpty);
+    }
+
+    /**
+     * 获取每一行的文件内容
+     * @param file 文件路径
+     * @param charset 文件编码
+     * @return 结果列表
+     * @since 0.1.88
+     */
+    public static List<String> readAllLines(final File file,
+                                            final String charset) {
+        return readAllLines(file, charset, false);
+    }
+
+    /**
+     * 获取每一行的文件内容
+     * @param file 文件路径
+     * @return 结果列表
+     * @since 0.1.88
+     */
+    public static List<String> readAllLines(final File file) {
+        return readAllLines(file, CharsetConst.UTF8);
+    }
+
+    /**
+     * 获取每一行的文件内容
      * @param filePath 文件路径
      * @param charset 文件编码
      * @return 结果列表
@@ -369,6 +406,7 @@ public final class FileUtil {
                                             final String charset) {
         return readAllLines(filePath, charset, false);
     }
+
 
     /**
      * 获取每一行的文件内容
@@ -480,6 +518,13 @@ public final class FileUtil {
             ArgUtil.notNull(lines, "charSequences");
             CharsetEncoder encoder = Charset.forName(charset).newEncoder();
             final Path path = Paths.get(filePath);
+
+            // 创建父类文件夹
+            Path pathParent = path.getParent();
+            File parent = pathParent.toFile();
+            if(!parent.exists()) {
+                parent.mkdirs();
+            }
 
             OutputStream out = path.getFileSystem().provider().newOutputStream(path, openOptions);
             try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, encoder))) {
@@ -838,6 +883,21 @@ public final class FileUtil {
     public static String getDirPath(final String path) {
         Path path1 = Paths.get(path);
         return path1.getParent().toAbsolutePath().toString()+ File.separator;
+    }
+
+
+    /**
+     * 移除 windows 中禁止出现的特殊符号名称
+     * @param name 名称
+     * @return 结果
+     * @since 0.1.88
+     */
+    public static String trimWindowsSpecialChars(final String name) {
+        if(StringUtil.isEmpty(name)) {
+            return name;
+        }
+
+        return name.replaceAll("[?/\\\\*<>|:\"]", "");
     }
 
 }
