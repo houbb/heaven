@@ -668,3 +668,11 @@
 | 1 | A | 新增 Stream#inputStreamToFile() | 2020-3-1 20:18:53 | 输入流转文件 |
 | 2 | A | 新增 Stream#inputStreamToBytes() | 2020-3-1 20:18:53 | 输入流转字节 |
 | 3 | A | 新增 Stream#inputStreamToString() | 2020-3-1 20:18:53 | 输入流转字符串 |
+
+# release_0.1.88
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | U | 调整 LangEnum 属性 | 2020-3-6 11:51:46 | |
+| 2 | A | 新增 FileUtil#trimWindowsSpecialChars() | 2020-3-6 11:51:46 | 过滤不符合掉 windows 文件名|
+| 3 | A | 新增 FileUtil#readAllLines() | 2020-3-6 11:51:46 | 基于文件的行读取 |
