@@ -10,6 +10,7 @@ import com.github.houbb.heaven.support.condition.ICondition;
 import com.github.houbb.heaven.support.filler.IFiller;
 import com.github.houbb.heaven.support.filter.IFilter;
 import com.github.houbb.heaven.support.handler.IHandler;
+import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
@@ -695,6 +696,41 @@ public final class CollectionUtil {
             resultList.add(result);
         }
 
+        return resultList;
+    }
+
+    /**
+     * 对原始列表进行截取
+     *
+     * @param list   集合1
+     * @param offset 偏移量
+     * @param limit   大小
+     * @param <E>    泛型
+     * @return 结果集合
+     * @since 0.1.89
+     */
+    public static <E> List<E> subList(final List<E> list,
+                                      final int offset,
+                                      final int limit) {
+        // 参数校验
+        ArgUtil.notNegative(offset, "offset");
+        ArgUtil.notNegative(limit, "limit");
+
+        //fast-return
+        if(CollectionUtil.isEmpty(list)) {
+            return Collections.emptyList();
+        }
+
+        //offset 的大小计算
+        final int size = list.size();
+        final int actualOffset = Math.min(offset, size);
+        final int actualLimit = Math.min(limit, size-actualOffset);
+
+        // 处理
+        List<E> resultList = Guavas.newArrayList(actualLimit);
+        for(int i = actualOffset; i < actualOffset+actualLimit; i++) {
+            resultList.add(list.get(i));
+        }
         return resultList;
     }
 
