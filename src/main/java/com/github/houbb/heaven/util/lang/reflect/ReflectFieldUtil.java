@@ -246,4 +246,53 @@ public final class ReflectFieldUtil {
         }
     }
 
+    /**
+     * 获取对应的值信息
+     * @param fieldName 字段名称
+     * @param instance 实例
+     * @return 值
+     * @since 0.1.90
+     */
+    public static Object getValue(final String fieldName, final Object instance) {
+        Field field = getField(instance, fieldName);
+        return getValue(field, instance);
+    }
+
+    /**
+     * 获取指定字段名称的字段信息
+     * @param object 对象实例
+     * @param fieldName 字段名称
+     * @return 字段信息
+     * @since 0.1.90
+     */
+    public static Field getField(final Object object, final String fieldName) {
+        ArgUtil.notNull(object, "object");
+
+        final Class clazz = object.getClass();
+        return getField(clazz, fieldName);
+    }
+
+    /**
+     * 获取指定字段名称的字段信息
+     * @param clazz 类名称
+     * @param fieldName 字段名称
+     * @return 字段信息
+     * @since 0.1.90
+     */
+    public static Field getField(final Class clazz, final String fieldName) {
+        ArgUtil.notNull(clazz, "clazz");
+        ArgUtil.notEmpty(fieldName, "fieldName");
+
+        List<Field> fieldList = ClassUtil.getAllFieldList(clazz);
+
+        for(Field field : fieldList) {
+            String name = field.getName();
+            if(name.equals(fieldName)) {
+                return field;
+            }
+        }
+
+        throw new CommonRuntimeException("Field not found for fieldName: " + fieldName);
+    }
+
 }
