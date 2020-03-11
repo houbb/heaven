@@ -689,3 +689,11 @@
 |:---|:---|:---|:---|:--|
 | 1 | A | 新增 FieldUtil#getField | 2020-3-10 22:37:00 | 获取字段 |
 | 2 | A | 新增 FieldUtil#getValue | 2020-3-10 22:37:00 | 获取字段值 |
+
+# release_0.1.91
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 ReflectMethodUtil#invokeGetterMethod | 2020-3-11 12:08:34 | |
+| 2 | A | 新增 ReflectMethodUtil#buildGetMethodName(String) | 2020-3-11 12:08:34 | |
+

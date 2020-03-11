@@ -345,6 +345,57 @@ public final class ReflectMethodUtil {
         }
     }
 
+    /***
+     * 调用 getter 方法，获取属性值
+     * @param instance 实例信息
+     * @param fieldName 属性名称
+     * @param fieldType 字段类型
+     * @since 0.1.91
+     */
+    public static Object invokeGetterMethod(final Object instance,
+                                          final String fieldName,
+                                          final Class fieldType) {
+        ArgUtil.notNull(instance, "instance");
+        ArgUtil.notNull(fieldType, "fieldType");
+        ArgUtil.notEmpty(fieldName, "fieldName");
+
+        final Class<?> clazz = instance.getClass();
+        String getMethodName = buildGetMethodName(fieldType, fieldName);
+
+        // 反射获取对应的方法
+        try {
+            Method method = clazz.getMethod(getMethodName);
+            return method.invoke(instance);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /***
+     * 调用 getter 方法，获取属性值
+     * @param instance 实例信息
+     * @param fieldName 属性名称
+     * @since 0.1.91
+     */
+    public static Object invokeGetterMethod(final Object instance,
+                                            final String fieldName) {
+        return invokeGetterMethod(instance, fieldName, String.class);
+    }
+
+    /***
+     * 调用 getter 方法，获取属性值
+     * @param instance 实例信息
+     * @param field 字段类型
+     * @since 0.1.91
+     */
+    public static Object invokeGetterMethod(final Object instance,
+                                            final Field field) {
+        final Class<?> fieldType = field.getType();
+        final String fieldName = field.getName();
+
+        return invokeGetterMethod(instance, fieldName, fieldType);
+    }
+
     /**
      * 构建设置方法名称
      * @param propertyName 属性名称
@@ -375,6 +426,17 @@ public final class ReflectMethodUtil {
             return MethodConst.IS_PREFIX + StringUtil.firstToUpperCase(propertyName);
         }
         return MethodConst.GET_PREFIX + StringUtil.firstToUpperCase(propertyName);
+    }
+
+    /**
+     * 构建设置方法名称
+     * 1. 默认使用 getXXX
+     * @param propertyName 属性名称
+     * @return set 方法名称
+     * @since 0.1.91
+     */
+    public static String buildGetMethodName(final String propertyName) {
+        return buildGetMethodName(String.class, propertyName);
     }
 
 }
