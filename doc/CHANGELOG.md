@@ -697,3 +697,11 @@
 | 1 | A | 新增 ReflectMethodUtil#invokeGetterMethod | 2020-3-11 12:08:34 | |
 | 2 | A | 新增 ReflectMethodUtil#buildGetMethodName(String) | 2020-3-11 12:08:34 | |
 
+# release_0.1.92
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 修正 FileUtil 文件不存在抛出异常 | 2020-3-12 17:34:00 | |
+| 2 | A | 新增 Collection#getRepeatList | 2020-3-12 17:35:24 | |
+
+

@@ -475,6 +475,32 @@ public final class CollectionUtil {
     }
 
     /**
+     * 获取重复列表
+     * @param collection 集合
+     * @param <T> 泛型
+     * @return 结果列表
+     * @since 0.1.92
+     */
+    public static <T extends Comparable> List<T> getRepeatList(final Collection<T> collection) {
+        if(CollectionUtil.isEmpty(collection)) {
+            return Collections.emptyList();
+        }
+
+        List<T> resultList = Guavas.newArrayList();
+        Set<T> set = Guavas.newHashSet();
+        for(T elem : collection) {
+            // 重复数据
+            if(set.contains(elem)) {
+                resultList.add(elem);
+            }
+
+            set.add(elem);
+        }
+
+        return resultList;
+    }
+
+    /**
      * 排序
      *
      * @param <T> 集合元素类型

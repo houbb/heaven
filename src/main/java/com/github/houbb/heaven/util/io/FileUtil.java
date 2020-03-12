@@ -240,7 +240,7 @@ public final class FileUtil {
                 contentList.add(dataEachLine);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new CommonRuntimeException(e);
         }
 
         return contentList;
@@ -282,7 +282,7 @@ public final class FileUtil {
                 contentList.add(dataEachLine);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new CommonRuntimeException(e);
         }
 
         return contentList;
@@ -309,7 +309,7 @@ public final class FileUtil {
 
         List<String> contentList = new LinkedList<>();
         if (!file.exists()) {
-            return contentList;
+            throw new CommonRuntimeException("File not exists!");
         }
 
         try (FileInputStream fileInputStream = new FileInputStream(file);
@@ -534,7 +534,7 @@ public final class FileUtil {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new CommonRuntimeException(e);
         }
     }
 
@@ -547,7 +547,7 @@ public final class FileUtil {
      * @param filePath 文件路径
      * @return 是否成功
      * @since 0.1.24
-     * @throws RuntimeException 运行时异常，如果创建文件异常。包括的异常为 {@link IOException} 文件异常.
+     * @throws CommonRuntimeException 运行时异常，如果创建文件异常。包括的异常为 {@link IOException} 文件异常.
      */
     public static boolean createFile(final String filePath) {
         if(StringUtil.isEmpty(filePath)) {
@@ -572,7 +572,7 @@ public final class FileUtil {
         try {
             return file.createNewFile();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new CommonRuntimeException(e);
         }
     }
 
@@ -701,7 +701,7 @@ public final class FileUtil {
      * @param filePath 文件路径
      * @return 文件信息
      * @since 0.1.50
-     * @throws RuntimeException 运行时异常，如果创建文件异常。包括的异常为 {@link IOException} 文件异常.
+     * @throws CommonRuntimeException 运行时异常，如果创建文件异常。包括的异常为 {@link IOException} 文件异常.
      */
     public static File createFileAssertSuccess(final String filePath) {
         ArgUtil.notEmpty(filePath, "filePath");
@@ -729,7 +729,7 @@ public final class FileUtil {
             }
             return file;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new CommonRuntimeException(e);
         }
     }
 
