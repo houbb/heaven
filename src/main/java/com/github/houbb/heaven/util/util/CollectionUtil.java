@@ -382,6 +382,23 @@ public final class CollectionUtil {
     }
 
     /**
+     * 循环处理集合
+     *
+     * @param collection 集合
+     * @param <E>        泛型元素
+     * @since 0.1.93
+     */
+    public static <E> void foreachPrint(final Collection<E> collection) {
+        foreach(collection, new IHandler<E, Void>() {
+            @Override
+            public Void handle(E e) {
+                System.out.println(e);
+                return null;
+            }
+        });
+    }
+
+    /**
      * 填充信息
      *
      * @param size 大小

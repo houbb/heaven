@@ -704,4 +704,9 @@
 | 1 | A | 修正 FileUtil 文件不存在抛出异常 | 2020-3-12 17:34:00 | |
 | 2 | A | 新增 Collection#getRepeatList | 2020-3-12 17:35:24 | |
 
+# release_0.1.93
 
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 CollectionUtil#foreachPrint() | 2020-3-14 15:01:33 | |
+| 2 | A | 新增 MapUtil#getMapValue() | 2020-3-14 15:01:33 | 便于获取默认值 |
