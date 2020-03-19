@@ -78,6 +78,40 @@ public final class FileUtil {
 
     /**
      * 获取文件内容
+     * 默认编码UTF8
+     *
+     * @param file 文件
+     * @param charset 文件编码
+     * @return 文件内容
+     * @since 0.1.94
+     */
+    public static String getFileContent(final File file,
+                                        final String charset) {
+        try(InputStream inputStream = new FileInputStream(file)) {
+            return getFileContent(inputStream, charset);
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 获取文件内容
+     * 默认编码UTF8
+     *
+     * @param file 文件
+     * @return 文件内容
+     * @since 0.1.94
+     */
+    public static String getFileContent(final File file) {
+        try(InputStream inputStream = new FileInputStream(file)) {
+            return getFileContent(inputStream);
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 获取文件内容
      *
      * @param inputStream 文件输入流
      * @param charset     文件编码
