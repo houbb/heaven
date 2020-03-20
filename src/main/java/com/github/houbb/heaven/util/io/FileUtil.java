@@ -518,10 +518,11 @@ public final class FileUtil {
      * （3）默认为一行
      * @param filePath 文件路径
      * @param line 行信息
+     * @param openOptions 操作属性
      * @since 0.1.78
      */
-    public static void write(final String filePath, final CharSequence line){
-        write(filePath, Collections.singletonList(line));
+    public static void write(final String filePath, final CharSequence line, OpenOption ... openOptions){
+        write(filePath, Collections.singletonList(line), openOptions);
     }
 
     /**
