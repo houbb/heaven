@@ -928,6 +928,7 @@ public final class FileUtil {
     /**
      * 将文件内容转换为 map
      *
+     * @param inputStream 输入流
      * @param charset    文件编码
      * @param mapHandler 转换实现
      * @param <K>        key 泛型
