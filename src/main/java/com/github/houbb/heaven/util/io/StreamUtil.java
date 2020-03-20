@@ -334,7 +334,7 @@ public class StreamUtil {
     public static <K, V> Map<K, V> readToMap(final String path,
                                              final String charset,
                                              final IMapHandler<K, V, String> mapHandler) {
-        InputStream inputStream = getInputStream(path);
+        InputStream inputStream = StreamUtil.class.getResourceAsStream(path);
         return FileUtil.readToMap(inputStream, charset, mapHandler);
     }
 
