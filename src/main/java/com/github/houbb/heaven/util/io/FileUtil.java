@@ -12,9 +12,11 @@ import com.github.houbb.heaven.constant.FileTypeConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.handler.IMapHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
+import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
+import com.sun.corba.se.spi.orbutil.fsm.Input;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -290,6 +292,7 @@ public final class FileUtil {
      * @param charset  编码
      * @return string list
      */
+    @Deprecated
     public static List<String> getFileContentEachLine(final File file, final int initLine, final int endLine, final String charset) {
         List<String> contentList = new LinkedList<>();
 
@@ -340,14 +343,38 @@ public final class FileUtil {
                                             final boolean ignoreEmpty) {
         ArgUtil.notNull(file, "file");
         ArgUtil.notEmpty(charset, "charset");
-
-        List<String> contentList = new LinkedList<>();
         if (!file.exists()) {
             throw new CommonRuntimeException("File not exists!");
         }
 
-        try (FileInputStream fileInputStream = new FileInputStream(file);
-             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, charset);
+        try (FileInputStream inputStream = new FileInputStream(file)) {
+            return readAllLines(inputStream, charset, initLine, endLine, ignoreEmpty);
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 获取每一行的文件内容
+     * （1）如果文件不存在，直接返回空列表。
+     * @param inputStream 文件输入流
+     * @param charset 编码
+     * @param initLine 初始化行
+     * @param endLine 结束航
+     * @param ignoreEmpty 是否跳过空白行
+     * @return 结果列表
+     * @since 0.1.95
+     */
+    public static List<String> readAllLines(final InputStream inputStream,
+                                            final String charset,
+                                            final int initLine,
+                                            final int endLine,
+                                            final boolean ignoreEmpty) {
+        ArgUtil.notNull(inputStream, "inputStream");
+        ArgUtil.notEmpty(charset, "charset");
+
+        List<String> contentList = new LinkedList<>();
+        try (InputStreamReader inputStreamReader = new InputStreamReader(inputStream, charset);
              BufferedReader bufferedReader = new BufferedReader(inputStreamReader)
         ) {
             // 用于记录行号
@@ -373,9 +400,71 @@ public final class FileUtil {
             }
         } catch (IOException e) {
             throw new CommonRuntimeException(e);
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return contentList;
+    }
+
+    /**
+     * 获取每一行的文件内容
+     * （1）如果文件不存在，直接返回空列表。
+     * @param inputStream 文件输入流
+     * @param charset 编码
+     * @param initLine 初始化行
+     * @param endLine 结束航
+     * @return 结果列表
+     * @since 0.1.95
+     */
+    public static List<String> readAllLines(final InputStream inputStream,
+                                            final String charset,
+                                            final int initLine,
+                                            final int endLine) {
+        return readAllLines(inputStream, charset, initLine, endLine, true);
+    }
+
+    /**
+     * 获取每一行的文件内容
+     * （1）如果文件不存在，直接返回空列表。
+     * @param inputStream 文件输入流
+     * @param charset 编码
+     * @param initLine 初始化行
+     * @return 结果列表
+     * @since 0.1.95
+     */
+    public static List<String> readAllLines(final InputStream inputStream,
+                                            final String charset,
+                                            final int initLine) {
+        return readAllLines(inputStream, charset, initLine, Integer.MAX_VALUE);
+    }
+
+    /**
+     * 获取每一行的文件内容
+     * （1）如果文件不存在，直接返回空列表。
+     * @param inputStream 文件输入流
+     * @param charset 编码
+     * @return 结果列表
+     * @since 0.1.95
+     */
+    public static List<String> readAllLines(final InputStream inputStream,
+                                            final String charset) {
+        return readAllLines(inputStream, charset, 0);
+    }
+
+    /**
+     * 获取每一行的文件内容
+     * （1）如果文件不存在，直接返回空列表。
+     * @param inputStream 文件输入流
+     * @return 结果列表
+     * @since 0.1.95
+     */
+    public static List<String> readAllLines(final InputStream inputStream) {
+        return readAllLines(inputStream, CharsetConst.UTF8);
     }
 
     /**
@@ -418,6 +507,7 @@ public final class FileUtil {
                                             final String charset) {
         return readAllLines(file, charset, false);
     }
+
 
     /**
      * 获取每一行的文件内容
@@ -833,6 +923,23 @@ public final class FileUtil {
                 || string.endsWith(FileTypeConst.Image.JPEG)
                 || string.endsWith(FileTypeConst.Image.JPG)
                 || string.endsWith(FileTypeConst.Image.GIF);
+    }
+
+    /**
+     * 将文件内容转换为 map
+     *
+     * @param charset    文件编码
+     * @param mapHandler 转换实现
+     * @param <K>        key 泛型
+     * @param <V>        value 泛型
+     * @return 结果
+     * @since 0.1.95
+     */
+    public static <K, V> Map<K, V> readToMap(final InputStream inputStream,
+                                             final String charset,
+                                             final IMapHandler<K, V, String> mapHandler) {
+        List<String> allLines = FileUtil.readAllLines(inputStream, charset);
+        return MapUtil.toMap(allLines, mapHandler);
     }
 
     /**

@@ -3,9 +3,11 @@ package com.github.houbb.heaven.util.io;
 import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.constant.CharsetConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
+import com.github.houbb.heaven.support.handler.IMapHandler;
 import com.github.houbb.heaven.util.id.impl.Ids;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
+import com.github.houbb.heaven.util.util.MapUtil;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -16,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 流工具类
@@ -315,6 +318,61 @@ public class StreamUtil {
      */
     public static String inputStreamToString(final InputStream inputStream) {
         return inputStreamToString(inputStream, CharsetConst.UTF8);
+    }
+
+    /**
+     * 将文件内容转换为 map
+     *
+     * @param path       文件路径
+     * @param charset    文件编码
+     * @param mapHandler 转换实现
+     * @param <K>        key 泛型
+     * @param <V>        value 泛型
+     * @return 结果
+     * @since 0.1.95
+     */
+    public static <K, V> Map<K, V> readToMap(final String path,
+                                             final String charset,
+                                             final IMapHandler<K, V, String> mapHandler) {
+        InputStream inputStream = getInputStream(path);
+        return FileUtil.readToMap(inputStream, charset, mapHandler);
+    }
+
+    /**
+     * 将文件内容转换为 map
+     *
+     * @param path       文件路径
+     * @param mapHandler 转换实现
+     * @param <K>        key 泛型
+     * @param <V>        value 泛型
+     * @return 结果
+     * @since 0.1.95
+     */
+    public static <K, V> Map<K, V> readToMap(final String path,
+                                             final IMapHandler<K, V, String> mapHandler) {
+        return readToMap(path, CharsetConst.UTF8, mapHandler);
+    }
+
+    /**
+     * 将文件内容转换为 map
+     *
+     * @param path       文件路径
+     * @param splliter  拆分符号
+     * @return 结果
+     * @since 0.1.95
+     */
+    public static Map<String, String> readToMap(final String path, final String splliter) {
+        return readToMap(path, new IMapHandler<String, String, String>() {
+            @Override
+            public String getKey(String o) {
+                return o.split(splliter)[0];
+            }
+
+            @Override
+            public String getValue(String o) {
+                return o.split(splliter)[1];
+            }
+        });
     }
 
 }
