@@ -2,6 +2,8 @@ package com.github.houbb.heaven.support.reader.impl;
 
 import com.github.houbb.heaven.support.reader.IReader;
 
+import java.io.File;
+
 /**
  * <p> project: heaven-Readers </p>
  * <p> create on 2020/3/19 21:47 </p>
@@ -33,6 +35,18 @@ public final class Readers {
     public static IReader filePath(final String filePath,
                                    final String charset) {
         return new FilePathReader(filePath, charset);
+    }
+
+    /**
+     * 获取文本字符串
+     * @param file 文件
+     * @param charset 文件编码
+     * @return 实现
+     * @since 0.1.95
+     */
+    public static IReader file(final File file,
+                                   final String charset) {
+        return new FileReader(file, charset);
     }
 
 }
