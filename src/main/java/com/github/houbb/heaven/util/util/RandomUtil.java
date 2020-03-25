@@ -4,6 +4,8 @@ import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -109,4 +111,24 @@ public final class RandomUtil {
         }
         return sb.toString();
     }
+
+    /**
+     * 随机选择列表中的一个元素
+     * @param list 列表
+     * @param <T> 泛型
+     * @return 结果
+     * @since 0.1.97
+     */
+    public static <T> T random(final List<T> list) {
+        if(CollectionUtil.isEmpty(list)) {
+            return null;
+        }
+
+        final int size = list.size();
+        final Random random = ThreadLocalRandom.current();
+        int index = random.nextInt(size);
+
+        return list.get(index);
+    }
+
 }

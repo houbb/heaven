@@ -18,7 +18,7 @@ public final class CharsetUtil {
      * @return 中文
      * @since 0.1.31
      */
-    private static String unicodeToZh(String unicode) {
+    public static String unicodeToZh(String unicode) {
         if(StringUtil.isEmpty(unicode)) {
            return null;
         }
@@ -27,8 +27,17 @@ public final class CharsetUtil {
         StringBuilder builder = new StringBuilder();
         // 由于unicode字符串以 \ u 开头，因此分割出的第一个字符是""。
         for (int i = 1; i < strings.length; i++) {
-            final char c = (char) Integer.valueOf(strings[i], 16).intValue();
+            String code = strings[i];
+
+            // 只考虑4个字符的部分
+            String actualCode = code.substring(0, 4);
+            final char c = (char) Integer.valueOf(actualCode, 16).intValue();
             builder.append(c);
+
+            if(code.length() > 4) {
+                // 如果有超过4个字母的部分，直接当做字符串处理掉
+                builder.append(code.substring(4));
+            }
         }
         return builder.toString();
     }
@@ -39,7 +48,7 @@ public final class CharsetUtil {
      * @return 编码
      * @since 0.1.31
      */
-    private static String zhToUnicode(String zh) {
+    public static String zhToUnicode(String zh) {
         if(StringUtil.isEmpty(zh)) {
             return null;
         }
