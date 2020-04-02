@@ -1043,4 +1043,17 @@ public final class FileUtil {
         return name.replaceAll("[?/\\\\*<>|:\"]", "");
     }
 
+    /**
+     * 重命名
+     * @param sourcePath 原始路径
+     * @param targetPath 结果路径
+     * @return 重命名结果
+     * @since 0.1.98
+     */
+    public static boolean rename(final String sourcePath,
+                              final String targetPath) {
+        File sourceFile = new File(sourcePath);
+        File targetFile = new File(targetPath);
+        return sourceFile.renameTo(targetFile);
+    }
 }

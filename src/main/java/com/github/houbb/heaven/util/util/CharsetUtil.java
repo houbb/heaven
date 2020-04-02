@@ -2,6 +2,9 @@ package com.github.houbb.heaven.util.util;
 
 import com.github.houbb.heaven.util.lang.StringUtil;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * 字符集工具类
  * @author binbin.hou
@@ -10,6 +13,12 @@ import com.github.houbb.heaven.util.lang.StringUtil;
 public final class CharsetUtil {
 
     private CharsetUtil(){}
+
+    /**
+     * unicode 编码模式
+     * @since 0.1.98
+     */
+    private static final Pattern UNICODE_PATTERN = Pattern.compile("(\\\\u(\\p{XDigit}{4}))");
 
     /**
      * unicode 转中文
@@ -117,5 +126,25 @@ public final class CharsetUtil {
 
         return true;
     }
-    
+
+    /**
+     * unicode 编码转字符串
+     * @param unicodeText 文本
+     * @return 结果
+     * @since 0.1.98
+     */
+    public static String unicodeToString(String unicodeText) {
+        if(StringUtil.isEmptyTrim(unicodeText)) {
+            return unicodeText;
+        }
+
+        Matcher matcher = UNICODE_PATTERN.matcher(unicodeText);
+        char ch;
+        while (matcher.find()) {
+            ch = (char) Integer.parseInt(matcher.group(2), 16);
+            unicodeText = unicodeText.replace(matcher.group(1), ch + "");
+        }
+        return unicodeText;
+    }
+
 }

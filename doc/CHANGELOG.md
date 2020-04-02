@@ -737,3 +737,13 @@
 |:---|:---|:---|:---|:--|
 | 1 | A | 新增 RandomUtil#random(List)，随机获取元素 | 2020-3-25 20:51:43 | |
 | 2 | U | 暴露 CharsetUtil 中 unicode 与 String 转换的方法 | 2020-3-25 20:51:43 | |
+
+# release_0.1.98
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 HttpUtil | 2020-4-2 10:19:05 | 为 http 操作提供便利 |
+| 2 | A | 新增 AesUtil | 2020-4-2 10:19:05 | 为 AES 加密 操作提供便利 |
+| 3 | A | 新增 StringUtil#replaceAnyBlank | 2020-4-2 10:19:05 | 替换任意空格 |
+| 4 | A | 新增 CharsetUtil#unicodeToString | 2020-4-2 10:19:05 | 编码转换 |
+| 5 | A | 新增 FileUtil#rename | 2020-4-2 10:19:05 | 文件重命名 |

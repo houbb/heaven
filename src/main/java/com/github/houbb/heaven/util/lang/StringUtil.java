@@ -5,7 +5,6 @@
 
 package com.github.houbb.heaven.util.lang;
 
-import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.constant.CharConst;
 import com.github.houbb.heaven.constant.PunctuationConst;
 import com.github.houbb.heaven.support.condition.ICondition;
@@ -18,6 +17,8 @@ import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 字符串工具类
@@ -38,6 +39,12 @@ public final class StringUtil {
      * @since 0.1.66
      */
     public static final String LETTERS_LOWER = "abcdefghijklmnopqrstuvwsxyz";
+
+    /**
+     * 空白信息的表达式
+     * @since 0.1.98
+     */
+    private static final Pattern BLANK_PATTERN = Pattern.compile("\\s*|\t|\r|\n");
 
     private StringUtil() {
     }
@@ -318,6 +325,36 @@ public final class StringUtil {
 
         String trim = string.trim();
         return trim.replaceAll("\\s+|\u0013", "");
+    }
+
+    /**
+     * 替换掉任意空格
+     * @param string 原始字符串
+     * @param replacement 待替换的文本
+     * @return 结果
+     * @since 0.1.98
+     */
+    public static String replaceAnyBlank(final String string,
+                                         final String replacement) {
+        if(StringUtil.isEmpty(string)) {
+            return string;
+        }
+
+        Matcher m = BLANK_PATTERN.matcher(string);
+        String result = m.replaceAll(replacement);
+        //160 &nbsp;
+        result = result.replaceAll("\\u00A0",replacement);
+        return result;
+    }
+
+    /**
+     * 替换掉任意空格为空
+     * @param string 原始字符串
+     * @return 结果
+     * @since 0.1.98
+     */
+    public static String replaceAnyBlank(final String string) {
+        return replaceAnyBlank(string, StringUtil.EMPTY);
     }
 
     /**
