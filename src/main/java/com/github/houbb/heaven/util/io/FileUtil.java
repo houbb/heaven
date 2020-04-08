@@ -6,17 +6,14 @@
 package com.github.houbb.heaven.util.io;
 
 
-import com.github.houbb.heaven.constant.CharConst;
 import com.github.houbb.heaven.constant.CharsetConst;
 import com.github.houbb.heaven.constant.FileTypeConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.handler.IMapHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
-import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
-import com.sun.corba.se.spi.orbutil.fsm.Input;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -1056,4 +1053,66 @@ public final class FileUtil {
         File targetFile = new File(targetPath);
         return sourceFile.renameTo(targetFile);
     }
+
+    /**
+     * 文件合并
+     * @param result 结果路径
+     * @param sources 其他待合并文件路径
+     * @since 0.1.99
+     */
+    public static void merge(final String result,
+                             final String ... sources) {
+        ArgUtil.notEmpty(result, "result");
+        ArgUtil.notEmpty(sources, "sources");
+
+        try(OutputStream os = new FileOutputStream(result)) {
+            for(String source : sources) {
+                byte[] bytes = getFileBytes(source);
+                os.write(bytes);
+            }
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 将指定的数组信息合并到指定的文件中
+     * @param result 结果路径
+     * @param byteArrays 其他待合并文件路径
+     * @since 0.1.99
+     */
+    public static void merge(final String result,
+                             final byte[] ... byteArrays) {
+        ArgUtil.notEmpty(result, "result");
+        ArgUtil.notEmpty(byteArrays, "byteArrays");
+
+        try(OutputStream os = new FileOutputStream(result)) {
+            for(byte[] bytes : byteArrays) {
+                os.write(bytes);
+            }
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 将指定的数组信息合并到指定的文件中
+     * @param result 结果路径
+     * @param byteArrayList 其他待合并文件字节数组
+     * @since 0.1.99
+     */
+    public static void merge(final String result,
+                             final List<byte[]> byteArrayList) {
+        ArgUtil.notEmpty(result, "result");
+        ArgUtil.notEmpty(byteArrayList, "byteArrayList");
+
+        try(OutputStream os = new FileOutputStream(result)) {
+            for(byte[] bytes : byteArrayList) {
+                os.write(bytes);
+            }
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
 }

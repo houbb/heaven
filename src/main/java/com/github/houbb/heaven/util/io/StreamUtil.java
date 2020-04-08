@@ -100,6 +100,17 @@ public class StreamUtil {
     }
 
     /**
+     * 获取文件字节流
+     * @param filePath 文件路径
+     * @return 字节流
+     * @since 0.1.99
+     */
+    public static byte[] getFileBytes(final String filePath) {
+        InputStream inputStream = getInputStream(filePath);
+        return inputStreamToBytes(inputStream);
+    }
+
+    /**
      * 获取文件对应输入流
      *
      * @param filePath 文件路径

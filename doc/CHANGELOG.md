@@ -747,3 +747,10 @@
 | 3 | A | 新增 StringUtil#replaceAnyBlank | 2020-4-2 10:19:05 | 替换任意空格 |
 | 4 | A | 新增 CharsetUtil#unicodeToString | 2020-4-2 10:19:05 | 编码转换 |
 | 5 | A | 新增 FileUtil#rename | 2020-4-2 10:19:05 | 文件重命名 |
+
+# release_0.1.99
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 FileUtil#merge | 2020-4-8 14:19:25 | 多个文件合并 |
+| 2 | A | 新增 StreamUtil#getFileBytes | 2020-4-8 14:19:25 | 获取文件字节流 |
