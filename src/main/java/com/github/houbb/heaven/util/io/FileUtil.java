@@ -599,6 +599,23 @@ public final class FileUtil {
     }
 
     /**
+     * 写入字节到文件
+     * @param filePath 文件路径
+     * @param bytes 字节信息
+     * @since 0.2.1
+     */
+    public static void write(final String filePath,
+                             final byte[] bytes) {
+        ArgUtil.notEmpty(filePath, "filePath");
+
+        try(OutputStream os = new FileOutputStream(filePath)) {
+            os.write(bytes);
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
      * 写入文件信息
      * （1）默认 utf-8 编码
      * （2）默认新建一个文件
