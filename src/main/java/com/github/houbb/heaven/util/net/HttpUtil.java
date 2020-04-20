@@ -7,6 +7,7 @@ import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.io.FileUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
 
+import javax.net.ssl.SSLContext;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -64,7 +65,20 @@ public final class HttpUtil {
      * @since 0.1.98
      */
     public static String request(String requestUrl, String requestMethod) {
-        return request(requestUrl, requestMethod, CharsetConst.UTF8);
+        return request(requestUrl, requestMethod, CharsetConst.UTF8, null);
+    }
+
+    /**
+     * http 请求
+     * @param requestUrl 请求地址
+     * @param requestMethod 方法
+     * @param headerMap 头信息
+     * @return 结果
+     * @since 0.1.100
+     */
+    public static String request(String requestUrl, String requestMethod,
+                                 final Map<String, String> headerMap) {
+        return request(requestUrl, requestMethod, CharsetConst.UTF8, headerMap);
     }
 
     /**
@@ -72,11 +86,13 @@ public final class HttpUtil {
      * @param requestUrl 请求地址
      * @param requestMethod 方法
      * @param charset 流编码
+     * @param headerMap 头信息
      * @return 结果
      * @since 0.1.98
      */
     public static String request(String requestUrl, String requestMethod,
-                                 final String charset) {
+                                 final String charset,
+                                 final Map<String, String> headerMap) {
         StringBuilder buffer = new StringBuilder();
         try {
             URL url = new URL(requestUrl);
@@ -88,6 +104,17 @@ public final class HttpUtil {
             httpUrlConn.setUseCaches(false);
             // 设置请求方式（GET/POST）
             httpUrlConn.setRequestMethod(requestMethod);
+            //SSL
+//            SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
+//            sslContext.init(null,null,null);
+//            SSLContext.setDefault(sslContext);
+
+            // 设置 header 属性
+            if(MapUtil.isNotEmpty(headerMap)) {
+                for(Map.Entry<String, String> entry : headerMap.entrySet()) {
+                    httpUrlConn.setRequestProperty(entry.getKey(), entry.getValue());
+                }
+            }
 
             if (GET.equalsIgnoreCase(requestMethod)) {
                 httpUrlConn.connect();
