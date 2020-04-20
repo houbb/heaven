@@ -16,6 +16,7 @@ import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 集合工具类
@@ -775,6 +776,24 @@ public final class CollectionUtil {
             resultList.add(list.get(i));
         }
         return resultList;
+    }
+
+    /**
+     * 随机获取一个元素
+     * @param list 列表
+     * @param <E> 元素
+     * @return 结果
+     * @since 0.1.100
+     */
+    public static <E> E random(final List<E> list) {
+        if(CollectionUtil.isEmpty(list)) {
+            return null;
+        }
+
+        Random random = ThreadLocalRandom.current();
+        int next = random.nextInt(list.size());
+
+        return list.get(next);
     }
 
 }
