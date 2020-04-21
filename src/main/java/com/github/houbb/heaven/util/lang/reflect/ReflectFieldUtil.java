@@ -47,20 +47,8 @@ public final class ReflectFieldUtil {
 
         final Class<?> sourceType = sourceField.getType();
         final Class<?> targetType = targetField.getType();
-        if(sourceType.isAssignableFrom(targetType)) {
-            return true;
-        }
 
-        // 基础类型的判断
-        Class resolvedPrimitive;
-        if (sourceType.isPrimitive()) {
-            resolvedPrimitive = PrimitiveUtil.getPrimitiveType(targetType);
-            return sourceType == resolvedPrimitive;
-        } else {
-            resolvedPrimitive = PrimitiveUtil.getPrimitiveType(targetType);
-            return resolvedPrimitive != null && sourceType.isAssignableFrom(resolvedPrimitive);
-        }
-
+        return ClassUtil.isAssignable(sourceType, targetType);
     }
 
     /**

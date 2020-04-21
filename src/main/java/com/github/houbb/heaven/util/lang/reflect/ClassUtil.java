@@ -11,6 +11,7 @@ import com.github.houbb.heaven.support.filter.IFilter;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.guava.Guavas;
+import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
@@ -340,6 +341,36 @@ public final class ClassUtil {
         classSet.addAll(getAllSuperClass(clazz));
 
         return Guavas.newArrayList(classSet);
+    }
+
+    /**
+     * 是否可以设置
+     * @param sourceType 原始类型
+     * @param targetType 目标类型
+     * @return 结果
+     * @since 0.1.101
+     */
+    public static boolean isAssignable(final Class<?> sourceType, final Class<?> targetType) {
+        // 如果有任何一个字段为空，直接返回
+        if(ObjectUtil.isNull(sourceType)
+                || ObjectUtil.isNull(targetType)) {
+            return false;
+        }
+
+        if(sourceType.isAssignableFrom(targetType)) {
+            return true;
+        }
+
+        // 基础类型的判断
+        Class resolvedPrimitive;
+        if (sourceType.isPrimitive()) {
+            resolvedPrimitive = PrimitiveUtil.getPrimitiveType(targetType);
+            return sourceType == resolvedPrimitive;
+        } else {
+            resolvedPrimitive = PrimitiveUtil.getPrimitiveType(targetType);
+            return resolvedPrimitive != null && sourceType.isAssignableFrom(resolvedPrimitive);
+        }
+
     }
 
 }
