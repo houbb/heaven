@@ -94,6 +94,7 @@ public final class ClassGenericUtil {
     /**
      * 获取当前类对应的泛型
      * @param clazz 指定类
+     * @param index 索引
      * @return 默认返回 {@link Object#getClass()}
      * @since 0.1.102
      */
