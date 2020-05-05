@@ -767,3 +767,13 @@
 | 序号 | 变更类型 | 说明 | 时间 | 备注 |
 |:---|:---|:---|:---|:--|
 | 1 | A | 新增 ClassUtil#isAssignable | 2020-4-21 23:16:58 | 是否可以设置 |
+
+# release_0.1.102
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 StringUtil#valueOf() | 2020-5-5 14:08:42 | 避免 String.valueOf() 对于 null 的处理 |
+| 2 | A | 新增 StringUtil#isNotEmptyTrim() | 2020-5-5 14:08:42 | |
+| 3 | A | 新增 ReflectMethodUtil#invokeNoArgsMethod | 2020-5-5 14:08:42 | |
+| 4 | A | 新增 ReflectMethodUtil#invoke | 2020-5-5 14:08:42 | |
+| 5 | A | 新增 ReflectMethodUtil#getGenericSupperClass | 2020-5-5 14:08:42 | |

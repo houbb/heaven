@@ -232,18 +232,48 @@ public final class ReflectMethodUtil {
     }
 
     /**
+     * 执行反射调用
+     * @param instance 对象实例，为空的时候针对 static 方法
+     * @param methodName 方法名称
+     * @param args 参数信息
+     * @return 调用结果
+     * @since 0.1.102
+     */
+    public static Object invoke(final Object instance, final String methodName, Object... args) {
+        ArgUtil.notEmpty(methodName, "methodName");
+
+        try {
+            //1. 如果参数为空
+            if(ArrayUtil.isEmpty(args)) {
+                return invokeNoArgsMethod(instance, methodName);
+            }
+
+            //2. 如果参数不为空，则需要获取对应的参数列表
+            final Class clazz = instance.getClass();
+            Class<?>[] paramTypes = new Class[args.length];
+            for(int i = 0; i < args.length; i++) {
+                Object param = args[i];
+                paramTypes[i] = param.getClass();
+            }
+
+            Method method = ClassUtil.getMethod(clazz, methodName, paramTypes);
+            return method.invoke(instance, args);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
      * 直接执行调用无参方法
      * @param instance 实例对象
      * @param method 方法信息
      * @since 0.1.39
      */
-    public static void invokeNoArgsMethod(final Object instance,
+    public static Object invokeNoArgsMethod(final Object instance,
                                           final Method method) {
-        ArgUtil.notNull(instance, "instance");
-
         //0. fail-fast
         if(ObjectUtil.isNull(method)) {
-            return;
+            return null;
         }
 
         //1. 信息校验
@@ -254,7 +284,22 @@ public final class ReflectMethodUtil {
         }
 
         //2.反射调用
-        ReflectMethodUtil.invoke(instance, method);
+        return ReflectMethodUtil.invoke(instance, method);
+    }
+
+    /**
+     * 直接执行调用无参方法
+     * @param instance 实例对象
+     * @param methodName 方法名称信息
+     * @since 0.1.102
+     */
+    public static Object invokeNoArgsMethod(final Object instance,
+                                            final String methodName) {
+        ArgUtil.notNull(instance, "instance");
+
+        final Class clazz = instance.getClass();
+        Method method = ClassUtil.getMethod(clazz, methodName);
+        return invokeNoArgsMethod(instance, method);
     }
 
     /**

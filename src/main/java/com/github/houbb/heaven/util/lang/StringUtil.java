@@ -237,6 +237,16 @@ public final class StringUtil {
     }
 
     /**
+     * 是否不为空-进行 trim 之后
+     * @param string 原始字符串
+     * @return 是否
+     * @since 0.1.102
+     */
+    public static boolean isNotEmptyTrim(final String string) {
+        return !isEmptyTrim(string);
+    }
+
+    /**
      * 是否为空的 json
      * @param json json 信息
      * @return 是否
@@ -1496,6 +1506,21 @@ public final class StringUtil {
         }
 
         return stringBuilder.toString();
+    }
+
+    /**
+     * 避免默认实现的问题
+     * @see String#valueOf(Object) 默认实现会把 null 转换为 "null"
+     * @param object 对象
+     * @return 结果
+     * @since 0.1.102
+     */
+    public static String valueOf(final Object object) {
+        if(ObjectUtil.isNull(object)) {
+            return null;
+        }
+
+        return String.valueOf(object);
     }
 
 }

@@ -56,9 +56,9 @@ public final class ClassGenericUtil {
      * @param index 泛型的下标志位置
      * @return 对应的泛型类型
      */
-    public static Class getGenericType(final Class clazz,
-                                       final Class interfaceClass,
-                                       final int index) {
+    public static Class getGenericClass(final Class clazz,
+                                        final Class interfaceClass,
+                                        final int index) {
         List<Type> typeList = ClassGenericUtil.getGenericInterfaces(clazz);
         for(Type type : typeList) {
             if(type instanceof ParameterizedType
@@ -91,6 +91,33 @@ public final class ClassGenericUtil {
         return null;
     }
 
+    /**
+     * 获取当前类对应的泛型
+     * @param clazz 指定类
+     * @return 默认返回 {@link Object#getClass()}
+     * @since 0.1.102
+     */
+    public static Class getGenericSupperClass(final Class clazz,
+                                              final int index) {
+        Class classType = Object.class;
 
+        Type pageVoParserClass = clazz.getGenericSuperclass();
+        if (pageVoParserClass instanceof ParameterizedType) {
+            Type[] pageVoClassTypes = ((ParameterizedType)pageVoParserClass).getActualTypeArguments();
+            classType = (Class) pageVoClassTypes[index];
+        }
+
+        return classType;
+    }
+
+    /**
+     * 获取当前类对应的泛型
+     * @param clazz 指定类
+     * @return 默认返回 {@link Object#getClass()}
+     * @since 0.1.102
+     */
+    public static Class getGenericSupperClass(final Class clazz) {
+        return getGenericSupperClass(clazz, 0);
+    }
 
 }
