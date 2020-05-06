@@ -351,4 +351,19 @@ public final class ArgUtil {
         }
     }
 
+    /**
+     * 必须大于指定的值
+     * @param actual 确切的值
+     * @param expected 预期值
+     * @since 0.0.8
+     */
+    public static void gt(final int actual,
+                          final int expected) {
+        if(actual < expected) {
+            return;
+        }
+
+        throw new IllegalArgumentException("Actual is <" +actual+">"+", Expected is gt "+expected);
+    }
+
 }
