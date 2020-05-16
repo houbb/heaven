@@ -1523,4 +1523,46 @@ public final class StringUtil {
         return String.valueOf(object);
     }
 
+    /**
+     * 左补信息
+     * @param original 原始字符串
+     * @param targetLength 目标长度
+     * @param unit 补的元素
+     * @return 结果
+     * @since 0.1.104
+     */
+    public static String leftPadding(final String original,
+                                     final int targetLength,
+                                     final char unit) {
+        ArgUtil.notNull(original, "original");
+
+        //1. fast-return
+        final int originalLength = original.length();
+        if(originalLength >= targetLength) {
+            return original;
+        }
+
+        //2. 循环补零
+        StringBuilder stringBuilder = new StringBuilder(targetLength);
+        for(int i = originalLength; i < targetLength; i++) {
+            stringBuilder.append(unit);
+        }
+        stringBuilder.append(original);
+
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 左补信息
+     * 默认左补零 0
+     * @param original 原始字符串
+     * @param targetLength 目标长度
+     * @return 结果
+     * @since 0.1.104
+     */
+    public static String leftPadding(final String original,
+                                     final int targetLength) {
+        return leftPadding(original, targetLength, '0');
+    }
+
 }

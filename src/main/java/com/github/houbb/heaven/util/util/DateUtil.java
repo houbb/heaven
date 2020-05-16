@@ -109,6 +109,25 @@ public final class DateUtil {
     }
 
     /**
+     * 获取当前时间戳。
+     * @return  dateStr
+     * @since 0.1.104
+     */
+    public static String getCurrentTimeStampStr15() {
+        Date now = new Date();
+        return new SimpleDateFormat(TIMESTAMP_FORMAT_15).format(now);
+    }
+
+    /**
+     * 当前的毫秒数
+     * @return 毫秒数
+     * @since 0.1.104
+     */
+    public static String getCurrentTimeMills() {
+        return String.valueOf(System.currentTimeMillis());
+    }
+
+    /**
      * 获取当前日期时间字符串
      * @return 日期时间字符串
      * @since 0.1.75
@@ -147,6 +166,35 @@ public final class DateUtil {
      */
     public static long costTimeInMills(final Date start, final Date end) {
         return end.getTime() - start.getTime();
+    }
+
+    /**
+     * 当前线程主动沉睡
+     * @param pauseMills 暂定的毫秒数
+     * @since 0.1.104
+     */
+    public static void sleep(final long pauseMills) {
+        sleep(TimeUnit.MILLISECONDS, pauseMills);
+    }
+
+    /**
+     * 当前线程主动沉睡
+     * @param unit 时间单位
+     * @param timeout 超时时间
+     * @since 0.1.104
+     */
+    public static void sleep(final TimeUnit unit,
+                             final long timeout) {
+        if(timeout <= 0) {
+            return;
+        }
+
+        try {
+            unit.sleep(timeout);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new CommonRuntimeException(e);
+        }
     }
 
 }

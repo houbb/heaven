@@ -6,7 +6,9 @@ import com.github.houbb.heaven.response.exception.CommonRuntimeException;
  * 时间工具类
  * @author binbin.hou
  * @since 0.1.103
+ * @see DateUtil 时间工具类
  */
+@Deprecated
 public final class TimeUtil {
 
     private TimeUtil(){}
