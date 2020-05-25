@@ -357,13 +357,78 @@ public final class ArgUtil {
      * @param expected 预期值
      * @since 0.0.8
      */
-    public static void gt(final int actual,
-                          final int expected) {
+    @Deprecated
+    public static void gt(final long actual,
+                          final long expected) {
+        gt("", actual, expected);
+    }
+
+    /**
+     * 必须大于指定的值
+     * @param paramName 参数名称
+     * @param actual 确切的值
+     * @param expected 预期值
+     * @since 0.1.105
+     */
+    public static void gt(final String paramName,
+                          final long actual,
+                          final long expected) {
+        if(actual > expected) {
+            return;
+        }
+
+        throw new IllegalArgumentException("["+paramName+"] actual is <" +actual+">"+", expected is gt "+expected);
+    }
+
+    /**
+     * 必须大于等于指定的值
+     * @param paramName 参数名称
+     * @param actual 确切的值
+     * @param expected 预期值
+     * @since 0.1.105
+     */
+    public static void gte(final String paramName,
+                          final long actual,
+                          final long expected) {
+        if(actual >= expected) {
+            return;
+        }
+
+        throw new IllegalArgumentException("["+paramName+"] actual is <" +actual+">"+", expected is gte "+expected);
+    }
+
+    /**
+     * 必须小于指定的值
+     * @param paramName 参数名称
+     * @param actual 确切的值
+     * @param expected 预期值
+     * @since 0.1.105
+     */
+    public static void lt(final String paramName,
+                           final long actual,
+                           final long expected) {
         if(actual < expected) {
             return;
         }
 
-        throw new IllegalArgumentException("Actual is <" +actual+">"+", Expected is gt "+expected);
+        throw new IllegalArgumentException("["+paramName+"] actual is <" +actual+">"+", expected is lt "+expected);
+    }
+
+    /**
+     * 必须小于等于指定的值
+     * @param paramName 参数名称
+     * @param actual 确切的值
+     * @param expected 预期值
+     * @since 0.1.105
+     */
+    public static void lte(final String paramName,
+                          final long actual,
+                          final long expected) {
+        if(actual <= expected) {
+            return;
+        }
+
+        throw new IllegalArgumentException("["+paramName+"] actual is <" +actual+">"+", expected is lte "+expected);
     }
 
 }

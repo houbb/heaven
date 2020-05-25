@@ -793,3 +793,9 @@
 | 2 | A | 新增 DateUtil#getCurrentTimeMills | 2020-5-16 09:20:49 | 时间戳 |
 | 3 | D | 废弃 TimeUtil#sleep | 2020-5-6 16:16:15 | |
 | 4 | A | 新增 StringUtil#leftPadding | 2020-5-6 16:16:15 | 左补零等常见工具类 |
+
+# release_0.1.105
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 新增 ArgUtil#gte/lte | 2020-5-25 13:33:53 | 便于比较 |
