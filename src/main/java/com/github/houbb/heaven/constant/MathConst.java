@@ -5,6 +5,7 @@ package com.github.houbb.heaven.constant;
  * @author binbin.hou
  * @since 0.1.2
  */
+@Deprecated
 public final class MathConst {
 
     private MathConst(){}
@@ -13,5 +14,6 @@ public final class MathConst {
      * 黄金分割比
      */
     public static final double GOLD_SECTION  = 0.61803398874989484820458683436565;
+
 
 }
