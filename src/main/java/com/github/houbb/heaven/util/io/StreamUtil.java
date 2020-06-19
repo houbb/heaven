@@ -7,7 +7,6 @@ import com.github.houbb.heaven.support.handler.IMapHandler;
 import com.github.houbb.heaven.util.id.impl.Ids;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
-import com.github.houbb.heaven.util.util.MapUtil;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -17,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -384,6 +384,44 @@ public class StreamUtil {
                 return o.split(splliter)[1];
             }
         });
+    }
+
+    /**
+     * Writes the set of service class names to a service file.
+     *
+     * @param output not {@code null}. Not closed after use.
+     * @param lines a not {@code null Collection} of service class names.
+     * @param charset 文件编码
+     * @since 0.1.108
+     */
+    public static void write(Collection<String> lines, OutputStream output,
+                              final String charset) {
+        try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(output, Charset.forName(charset)))) {
+            for (String service : lines) {
+                writer.write(service);
+                writer.newLine();
+            }
+            writer.flush();
+        } catch (IOException e) {
+            throw new CommonRuntimeException(e);
+        } finally {
+            try {
+                output.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Writes the set of service class names to a service file.
+     *
+     * @param output not {@code null}. Not closed after use.
+     * @param lines a not {@code null Collection} of service class names.
+     * @since 0.1.108
+     */
+    public static void write(Collection<String> lines, OutputStream output) {
+        write(lines, output, CharsetConst.UTF8);
     }
 
 }
