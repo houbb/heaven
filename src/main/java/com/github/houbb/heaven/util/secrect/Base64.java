@@ -80,7 +80,9 @@ public final class Base64 {
 
     /**
      * 将原始数据编码为base64编码
+     * @param data 数据信息
      * @since 0.1.106
+     * @return 结果
      */
     public static char[] encode(byte[] data) {
         char[] out = new char[((data.length + 2) / 3) * 4];
@@ -113,7 +115,9 @@ public final class Base64 {
 
     /**
      * 将base64编码的数据解码成原始数据
+     * @param data 数据
      * @since 0.1.106
+     * @return 结果
      */
     public static byte[] decode(char[] data)
     {
