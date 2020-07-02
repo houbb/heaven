@@ -660,9 +660,12 @@ public final class FileUtil {
 
             // 创建父类文件夹
             Path pathParent = path.getParent();
-            File parent = pathParent.toFile();
-            if (!parent.exists()) {
-                parent.mkdirs();
+            // 路径判断空
+            if(pathParent != null) {
+                File parent = pathParent.toFile();
+                if (!parent.exists()) {
+                    parent.mkdirs();
+                }
             }
 
             OutputStream out = path.getFileSystem().provider().newOutputStream(path, openOptions);
