@@ -6,6 +6,8 @@
 package com.github.houbb.heaven.util.util;
 
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
+import com.github.houbb.heaven.util.lang.ObjectUtil;
+import com.github.houbb.heaven.util.lang.StringUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -72,6 +74,9 @@ public final class DateUtil {
      * @since 0.1.12
      */
     public static String getDateFormat(final Date date, final String format) {
+        if(ObjectUtil.isNull(date)) {
+            return null;
+        }
         return new SimpleDateFormat(format).format(date);
     }
 
@@ -83,6 +88,9 @@ public final class DateUtil {
      * @since 0.1.12
      */
     public static Date getFormatDate(final String dateStr, final String format) {
+        if(StringUtil.isEmptyTrim(dateStr)) {
+            return null;
+        }
         try {
             return new SimpleDateFormat(format).parse(dateStr);
         } catch (ParseException e) {
