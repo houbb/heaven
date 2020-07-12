@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.util;
 
+import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.support.handler.IMapEntryHandler;
 import com.github.houbb.heaven.support.handler.IMapHandler;
@@ -182,6 +183,24 @@ public final class MapUtil {
             return defaultValue;
         }
         return value;
+    }
+
+    /**
+     * 获取 map 的第一个值
+     * @param map map
+     * @return 结果
+     * @since 0.1.111
+     */
+    public static Map.Entry<String, Object> getFirstEntry(final Map<String, Object> map) {
+        if(MapUtil.isEmpty(map)) {
+            return null;
+        }
+
+        for(Map.Entry<String, Object> entry : map.entrySet()) {
+            return entry;
+        }
+
+        return null;
     }
 
 }
