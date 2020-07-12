@@ -30,18 +30,21 @@ public final class StringUtil {
 
     /**
      * 大写的字母
+     *
      * @since 0.1.66
      */
     public static final String LETTERS_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWSXYZ";
 
     /**
      * 小写的字母
+     *
      * @since 0.1.66
      */
     public static final String LETTERS_LOWER = "abcdefghijklmnopqrstuvwsxyz";
 
     /**
      * 空白信息的表达式
+     *
      * @since 0.1.98
      */
     private static final Pattern BLANK_PATTERN = Pattern.compile("\\s*|\t|\r|\n");
@@ -56,6 +59,7 @@ public final class StringUtil {
 
     /**
      * 空 json
+     *
      * @since 0.1.80
      */
     public static final String EMPTY_JSON = "{}";
@@ -67,17 +71,18 @@ public final class StringUtil {
 
     /**
      * 是否全部为大写
+     *
      * @param string 待检验字符
      * @return 是否为大写
      */
     public static boolean isUpperCase(final String string) {
-        if(StringUtil.isEmpty(string)) {
+        if (StringUtil.isEmpty(string)) {
             return false;
         }
 
         char[] characters = string.toCharArray();
-        for(char c : characters) {
-            if(!Character.isUpperCase(c)) {
+        for (char c : characters) {
+            if (!Character.isUpperCase(c)) {
                 return false;
             }
         }
@@ -86,17 +91,18 @@ public final class StringUtil {
 
     /**
      * 是否全部为小写
+     *
      * @param string 待检验字符
      * @return 是否为大写
      */
     public static boolean isLowerCase(final String string) {
-        if(StringUtil.isEmpty(string)) {
+        if (StringUtil.isEmpty(string)) {
             return false;
         }
 
         char[] characters = string.toCharArray();
-        for(char c : characters) {
-            if(!Character.isLowerCase(c)) {
+        for (char c : characters) {
+            if (!Character.isLowerCase(c)) {
                 return false;
             }
         }
@@ -105,17 +111,18 @@ public final class StringUtil {
 
     /**
      * 是否包含大写字母
+     *
      * @param string 待检验字符
      * @return 是否为大写
      */
     public static boolean containsUppercase(final String string) {
-        if(StringUtil.isEmpty(string)) {
+        if (StringUtil.isEmpty(string)) {
             return false;
         }
 
         char[] characters = string.toCharArray();
-        for(char c : characters) {
-            if(Character.isUpperCase(c)) {
+        for (char c : characters) {
+            if (Character.isUpperCase(c)) {
                 return true;
             }
         }
@@ -124,17 +131,18 @@ public final class StringUtil {
 
     /**
      * 是否包含小写字母
+     *
      * @param string 待检验字符
      * @return 是否为大写
      */
     public static boolean containsLowercase(final String string) {
-        if(StringUtil.isEmpty(string)) {
+        if (StringUtil.isEmpty(string)) {
             return false;
         }
 
         char[] characters = string.toCharArray();
-        for(char c : characters) {
-            if(Character.isLowerCase(c)) {
+        for (char c : characters) {
+            if (Character.isLowerCase(c)) {
                 return true;
             }
         }
@@ -145,12 +153,13 @@ public final class StringUtil {
      * 是否全部由字母组成
      * 1. 大写字母
      * 2. 小写字母
+     *
      * @param string 字符串
      * @return 结果
      * @since 0.1.68
      */
     public static boolean isLetter(final String string) {
-        return isCharsCondition(string, new ICondition<Character> (){
+        return isCharsCondition(string, new ICondition<Character>() {
             @Override
             public boolean condition(Character character) {
                 return Character.isLowerCase(character)
@@ -161,12 +170,13 @@ public final class StringUtil {
 
     /**
      * 是否全部为数字
+     *
      * @param string 字符串
      * @return 是否为数字
      * @since 0.1.68
      */
     public static boolean isDigit(final String string) {
-        return isCharsCondition(string, new ICondition<Character> (){
+        return isCharsCondition(string, new ICondition<Character>() {
             @Override
             public boolean condition(Character character) {
                 return Character.isDigit(character);
@@ -176,12 +186,13 @@ public final class StringUtil {
 
     /**
      * 是否全部为数字或者字母
+     *
      * @param string 字符串
      * @return 是否数字或者字母
      * @since 0.1.68
      */
     public static boolean isDigitOrLetter(final String string) {
-        return isCharsCondition(string, new ICondition<Character> (){
+        return isCharsCondition(string, new ICondition<Character>() {
             @Override
             public boolean condition(Character character) {
                 return CharUtil.isDigitOrLetter(character);
@@ -191,20 +202,21 @@ public final class StringUtil {
 
     /**
      * 字符串是否全部满足某一个条件
-     * @param string 原始字符串
+     *
+     * @param string    原始字符串
      * @param condition 条件
      * @return 是否满足
      * @since 0.1.68
      */
     private static boolean isCharsCondition(final String string,
-                                   final ICondition<Character> condition) {
-        if(StringUtil.isEmpty(string)) {
+                                            final ICondition<Character> condition) {
+        if (StringUtil.isEmpty(string)) {
             return false;
         }
 
         char[] chars = string.toCharArray();
-        for(char c : chars) {
-            if(!condition.condition(c)) {
+        for (char c : chars) {
+            if (!condition.condition(c)) {
                 return false;
             }
         }
@@ -223,12 +235,13 @@ public final class StringUtil {
 
     /**
      * 是否为空-进行 trim 之后
+     *
      * @param string 原始字符串
      * @return 是否
      * @since 0.1.71
      */
     public static boolean isEmptyTrim(final String string) {
-        if(isEmpty(string)) {
+        if (isEmpty(string)) {
             return true;
         }
 
@@ -238,6 +251,7 @@ public final class StringUtil {
 
     /**
      * 是否不为空-进行 trim 之后
+     *
      * @param string 原始字符串
      * @return 是否
      * @since 0.1.102
@@ -248,12 +262,13 @@ public final class StringUtil {
 
     /**
      * 是否为空的 json
+     *
      * @param json json 信息
      * @return 是否
      * @since 0.1.80
      */
     public static boolean isEmptyJson(final String json) {
-        if(isEmptyTrim(json)) {
+        if (isEmptyTrim(json)) {
             return true;
         }
 
@@ -303,7 +318,6 @@ public final class StringUtil {
     }
 
 
-
     /**
      * 根据任意多的空格进行分割字符串。
      * 1. 入参为空,则返回空字符串数组
@@ -324,6 +338,7 @@ public final class StringUtil {
      * 过滤掉所有的空格
      * （1）trim
      * （2）移除所有的空格
+     *
      * @param string 原始字符串
      * @return 过滤后的内容
      * @since 0.1.68
@@ -339,26 +354,28 @@ public final class StringUtil {
 
     /**
      * 替换掉任意空格
-     * @param string 原始字符串
+     *
+     * @param string      原始字符串
      * @param replacement 待替换的文本
      * @return 结果
      * @since 0.1.98
      */
     public static String replaceAnyBlank(final String string,
                                          final String replacement) {
-        if(StringUtil.isEmpty(string)) {
+        if (StringUtil.isEmpty(string)) {
             return string;
         }
 
         Matcher m = BLANK_PATTERN.matcher(string);
         String result = m.replaceAll(replacement);
         //160 &nbsp;
-        result = result.replaceAll("\\u00A0",replacement);
+        result = result.replaceAll("\\u00A0", replacement);
         return result;
     }
 
     /**
      * 替换掉任意空格为空
+     *
      * @param string 原始字符串
      * @return 结果
      * @since 0.1.98
@@ -372,6 +389,7 @@ public final class StringUtil {
      * （1）trim
      * （2）移除标点符号
      * （3）移除 symbol
+     *
      * @param string 原始字符串
      * @return 过滤后的内容
      * @since 0.1.68
@@ -481,7 +499,8 @@ public final class StringUtil {
 
     /**
      * 将数组进行逗号连接
-     * @param array  object array
+     *
+     * @param array object array
      * @return join string
      * @since 0.1.46
      */
@@ -491,11 +510,12 @@ public final class StringUtil {
 
     /**
      * 将数组进行连接
-     * @param array      object array
-     * @param separator  分隔符
+     *
+     * @param array     object array
+     * @param separator 分隔符
      * @return join string
-     * @since 0.1.14
      * @see #join(Object[], String, int, int) 核心实现
+     * @since 0.1.14
      */
     public static String join(Object[] array, String separator) {
         final int endIndex = ArrayUtil.getEndIndex(-1, array);
@@ -522,7 +542,7 @@ public final class StringUtil {
         }
 
         int noOfItems = endIndex - startIndex;
-        if (noOfItems <= 0) {
+        if (noOfItems < 0) {
             return "";
         } else {
             StringBuilder buf = new StringBuilder(noOfItems * 16);
@@ -545,17 +565,18 @@ public final class StringUtil {
      * 字符串拼接
      * (1) v0.1.14 将其范围扩展到对象列表
      * 注意：如果有 null 属性，会导致直接报错。此处不再处理。
+     *
      * @param collection 集合列表
-     * @param splitter 分隔符
+     * @param splitter   分隔符
      * @param startIndex 开始下标
-     * @param endIndex 结束下标
-     * @param <E> 泛型
+     * @param endIndex   结束下标
+     * @param <E>        泛型
      * @return 结果
      * @since 0.1.14
      */
     public static <E> String join(final Collection<E> collection, final String splitter,
-                              final int startIndex, final int endIndex) {
-        if(CollectionUtil.isEmpty(collection)) {
+                                  final int startIndex, final int endIndex) {
+        if (CollectionUtil.isEmpty(collection)) {
             return StringUtil.EMPTY;
         }
 
@@ -564,11 +585,11 @@ public final class StringUtil {
 
         Iterator<E> iterator = collection.iterator();
         // 循环直到 startIndex
-        for(int i = 0; i < startIndex; i++) {
+        for (int i = 0; i < startIndex; i++) {
             iterator.next();
         }
         stringBuilder.append(iterator.next().toString());
-        for(int i = startIndex; i < endIndex; i++) {
+        for (int i = startIndex; i < endIndex; i++) {
             stringBuilder.append(actualSplitter).append(iterator.next().toString());
         }
         return stringBuilder.toString();
@@ -578,9 +599,10 @@ public final class StringUtil {
      * 字符串拼接
      * (1) v0.1.14 将其范围扩展到对象列表
      * 注意：如果有 null 属性，会导致直接报错。此处不再处理。
+     *
      * @param collection 集合信息
-     * @param splitter 分隔符
-     * @param <E> 泛型
+     * @param splitter   分隔符
+     * @param <E>        泛型
      * @return 结果
      * @since 0.1.14
      */
@@ -591,8 +613,9 @@ public final class StringUtil {
 
     /**
      * 字符串按逗号拼接拼接
+     *
      * @param collection 集合信息
-     * @param <E> 泛型
+     * @param <E>        泛型
      * @return 结果
      * @since 0.1.46
      */
@@ -654,18 +677,19 @@ public final class StringUtil {
 
     /**
      * 重复多少次
+     *
      * @param component 组成信息
-     * @param times 重复次数
+     * @param times     重复次数
      * @return 重复多次的字符串结果
      */
     public static String repeat(final String component, final int times) {
-        if(StringUtil.isEmpty(component)
+        if (StringUtil.isEmpty(component)
                 || times <= 0) {
             return StringUtil.EMPTY;
         }
 
         StringBuilder stringBuffer = new StringBuilder();
-        for(int i = 0; i < times; i++) {
+        for (int i = 0; i < times; i++) {
             stringBuffer.append(component);
         }
 
@@ -674,8 +698,9 @@ public final class StringUtil {
 
     /**
      * 构建新的字符串
-     * @param original 原始对象
-     * @param middle 中间隐藏信息
+     *
+     * @param original     原始对象
+     * @param middle       中间隐藏信息
      * @param prefixLength 前边信息长度
      * @return 构建后的新字符串
      * @since 0.0.8
@@ -683,7 +708,7 @@ public final class StringUtil {
     public static String buildString(final Object original,
                                      final String middle,
                                      final int prefixLength) {
-        if(ObjectUtil.isNull(original)) {
+        if (ObjectUtil.isNull(original)) {
             return null;
         }
 
@@ -693,15 +718,15 @@ public final class StringUtil {
         String prefix = "";
         String suffix = "";
 
-        if(stringLength >= prefixLength) {
+        if (stringLength >= prefixLength) {
             prefix = string.substring(0, prefixLength);
         } else {
             prefix = string.substring(0, stringLength);
         }
 
         int suffixLength = stringLength - prefix.length() - middle.length();
-        if(suffixLength > 0) {
-            suffix = string.substring(stringLength -suffixLength);
+        if (suffixLength > 0) {
+            suffix = string.substring(stringLength - suffixLength);
         }
 
         return prefix + middle + suffix;
@@ -763,19 +788,20 @@ public final class StringUtil {
     /**
      * 对象转换为字符串
      * 1. 对数组特殊处理 {@link java.util.Arrays#toString(Object[])} 避免打印无意义的信息（v0.1.14）
-     * @param object 对象
+     *
+     * @param object          对象
      * @param defaultWhenNull 对象为空时的默认值
      * @return 结果
      * @since 0.1.5
      */
     public static String objectToString(final Object object,
-                             final String defaultWhenNull) {
-        if(ObjectUtil.isNull(object)) {
+                                        final String defaultWhenNull) {
+        if (ObjectUtil.isNull(object)) {
             return defaultWhenNull;
         }
         Class type = object.getClass();
-        if(ClassTypeUtil.isArray(type)) {
-            Object[] arrays = (Object[])object;
+        if (ClassTypeUtil.isArray(type)) {
+            Object[] arrays = (Object[]) object;
             return Arrays.toString(arrays);
         }
         return object.toString();
@@ -784,6 +810,7 @@ public final class StringUtil {
     /**
      * 对象转换为字符串
      * 1. 默认为空时返回 null
+     *
      * @param object 对象
      * @return 结果
      * @since 0.1.5
@@ -794,24 +821,25 @@ public final class StringUtil {
 
     /**
      * 对 single 的信息重复多次
+     *
      * @param single 单个字符
-     * @param times 重复次数
+     * @param times  重复次数
      * @return 结果
-     * @since 0.1.9
      * @see #repeat(String, int) 重复
+     * @since 0.1.9
      */
     @Deprecated
     public static String times(final String single,
                                final int times) {
-        if(StringUtil.isEmpty(single)) {
+        if (StringUtil.isEmpty(single)) {
             return single;
         }
-        if(times <= 0) {
+        if (times <= 0) {
             return single;
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-        for(int i = 0; i < times; i++) {
+        for (int i = 0; i < times; i++) {
             stringBuilder.append(single);
         }
         return stringBuilder.toString();
@@ -819,16 +847,17 @@ public final class StringUtil {
 
     /**
      * 首字母大写
+     *
      * @param string 字符串
      * @return 大写的结果
      * @since 0.1.11
      */
     public static String capitalFirst(final String string) {
-        if(StringUtil.isEmpty(string)) {
+        if (StringUtil.isEmpty(string)) {
             return string;
         }
 
-        if(string.length() <= 1) {
+        if (string.length() <= 1) {
             return string.toUpperCase();
         }
 
@@ -840,11 +869,11 @@ public final class StringUtil {
      * 严格拆分
      * 【传统拆分】
      * 1:2:3:31::32:4 结果是：[1, 2, 3, 31, , 32, 4]
-     *
+     * <p>
      * 【严格拆分】
      * 严格匹配 : 拆分符，如果有多个，则不进行拆分。
      * 结果：[1, 2, 3, 31::32, 4]
-     *
+     * <p>
      * 实现逻辑：
      * （1）根据 index 获取所有的下标。+length（当前步长）
      * （2）获取当前的所有拆分下标，获取 times+1 的拆分下标
@@ -852,25 +881,25 @@ public final class StringUtil {
      * 连续：times+1 的下标，后续的 times 步长。如果不连续，则中断。
      * （4）根据过滤后的列表生成最后的结果。
      *
-     * @param string 原始字符串
+     * @param string    原始字符串
      * @param splitUnit 分隔单元
-     * @param times 次数
+     * @param times     次数
      * @return 结果
      * @since 0.1.16
      */
     public static List<String> splitStrictly(final String string,
                                              final char splitUnit,
                                              final int times) {
-        if(StringUtil.isEmpty(string)) {
+        if (StringUtil.isEmpty(string)) {
             return Collections.emptyList();
         }
-        if(times <= 0) {
+        if (times <= 0) {
             return Collections.singletonList(string);
         }
 
         // 分别获取索引列表
         final String split = CharUtil.repeat(splitUnit, times);
-        final String moreSplit = CharUtil.repeat(splitUnit, times+1);
+        final String moreSplit = CharUtil.repeat(splitUnit, times + 1);
         final List<Integer> splitIndexList = getIndexList(string, split);
         final List<Integer> moreSplitIndexList = getIndexList(string, moreSplit);
 
@@ -886,26 +915,27 @@ public final class StringUtil {
      * 获取满足条件连续的列表
      * （1）当前信息
      * （2）连续的索引信息
-     * @param allList 所有的整数
+     *
+     * @param allList    所有的整数
      * @param filterList 待排除的整数
-     * @param step 步长
+     * @param step       步长
      * @return 结果列表
      */
     private static List<Integer> getSerialFilterList(final List<Integer> allList,
-                                              final List<Integer> filterList,
-                                               final int step) {
+                                                     final List<Integer> filterList,
+                                                     final int step) {
         List<Integer> resultList = Guavas.newArrayList();
 
         resultList.addAll(filterList);
         // 根据 index+times 为步长进行连续判断。不存在则跳过
-        for(Integer filter : filterList) {
+        for (Integer filter : filterList) {
             // 从匹配的下一个元素开始
-            final int startIndex = allList.indexOf(filter)+1;
+            final int startIndex = allList.indexOf(filter) + 1;
             int stepTimes = 1;
-            for(int i = startIndex; i < allList.size(); i++) {
+            for (int i = startIndex; i < allList.size(); i++) {
                 final Integer indexVal = allList.get(i);
-                final int nextVal = step*stepTimes+filter;
-                if(indexVal.equals(nextVal)) {
+                final int nextVal = step * stepTimes + filter;
+                if (indexVal.equals(nextVal)) {
                     resultList.add(nextVal);
                 } else {
                     // 跳出当前循环
@@ -920,47 +950,48 @@ public final class StringUtil {
 
     /**
      * 根据下标截取列表
-     *
+     * <p>
      * 【最后的截取问题】
      * 最后构建的结果：
      * string=1::2::3:31:::32::4:
      * index=[1,4,15]
      * ignore=2
+     * <p>
+     * 每次截取：
+     * [0,1)
+     * [1+2,4)
+     * [15+2,]
      *
-     *  每次截取：
-     *  [0,1)
-     *  [1+2,4)
-     *  [15+2,]
-     * @param string 原始字符串
+     * @param string          原始字符串
      * @param indexCollection 下标列表
-     * @param ignoreLength 每次忽略跳过的长度。用于跳过 split 字符。
+     * @param ignoreLength    每次忽略跳过的长度。用于跳过 split 字符。
      * @return 结果列表
      * @since 0.1.16
      */
     public static List<String> subStringList(final String string,
                                              final Collection<Integer> indexCollection,
                                              final int ignoreLength) {
-        if(StringUtil.isEmpty(string)) {
+        if (StringUtil.isEmpty(string)) {
             return Collections.emptyList();
         }
-        if(CollectionUtil.isEmpty(indexCollection)) {
+        if (CollectionUtil.isEmpty(indexCollection)) {
             return Collections.singletonList(string);
         }
 
         List<String> resultList = Guavas.newArrayList(indexCollection.size());
         int startIndex = 0;
-        for(Integer index : indexCollection) {
+        for (Integer index : indexCollection) {
             // 最后的位置添加空字符串
-            if(startIndex > string.length()-1) {
+            if (startIndex > string.length() - 1) {
                 resultList.add(StringUtil.EMPTY);
                 break;
             }
             String subString = string.substring(startIndex, index);
             resultList.add(subString);
-            startIndex = index+ignoreLength;
+            startIndex = index + ignoreLength;
         }
         // 最后的结果信息
-        if(startIndex < string.length()) {
+        if (startIndex < string.length()) {
             String subString = string.substring(startIndex);
             resultList.add(subString);
         }
@@ -972,24 +1003,25 @@ public final class StringUtil {
      * 获取所有符合条件的下标类表
      * 【下标】
      * 1:2:3:31::32:4:
-     *
+     * <p>
      * [1, 3, 5, 8, 9, 12, 14]
-     *
+     * <p>
      * 问题：这个下标没有过滤 split。
      * 如果想过滤分隔符，应该如下：
      * (0,1)
      * (1+split.length, 3)
      * ...
      * 1,2,
+     *
      * @param string 原始字符串
-     * @param split 分隔字符串
+     * @param split  分隔字符串
      * @return 下标列表
      * @since 0.1.16
      */
     public static List<Integer> getIndexList(final String string,
                                              final String split) {
-        if(StringUtil.isEmpty(string)
-            || StringUtil.isEmpty(split)) {
+        if (StringUtil.isEmpty(string)
+                || StringUtil.isEmpty(split)) {
             return Collections.emptyList();
         }
 
@@ -997,7 +1029,7 @@ public final class StringUtil {
         int startIndex = 0;
         while (startIndex < string.length()) {
             startIndex = string.indexOf(split, startIndex);
-            if(startIndex < 0) {
+            if (startIndex < 0) {
                 break;
             }
             indexList.add(startIndex);
@@ -1009,8 +1041,9 @@ public final class StringUtil {
 
     /**
      * 获取字符串对应的下标信息
-     * @param string 字符串
-     * @param symbol 分隔符
+     *
+     * @param string             字符串
+     * @param symbol             分隔符
      * @param ignoreDoubleQuotes 是否忽略双引号中的信息
      * @return 结果列表
      * @since 0.1.27
@@ -1018,7 +1051,7 @@ public final class StringUtil {
     public static List<Integer> getIndexList(final String string,
                                              final char symbol,
                                              final boolean ignoreDoubleQuotes) {
-        if(StringUtil.isEmpty(string)) {
+        if (StringUtil.isEmpty(string)) {
             return Collections.emptyList();
         }
 
@@ -1027,7 +1060,7 @@ public final class StringUtil {
 
         boolean doubleQuotesStart = false;
         char preChar = CharConst.BLANK;
-        for(int i = 0; i < chars.length; i++) {
+        for (int i = 0; i < chars.length; i++) {
             char currentChar = chars[i];
 
             preChar = getPreChar(preChar, currentChar);
@@ -1038,10 +1071,10 @@ public final class StringUtil {
             }
 
             // 等于且不在双引号中。
-            if(currentChar == symbol) {
+            if (currentChar == symbol) {
                 // 忽略双引号中的信息 && 不在双引号中。
-                if(ignoreDoubleQuotes) {
-                    if(!doubleQuotesStart) {
+                if (ignoreDoubleQuotes) {
+                    if (!doubleQuotesStart) {
                         resultList.add(i);
                     }
                 } else {
@@ -1054,7 +1087,7 @@ public final class StringUtil {
 
     /**
      * 获取上一个字符
-     *
+     * <p>
      * 保证转义字符的两次抵消。
      *
      * @param preChar     上一个字符
@@ -1074,20 +1107,21 @@ public final class StringUtil {
 
     /**
      * 根据索引下标直接拆分
-     * @param string 原始字符串
+     *
+     * @param string    原始字符串
      * @param indexList 结果列表
      * @return 结果
      * @since 0.1.27
      */
     public static List<String> splitByIndexes(final String string, final List<Integer> indexList) {
-        if(StringUtil.isEmpty(string)) {
+        if (StringUtil.isEmpty(string)) {
             return Collections.emptyList();
         }
-        if(CollectionUtil.isEmpty(indexList)) {
+        if (CollectionUtil.isEmpty(indexList)) {
             return Collections.singletonList(string);
         }
 
-        List<String> resultList = Guavas.newArrayList(indexList.size()+1);
+        List<String> resultList = Guavas.newArrayList(indexList.size() + 1);
 
         int preIndex = 0;
         for (Integer anIndexList : indexList) {
@@ -1095,24 +1129,25 @@ public final class StringUtil {
             if (currentIndex > preIndex) {
                 resultList.add(string.substring(preIndex, currentIndex));
             }
-            preIndex = currentIndex+1;
+            preIndex = currentIndex + 1;
         }
         // 判断最后一个下标
-        final int lastIndex = indexList.get(indexList.size()-1);
-        if(lastIndex+1 < string.length()) {
-            resultList.add(string.substring(lastIndex+1));
+        final int lastIndex = indexList.get(indexList.size() - 1);
+        if (lastIndex + 1 < string.length()) {
+            resultList.add(string.substring(lastIndex + 1));
         }
         return resultList;
     }
 
     /**
      * 字符串转字节数组
+     *
      * @param string 字符串
      * @return 字节数组
      * @since 0.1.35
      */
     public static byte[] stringToBytes(final String string) {
-        if(ObjectUtil.isNull(string)) {
+        if (ObjectUtil.isNull(string)) {
             return null;
         }
 
@@ -1121,12 +1156,13 @@ public final class StringUtil {
 
     /**
      * 字节数组转字符串
+     *
      * @param bytes 字节数组
      * @return 字符串
      * @since 0.1.35
      */
     public static String bytesToString(final byte[] bytes) {
-        if(ArrayPrimitiveUtil.isEmpty(bytes)) {
+        if (ArrayPrimitiveUtil.isEmpty(bytes)) {
             return null;
         }
 
@@ -1135,13 +1171,14 @@ public final class StringUtil {
 
     /**
      * 拆分为字符串数组
-     * @param string 字符串
+     *
+     * @param string   字符串
      * @param splitter 拆分符号
      * @return 字符串数组
      * @since 0.1.46
      */
     public static String[] splitToStringArray(final String string, final String splitter) {
-        if(StringUtil.isEmpty(string)) {
+        if (StringUtil.isEmpty(string)) {
             return null;
         }
 
@@ -1150,6 +1187,7 @@ public final class StringUtil {
 
     /**
      * 拆分为字符串数组
+     *
      * @param string 字符串
      * @return 字符串数组
      * @since 0.1.46
@@ -1160,13 +1198,14 @@ public final class StringUtil {
 
     /**
      * 数组拼接为字符串
-     * @param array 数组
+     *
+     * @param array     数组
      * @param splitters 分隔符
      * @return 拼接结果
      * @since 0.1.49
      */
-    public static String join(final byte[] array, final String ... splitters) {
-        if(ArrayPrimitiveUtil.isEmpty(array)) {
+    public static String join(final byte[] array, final String... splitters) {
+        if (ArrayPrimitiveUtil.isEmpty(array)) {
             return StringUtil.EMPTY;
         }
 
@@ -1182,13 +1221,14 @@ public final class StringUtil {
 
     /**
      * 数组拼接为字符串
-     * @param array 数组
+     *
+     * @param array     数组
      * @param splitters 分隔符
      * @return 拼接结果
      * @since 0.1.49
      */
-    public static String join(final char[] array, final String ... splitters) {
-        if(ArrayPrimitiveUtil.isEmpty(array)) {
+    public static String join(final char[] array, final String... splitters) {
+        if (ArrayPrimitiveUtil.isEmpty(array)) {
             return StringUtil.EMPTY;
         }
 
@@ -1204,13 +1244,14 @@ public final class StringUtil {
 
     /**
      * 数组拼接为字符串
-     * @param array 数组
+     *
+     * @param array     数组
      * @param splitters 分隔符
      * @return 拼接结果
      * @since 0.1.49
      */
-    public static String join(final short[] array, final String ... splitters) {
-        if(ArrayPrimitiveUtil.isEmpty(array)) {
+    public static String join(final short[] array, final String... splitters) {
+        if (ArrayPrimitiveUtil.isEmpty(array)) {
             return StringUtil.EMPTY;
         }
 
@@ -1226,13 +1267,14 @@ public final class StringUtil {
 
     /**
      * 数组拼接为字符串
-     * @param array 数组
+     *
+     * @param array     数组
      * @param splitters 分隔符
      * @return 拼接结果
      * @since 0.1.49
      */
-    public static String join(final long[] array, final String ... splitters) {
-        if(ArrayPrimitiveUtil.isEmpty(array)) {
+    public static String join(final long[] array, final String... splitters) {
+        if (ArrayPrimitiveUtil.isEmpty(array)) {
             return StringUtil.EMPTY;
         }
 
@@ -1248,13 +1290,14 @@ public final class StringUtil {
 
     /**
      * 数组拼接为字符串
-     * @param array 数组
+     *
+     * @param array     数组
      * @param splitters 分隔符
      * @return 拼接结果
      * @since 0.1.49
      */
-    public static String join(final float[] array, final String ... splitters) {
-        if(ArrayPrimitiveUtil.isEmpty(array)) {
+    public static String join(final float[] array, final String... splitters) {
+        if (ArrayPrimitiveUtil.isEmpty(array)) {
             return StringUtil.EMPTY;
         }
 
@@ -1270,13 +1313,14 @@ public final class StringUtil {
 
     /**
      * 数组拼接为字符串
-     * @param array 数组
+     *
+     * @param array     数组
      * @param splitters 分隔符
      * @return 拼接结果
      * @since 0.1.49
      */
-    public static String join(final double[] array, final String ... splitters) {
-        if(ArrayPrimitiveUtil.isEmpty(array)) {
+    public static String join(final double[] array, final String... splitters) {
+        if (ArrayPrimitiveUtil.isEmpty(array)) {
             return StringUtil.EMPTY;
         }
 
@@ -1292,13 +1336,14 @@ public final class StringUtil {
 
     /**
      * 数组拼接为字符串
-     * @param array 数组
+     *
+     * @param array     数组
      * @param splitters 分隔符
      * @return 拼接结果
      * @since 0.1.49
      */
-    public static String join(final boolean[] array, final String ... splitters) {
-        if(ArrayPrimitiveUtil.isEmpty(array)) {
+    public static String join(final boolean[] array, final String... splitters) {
+        if (ArrayPrimitiveUtil.isEmpty(array)) {
             return StringUtil.EMPTY;
         }
 
@@ -1314,13 +1359,14 @@ public final class StringUtil {
 
     /**
      * 数组拼接为字符串
-     * @param array 数组
+     *
+     * @param array     数组
      * @param splitters 分隔符
      * @return 拼接结果
      * @since 0.1.49
      */
-    public static String join(final int[] array, final String ... splitters) {
-        if(ArrayPrimitiveUtil.isEmpty(array)) {
+    public static String join(final int[] array, final String... splitters) {
+        if (ArrayPrimitiveUtil.isEmpty(array)) {
             return StringUtil.EMPTY;
         }
 
@@ -1336,12 +1382,13 @@ public final class StringUtil {
 
     /**
      * 获取指定的分隔符
+     *
      * @param splitters 分隔符
      * @return 字符串
      * @since 0.1.49
      */
-    private static String getSplitter(final String ... splitters) {
-        if(ArrayUtil.isEmpty(splitters)) {
+    private static String getSplitter(final String... splitters) {
+        if (ArrayUtil.isEmpty(splitters)) {
             return PunctuationConst.COMMA;
         }
 
@@ -1350,7 +1397,8 @@ public final class StringUtil {
 
     /**
      * 拆分为列表
-     * @param string 字符串
+     *
+     * @param string   字符串
      * @param splitter 分隔符号
      * @return 字符串列表
      * @since 0.1.49
@@ -1359,7 +1407,7 @@ public final class StringUtil {
                                            final String splitter) {
         ArgUtil.notEmpty(splitter, "splitter");
 
-        if(StringUtil.isEmpty(string)) {
+        if (StringUtil.isEmpty(string)) {
             return Guavas.newArrayList();
         }
 
@@ -1369,6 +1417,7 @@ public final class StringUtil {
 
     /**
      * 拆分为列表
+     *
      * @param string 字符串
      * @return 字符串列表
      * @since 0.1.49
@@ -1380,6 +1429,7 @@ public final class StringUtil {
 
     /**
      * 转换为数组字符
+     *
      * @param string 字符串
      * @return 结果
      * @since 0.1.66
@@ -1388,7 +1438,7 @@ public final class StringUtil {
         final char[] chars = string.toCharArray();
         Character[] newArray = new Character[chars.length];
 
-        for(int i = 0; i < chars.length; i++) {
+        for (int i = 0; i < chars.length; i++) {
             newArray[i] = chars[i];
         }
 
@@ -1397,6 +1447,7 @@ public final class StringUtil {
 
     /**
      * 转换为列表字符
+     *
      * @param string 字符串
      * @return 结果
      * @since 0.1.66
@@ -1414,12 +1465,13 @@ public final class StringUtil {
 
     /**
      * 转换为 char 字符串列表
+     *
      * @param string 字符串
      * @return 字符串列表
      * @since 0.1.74
      */
     public static List<String> toCharStringList(final String string) {
-        if(StringUtil.isEmpty(string)) {
+        if (StringUtil.isEmpty(string)) {
             return Guavas.newArrayList();
         }
 
@@ -1434,8 +1486,9 @@ public final class StringUtil {
 
     /**
      * 将字符串中的全角字符转为半角
+     *
      * @param string 字符串
-     * @return  转换之后的字符串
+     * @return 转换之后的字符串
      * @since 0.1.68
      */
     public static String toHalfWidth(final String string) {
@@ -1449,8 +1502,9 @@ public final class StringUtil {
 
     /**
      * 将字符串中的半角字符转为全角
+     *
      * @param string 字符串
-     * @return  转换之后的字符串
+     * @return 转换之后的字符串
      * @since 0.1.68
      */
     public static String toFullWidth(final String string) {
@@ -1464,21 +1518,22 @@ public final class StringUtil {
 
     /**
      * 字符的处理
-     * @param string 字符串
+     *
+     * @param string  字符串
      * @param handler 处理类
      * @return 结果
      * @since 0.1.68
      */
     private static String characterHandler(final String string,
-                                  final IHandler<Character, Character> handler) {
-        if(StringUtil.isEmpty(string)) {
+                                           final IHandler<Character, Character> handler) {
+        if (StringUtil.isEmpty(string)) {
             return string;
         }
 
         //1. 转换为列表
         char[] chars = string.toCharArray();
         char[] resultChars = new char[chars.length];
-        for(int i = 0; i < chars.length; i++) {
+        for (int i = 0; i < chars.length; i++) {
             resultChars[i] = handler.handle(chars[i]);
         }
 
@@ -1488,19 +1543,20 @@ public final class StringUtil {
 
     /**
      * 过滤掉非中文字符
+     *
      * @param string 字符串
      * @return 结果
      * @since 0.1.79
      */
     public static String trimNotChinese(final String string) {
-        if(StringUtil.isEmptyTrim(string)) {
+        if (StringUtil.isEmptyTrim(string)) {
             return StringUtil.EMPTY;
         }
 
         char[] chars = string.toCharArray();
         StringBuilder stringBuilder = new StringBuilder();
-        for(Character character : chars) {
-            if(CharUtil.isChinese(character)) {
+        for (Character character : chars) {
+            if (CharUtil.isChinese(character)) {
                 stringBuilder.append(character);
             }
         }
@@ -1510,13 +1566,14 @@ public final class StringUtil {
 
     /**
      * 避免默认实现的问题
-     * @see String#valueOf(Object) 默认实现会把 null 转换为 "null"
+     *
      * @param object 对象
      * @return 结果
+     * @see String#valueOf(Object) 默认实现会把 null 转换为 "null"
      * @since 0.1.102
      */
     public static String valueOf(final Object object) {
-        if(ObjectUtil.isNull(object)) {
+        if (ObjectUtil.isNull(object)) {
             return null;
         }
 
@@ -1525,9 +1582,10 @@ public final class StringUtil {
 
     /**
      * 左补信息
-     * @param original 原始字符串
+     *
+     * @param original     原始字符串
      * @param targetLength 目标长度
-     * @param unit 补的元素
+     * @param unit         补的元素
      * @return 结果
      * @since 0.1.104
      */
@@ -1538,13 +1596,13 @@ public final class StringUtil {
 
         //1. fast-return
         final int originalLength = original.length();
-        if(originalLength >= targetLength) {
+        if (originalLength >= targetLength) {
             return original;
         }
 
         //2. 循环补零
         StringBuilder stringBuilder = new StringBuilder(targetLength);
-        for(int i = originalLength; i < targetLength; i++) {
+        for (int i = originalLength; i < targetLength; i++) {
             stringBuilder.append(unit);
         }
         stringBuilder.append(original);
@@ -1555,7 +1613,8 @@ public final class StringUtil {
     /**
      * 左补信息
      * 默认左补零 0
-     * @param original 原始字符串
+     *
+     * @param original     原始字符串
      * @param targetLength 目标长度
      * @return 结果
      * @since 0.1.104
