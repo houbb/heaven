@@ -1174,4 +1174,35 @@ public final class FileUtil {
         }
     }
 
+    /**
+     * 转义 windows 下的特殊字符
+     * @param fileName 文件名称
+     * @return 转义后的字符串
+     * @since 0.1.113
+     */
+    public static String escapeWindowsSpecial(final String fileName) {
+        if(StringUtil.isEmpty(fileName)) {
+            return fileName;
+        }
+        return fileName.replaceAll("[\"<>/\\\\|:*?]", "");
+    }
+
+    /**
+     * 创建文件夹
+     * @param dir 文件夹
+     * @return 结果
+     * @since 0.1.113
+     */
+    public static boolean createDir(final String dir) {
+        if(StringUtil.isEmpty(dir)) {
+            return false;
+        }
+
+        File file = new File(dir);
+        if (file.isDirectory()) {
+            return file.mkdirs();
+        }
+        return false;
+    }
+
 }
