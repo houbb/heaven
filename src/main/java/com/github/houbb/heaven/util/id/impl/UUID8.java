@@ -48,6 +48,7 @@ import java.util.List;
  * @since 0.1.12
  */
 @ThreadSafe
+@Deprecated
 public class UUID8 implements Id {
 
     /**

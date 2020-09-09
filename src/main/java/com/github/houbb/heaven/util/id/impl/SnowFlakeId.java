@@ -24,6 +24,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author houbinbin
  * @since 0.1.12
  */
+@Deprecated
 public class SnowFlakeId implements Id {
 
     /**

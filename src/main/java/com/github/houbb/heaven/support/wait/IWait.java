@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
  * @author binbin.hou
  * @since 0.1.8
  */
+@Deprecated
 public interface IWait {
 
     /**

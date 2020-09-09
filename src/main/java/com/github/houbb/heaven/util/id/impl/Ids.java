@@ -5,6 +5,7 @@ package com.github.houbb.heaven.util.id.impl;
  * @author binbin.hou
  * @since 0.1.37
  */
+@Deprecated
 public final class Ids {
 
     private Ids(){}

@@ -10,6 +10,7 @@ package com.github.houbb.heaven.util.id;
  * @author bbhou
  * @since 0.0.1
  */
+@Deprecated
 public interface Id {
 
     /**

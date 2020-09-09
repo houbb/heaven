@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
  * @since 0.1.8
  */
 @ThreadSafe
+@Deprecated
 public class NoWait implements IWait {
 
     @Override

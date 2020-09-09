@@ -9,6 +9,7 @@ import com.github.houbb.heaven.util.id.Id;
  * @since 0.1.12
  */
 @ThreadSafe
+@Deprecated
 public class ConstId implements Id {
 
     /**

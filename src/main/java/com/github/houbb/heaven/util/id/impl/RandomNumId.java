@@ -24,6 +24,7 @@ import java.util.Date;
  * @see com.github.houbb.heaven.util.util.DateUtil#TIMESTAMP_FORMAT_15 15 位时间戳
  */
 @ThreadSafe
+@Deprecated
 public class RandomNumId implements Id {
 
     @Override

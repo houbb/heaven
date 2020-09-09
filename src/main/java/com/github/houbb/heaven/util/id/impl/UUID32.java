@@ -13,6 +13,7 @@ import java.util.UUID;
  * @since 0.1.12
  */
 @ThreadSafe
+@Deprecated
 public class UUID32 implements Id {
 
     /**
