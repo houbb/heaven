@@ -410,9 +410,14 @@ public final class ArrayUtil {
         }
 
         final int arrayLength = array.length;
+        int actualOffset = offset;
+        if(actualOffset < 0) {
+            actualOffset += arrayLength;
+        }
+
         Object[] newArray = new Object[arrayLength];
         for(int i = 0; i < arrayLength; i++) {
-            int realIndex = (i+offset) % arrayLength;
+            int realIndex = (i+actualOffset) % arrayLength;
             newArray[i] = array[realIndex];
         }
 
