@@ -1208,7 +1208,6 @@ public final class FileUtil {
     /**
      * 清空文件内容
      * @param filePath 文件路径
-     * @return 是否执行清空
      * @since 0.1.116
      */
     public static void truncate(final String filePath) {
