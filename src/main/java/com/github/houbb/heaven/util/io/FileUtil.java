@@ -705,7 +705,7 @@ public final class FileUtil {
 
         // 父类文件夹的处理
         File dir = file.getParentFile();
-        if (FileUtil.notExists(dir)) {
+        if (dir != null && FileUtil.notExists(dir)) {
             boolean mkdirResult = dir.mkdirs();
             if (!mkdirResult) {
                 return false;
@@ -1203,6 +1203,16 @@ public final class FileUtil {
             return file.mkdirs();
         }
         return false;
+    }
+
+    /**
+     * 清空文件内容
+     * @param filePath 文件路径
+     * @return 是否执行清空
+     * @since 0.1.116
+     */
+    public static void truncate(final String filePath) {
+        FileUtil.write(filePath, StringUtil.EMPTY, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
 }
