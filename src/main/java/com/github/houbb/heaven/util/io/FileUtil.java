@@ -1214,4 +1214,24 @@ public final class FileUtil {
         FileUtil.write(filePath, StringUtil.EMPTY, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
+    /**
+     * 追加文件内容
+     * @param filePath 文件路径
+     * @param line 文件内容
+     * @since 0.1.117
+     */
+    public static void append(final String filePath, final String line) {
+        FileUtil.write(filePath, line, StandardOpenOption.APPEND);
+    }
+
+    /**
+     * 追加文件内容
+     * @param filePath 文件路径
+     * @param collection 文件内容
+     * @since 0.1.117
+     */
+    public static void append(final String filePath, final Collection<String> collection) {
+        FileUtil.write(filePath, collection, StandardOpenOption.APPEND);
+    }
+
 }
