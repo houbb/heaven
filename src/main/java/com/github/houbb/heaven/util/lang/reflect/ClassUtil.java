@@ -231,6 +231,29 @@ public final class ClassUtil {
     }
 
     /**
+     * 获取方法信息
+     * @param clazz 类信息
+     * @param methodName 方法名称
+     * @return 方法信息
+     * @since 0.1.118
+     */
+    @SuppressWarnings("unchecked")
+    public static Method getMethod(final Class<?> clazz,
+                                   final String methodName) {
+        ArgUtil.notNull(clazz, "clazz");
+        ArgUtil.notEmpty(methodName, "methodName");
+
+        Method[] methods = clazz.getMethods();
+        for(Method method : methods) {
+            if(method.getName().equals(methodName)) {
+                return method;
+            }
+        }
+
+        throw new CommonRuntimeException("对应方法不存在!");
+    }
+
+    /**
      * 获取构造器信息
      *
      * @param clazz      类
