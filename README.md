@@ -1,3 +1,5 @@
+[中文文档](README_ZH.md)
+
 # Project Description
 
 This project is used to provide public core code and collect common tools.
@@ -43,7 +45,3 @@ maven 3.x+
     <version>${STABLE}</version>
 </dependency>
 ```
-
-# More
-
-[中文文档](README_ZH.md)

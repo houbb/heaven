@@ -1010,6 +1010,19 @@ public final class FileUtil {
      * 将文件内容转换为 map
      * <p>
      * （1）直接拆分。取第一个值和第一个值
+     * （2）默认使用空格分隔
+     * @param path     文件路径
+     * @return 结果
+     * @since 0.1.119
+     */
+    public static Map<String, String> readToMap(final String path) {
+        return readToMap(path, " ");
+    }
+
+    /**
+     * 将文件内容转换为 map
+     * <p>
+     * （1）直接拆分。取第一个值和第一个值
      *
      * @param path     文件路径
      * @param splitter 分隔符号
