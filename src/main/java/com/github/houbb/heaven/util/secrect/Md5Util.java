@@ -1,5 +1,6 @@
 package com.github.houbb.heaven.util.secrect;
 
+import com.github.houbb.heaven.util.codec.Base64;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
 import java.security.MessageDigest;
@@ -29,7 +30,7 @@ public final class Md5Util {
             byte[] output = messageDigest.digest(string.getBytes());
 
             //将得到的字节数组变成字符串返回
-            return Base64.toBase64String(output);
+            return Base64.encodeToString(output);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }

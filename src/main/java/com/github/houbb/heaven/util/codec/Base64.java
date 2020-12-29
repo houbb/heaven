@@ -1,4 +1,4 @@
-package com.github.houbb.heaven.util.secrect;
+package com.github.houbb.heaven.util.codec;
 
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.util.lang.StringUtil;
@@ -19,13 +19,13 @@ public final class Base64 {
 
     /**
      * Base64 标准字符集合
-     * @since 0.1.106
+     * @since 0.1.120
      */
     private static final char[] ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".toCharArray();
 
     /**
      * 编码信息
-     * @since 0.1.106
+     * @since 0.1.120
      */
     private static final byte[] CODES = new byte[256];
 
@@ -52,8 +52,9 @@ public final class Base64 {
      * 每一位16进制数可以代替4位二进制数，所以128位二进制数写成16进制就变成了128/4=32位。
      * @param bytes 字节流
      * @return 字符串
+     * @since 0.1.120
      */
-    public static String toBase64String(byte[] bytes){
+    public static String encodeToString(byte[] bytes){
         StringBuilder sb = new StringBuilder();
         for (byte b : bytes) {
             sb.append(byteToHex(b));
@@ -62,26 +63,26 @@ public final class Base64 {
     }
 
     /**
-     * 将一个字节转换成十六进制，并以字符串的形式返回
-     * @param b 比特
+     * 将字节数组转换成十六进制，并以字符串的形式返回
+     * 128位是指二进制位。二进制太长，所以一般都改写成16进制，
+     * 每一位16进制数可以代替4位二进制数，所以128位二进制数写成16进制就变成了128/4=32位。
+     * @param text 文本
+     * @return 字符串
+     * @since 0.1.120
      */
-    private static String byteToHex(byte b) {
-        int n = b;
-        if (n < 0) {
-            n = n + 256;
+    public static String encodeToString(String text){
+        if(StringUtil.isEmpty(text)) {
+            return text;
         }
-        int d1 = n / 16;
-        int d2 = n % 16;
 
-        final String charOne = String.valueOf(HEX_ARRAY[d1]);
-        final String charTwo = String.valueOf(HEX_ARRAY[d2]);
-        return charOne+charTwo;
+        return encodeToString(text.getBytes());
     }
+
 
     /**
      * 将原始数据编码为base64编码
      * @param data 数据信息
-     * @since 0.1.106
+     * @since 0.1.120
      * @return 结果
      */
     public static char[] encode(byte[] data) {
@@ -116,7 +117,7 @@ public final class Base64 {
     /**
      * 将base64编码的数据解码成原始数据
      * @param data 数据
-     * @since 0.1.106
+     * @since 0.1.120
      * @return 结果
      */
     public static byte[] decode(char[] data)
@@ -151,10 +152,23 @@ public final class Base64 {
     }
 
     /**
+     * 解码
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.120
+     */
+    public static String decodeToString(final String text) {
+        if(StringUtil.isEmpty(text)) {
+            return text;
+        }
+        return new String(decode(text.toCharArray()));
+    }
+
+    /**
      * 编码
      * @param text 文本
      * @return 结果
-     * @since 0.1.106
+     * @since 0.1.120
      */
     public static String encode(final String text) {
         if(StringUtil.isEmpty(text)) {
@@ -163,17 +177,24 @@ public final class Base64 {
         return new String(encode(text.getBytes()));
     }
 
+
+
     /**
-     * 解码
-     * @param text 文本
-     * @return 结果
-     * @since 0.1.106
+     * 将一个字节转换成十六进制，并以字符串的形式返回
+     * @param b 比特
      */
-    public static String decode(final String text) {
-        if(StringUtil.isEmpty(text)) {
-            return text;
+    private static String byteToHex(byte b) {
+        int n = b;
+        if (n < 0) {
+            n = n + 256;
         }
-        return new String(decode(text.toCharArray()));
+        int d1 = n / 16;
+        int d2 = n % 16;
+
+        final String charOne = String.valueOf(HEX_ARRAY[d1]);
+        final String charTwo = String.valueOf(HEX_ARRAY[d2]);
+        return charOne+charTwo;
     }
+
 
 }

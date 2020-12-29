@@ -45,3 +45,13 @@ maven 3.x+
     <version>${STABLE}</version>
 </dependency>
 ```
+
+# Road-MAP
+
+- [ ] Hash
+
+- [ ] Random
+
+- [ ] secret
+
+- [ ] codec 
