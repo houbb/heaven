@@ -20,11 +20,9 @@ package com.github.houbb.heaven.util.codec;
 
 /**
  * <a href="http://en.wikipedia.org/wiki/Hexadecimal">Hexadecimal</a> encoder and decoder.
- * <p/>
  * This class was borrowed from Apache Commons Codec SVN repository (rev. {@code 560660}) with modifications
  * to enable Hex conversion without a full dependency on Commons Codec.  We didn't want to reinvent the wheel of
  * great work they've done, but also didn't want to force every Shiro user to depend on the commons-codec.jar
- * <p/>
  * As per the Apache 2.0 license, the original copyright notice and all author and copyright information have
  * remained in tact.
  *
