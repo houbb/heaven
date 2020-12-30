@@ -86,6 +86,9 @@ public abstract class CodecSupport {
      * @throws CodecException if the JVM does not support the specified encoding.
      */
     public static byte[] toBytes(String source, String encoding) throws CodecException {
+        if(source == null) {
+            return null;
+        }
         try {
             return source.getBytes(encoding);
         } catch (UnsupportedEncodingException e) {
@@ -118,6 +121,9 @@ public abstract class CodecSupport {
      * @throws CodecException if the JVM does not support the specified encoding.
      */
     public static String toString(byte[] bytes, String encoding) throws CodecException {
+        if(null == bytes) {
+            return null;
+        }
         try {
             return new String(bytes, encoding);
         } catch (UnsupportedEncodingException e) {
