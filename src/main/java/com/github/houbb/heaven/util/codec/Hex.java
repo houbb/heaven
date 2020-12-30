@@ -30,6 +30,7 @@ package com.github.houbb.heaven.util.codec;
  *
  * @see <a href="http://en.wikipedia.org/wiki/Hexadecimal">Wikipedia: Hexadecimal</a>
  * @since 0.9
+ * @since 0.1.120
  */
 public class Hex {
 

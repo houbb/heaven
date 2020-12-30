@@ -116,12 +116,27 @@ public final class Base64 {
 
     /**
      * 将base64编码的数据解码成原始数据
+     * @param bytes 数组
+     * @since 0.1.120
+     * @return 结果
+     */
+    public static byte[] decode(byte[] bytes) {
+        char[] chars = CodecSupport.toChars(bytes);
+        return decode(chars);
+    }
+
+    /**
+     * 将base64编码的数据解码成原始数据
      * @param data 数据
      * @since 0.1.120
      * @return 结果
      */
     public static byte[] decode(char[] data)
     {
+        if(data == null) {
+            return null;
+        }
+
         int len = ((data.length + 3) / 4) * 3;
         if(data.length > 0 && data[data.length - 1] == '=') {
             --len;
@@ -165,6 +180,17 @@ public final class Base64 {
     }
 
     /**
+     * 解码
+     * @param bytes 字节数组
+     * @return 结果
+     * @since 0.1.120
+     */
+    public static String decodeToString(final byte[] bytes) {
+        String text = CodecSupport.toString(bytes);
+        return decodeToString(text);
+    }
+
+    /**
      * 编码
      * @param text 文本
      * @return 结果
@@ -174,10 +200,10 @@ public final class Base64 {
         if(StringUtil.isEmpty(text)) {
             return text;
         }
-        return new String(encode(text.getBytes()));
+        byte[] bytes = CodecSupport.toBytes(text);
+        char[] chars = encode(bytes);
+        return CodecSupport.toString(chars);
     }
-
-
 
     /**
      * 将一个字节转换成十六进制，并以字符串的形式返回

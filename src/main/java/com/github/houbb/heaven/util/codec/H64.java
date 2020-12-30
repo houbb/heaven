@@ -43,7 +43,7 @@ import java.io.IOException;
  * <p/>
  * This file and all that it contains is ASL 2.0 compatible.
  *
- * @since 1.2
+ * @since 0.1.120
  */
 public class H64 {
 

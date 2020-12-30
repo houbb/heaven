@@ -23,7 +23,7 @@ import java.io.*;
 /**
  * Base abstract class that provides useful encoding and decoding operations, especially for character data.
  *
- * @since 0.9
+ * @since 0.1.120
  */
 public abstract class CodecSupport {
 
@@ -313,4 +313,33 @@ public abstract class CodecSupport {
     protected String objectToString(Object o) {
         return o.toString();
     }
+
+    /**
+     * 转为字符串
+     * @param text 文本
+     * @return char 数组
+     * @since 0.1.120
+     */
+    public static char[] toChars(final String text) {
+        if(null == text) {
+            return null;
+        }
+
+        return text.toCharArray();
+    }
+
+    /**
+     * 转化为字符串
+     * @param chars 字符数组
+     * @return 字符串
+     * @since 0.1.120
+     */
+    public static String toString(final char[] chars) {
+        if(null == chars) {
+            return null;
+        }
+
+        return new String(chars);
+    }
+
 }

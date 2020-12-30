@@ -21,7 +21,7 @@ package com.github.houbb.heaven.util.codec;
 /**
  * Root exception related to issues during encoding or decoding.
  *
- * @since 0.9
+ * @since 0.1.120
  */
 public class CodecException extends RuntimeException {
 
