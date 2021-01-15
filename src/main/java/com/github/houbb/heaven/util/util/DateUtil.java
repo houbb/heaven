@@ -205,4 +205,60 @@ public final class DateUtil {
         }
     }
 
+    /**
+     * 从 sql 转化为 date
+     * @param date 日期
+     * @return 结果
+     * @since 0.1.121
+     */
+    public static Date fromSql(java.sql.Date date) {
+        if(null == date) {
+            return null;
+        }
+
+        return new Date(date.getTime());
+    }
+
+    /**
+     * 从 date 转化为 sql date
+     * @param date 日期
+     * @return 结果
+     * @since 0.1.121
+     */
+    public static java.sql.Date toSqlDate(Date date) {
+        if(null == date) {
+            return null;
+        }
+
+        return new java.sql.Date(date.getTime());
+    }
+
+    /**
+     * 从 date 转化为 sql date
+     * @param date 日期
+     * @return 结果
+     * @since 0.1.121
+     */
+    public static java.sql.Time toSqlTime(Date date) {
+        if(null == date) {
+            return null;
+        }
+
+        return new java.sql.Time(date.getTime());
+    }
+
+    /**
+     * 从 date 转化为 sql date
+     * @param date 日期
+     * @return 结果
+     * @since 0.1.121
+     */
+    public static java.sql.Timestamp toSqlTimestamp(Date date) {
+        if(null == date) {
+            return null;
+        }
+
+        return new java.sql.Timestamp(date.getTime());
+    }
+
 }

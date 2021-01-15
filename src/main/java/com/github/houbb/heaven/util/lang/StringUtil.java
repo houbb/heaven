@@ -1624,4 +1624,18 @@ public final class StringUtil {
         return leftPadding(original, targetLength, '0');
     }
 
+    /**
+     * 获取第一个字符
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.121
+     */
+    public static Character getFirstChar(final String text) {
+        if(StringUtil.isEmpty(text)) {
+            return null;
+        }
+
+        return text.charAt(0);
+    }
+
 }

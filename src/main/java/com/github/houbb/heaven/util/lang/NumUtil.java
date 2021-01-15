@@ -341,4 +341,32 @@ public final class NumUtil {
         }
     }
 
+    /**
+     * 转换为 bigInteger
+     * @param bigDecimal 数字
+     * @return 结果
+     * @since 0.1.121
+     */
+    public static BigInteger toBigInteger(final BigDecimal bigDecimal) {
+        if(null == bigDecimal) {
+            return null;
+        }
+
+        return bigDecimal.toBigInteger();
+    }
+
+    /**
+     * 转换为浮点型
+     * @param bigInteger 整数
+     * @return 浮点金额
+     * @since 0.1.121
+     */
+    public static BigDecimal parseBigDecimal(final BigInteger bigInteger) {
+        if(null == bigInteger) {
+            return null;
+        }
+
+        return new BigDecimal(bigInteger);
+    }
+
 }
