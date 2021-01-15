@@ -1628,7 +1628,7 @@ public final class StringUtil {
      * 获取第一个字符
      * @param text 文本
      * @return 结果
-     * @since 0.1.121
+     * @since 0.1.122
      */
     public static Character getFirstChar(final String text) {
         if(StringUtil.isEmpty(text)) {
