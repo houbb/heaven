@@ -7,12 +7,15 @@ package com.github.houbb.heaven.util.lang;
 
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
+import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
+import com.github.houbb.heaven.util.lang.reflect.ReflectFieldUtil;
 import com.github.houbb.heaven.util.util.ArrayPrimitiveUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Field;
 import java.util.*;
 
 /**
@@ -293,6 +296,25 @@ public final class ObjectUtil {
             return null;
         }
         return object.getClass();
+    }
+
+    /**
+     * empty 转换为 null
+     * @param object 对象
+     * @since 0.1.123
+     */
+    public static void emptyToNull(Object object) {
+        if(null == object) {
+            return;
+        }
+
+        List<Field> fieldList = ClassUtil.getAllFieldList(object.getClass());
+        for(Field field : fieldList) {
+            Object value = ReflectFieldUtil.getValue(field, object);
+            if(ObjectUtil.isEmpty(value)) {
+                ReflectFieldUtil.setValue(field, object, null);
+            }
+        }
     }
 
 }

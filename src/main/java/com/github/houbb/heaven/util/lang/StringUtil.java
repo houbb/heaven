@@ -1638,4 +1638,17 @@ public final class StringUtil {
         return text.charAt(0);
     }
 
+    /**
+     * 空转换为 null
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.123
+     */
+    public static String emptyToNull(String text) {
+        if(StringUtil.isEmpty(text)) {
+            return null;
+        }
+        return text;
+    }
+
 }
