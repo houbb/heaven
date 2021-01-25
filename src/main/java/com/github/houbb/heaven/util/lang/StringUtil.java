@@ -15,7 +15,10 @@ import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.util.ArrayPrimitiveUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
+import com.github.houbb.heaven.util.util.DateUtil;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1649,6 +1652,204 @@ public final class StringUtil {
             return null;
         }
         return text;
+    }
+
+    /**
+     * 转换为 boolean 类型
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static Boolean toBool(final String text) {
+        return "YES".equalsIgnoreCase(text)
+                || "TRUE".equalsIgnoreCase(text)
+                || "1".equalsIgnoreCase(text);
+    }
+
+    /**
+     * 转换为 boolean 类型
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static Character toChar(final String text) {
+        if(isEmpty(text)) {
+            return null;
+        }
+
+        return text.charAt(0);
+    }
+
+    /**
+     * 转换为 Byte 类型
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static Byte toByte(final String text) {
+        if(isEmpty(text)) {
+            return null;
+        }
+
+        return Byte.valueOf(text);
+    }
+
+    /**
+     * 转换为 Short 类型
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static Short toShort(final String text) {
+        if(isEmpty(text)) {
+            return null;
+        }
+
+        return Short.valueOf(text);
+    }
+
+    /**
+     * 转换为 Integer 类型
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static Integer toInt(final String text) {
+        if(isEmpty(text)) {
+            return null;
+        }
+
+        return Integer.valueOf(text);
+    }
+
+    /**
+     * 转换为 Long 类型
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static Long toLong(final String text) {
+        if(isEmpty(text)) {
+            return null;
+        }
+
+        return Long.valueOf(text);
+    }
+
+    /**
+     * 转换为 Float 类型
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static Float toFloat(final String text) {
+        if(isEmpty(text)) {
+            return null;
+        }
+
+        return Float.valueOf(text);
+    }
+
+    /**
+     * 转换为 Float 类型
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static Double toDouble(final String text) {
+        if(isEmpty(text)) {
+            return null;
+        }
+
+        return Double.valueOf(text);
+    }
+
+    /**
+     * 转换为 BigInteger 类型
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static BigInteger toBigInteger(final String text) {
+        if(isEmpty(text)) {
+            return null;
+        }
+
+        return new BigInteger(text);
+    }
+
+    /**
+     * 转换为 BigDecimal 类型
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static BigDecimal toBigDecimal(final String text) {
+        if(isEmpty(text)) {
+            return null;
+        }
+
+        return new BigDecimal(text);
+    }
+
+    /**
+     * 转换为 Date 类型
+     * @param text 文本
+     * @param dateFormat 格式化
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static Date toDate(final String text, final String dateFormat) {
+        if(isEmpty(text)) {
+            return null;
+        }
+
+        return DateUtil.getFormatDate(text, dateFormat);
+    }
+
+    /**
+     * 转换为 BigDecimal 类型
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static Date toDate(final String text) {
+        return toDate(text, DateUtil.PURE_DATE_FORMAT);
+    }
+
+    /**
+     * 转换为字符串
+     * @param date 日期
+     * @param format 格式化
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static String toString(Date date, String format) {
+        return DateUtil.getDateFormat(date, format);
+    }
+
+    /**
+     * 转换为字符串
+     * @param date 日期
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static String toString(Date date) {
+        return toString(date, DateUtil.PURE_DATE_FORMAT);
+    }
+
+    /**
+     * 转换为字符串
+     * @param object 对象
+     * @return 结果
+     * @since 0.1.124
+     */
+    public static String toString(Object object) {
+        if(null == object) {
+            return null;
+        }
+
+        return object.toString();
     }
 
 }
