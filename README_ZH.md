@@ -40,6 +40,6 @@ maven 3.x+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>heaven</artifactId>
-    <version>0.1.122</version>
+    <version>0.1.125</version>
 </dependency>
 ```

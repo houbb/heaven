@@ -1,9 +1,13 @@
 package com.github.houbb.heaven.util.net;
 
+import com.github.houbb.heaven.constant.PunctuationConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
+import com.github.houbb.heaven.util.util.regex.RegexUtil;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.net.*;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 网络工具类
@@ -15,6 +19,12 @@ import java.net.UnknownHostException;
 public final class NetUtil {
 
     private NetUtil(){}
+
+    /**
+     * 默认的本地地址
+     * @since 0.1.125
+     */
+    public static final String LOCALHOST = "127.0.0.1";
 
     /**
      * 本地服务地址
@@ -83,4 +93,89 @@ public final class NetUtil {
                     "check your network or set isCommentWhenNetworkBroken=true.");
         }
     }
+
+    /**
+     * 获取当前机器的 IP 地址
+     * @return IP 地址
+     * @since 0.1.125
+     */
+    public static String getLocalIp() {
+        InetAddress inetAddress = findLocalAddress();
+        if(inetAddress == null) {
+            return null;
+        }
+
+        String ip = inetAddress.getHostAddress();
+        if(RegexUtil.isIp(ip)) {
+            return ip;
+        }
+
+        return null;
+    }
+
+    /**
+     * 查询本地地址
+     * @return 地址
+     * @since 0.1.125
+     */
+    private static InetAddress findLocalAddress() {
+        String preferNamePrefix = "bond0";
+        String defaultNicList = "bond0,eth0,em0,en0,em1,br0,eth1,em2,en1,eth2,em3,en2,eth3,em4,en3";
+
+        InetAddress resultAddress = null;
+        Map<String, NetworkInterface> candidateInterfaces = new HashMap<>();
+
+        // 遍历所有网卡，找出所有可用网卡，尝试找出符合prefer前缀的网卡
+        try {
+            for (Enumeration<NetworkInterface> allInterfaces = NetworkInterface.getNetworkInterfaces(); allInterfaces
+                    .hasMoreElements(); ) {
+                NetworkInterface nic = allInterfaces.nextElement();
+                // 检查网卡可用并支持广播
+                if (!nic.isUp() || !nic.supportsMulticast()) {
+                    continue;
+                }
+
+                // 检查是否符合prefer前缀
+                String name = nic.getName();
+                if (name.startsWith(preferNamePrefix)) {
+                    resultAddress = findAvailableAddress(nic);
+                    if (resultAddress != null) {
+                        return resultAddress;
+                    }
+                } else {
+                    // 不是Prefer前缀，先放入可选列表
+                    candidateInterfaces.put(name, nic);
+                }
+            }
+
+            for (String nifName : defaultNicList.split(PunctuationConst.COMMA)) {
+                NetworkInterface nic = candidateInterfaces.get(nifName);
+                if (nic != null) {
+                    resultAddress = findAvailableAddress(nic);
+                    if (resultAddress != null) {
+                        return resultAddress;
+                    }
+                }
+            }
+
+            return null;
+        } catch (SocketException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 检查有否非ipv6，非127.0.0.1
+     * @since 0.1.125
+     */
+    private static InetAddress findAvailableAddress(NetworkInterface nic) {
+        for (Enumeration<InetAddress> inetAddresses = nic.getInetAddresses(); inetAddresses.hasMoreElements(); ) {
+            InetAddress inetAddress = inetAddresses.nextElement();
+            if (!(inetAddress instanceof Inet6Address) && !inetAddress.isLoopbackAddress()) {
+                return inetAddress;
+            }
+        }
+        return null;
+    }
+
 }
