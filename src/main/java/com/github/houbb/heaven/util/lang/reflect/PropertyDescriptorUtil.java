@@ -46,7 +46,7 @@ public final class PropertyDescriptorUtil {
      * @return 属性读方法
      * @since 0.1.62
      */
-    public static Method getReadMethod(final Class beanClass,
+    public static Method getReadMethod(final Class<?> beanClass,
                                        final String propertyName) {
         PropertyDescriptor propertyDescriptor = getPropertyDescriptor(beanClass, propertyName);
 
@@ -98,6 +98,84 @@ public final class PropertyDescriptorUtil {
                 return getPropertyDescriptor(beanClass, fieldName);
             }
         });
+    }
+
+    /**
+     * 设置属性值
+     *
+     * @param bean       对象
+     * @param descriptor 描述类
+     * @param value      待设置的值
+     * @since 0.1.126
+     * @return 是否设置成功
+     */
+    public static boolean setPropertyValue(Object bean,
+                                           PropertyDescriptor descriptor,
+                                           Object value) {
+        try {
+            Method setMethod = descriptor.getWriteMethod();//从属性描述器中获取 set 方法
+            if (setMethod == null) {
+                return false;
+            }
+
+            //调用 set 方法将传入的value值保存属性中去
+            setMethod.invoke(bean, value);
+            return true;
+        } catch (Exception e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 设置属性值
+     *
+     * @param bean       对象
+     * @param descriptorName 描述名称
+     * @param value      待设置的值
+     * @since 0.1.126
+     * @return 是否设置成功
+     */
+    public static boolean setPropertyValue(Object bean,
+                                           String descriptorName,
+                                           Object value) {
+        PropertyDescriptor propertyDescriptor = getPropertyDescriptor(bean.getClass(), descriptorName);
+        return setPropertyValue(bean, propertyDescriptor, value);
+    }
+
+    /**
+     * 获取属性值
+     *
+     * @param bean       对象
+     * @param descriptor 描述类
+     * @return 对应的值
+     * @since 0.1.126
+     */
+    public static Object getPropertyValue(Object bean,
+                                           PropertyDescriptor descriptor) {
+        try {
+            Method readMethod = descriptor.getReadMethod();//从属性描述器中获取 set 方法
+            if (readMethod == null) {
+                return null;
+            }
+
+            return readMethod.invoke(bean);
+        } catch (Exception e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 获取属性值
+     *
+     * @param bean       对象
+     * @param descriptorName 描述名称
+     * @since 0.1.126
+     * @return 对应的配置值
+     */
+    public static Object getPropertyValue(Object bean,
+                                           String descriptorName) {
+        PropertyDescriptor propertyDescriptor = getPropertyDescriptor(bean.getClass(), descriptorName);
+        return getPropertyValue(bean, propertyDescriptor);
     }
 
 }
