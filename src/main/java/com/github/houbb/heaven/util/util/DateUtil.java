@@ -167,6 +167,7 @@ public final class DateUtil {
     /**
      * 获取当前时间戳。
      * @since 0.1.127
+     * @return 时间戳
      */
     public static String getCurrentTime17() {
         Date now = new Date();
@@ -176,6 +177,7 @@ public final class DateUtil {
     /**
      * 获取当前时间戳。
      * @since 0.1.127
+     * @return 时间戳
      */
     public static String getCurrentTime14() {
         Date now = new Date();

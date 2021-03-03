@@ -20,6 +20,8 @@ public final class OsUtil {
      * 查看指定的端口号是否空闲，若空闲则返回否则返回一个随机的空闲端口号
      * @param defaultPort 默认端口
      * @since 0.1.125
+     * @return 端口
+     * @throws IOException 异常
      */
     public static int getFreePort(int defaultPort) throws IOException {
         try (ServerSocket serverSocket = new ServerSocket(defaultPort)) {
@@ -32,6 +34,8 @@ public final class OsUtil {
     /**
      * 获取空闲端口号
      * @since 0.1.125
+     * @return 端口
+     * @throws IOException 异常
      */
     public static int getFreePort() throws IOException {
         try (ServerSocket serverSocket = new ServerSocket(0)) {
@@ -43,6 +47,7 @@ public final class OsUtil {
      * 检查端口号是否被占用
      * @param port 端口号
      * @since 0.1.125
+     * @return 是否
      */
     public static boolean isBusyPort(int port) {
         boolean ret = true;
