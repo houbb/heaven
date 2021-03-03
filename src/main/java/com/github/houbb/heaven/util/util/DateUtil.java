@@ -11,7 +11,9 @@ import com.github.houbb.heaven.util.lang.StringUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -60,6 +62,12 @@ public final class DateUtil {
     public static final String TIMESTAMP_FORMAT_17 = "yyyyMMddHHmmssSSS";
 
     /**
+     * 时间戳格式化
+     * 14位长度
+     */
+    public static final String TIMESTAMP_FORMAT_14 = "yyyyMMddHHmmss";
+
+    /**
      * 时间戳格式化(15 位长度)
      * 备注：因为 2019 最前面两位，在自己的有生之年，基本是不变的。
      * @since 0.1.12
@@ -81,6 +89,26 @@ public final class DateUtil {
     }
 
     /**
+     * 格式化为 17 位时间戳
+     * @param date 日期
+     * @return  时间戳
+     * @since 0.1.127
+     */
+    public static String getDateFormat17(final Date date) {
+        return getDateFormat(date, TIMESTAMP_FORMAT_17);
+    }
+
+    /**
+     * 格式化为 14 位时间戳
+     * @param date 日期
+     * @return  时间戳
+     * @since 0.1.127
+     */
+    public static String getDateFormat14(final Date date) {
+        return getDateFormat(date, TIMESTAMP_FORMAT_14);
+    }
+
+    /**
      * 对字符串格式化为日期
      * @param dateStr 日期字符串
      * @param format 格式化
@@ -99,6 +127,26 @@ public final class DateUtil {
     }
 
     /**
+     * 对字符串格式化为日期
+     * @param dateStr 日期字符串
+     * @return 格式化后日期信息
+     * @since 0.1.127
+     */
+    public static Date getFormatDate17(final String dateStr) {
+        return getFormatDate(dateStr, TIMESTAMP_FORMAT_17);
+    }
+
+    /**
+     * 对字符串格式化为日期
+     * @param dateStr 日期字符串
+     * @return 格式化后日期信息
+     * @since 0.1.127
+     */
+    public static Date getFormatDate14(final String dateStr) {
+        return getFormatDate(dateStr, TIMESTAMP_FORMAT_14);
+    }
+
+    /**
      * 获取日期当前字符串形式
      * @return  dateStr
      */
@@ -114,6 +162,24 @@ public final class DateUtil {
     public static String getCurrentTimeStampStr() {
         Date now = new Date();
         return new SimpleDateFormat(TIMESTAMP_FORMAT_17).format(now);
+    }
+
+    /**
+     * 获取当前时间戳。
+     * @since 0.1.127
+     */
+    public static String getCurrentTime17() {
+        Date now = new Date();
+        return new SimpleDateFormat(TIMESTAMP_FORMAT_17).format(now);
+    }
+
+    /**
+     * 获取当前时间戳。
+     * @since 0.1.127
+     */
+    public static String getCurrentTime14() {
+        Date now = new Date();
+        return new SimpleDateFormat(TIMESTAMP_FORMAT_14).format(now);
     }
 
     /**
@@ -259,6 +325,36 @@ public final class DateUtil {
         }
 
         return new java.sql.Timestamp(date.getTime());
+    }
+
+    /**
+     * 年份变更
+     * @param date 日期
+     * @param year 年份
+     * @return 时间
+     * @since 0.1.127
+     */
+    public static Date addYear(final Date date, int year) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        //把日期往后增加一年，整数往后推，负数往前移
+        calendar.add(Calendar.YEAR, year);
+        return calendar.getTime();
+    }
+
+    /**
+     * 秒变更
+     * @param date 日期
+     * @param second 秒
+     * @return 时间
+     * @since 0.1.127
+     */
+    public static Date addSecond(final Date date, int second) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        //把日期往后增加一年，整数往后推，负数往前移
+        calendar.add(Calendar.SECOND, second);
+        return calendar.getTime();
     }
 
 }
