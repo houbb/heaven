@@ -796,4 +796,115 @@ public final class CollectionUtil {
         return list.get(next);
     }
 
+    /**
+     * 空列表
+     * @param <T> 泛型
+     * @return 空列表
+     * @since 0.1.128
+     */
+    public static <T> List<T> list() {
+        return Collections.emptyList();
+    }
+
+    /**
+     * 空列表
+     * @param t 实体
+     * @param <T> 泛型
+     * @return 空列表
+     * @since 0.1.128
+     */
+    public static <T> List<T> list(T t) {
+        return Collections.singletonList(t);
+    }
+
+    /**
+     * 列表
+     * @param ts 数组
+     * @param <T> 泛型
+     * @return 空列表
+     * @since 0.1.128
+     */
+    public static <T> List<T> list(T... ts) {
+        return new ArrayList<>(Arrays.asList(ts));
+    }
+
+    /**
+     * 复制列表
+     * @param list 列表
+     * @param <T> 泛型
+     * @return 空列表
+     * @since 0.1.128
+     */
+    public static <T> List<T> copy(List<T> list) {
+        return new ArrayList<>(list);
+    }
+
+    /**
+     * 获取第一个元素
+     * @param list 列表
+     * @param <T> 泛型
+     * @return 空列表
+     * @since 0.1.128
+     */
+    public static <T> T head(List<T> list) {
+        if(CollectionUtil.isEmpty(list)) {
+            return null;
+        }
+        return list.get(0);
+    }
+
+    /**
+     * 获取最后一个元素
+     * @param list 列表
+     * @param <T> 泛型
+     * @return 空列表
+     * @since 0.1.128
+     */
+    public static <T> T tail(List<T> list) {
+        if(CollectionUtil.isEmpty(list)) {
+            return null;
+        }
+        return list.get(list.size()-1);
+    }
+
+    /**
+     * 添加元素到列表
+     * @param list 列表
+     * @param t 元素
+     * @param <T> 泛型
+     * @return 空列表
+     * @since 0.1.128
+     */
+    public static <T> List<T> append(List<T> list, T t) {
+        if(list == null) {
+            list = new ArrayList<>();
+        }
+        list.add(t);
+
+        return list;
+    }
+
+    /**
+     * 反转列表
+     * @param list 列表
+     * @param t 元素
+     * @param <T> 泛型
+     * @return 空列表
+     * @since 0.1.128
+     */
+    public static <T> List<T> reverse(List<T> list, T t) {
+        if(CollectionUtil.isEmpty(list)) {
+            return list;
+        }
+
+        List<T> results = new ArrayList<>(list.size());
+        for(int i = list.size()-1; i >= 0; i--) {
+            results.add(list.get(i));
+        }
+        list.add(t);
+
+        return results;
+    }
+
+
 }
