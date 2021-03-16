@@ -73,6 +73,47 @@ public final class StringUtil {
     public static final String BLANK = " ";
 
     /**
+     * 新行
+     *
+     * System.lineSeparator() 实际的文本效果是2行
+     * @since 0.1.129
+     */
+    public static final String NEW_LINE = "";
+
+    /**
+     * 是否不为换行符
+     * @param line 内容
+     * @return 是否
+     * @since 0.1.129
+     */
+    public static boolean isNotReturnLine(String line){
+        return !isReturnLine(line);
+    }
+
+    /**
+     * 是否为换行符
+     * @param line 内容
+     * @return 是否
+     * @since 0.1.129
+     */
+    public static boolean isReturnLine(String line) {
+        if(StringUtil.isEmpty(line)) {
+            return true;
+        }
+
+        String trim = line.trim();
+        if(StringUtil.isEmpty(trim)) {
+            return true;
+        }
+
+        if(NEW_LINE.equals(line)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * 是否全部为大写
      *
      * @param string 待检验字符

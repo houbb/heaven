@@ -107,6 +107,16 @@ public final class CharUtil {
     }
 
     /**
+     * 是否不为空格
+     * @param c char
+     * @return 是否为空格
+     * @since 0.1.129
+     */
+    public static boolean isNotSpace(final char c) {
+        return !isSpace(c);
+    }
+
+    /**
      * 是数字或者英文字符
      * @param c 字符
      * @return 是否
@@ -170,6 +180,30 @@ public final class CharUtil {
      */
     public static boolean isDigit(char ch) {
         return ch >= 0x0030 && ch <= 0x0039;
+    }
+
+    /**
+     * 是否为 ascii 码
+     * @param c 字符
+     * @return 结果
+     * @since 0.1.129
+     */
+    public static boolean isAscii(char c) {
+        if(c > 127) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * 是否不为 ascii 码
+     * @param c 字符
+     * @return 结果
+     * @since 0.1.129
+     */
+    public static boolean isNotAscii(char c) {
+        return !isAscii(c);
     }
 
 }
