@@ -6,7 +6,9 @@
 package com.github.houbb.heaven.util.lang;
 
 import com.github.houbb.heaven.constant.CharConst;
+import com.github.houbb.heaven.constant.CharsetConst;
 import com.github.houbb.heaven.constant.PunctuationConst;
+import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.condition.ICondition;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
@@ -17,8 +19,10 @@ import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.DateUtil;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1891,6 +1895,56 @@ public final class StringUtil {
         }
 
         return object.toString();
+    }
+
+    /**
+     * 转换为字符串
+     * @param bytes 字节
+     * @param charset 编码
+     * @return 结果
+     * @since 0.1.130
+     */
+    public static String toString(byte[] bytes, String charset) {
+        try {
+            return new String(bytes, charset);
+        } catch (UnsupportedEncodingException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 转换为字符串
+     * @param bytes 字节
+     * @return 结果
+     * @since 0.1.130
+     */
+    public static String toString(byte[] bytes) {
+        return toString(bytes, CharsetConst.UTF8);
+    }
+
+    /**
+     * 转换为 bytes
+     * @param text 文本
+     * @param charset 编码
+     * @return 结果
+     * @since 0.1.130
+     */
+    public static byte[] getBytes(String text, String charset) {
+        try {
+            return text.getBytes(charset);
+        } catch (UnsupportedEncodingException e) {
+            throw new CommonRuntimeException(e);
+        }
+    }
+
+    /**
+     * 转换为 bytes
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.130
+     */
+    public static byte[] getBytes(String text) {
+        return getBytes(text, CharsetConst.UTF8);
     }
 
 }
