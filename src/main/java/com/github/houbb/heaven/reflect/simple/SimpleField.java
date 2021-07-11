@@ -128,4 +128,9 @@ public class SimpleField implements IField {
         this.field = field;
         return this;
     }
+
+    @Override
+    public int compareTo(IField o) {
+        return this.name.compareTo(o.name());
+    }
 }

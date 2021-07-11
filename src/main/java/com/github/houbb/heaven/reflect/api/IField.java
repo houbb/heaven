@@ -11,7 +11,7 @@ import java.util.List;
  * @author binbin.hou
  * @since 0.1.5
  */
-public interface IField extends IMember {
+public interface IField extends IMember, Comparable<IField> {
 
     /**
      * 原始字段信息
