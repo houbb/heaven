@@ -22,7 +22,6 @@ import com.github.houbb.heaven.util.util.DateUtil;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1945,6 +1944,48 @@ public final class StringUtil {
      */
     public static byte[] getBytes(String text) {
         return getBytes(text, CharsetConst.UTF8);
+    }
+
+    /**
+     * 是否全部是英文
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.132
+     */
+    public static boolean isEnglish(String text) {
+        if(StringUtil.isEmpty(text)) {
+            return false;
+        }
+
+        char[] chars = text.toCharArray();
+        for(char c : chars) {
+            if(!CharUtil.isEnglish(c)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 是否全部是中文
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.132
+     */
+    public static boolean isChinese(String text) {
+        if(StringUtil.isEmpty(text)) {
+            return false;
+        }
+
+        char[] chars = text.toCharArray();
+        for(char c : chars) {
+            if(!CharUtil.isChinese(c)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }
