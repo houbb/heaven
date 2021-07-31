@@ -345,6 +345,64 @@ public final class DateUtil {
     }
 
     /**
+     * 月份变更
+     * @param date 日期
+     * @param month 月份
+     * @return 时间
+     * @since 0.1.141
+     */
+    public static Date addMonth(final Date date, int month) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH, month);
+        return calendar.getTime();
+    }
+
+    /**
+     * 日变更
+     * @param date 日期
+     * @param day 日
+     * @return 时间
+     * @since 0.1.141
+     */
+    public static Date addDay(final Date date, int day) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, day);
+        return calendar.getTime();
+    }
+
+    /**
+     * 分钟变更
+     * @param date 日期
+     * @param hour 时
+     * @return 时间
+     * @since 0.1.141
+     */
+    public static Date addHour(final Date date, int hour) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        //把日期往后增加一年，整数往后推，负数往前移
+        calendar.add(Calendar.HOUR_OF_DAY, hour);
+        return calendar.getTime();
+    }
+
+    /**
+     * 分钟变更
+     * @param date 日期
+     * @param minute 分
+     * @return 时间
+     * @since 0.1.141
+     */
+    public static Date addMinute(final Date date, int minute) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        //把日期往后增加一年，整数往后推，负数往前移
+        calendar.add(Calendar.MINUTE, minute);
+        return calendar.getTime();
+    }
+
+    /**
      * 秒变更
      * @param date 日期
      * @param second 秒
@@ -358,5 +416,7 @@ public final class DateUtil {
         calendar.add(Calendar.SECOND, second);
         return calendar.getTime();
     }
+
+
 
 }
