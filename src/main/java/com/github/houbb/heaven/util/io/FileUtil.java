@@ -902,6 +902,18 @@ public final class FileUtil {
     }
 
     /**
+     * 删除文件
+     *
+     * @param filePath 文件信息
+     * @since 0.1.141
+     */
+    public static void deleteFile(final String filePath) {
+        ArgUtil.notEmpty(filePath, "filePath");
+        File file = new File(filePath);
+        deleteFile(file);
+    }
+
+    /**
      * 创建临时文件
      *
      * @param name   文件名称

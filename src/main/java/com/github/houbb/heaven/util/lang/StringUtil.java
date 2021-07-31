@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.lang;
 
+import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.constant.CharConst;
 import com.github.houbb.heaven.constant.CharsetConst;
 import com.github.houbb.heaven.constant.PunctuationConst;
@@ -1986,6 +1987,20 @@ public final class StringUtil {
         }
 
         return true;
+    }
+
+    /**
+     * 包信息调整为路径信息
+     * @param packageName 包信息
+     * @return 結果
+     * @since 0.1.141
+     */
+    public static String packageToPath(String packageName) {
+        if(StringUtil.isEmpty(packageName)) {
+            return packageName;
+        }
+
+        return packageName.replaceAll("\\.", "/");
     }
 
 }
