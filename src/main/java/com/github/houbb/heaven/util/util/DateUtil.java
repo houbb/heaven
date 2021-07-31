@@ -38,6 +38,12 @@ public final class DateUtil {
     public static final String DATE_FORMAT = "yyyy-MM-dd";
 
     /**
+     * 日期格式化
+     * @since 0.1.141
+     */
+    public static final String DATE_ZH_FORMAT = "yyyy年MM月dd日";
+
+    /**
      * 纯净时间格式化
      * @since 0.1.12
      */
@@ -48,12 +54,23 @@ public final class DateUtil {
      * @since 0.1.12
      */
     public static final String TIME_FORMAT = "HH:mm:ss";
+    /**
+     * 时间格式化
+     * @since 0.1.12
+     */
+    public static final String TIME_ZH_FORMAT = "HH时mm分ss秒";
 
     /**
      * 简单的日期时间格式化
      * @since 0.1.12
      */
     public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
+
+    /**
+     * 简单的日期时间格式化
+     * @since 0.1.141
+     */
+    public static final String DATE_TIME_SEC_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     /**
      * 时间戳格式化

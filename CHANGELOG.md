@@ -974,3 +974,4 @@
 | 1 | A | 添加 FileUtil#deleteFile  | 2021-07-31 13:27:35 | |
 | 2 | A | 添加 StringUtil#packageToPath  | 2021-07-31 13:27:35 | |
 | 3 | A | 添加 DateUtil#addXXX  | 2021-07-31 13:27:35 | |
+| 4 | A | 添加 DateUtil#xxxFORMAT  | 2021-07-31 13:27:35 | |
