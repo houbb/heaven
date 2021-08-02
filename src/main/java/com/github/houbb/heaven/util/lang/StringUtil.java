@@ -2003,4 +2003,31 @@ public final class StringUtil {
         return packageName.replaceAll("\\.", "/");
     }
 
+    /**
+     * 字符串截取
+     * @param text 文本
+     * @param startIndex 开始位置
+     * @param length 长度
+     * @return 结果
+     * @since 0.1.142
+     */
+    public static String subString(String text, int startIndex, int length) {
+        if(StringUtil.isEmpty(text)) {
+            return text;
+        }
+
+        // 长度
+        if(length <= 0) {
+            return null;
+        }
+
+        //避免越界
+        int endIndex = startIndex + length;
+        if(endIndex > text.length()) {
+            endIndex = text.length();
+        }
+
+        return text.substring(startIndex, endIndex);
+    }
+
 }
