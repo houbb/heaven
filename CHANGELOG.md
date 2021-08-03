@@ -975,3 +975,9 @@
 | 2 | A | 添加 StringUtil#packageToPath  | 2021-07-31 13:27:35 | |
 | 3 | A | 添加 DateUtil#addXXX  | 2021-07-31 13:27:35 | |
 | 4 | A | 添加 DateUtil#xxxFORMAT  | 2021-07-31 13:27:35 | |
+
+# release_0.1.142
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 添加 StringUtil#subString  | 2021-08-03 23:27:35 | |
