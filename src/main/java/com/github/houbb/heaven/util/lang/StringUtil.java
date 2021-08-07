@@ -15,10 +15,7 @@ import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
-import com.github.houbb.heaven.util.util.ArrayPrimitiveUtil;
-import com.github.houbb.heaven.util.util.ArrayUtil;
-import com.github.houbb.heaven.util.util.CollectionUtil;
-import com.github.houbb.heaven.util.util.DateUtil;
+import com.github.houbb.heaven.util.util.*;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
@@ -2028,6 +2025,54 @@ public final class StringUtil {
         }
 
         return text.substring(startIndex, endIndex);
+    }
+
+    /**
+     * 在不同的操作系统中，对换号符的定义是不同的，比如：
+     *
+     * 1. \n unix,linux系统，好像新的mac也是这样的。
+     *
+     * 2. \r 有的mac系统
+     *
+     * 3. \r\n window系统。
+     *
+     * 自己观察，你会发现规律，其实用一个正则表达式就可以满足： \r?\n
+     *
+     * @param content 内容
+     * @return 结果
+     * @since 0.1.143
+     */
+    public static List<String> contentToLines(String content) {
+        if(content == null) {
+            return null;
+        }
+
+        // 根据换行符分割
+        String[] strings = content.split("\\r?\\n");
+        return ArrayUtil.toList(strings);
+    }
+
+    /**
+     * 字符串按照换行符拼接为新的内容
+     * @param lines 行
+     * @return 结果
+     * @since 0.1.143
+     */
+    public static String linesToContent(List<String> lines) {
+        if(CollectionUtil.isEmpty(lines)) {
+            return null;
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(int i = 0; i < lines.size()-1; i++) {
+            stringBuilder.append(lines.get(i))
+                    .append(SystemUtil.getLineSeparator());
+        }
+
+        stringBuilder.append(lines.get(lines.size()-1));
+
+        return stringBuilder.toString();
     }
 
 }
