@@ -173,6 +173,16 @@ public final class DateUtil {
     }
 
     /**
+     * 获取日期当前字符串形式
+     * @return  dateStr
+     * @since 0.1.144
+     */
+    public static String getCurrentDatePureStr() {
+        Date now = new Date();
+        return new SimpleDateFormat(PURE_DATE_FORMAT).format(now);
+    }
+
+    /**
      * 获取当前时间戳。
      * @return  dateStr
      */

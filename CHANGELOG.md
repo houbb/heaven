@@ -988,3 +988,9 @@
 |:---|:---|:---|:---|:--|
 | 1 | A | 添加 StringUtil#contentToLines  | 2021-08-07 23:27:35 | |
 | 2 | A | 添加 StringUtil#linesToContent  | 2021-08-07 23:27:35 | |
+
+# release_0.1.144
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | A | 添加 DateUtil#getCurrentDatePureStr  | 2021-08-19 23:27:35 | |
