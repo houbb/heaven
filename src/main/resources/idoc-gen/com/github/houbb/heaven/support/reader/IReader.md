@@ -1,0 +1,28 @@
+## IReader-<p> project: heaven-IReader </p>
+
+<p> project: heaven-IReader </p>
+<p> create on 2020/3/19 21:43 </p>
+
+### read-读取内容
+
+读取内容
+
+#### 方法入参
+
+暂无入参
+
+##### 方法入参详情
+
+暂无入参详情
+
+#### 方法出参
+
+暂无出参
+
+##### 方法出参详情
+
+暂无出参详情
+
+
+
+

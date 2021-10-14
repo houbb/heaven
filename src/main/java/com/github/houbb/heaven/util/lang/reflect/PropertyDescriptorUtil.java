@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 /**
- * {@link java.beans.PropertyDescriptor} 内省工具类
+ * 内省工具类
  * @author binbin.hou
  * @since 0.1.62
  */

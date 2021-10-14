@@ -92,11 +92,19 @@
 
             <plugin>
                 <groupId>com.github.houbb</groupId>
-                <artifactId>gen-maven-plugin</artifactId>
-                <version>${plugin.gen.version}</version>
+                <artifactId>idoc-core</artifactId>
+                <version>0.2.0-SNAPSHOT</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.github.houbb</groupId>
+                        <artifactId>idoc-ftl</artifactId>
+                        <version>0.2.0-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
                 <configuration>
-                    <junitVersion>4</junitVersion>
-                    <isOverwriteWhenExists>false</isOverwriteWhenExists>
+                    <generates>
+                        <generate>com.github.houbb.idoc.ftl.api.generator.MarkdownDocGenerator</generate>
+                    </generates>
                 </configuration>
             </plugin>
         </plugins>

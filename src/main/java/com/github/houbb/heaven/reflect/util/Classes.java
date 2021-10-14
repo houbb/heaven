@@ -1,7 +1,7 @@
 package com.github.houbb.heaven.reflect.util;
 
 import com.github.houbb.heaven.reflect.api.IField;
-import com.github.houbb.heaven.reflect.exception.ReflectRumtionException;
+import com.github.houbb.heaven.reflect.exception.ReflectRuntimeException;
 import com.github.houbb.heaven.reflect.handler.SimpleFieldHandler;
 import com.github.houbb.heaven.support.cache.impl.ClassFieldListCache;
 import com.github.houbb.heaven.util.common.ArgUtil;
@@ -56,7 +56,7 @@ public final class Classes {
                     field.value(value);
                 }
             } catch (IllegalAccessException e) {
-                throw new ReflectRumtionException(e);
+                throw new ReflectRuntimeException(e);
             }
         }
     }
