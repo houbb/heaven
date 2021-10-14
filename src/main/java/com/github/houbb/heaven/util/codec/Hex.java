@@ -19,6 +19,8 @@
 package com.github.houbb.heaven.util.codec;
 
 /**
+ * HEX
+ *
  * <a href="http://en.wikipedia.org/wiki/Hexadecimal">Hexadecimal</a> encoder and decoder.
  * This class was borrowed from Apache Commons Codec SVN repository (rev. {@code 560660}) with modifications
  * to enable Hex conversion without a full dependency on Commons Codec.  We didn't want to reinvent the wheel of

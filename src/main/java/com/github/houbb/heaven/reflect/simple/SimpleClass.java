@@ -7,6 +7,7 @@ import com.github.houbb.heaven.reflect.api.IMethod;
 import java.util.List;
 
 /**
+ * 简单类
  * @author binbin.hou
  * @since 0.1.5
  */

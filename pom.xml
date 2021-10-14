@@ -27,7 +27,7 @@
 
         <!--============================== INTER ==============================-->
         <plugin.gen.version>1.0.6</plugin.gen.version>
-        <idoc.version>0.2.0</idoc.version>
+        <idoc.version>0.3.0</idoc.version>
 
         <!--============================== OTHER ==============================-->
         <junit.version>4.12</junit.version>
@@ -106,6 +106,7 @@
                     <generates>
                         <generate>com.github.houbb.idoc.ftl.api.generator.MarkdownDocGenerator</generate>
                     </generates>
+                    <targetDir>D:\gitee\heaven\doc\gen</targetDir>
                 </configuration>
             </plugin>
         </plugins>

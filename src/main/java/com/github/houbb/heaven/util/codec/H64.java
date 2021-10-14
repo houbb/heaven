@@ -32,6 +32,8 @@ package com.github.houbb.heaven.util.codec;
 import java.io.IOException;
 
 /**
+ * H64
+ *
  * Codec for <a href="http://en.wikipedia.org/wiki/Crypt_(Unix)">Unix Crypt</a>-style encoding.  While similar to
  * Base64, it is not compatible with Base64.
  * This implementation is based on encoding algorithms found in the Apache Portable Runtime library's

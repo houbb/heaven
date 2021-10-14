@@ -19,6 +19,8 @@
 package com.github.houbb.heaven.util.codec;
 
 /**
+ * Codec 异常
+ *
  * Root exception related to issues during encoding or decoding.
  *
  * @since 0.1.120

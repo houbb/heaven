@@ -6,6 +6,8 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 /**
+ * Optional 工具类
+ *
  * A container object which may or may not contain a non-null value.
  * If a value is present, {@code isPresent()} will return {@code true} and
  * {@code get()} will return the value.

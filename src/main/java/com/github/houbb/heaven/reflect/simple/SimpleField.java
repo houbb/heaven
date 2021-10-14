@@ -10,6 +10,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 /**
+ * 简单字段
  * @author binbin.hou
  * @since 0.1.5
  */

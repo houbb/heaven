@@ -4,7 +4,7 @@ package com.github.houbb.heaven.reflect.simple;
 import com.github.houbb.heaven.reflect.api.IMethod;
 
 /**
- * 注解实现
+ * 简单方法
  * @author binbin.hou
  * @since 0.1.5
  */

@@ -21,6 +21,8 @@ package com.github.houbb.heaven.util.codec;
 import java.io.*;
 
 /**
+ * Codec 支持类
+ *
  * Base abstract class that provides useful encoding and decoding operations, especially for character data.
  *
  * @since 0.1.120
@@ -34,10 +36,10 @@ public abstract class CodecSupport {
 
     /**
      * Converts the specified character array to a byte array using the Shiro's preferred encoding (UTF-8).
-     * 
+     *
      * This is a convenience method equivalent to calling the {@link #toBytes(String,String)} method with a
      * a wrapping String and {@link CodecSupport#PREFERRED_ENCODING PREFERRED_ENCODING}, i.e.
-     * 
+     *
      * <code>toBytes( new String(chars), {@link CodecSupport#PREFERRED_ENCODING PREFERRED_ENCODING} );</code>
      *
      * @param chars the character array to be converted to a byte array.
@@ -49,10 +51,10 @@ public abstract class CodecSupport {
 
     /**
      * Converts the specified character array into a byte array using the specified character encoding.
-     * 
+     *
      * This is a convenience method equivalent to calling the {@link #toBytes(String,String)} method with a
      * a wrapping String and the specified encoding, i.e.
-     * 
+     *
      * <code>toBytes( new String(chars), encoding );</code>
      *
      * @param chars    the character array to be converted to a byte array
@@ -146,7 +148,7 @@ public abstract class CodecSupport {
 
     /**
      * Converts the specified byte array to a character array using the specified character encoding.
-     * 
+     *
      * Effectively calls <code>{@link #toString(byte[], String) toString(bytes,encoding)}.{@link String#toCharArray() toCharArray()};</code>
      *
      * @param bytes    the byte array to convert to a String
@@ -161,7 +163,7 @@ public abstract class CodecSupport {
     /**
      * Returns {@code true} if the specified object can be easily converted to bytes by instances of this class,
      * {@code false} otherwise.
-     * 
+     *
      * The default implementation returns {@code true} IFF the specified object is an instance of one of the following
      * types:
      *

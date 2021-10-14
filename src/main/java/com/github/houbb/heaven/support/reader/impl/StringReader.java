@@ -4,6 +4,8 @@ import com.github.houbb.heaven.annotation.ThreadSafe;
 import com.github.houbb.heaven.support.reader.IReader;
 
 /**
+ * 字符串读取类
+ *
  * <p> project: heaven-StringReader </p>
  * <p> create on 2020/3/19 21:43 </p>
  *

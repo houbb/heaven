@@ -4,7 +4,7 @@ package com.github.houbb.heaven.reflect.simple;
 import com.github.houbb.heaven.reflect.api.IParam;
 
 /**
- * 参数实现
+ * 简单参数
  * @author binbin.hou
  * @since 0.1.5
  */

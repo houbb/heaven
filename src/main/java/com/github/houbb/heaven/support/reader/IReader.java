@@ -1,6 +1,7 @@
 package com.github.houbb.heaven.support.reader;
 
 /**
+ * 阅读者接口
  * <p> project: heaven-IReader </p>
  * <p> create on 2020/3/19 21:43 </p>
  *

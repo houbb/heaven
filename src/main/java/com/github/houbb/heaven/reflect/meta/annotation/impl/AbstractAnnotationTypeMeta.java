@@ -17,6 +17,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * 抽象注解类型元数据
+ *
  * <p> project: heaven-AnnotationMeta </p>
  * <p> create on 2019/11/29 23:04 </p>
  *

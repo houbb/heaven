@@ -6,6 +6,7 @@ import com.github.houbb.heaven.reflect.simple.SimpleReturn;
 import com.github.houbb.heaven.support.handler.IHandler;
 
 /**
+ * 返回值处理类
  * @author binbin.hou
  * @since 0.1.5
  */

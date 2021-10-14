@@ -1,47 +1,49 @@
-[中文文档](README_ZH.md)
+# 项目简介
 
-# Project Description
-
-This project is used to provide public core code and collect common tools.
+本项目用于提供公有的核心代码，收集常见的工具类。
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.houbb/heaven/badge.svg)](http://mvnrepository.com/artifact/com.github.houbb/heaven)
 [![Build Status](https://www.travis-ci.org/houbb/heaven.svg?branch=master)](https://www.travis-ci.org/houbb/heaven?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/houbb/heaven/badge.svg?branch=master)](https://coveralls.io/github/houbb/heaven?branch=master)
 
-## Guidelines
+## 准则
 
-Does not introduce any tripartite tools.
+不引入任何三方工具。
 
-There is only one module that guarantees rapid iteration.
+只有一个模块，保证快速迭代。
 
-Compatibility is guaranteed under the same large version.
+同一个大版本下保证兼容性。
 
-# Change Log
+# 变更日志
 
-> [Change Log](doc/CHANGELOG.md)
+> [变更日志](CHANGELOG.md)
 
-# Project guidelines
+# 项目准则
 
-The most basic projects must be simple, streamlined, and robust.
+最基础的项目一定要简单，精简，健壮。
 
-All tall buildings should be based on this.
+所有的高楼都应该以此为基础。
 
-Introduce this kind of development project, unless special needs, no longer need to hand write common util tools
+引入这个类的开发项目，除非特殊需要，不用再手写常见的 util 工具。
 
-# Quick Start
+# 快速开始 
 
-## Requirements
+## 需要 
 
 jdk1.7+
 
 maven 3.x+
 
-## maven import
+## maven 引入 
 
 ```xml
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>heaven</artifactId>
-    <version>0.1.132</version>
+    <version>0.1.145</version>
 </dependency>
 ```
+
+# 文档
+
+> [文档目录](doc/gen/heaven-索引.md)

@@ -1,12 +1,12 @@
 package com.github.houbb.heaven.reflect.meta.annotation;
 
-import com.github.houbb.heaven.util.lang.ObjectUtil;
-
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Map;
 
 /**
+ * 注解元数据
+ *
  * <p> project: heaven-AnnotationMeta </p>
  * <p> create on 2019/11/29 23:04 </p>
  *

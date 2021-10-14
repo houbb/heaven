@@ -6,6 +6,7 @@ import com.github.houbb.heaven.support.reader.IReader;
 import com.github.houbb.heaven.util.io.FileUtil;
 
 /**
+ * 文件路径阅读者
  * <p> project: heaven-StringReader </p>
  * <p> create on 2020/3/19 21:43 </p>
  *

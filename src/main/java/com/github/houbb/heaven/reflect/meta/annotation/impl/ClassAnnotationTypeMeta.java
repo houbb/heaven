@@ -6,6 +6,8 @@ import java.lang.annotation.Annotation;
 import java.util.Map;
 
 /**
+ * 类注解类型元数据
+ *
  * <p> project: heaven-AnnotationMeta </p>
  * <p> create on 2019/11/29 23:04 </p>
  *

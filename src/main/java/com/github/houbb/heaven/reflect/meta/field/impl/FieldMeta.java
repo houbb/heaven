@@ -5,6 +5,8 @@ import com.github.houbb.heaven.reflect.meta.field.IFieldMeta;
 import java.lang.reflect.Field;
 
 /**
+ * 字段元数据
+ *
  * <p> project: FieldMeta </p>
  * <p> create on 2019/11/9 23:08 </p>
  *

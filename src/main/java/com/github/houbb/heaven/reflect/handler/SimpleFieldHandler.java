@@ -8,6 +8,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 
 /**
+ * 字段处理类
  * @author binbin.hou
  * @since 0.1.5
  */

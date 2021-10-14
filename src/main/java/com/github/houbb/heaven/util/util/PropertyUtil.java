@@ -4,6 +4,8 @@ import com.github.houbb.heaven.support.tuple.impl.Pair;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
 /**
+ * 属性工具类
+ *
  * @author binbin.hou
  * @since 0.1.123
  */
