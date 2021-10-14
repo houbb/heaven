@@ -10,17 +10,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  |  |
 
 ### updateValue-更新值信息
 
@@ -28,23 +22,17 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| annotation | 注解 | java.lang.annotation.Annotation |  |  |
-| method | 方法 | 字符串 |  |  |
-| value | 属性值 | java.lang.Object |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| annotation | 注解 | java.lang.annotation.Annotation |
+| method | 方法 | 字符串 |
+| value | 属性值 | java.lang.Object |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  |  |
 
 ### getValue-获取值信息
 
@@ -52,22 +40,16 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| annotation | 注解 | java.lang.annotation.Annotation |  |  |
-| method | 方法 | 字符串 |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| annotation | 注解 | java.lang.annotation.Annotation |
+| method | 方法 | 字符串 |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| 获取的属性值 | java.lang.Object |
 
 ### getValueStr-获取值信息-字符串形式
 
@@ -75,22 +57,16 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| annotation | 注解 | java.lang.annotation.Annotation |  |  |
-| method | 方法 | 字符串 |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| annotation | 注解 | java.lang.annotation.Annotation |
+| method | 方法 | 字符串 |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| 对象值 String 形式 | java.lang.String |
 
 ### getAnnotationAttributes-获取对应的注解属性 map
 
@@ -99,21 +75,15 @@ https://segmentfault.com/a/1190000011213222?utm_source=tag-newest
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| annotation | 直接 | java.lang.annotation.Annotation |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| annotation | 直接 | java.lang.annotation.Annotation |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| map | java.util.Map |
 
 ### getAnnotation-获取当前字段被指定注解标注的注解
 
@@ -121,25 +91,16 @@ https://segmentfault.com/a/1190000011213222?utm_source=tag-newest
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| annotation | 注解 | java.lang.annotation.Annotation |  |  |
-| annotationClass | 标注注解类型 | java.lang.Class |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| annotation | 注解 | java.lang.annotation.Annotation |
+| annotationClass | 标注注解类型 | java.lang.Class |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| EMPTY | Common instance for {@code empty()}. | com.github.houbb.heaven.util.util.Optional |   |
-| value | If non-null, the value; if null, indicates no value is present | T |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| 注解信息 | com.github.houbb.heaven.util.util.Optional |
 
 ### getAnnotation-获取类指定的注解
 
@@ -147,25 +108,16 @@ https://segmentfault.com/a/1190000011213222?utm_source=tag-newest
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| clazz | 类 | java.lang.Class |  |  |
-| annotationClass | 指定注解类型 | java.lang.Class |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| clazz | 类 | java.lang.Class |
+| annotationClass | 指定注解类型 | java.lang.Class |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| EMPTY | Common instance for {@code empty()}. | com.github.houbb.heaven.util.util.Optional |   |
-| value | If non-null, the value; if null, indicates no value is present | T |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| 结果 | com.github.houbb.heaven.util.util.Optional |
 
 ### getAnnotationRefs-获取类对应的注解
 
@@ -175,22 +127,16 @@ https://segmentfault.com/a/1190000011213222?utm_source=tag-newest
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| clazz | 类型 | java.lang.Class |  |  |
-| annotationClass | 注解类 | java.lang.Class |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| clazz | 类型 | java.lang.Class |
+| annotationClass | 注解类 | java.lang.Class |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| 结果列表 | java.util.List |
 
 
 

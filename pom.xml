@@ -27,7 +27,7 @@
 
         <!--============================== INTER ==============================-->
         <plugin.gen.version>1.0.6</plugin.gen.version>
-        <idoc.version>0.3.0</idoc.version>
+<!--        <idoc.version>0.4.0-SNAPSHOT</idoc.version>-->
 
         <!--============================== OTHER ==============================-->
         <junit.version>4.12</junit.version>
@@ -91,24 +91,24 @@
                 <version>${plugin.maven-javadoc-plugin.version}</version>
             </plugin>
 
-            <plugin>
-                <groupId>com.github.houbb</groupId>
-                <artifactId>idoc-core</artifactId>
-                <version>${idoc.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.github.houbb</groupId>
-                        <artifactId>idoc-ftl</artifactId>
-                        <version>${idoc.version}</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <generates>
-                        <generate>com.github.houbb.idoc.ftl.api.generator.MarkdownDocGenerator</generate>
-                    </generates>
-                    <targetDir>D:\gitee\heaven\doc\gen</targetDir>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>com.github.houbb</groupId>-->
+<!--                <artifactId>idoc-core</artifactId>-->
+<!--                <version>${idoc.version}</version>-->
+<!--                <dependencies>-->
+<!--                    <dependency>-->
+<!--                        <groupId>com.github.houbb</groupId>-->
+<!--                        <artifactId>idoc-ftl</artifactId>-->
+<!--                        <version>${idoc.version}</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
+<!--                <configuration>-->
+<!--                    <generates>-->
+<!--                        <generate>com.github.houbb.idoc.ftl.api.generator.MarkdownDocGenerator</generate>-->
+<!--                    </generates>-->
+<!--                    <targetDir>D:\gitee\heaven\doc\gen</targetDir>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

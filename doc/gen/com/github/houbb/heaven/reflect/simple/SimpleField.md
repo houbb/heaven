@@ -10,17 +10,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | java.util.List |
 
 ### annotationOpt-暂无说明
 
@@ -28,24 +22,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| type |  | java.lang.Class |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| type |  | java.lang.Class |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| EMPTY | Common instance for {@code empty()}. | com.github.houbb.heaven.util.util.Optional |   |
-| value | If non-null, the value; if null, indicates no value is present | T |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | com.github.houbb.heaven.util.util.Optional |
 
 ### annotation-暂无说明
 
@@ -53,21 +38,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| type |  | java.lang.Class |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| type |  | java.lang.Class |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | java.lang.annotation.Annotation |
 
 ### annotations-暂无说明
 
@@ -75,29 +54,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| annotations |  | 列表 |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| annotations |  | 列表 |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| field | 原始字段信息 | java.lang.reflect.Field |   |
-| annotations |  | 列表 |   |
-| name |  | 字符串 |   |
-| fullName |  | 字符串 |   |
-| type |  | java.lang.Class |   |
-| access |  | 整型 |   |
-| value | 字段对应得值 | java.lang.Object |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | com.github.houbb.heaven.reflect.simple.SimpleField |
 
 ### name-暂无说明
 
@@ -107,17 +72,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | java.lang.String |
 
 ### name-暂无说明
 
@@ -125,29 +84,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| name |  | 字符串 |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| name |  | 字符串 |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| field | 原始字段信息 | java.lang.reflect.Field |   |
-| annotations |  | 列表 |   |
-| name |  | 字符串 |   |
-| fullName |  | 字符串 |   |
-| type |  | java.lang.Class |   |
-| access |  | 整型 |   |
-| value | 字段对应得值 | java.lang.Object |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | com.github.houbb.heaven.reflect.simple.SimpleField |
 
 ### fullName-暂无说明
 
@@ -157,17 +102,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | java.lang.String |
 
 ### fullName-暂无说明
 
@@ -175,29 +114,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| fullName |  | 字符串 |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| fullName |  | 字符串 |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| field | 原始字段信息 | java.lang.reflect.Field |   |
-| annotations |  | 列表 |   |
-| name |  | 字符串 |   |
-| fullName |  | 字符串 |   |
-| type |  | java.lang.Class |   |
-| access |  | 整型 |   |
-| value | 字段对应得值 | java.lang.Object |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | com.github.houbb.heaven.reflect.simple.SimpleField |
 
 ### type-暂无说明
 
@@ -207,17 +132,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | java.lang.Class |
 
 ### type-暂无说明
 
@@ -225,29 +144,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| type |  | java.lang.Class |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| type |  | java.lang.Class |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| field | 原始字段信息 | java.lang.reflect.Field |   |
-| annotations |  | 列表 |   |
-| name |  | 字符串 |   |
-| fullName |  | 字符串 |   |
-| type |  | java.lang.Class |   |
-| access |  | 整型 |   |
-| value | 字段对应得值 | java.lang.Object |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | com.github.houbb.heaven.reflect.simple.SimpleField |
 
 ### access-暂无说明
 
@@ -257,17 +162,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | int |
 
 ### access-暂无说明
 
@@ -275,29 +174,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| access |  | 整型 |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| access |  | 整型 |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| field | 原始字段信息 | java.lang.reflect.Field |   |
-| annotations |  | 列表 |   |
-| name |  | 字符串 |   |
-| fullName |  | 字符串 |   |
-| type |  | java.lang.Class |   |
-| access |  | 整型 |   |
-| value | 字段对应得值 | java.lang.Object |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | com.github.houbb.heaven.reflect.simple.SimpleField |
 
 ### value-暂无说明
 
@@ -307,17 +192,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | java.lang.Object |
 
 ### value-暂无说明
 
@@ -325,29 +204,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| value |  | java.lang.Object |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| value |  | java.lang.Object |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| field | 原始字段信息 | java.lang.reflect.Field |   |
-| annotations |  | 列表 |   |
-| name |  | 字符串 |   |
-| fullName |  | 字符串 |   |
-| type |  | java.lang.Class |   |
-| access |  | 整型 |   |
-| value | 字段对应得值 | java.lang.Object |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | com.github.houbb.heaven.reflect.simple.SimpleField |
 
 ### field-暂无说明
 
@@ -357,17 +222,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | java.lang.reflect.Field |
 
 ### field-暂无说明
 
@@ -375,29 +234,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| field |  | java.lang.reflect.Field |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| field |  | java.lang.reflect.Field |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| field | 原始字段信息 | java.lang.reflect.Field |   |
-| annotations |  | 列表 |   |
-| name |  | 字符串 |   |
-| fullName |  | 字符串 |   |
-| type |  | java.lang.Class |   |
-| access |  | 整型 |   |
-| value | 字段对应得值 | java.lang.Object |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | com.github.houbb.heaven.reflect.simple.SimpleField |
 
 ### compareTo-暂无说明
 
@@ -405,21 +250,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| o |  | com.github.houbb.heaven.reflect.api.IField |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| o |  | com.github.houbb.heaven.reflect.api.IField |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | int |
 
 
 

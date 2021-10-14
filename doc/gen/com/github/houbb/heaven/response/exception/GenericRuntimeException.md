@@ -9,21 +9,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| respCode |  | com.github.houbb.heaven.response.respcode.RespCode |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| respCode |  | com.github.houbb.heaven.response.respcode.RespCode |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  |  |
 
 ### GenericRuntimeException-暂无说明
 
@@ -31,22 +25,16 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| message |  | 字符串 |  |  |
-| respCode |  | com.github.houbb.heaven.response.respcode.RespCode |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| message |  | 字符串 |
+| respCode |  | com.github.houbb.heaven.response.respcode.RespCode |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  |  |
 
 ### GenericRuntimeException-暂无说明
 
@@ -54,23 +42,17 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| message |  | 字符串 |  |  |
-| cause |  | java.lang.Throwable |  |  |
-| respCode |  | com.github.houbb.heaven.response.respcode.RespCode |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| message |  | 字符串 |
+| cause |  | java.lang.Throwable |
+| respCode |  | com.github.houbb.heaven.response.respcode.RespCode |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  |  |
 
 ### GenericRuntimeException-暂无说明
 
@@ -78,22 +60,16 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| cause |  | java.lang.Throwable |  |  |
-| respCode |  | com.github.houbb.heaven.response.respcode.RespCode |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| cause |  | java.lang.Throwable |
+| respCode |  | com.github.houbb.heaven.response.respcode.RespCode |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  |  |
 
 ### GenericRuntimeException-暂无说明
 
@@ -101,25 +77,19 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| message |  | 字符串 |  |  |
-| cause |  | java.lang.Throwable |  |  |
-| enableSuppression |  | 布尔值 |  |  |
-| writableStackTrace |  | 布尔值 |  |  |
-| respCode |  | com.github.houbb.heaven.response.respcode.RespCode |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| message |  | 字符串 |
+| cause |  | java.lang.Throwable |
+| enableSuppression |  | 布尔值 |
+| writableStackTrace |  | 布尔值 |
+| respCode |  | com.github.houbb.heaven.response.respcode.RespCode |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  |  |
 
 ### getCode-暂无说明
 
@@ -129,17 +99,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | java.lang.String |
 
 ### getMsg-暂无说明
 
@@ -149,17 +113,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | java.lang.String |
 
 ### getMsgMixed-将枚举的信息+错误的信息
 
@@ -169,17 +127,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| 混合的信息 | java.lang.String |
 
 ### getMsgPerfer-如果指定了 Message,则直接返回 message
 
@@ -190,17 +142,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| 信息 | java.lang.String |
 
 
 

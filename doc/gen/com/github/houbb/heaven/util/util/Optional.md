@@ -19,17 +19,11 @@ should exist per VM.
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  |  |
 
 ### empty-Returns an empty {@code Optional} instance.  No value is present for this
 
@@ -45,20 +39,11 @@ Instead, use {@link #isPresent()}.
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| EMPTY | Common instance for {@code empty()}. | com.github.houbb.heaven.util.util.Optional |   |
-| value | If non-null, the value; if null, indicates no value is present | T |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| an empty {@code Optional} | com.github.houbb.heaven.util.util.Optional |
 
 ### Optional-Constructs an instance with the value present.
 
@@ -66,21 +51,15 @@ Constructs an instance with the value present.
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| value | the | T |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| value | the | T |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  |  |
 
 ### of-Returns an {@code Optional} with the specified present non-null value.
 
@@ -88,24 +67,15 @@ Returns an {@code Optional} with the specified present non-null value.
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| value | the | T |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| value | the | T |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| EMPTY | Common instance for {@code empty()}. | com.github.houbb.heaven.util.util.Optional |   |
-| value | If non-null, the value; if null, indicates no value is present | T |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| an {@code Optional} with the value present | com.github.houbb.heaven.util.util.Optional |
 
 ### ofNullable-Returns an {@code Optional} describing the specified value, if non-null,
 
@@ -114,24 +84,16 @@ otherwise returns an empty {@code Optional}.
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| value | the | T |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| value | the | T |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| EMPTY | Common instance for {@code empty()}. | com.github.houbb.heaven.util.util.Optional |   |
-| value | If non-null, the value; if null, indicates no value is present | T |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| an {@code Optional} with a present value if the specified value
+is non-null, otherwise an empty {@code Optional} | com.github.houbb.heaven.util.util.Optional |
 
 ### get-If a value is present in this {@code Optional}, returns the value,
 
@@ -142,17 +104,11 @@ otherwise throws {@code NoSuchElementException}.
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| the non-null value held by this {@code Optional} | T |
 
 ### getCastOrNull-获取转换后的类型。
 
@@ -161,21 +117,15 @@ otherwise throws {@code NoSuchElementException}.
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| rClass | 类型 | java.lang.Class |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| rClass | 类型 | java.lang.Class |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| 结果 | R |
 
 ### isPresent-Return {@code true} if there is a value present, otherwise {@code false}.
 
@@ -185,17 +135,11 @@ Return {@code true} if there is a value present, otherwise {@code false}.
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| {@code true} if there is a value present, otherwise {@code false} | boolean |
 
 ### isNotPresent-Return {@code true} if there is a value not present, otherwise {@code false}.
 
@@ -205,17 +149,11 @@ Return {@code true} if there is a value not present, otherwise {@code false}.
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| {@code true} if there is a value not present, otherwise {@code false} | boolean |
 
 ### orElseThrow-Return the contained value, if present, otherwise throw an exception
 
@@ -228,21 +166,15 @@ argument list can be used as the supplier. For example,
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| throwable | Type | X |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| throwable | Type | X |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| the present value | T |
 
 ### orElseNull-Return the contained value, if present, otherwise return null.
 
@@ -252,17 +184,11 @@ Return the contained value, if present, otherwise return null.
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| the present value or null | T |
 
 ### orDefault-Return the contained value, if present, otherwise return default value.
 
@@ -270,21 +196,15 @@ Return the contained value, if present, otherwise return default value.
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| defaultVal | default | T |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| defaultVal | default | T |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| the present value or default value | T |
 
 ### equals-Indicates whether some other object is "equal to" this Optional. The
 
@@ -298,21 +218,16 @@ other object is considered equal if:
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| obj | an | java.lang.Object |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| obj | an | java.lang.Object |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| {code true} if the other object is "equal to" this object
+otherwise {@code false} | boolean |
 
 ### hashCode-Returns the hash code value of the present value, if any, or 0 (zero) if
 
@@ -323,17 +238,11 @@ no value is present.
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| hash code value of the present value or 0 if no value is present | int |
 
 ### toString-Returns a non-empty string representation of this Optional suitable for
 
@@ -349,17 +258,11 @@ unambiguously differentiable.
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| the string representation of this instance | java.lang.String |
 
 
 

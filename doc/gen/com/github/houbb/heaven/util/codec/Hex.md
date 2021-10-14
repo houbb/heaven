@@ -16,21 +16,15 @@ as a String.
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| bytes | the | 数组 |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| bytes | the | 数组 |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| A String representation of the resultant hex-encoded char array. | java.lang.String |
 
 ### encode-Converts an array of bytes into an array of characters representing the hexadecimal values of each byte in order.
 
@@ -40,21 +34,15 @@ given byte.
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| data | byte | 数组 |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| data | byte | 数组 |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| A char[] containing hexadecimal characters | char |
 
 ### decode-Converts an array of character bytes representing hexadecimal values into an
 
@@ -66,21 +54,16 @@ number of elements.
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| array | An | 数组 |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| array | An | 数组 |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| A byte array containing binary data decoded from
+        the supplied byte array (representing characters). | byte |
 
 ### decode-Converts the specified Hex-encoded String into a raw byte array.  This is a
 
@@ -90,21 +73,15 @@ argument's hex.toCharArray() value.
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| hex | a | 字符串 |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| hex | a | 字符串 |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| A byte array containing binary data decoded from the supplied String's char array. | byte |
 
 ### decode-Converts an array of characters representing hexadecimal values into an
 
@@ -116,21 +93,16 @@ number of elements.
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| data | An | 数组 |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| data | An | 数组 |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| A byte array containing binary data decoded from
+        the supplied char array. | byte |
 
 ### toDigit-Converts a hexadecimal character to an integer.
 
@@ -138,22 +110,16 @@ Converts a hexadecimal character to an integer.
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| ch | A | 字符 |  |  |
-| index | The | 整型 |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| ch | A | 字符 |
+| index | The | 整型 |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| An integer | int |
 
 
 

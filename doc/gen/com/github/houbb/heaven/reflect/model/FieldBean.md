@@ -10,17 +10,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | java.lang.String |
 
 ### name-暂无说明
 
@@ -28,25 +22,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| name |  | 字符串 |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| name |  | 字符串 |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| name | 字段名称 | 字符串 |   |
-| field | 反射字段 | java.lang.reflect.Field |   |
-| annotation | 注解对象 | java.lang.annotation.Annotation |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | com.github.houbb.heaven.reflect.model.FieldBean |
 
 ### field-暂无说明
 
@@ -56,17 +40,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | java.lang.reflect.Field |
 
 ### field-暂无说明
 
@@ -74,25 +52,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| field |  | java.lang.reflect.Field |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| field |  | java.lang.reflect.Field |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| name | 字段名称 | 字符串 |   |
-| field | 反射字段 | java.lang.reflect.Field |   |
-| annotation | 注解对象 | java.lang.annotation.Annotation |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | com.github.houbb.heaven.reflect.model.FieldBean |
 
 ### annotation-暂无说明
 
@@ -102,17 +70,11 @@
 
 暂无入参
 
-##### 方法入参详情
-
-暂无入参详情
-
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | java.lang.annotation.Annotation |
 
 ### annotation-暂无说明
 
@@ -120,25 +82,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| annotation |  | java.lang.annotation.Annotation |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| annotation |  | java.lang.annotation.Annotation |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| name | 字段名称 | 字符串 |   |
-| field | 反射字段 | java.lang.reflect.Field |   |
-| annotation | 注解对象 | java.lang.annotation.Annotation |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+|  | com.github.houbb.heaven.reflect.model.FieldBean |
 
 ### annotationByType-获取指定类型的注解信息
 
@@ -146,21 +98,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| tClass | 注解类型 | java.lang.Class |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| tClass | 注解类型 | java.lang.Class |
 
 #### 方法出参
 
-暂无出参
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| 结果 | T |
 
 ### annotationOptByType-获取指定类型的注解信息 Optional
 
@@ -168,24 +114,15 @@
 
 #### 方法入参
 
-| 字段 | 说明 | 字段类型 | 是否必填 | 备注 |
-|:---|:---|:---|:---|:----|
-| tClass | 注解类型 | java.lang.Class |  |  |
-
-##### 方法入参详情
-
-暂无入参详情
+| 字段 | 说明 | 字段类型 |
+|:---|:---|:---|
+| tClass | 注解类型 | java.lang.Class |
 
 #### 方法出参
 
-| 字段 | 说明 | 字段类型 | 备注 |
-|:---|:---|:---|:---|
-| EMPTY | Common instance for {@code empty()}. | com.github.houbb.heaven.util.util.Optional |   |
-| value | If non-null, the value; if null, indicates no value is present | T |   |
-
-##### 方法出参详情
-
-暂无出参详情
+| 说明 | 类型 |
+|:---|:---|
+| 结果 | com.github.houbb.heaven.util.util.Optional |
 
 
 
