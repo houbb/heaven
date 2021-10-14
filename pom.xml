@@ -30,7 +30,7 @@
 <!--        <idoc.version>0.4.0-SNAPSHOT</idoc.version>-->
 
         <!--============================== OTHER ==============================-->
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <apiguardian-api.version>1.0.0</apiguardian-api.version>
     </properties>
 
