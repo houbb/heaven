@@ -6,6 +6,8 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 /**
+ * 类字段列表缓存
+ *
  * <p> project: heaven-ClassFieldListCache </p>
  * <p> create on 2019/12/16 23:22 </p>
  *

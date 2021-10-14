@@ -1,6 +1,6 @@
-## RandomAccessFileUtil-暂无说明
+## RandomAccessFileUtil-文件随机访问工具类
 
-
+文件随机访问工具类
 
 ### RandomAccessFileUtil-暂无说明
 

@@ -10,6 +10,8 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 /**
+ * 文件随机访问工具类
+ *
  * @author binbin.hou
  * @since 0.1.78
  */
