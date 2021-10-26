@@ -14,6 +14,8 @@ import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -1257,6 +1259,39 @@ public final class FileUtil {
      */
     public static void append(final String filePath, final Collection<String> collection) {
         FileUtil.write(filePath, collection, StandardOpenOption.APPEND);
+    }
+
+    /**
+     * 将文件转成 base64 字符串
+     * @param filePath 文件路径
+     * @return base64 字符串
+     * @since 0.1.146
+     */
+    public static String fileToBase64(String filePath) {
+        File file = new File(filePath);
+
+        try(FileInputStream inputFile = new FileInputStream(file)) {
+            byte[] buffer = new byte[(int)file.length()];
+            inputFile.read(buffer);
+            return new BASE64Encoder().encode(buffer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 将base64字符解码保存文件
+     * @param base64Code base64 内容
+     * @param targetPath 目标文件
+     * @since 0.1.146
+     */
+    public static void base64ToFile(String base64Code,String targetPath) {
+        try(FileOutputStream out = new FileOutputStream(targetPath);) {
+            byte[] buffer = new BASE64Decoder().decodeBuffer(base64Code);
+            out.write(buffer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

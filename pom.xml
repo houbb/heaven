@@ -4,7 +4,7 @@
 
     <groupId>com.github.houbb</groupId>
     <artifactId>heaven</artifactId>
-    <version>0.1.145</version>
+    <version>0.1.146</version>
 
     <properties>
         <!--============================== All Plugins START ==============================-->
@@ -27,7 +27,7 @@
 
         <!--============================== INTER ==============================-->
         <plugin.gen.version>1.0.6</plugin.gen.version>
-        <idoc.version>0.4.0-SNAPSHOT</idoc.version>
+        <idoc.version>0.3.0</idoc.version>
 
         <!--============================== OTHER ==============================-->
         <junit.version>4.13.1</junit.version>
