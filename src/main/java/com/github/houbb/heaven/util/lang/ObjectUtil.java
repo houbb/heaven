@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.lang;
 
+import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
@@ -315,6 +316,57 @@ public final class ObjectUtil {
                 ReflectFieldUtil.setValue(field, object, null);
             }
         }
+    }
+
+    /**
+     * 基于反射的属性拷贝
+     * @param source 源头
+     * @param target 目标
+     * @since 0.1.147
+     */
+    public static void copyProperties(Object source, Object target) {
+        if(source == null || target == null) {
+            return;
+        }
+
+        Map<String, Field> sourceFieldMap = ClassUtil.getAllFieldMap(source.getClass());
+        Map<String, Field> targetFieldMap = ClassUtil.getAllFieldMap(target.getClass());
+
+        // 遍历
+        for(Map.Entry<String, Field> entry : sourceFieldMap.entrySet()) {
+            String sourceFieldName = entry.getKey();
+            Field sourceField = entry.getValue();
+            Field targetField = targetFieldMap.get(sourceFieldName);
+
+            if(targetField == null) {
+                continue;
+            }
+
+            if(ClassUtil.isAssignable(sourceField.getType(), targetField.getType())) {
+                Object sourceVal = ReflectFieldUtil.getValue(sourceField, source);
+                ReflectFieldUtil.setValue(targetField, target, sourceVal);
+            }
+        }
+    }
+
+    /**
+     * 是否为相同的值
+     * null null 被认为相同
+     * @param valueOne 第一个
+     * @param valueTwo 第二个
+     * @return 是否
+     * @since 0.1.147
+     */
+    public boolean isSameValue(Object valueOne, Object valueTwo) {
+        if(valueOne == null && valueTwo == null) {
+            return true;
+        }
+
+        if(valueOne == null || valueTwo == null) {
+            return false;
+        }
+
+        return valueOne.equals(valueTwo);
     }
 
 }

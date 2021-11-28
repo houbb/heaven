@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.util;
 
+import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.constant.PunctuationConst;
 import com.github.houbb.heaven.support.condition.ICondition;
 import com.github.houbb.heaven.support.filler.IFiller;
@@ -906,5 +907,17 @@ public final class CollectionUtil {
         return results;
     }
 
+    /**
+     * 添加所有的元素
+     * @param collection 集合1
+     * @param addCollection 集合2
+     * @param <T> 泛型
+     * @since 0.1.147
+     */
+    private static <T> void  addAll(Collection<T> collection, Collection<T> addCollection) {
+        if(CollectionUtil.isNotEmpty(addCollection)) {
+            collection.addAll(addCollection);
+        }
+    }
 
 }
