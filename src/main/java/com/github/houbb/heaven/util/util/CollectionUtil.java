@@ -914,7 +914,7 @@ public final class CollectionUtil {
      * @param <T> 泛型
      * @since 0.1.147
      */
-    private static <T> void  addAll(Collection<T> collection, Collection<T> addCollection) {
+    public static <T> void  addAll(Collection<T> collection, Collection<T> addCollection) {
         if(CollectionUtil.isNotEmpty(addCollection)) {
             collection.addAll(addCollection);
         }

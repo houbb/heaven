@@ -1014,3 +1014,9 @@
 | 1 | A | ObjectUtil#copyProperties | 2021-11-28 21:12:17 | |
 | 2 | A | ObjectUtil#isSameValue | 2021-11-28 21:12:17 | |
 | 3 | A | ObjectUtil#addAll | 2021-11-28 21:12:17 | |
+
+# release_0.1.148
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | F | ObjectUtil#addAll 修正访问级别 | 2021-11-29 21:12:17 | |

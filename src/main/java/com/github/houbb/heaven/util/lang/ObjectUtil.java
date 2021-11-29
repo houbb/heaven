@@ -357,7 +357,7 @@ public final class ObjectUtil {
      * @return 是否
      * @since 0.1.147
      */
-    public boolean isSameValue(Object valueOne, Object valueTwo) {
+    public static boolean isSameValue(Object valueOne, Object valueTwo) {
         if(valueOne == null && valueTwo == null) {
             return true;
         }
