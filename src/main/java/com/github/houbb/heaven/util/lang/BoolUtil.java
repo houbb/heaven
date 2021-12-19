@@ -47,4 +47,18 @@ public final class BoolUtil {
         return false;
     }
 
+    /**
+     * 结果
+     * @param value 布尔值
+     * @return 结果
+     * @since 0.1.150
+     */
+    public static String getYesOrNo(boolean value) {
+        if(value) {
+            return BoolUtil.Y;
+        }
+
+        return BoolUtil.N;
+    }
+
 }

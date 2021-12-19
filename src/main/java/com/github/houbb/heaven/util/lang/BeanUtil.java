@@ -73,4 +73,14 @@ public final class BeanUtil {
         }
     }
 
+    /**
+     * 属性拷贝
+     * @param source 源头
+     * @param target 目标
+     * @since 0.1.150
+     */
+    public static void copyProperties(final Object source, final Object target) {
+        ObjectUtil.copyProperties(source, target);
+    }
+
 }
