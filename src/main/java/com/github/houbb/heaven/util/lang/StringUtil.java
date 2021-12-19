@@ -5,7 +5,6 @@
 
 package com.github.houbb.heaven.util.lang;
 
-import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.constant.CharConst;
 import com.github.houbb.heaven.constant.CharsetConst;
 import com.github.houbb.heaven.constant.PunctuationConst;
@@ -2073,6 +2072,42 @@ public final class StringUtil {
         stringBuilder.append(lines.get(lines.size()-1));
 
         return stringBuilder.toString();
+    }
+
+    /**
+     * 根据长度进行文本截断
+     * @param text 文本
+     * @param limitSize 限制长度
+     * @return 结果列表
+     * @since 0.1.149
+     */
+    public static List<String> splitByLength(String text, int limitSize) {
+        if(StringUtil.isEmpty(text)) {
+            return Collections.emptyList();
+        }
+
+        final int totalLength = text.length();
+
+        int times = totalLength / limitSize;
+        if(totalLength % limitSize != 0) {
+            times++;
+        }
+
+        List<String> resultList = new ArrayList<>(times);
+
+        for(int i = 0; i < times; i++) {
+            int startIndex = i * limitSize;
+            int endIndex = (i+1) * limitSize;
+
+            // 越界处理
+            if(endIndex > totalLength) {
+                endIndex = totalLength;
+            }
+            String subText = text.substring(startIndex, endIndex);
+            resultList.add(subText);
+        }
+
+        return resultList;
     }
 
 }
