@@ -183,6 +183,17 @@ public final class DateUtil {
     }
 
     /**
+     * 获取日期当前字符串形式
+     * @return  dateStr
+     * @since 0.1.151
+     */
+    public static String getYesterdayPureStr() {
+        Date now = new Date();
+        Date yesterday = addDay(now, -1);
+        return new SimpleDateFormat(PURE_DATE_FORMAT).format(yesterday);
+    }
+
+    /**
      * 获取当前时间戳。
      * @return  dateStr
      */
