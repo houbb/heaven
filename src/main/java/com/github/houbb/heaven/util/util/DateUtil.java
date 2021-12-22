@@ -455,6 +455,62 @@ public final class DateUtil {
         return calendar.getTime();
     }
 
+    /**
+     * 获取当前日期
+     * @return 获取当前日期
+     * @since 0.1.152
+     */
+    public static Date getCurrentDate() {
+        return new Date();
+    }
 
+    /**
+     * 获取日期的小时
+     * @param date 日期
+     * @return 结果
+     * @since 0.1.152
+     */
+    public static Integer getDateHours(final Date date) {
+        if(date == null) {
+            return null;
+        }
+
+        return date.getHours();
+    }
+
+    /**
+     * 获取当前日期的小时数
+     * @return 小时
+     * @since 0.1.152
+     */
+    public static int getCurrentDateHours() {
+        Date now = getCurrentDate();
+
+        return getDateHours(now);
+    }
+
+    /**
+     * 是否为早晨
+     * @return 是否
+     * @since 0.1.152
+     */
+    public static boolean isAm() {
+        int hours = getCurrentDateHours();
+
+        if(0 <= hours && hours <= 12) {
+            return true;
+        }
+
+        return  false;
+    }
+
+    /**
+     * 是否为下午
+     * @return 是否
+     * @since 0.1.152
+     */
+    public static boolean isPm() {
+        return !isAm();
+    }
 
 }
