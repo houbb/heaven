@@ -548,7 +548,7 @@ public final class StringUtil {
      * @return join string
      * @since 0.1.46
      */
-    public static String join(Object[] array) {
+    public static String join(Object... array) {
         return join(array, PunctuationConst.COMMA);
     }
 
@@ -564,6 +564,17 @@ public final class StringUtil {
     public static String join(Object[] array, String separator) {
         final int endIndex = ArrayUtil.getEndIndex(-1, array);
         return join(array, separator, 0, endIndex);
+    }
+
+    /**
+     * 拼接
+     * @param splitter 拼接符
+     * @param objects 结果
+     * @return 结果
+     * @since 0.1.153
+     */
+    public static String join(String splitter, Object... objects) {
+        return join(objects, splitter);
     }
 
     /**
@@ -2109,5 +2120,7 @@ public final class StringUtil {
 
         return resultList;
     }
+
+
 
 }
