@@ -1,23 +1,23 @@
 package com.github.houbb.heaven.support.metadata.util;
 
-import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.constant.CharsetConst;
 import com.github.houbb.heaven.constant.FileProtocolConst;
 import com.github.houbb.heaven.constant.PunctuationConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.metadata.constant.PackageConst;
-import com.github.houbb.heaven.support.tuple.impl.Quatenary;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.guava.Guavas;
+import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
-import sun.tools.jar.resources.jar;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -36,6 +36,32 @@ public final class PackageUtil {
      */
     public static String getPackageName(final Class clazz) {
         return clazz.getPackage().getName();
+    }
+
+    /**
+     * 获取简化包名称
+     * 1. 针对 com.github.houbb.PackageUtil 简化为 c.g.h.PackageUtil
+     * @param fullPackageName 包名称
+     * @return 包名称
+     */
+    public static String getSlimPackageName(final String fullPackageName) {
+        if(StringUtil.isEmpty(fullPackageName)) {
+            return fullPackageName;
+        }
+
+        // 简化
+        String[] strings = fullPackageName.split("\\.");
+        // 如果只有1
+        List<String> newList = new ArrayList<>(strings.length);
+        for(int i = 0; i < strings.length-1; i++) {
+            String text = strings[i];
+            String firstChar = text.charAt(0)+"";
+            newList.add(firstChar);
+        }
+        // 添加最后一个元素
+        newList.add(strings[strings.length-1]);
+
+        return StringUtil.join(newList, ".");
     }
 
     /**
@@ -154,7 +180,8 @@ public final class PackageUtil {
     }
 
     public static void main(String[] args) {
-        scanPackageClassNameSet("com");
+        System.out.println(getSlimPackageName("com.github.houbb.StringUtil"));
+        System.out.println(getSlimPackageName("StringUtil"));;
     }
 
 }
