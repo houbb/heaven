@@ -1263,6 +1263,13 @@ public final class FileUtil {
 
     /**
      * 将文件转成 base64 字符串
+     *
+     * https://www.cnblogs.com/darkhumor/p/7525392.html
+     * https://blog.csdn.net/phoenix_cat/article/details/84676302
+     * https://blog.csdn.net/myloverisxin/article/details/117530365
+     * https://www.cnblogs.com/yejg1212/p/11926649.html
+     *
+     * 不同规范编码不同，会导致出现换行符号，但是解码的时候会被忽略。
      * @param filePath 文件路径
      * @return base64 字符串
      * @since 0.1.146
@@ -1273,7 +1280,10 @@ public final class FileUtil {
         try(FileInputStream inputFile = new FileInputStream(file)) {
             byte[] buffer = new byte[(int)file.length()];
             inputFile.read(buffer);
-            return new BASE64Encoder().encode(buffer);
+            String plainText = new BASE64Encoder().encode(buffer);
+
+            return plainText.replaceAll("\r", "")
+                    .replaceAll("\n", "");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -1286,6 +1296,8 @@ public final class FileUtil {
      * @since 0.1.146
      */
     public static void base64ToFile(String base64Code,String targetPath) {
+        FileUtil.createFile(targetPath);
+
         try(FileOutputStream out = new FileOutputStream(targetPath);) {
             byte[] buffer = new BASE64Decoder().decodeBuffer(base64Code);
             out.write(buffer);
