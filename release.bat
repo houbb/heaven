@@ -9,9 +9,9 @@ ECHO "============================= RELEASE START..."
 
 :: 版本号信息(需要手动指定)
 :::: 旧版本名称
-SET version=0.1.155
+SET version=0.1.156
 :::: 新版本名称
-SET newVersion=0.1.156
+SET newVersion=0.1.157
 :::: 组织名称
 SET groupName=com.github.houbb
 :::: 项目名称

@@ -2121,6 +2121,40 @@ public final class StringUtil {
         return resultList;
     }
 
+    /**
+     * 获取所有子字符串
+     * 比如：abc
+     * 1: a b c
+     * 2: ab bc
+     * 3: abc
+     *
+     * 最大公共子串：
+     * https://blog.csdn.net/xiaojimanman/article/details/38924981
+     * @param text 文本
+     * @param minStepLen 最小步长
+     * @return 结果列表
+     */
+    public static List<String> getAllSubStrList(String text,
+                                         int minStepLen) {
+        ArgUtil.positive(minStepLen, "stepLen");
 
+        if(StringUtil.isEmpty(text)
+            || minStepLen > text.length()) {
+            return Collections.emptyList();
+        }
+
+        List<String> list = new ArrayList<>();
+
+        final int length = text.length();
+        for(int i = minStepLen; i < length; i++) {
+            // 从 0 开始，固定步长
+            for(int j = 0; j <= length-i; j++) {
+                String subStr = text.substring(j, j+i);
+                list.add(subStr);
+            }
+        }
+
+        return list;
+    }
 
 }
