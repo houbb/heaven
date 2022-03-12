@@ -183,6 +183,36 @@ public final class CharUtil {
     }
 
     /**
+     * 是否不为数字
+     * @param ch 符号
+     * @return 是否
+     * @since 0.1.157
+     */
+    public static boolean isNotDigit(char ch) {
+        return !isDigit(ch);
+    }
+
+    /**
+     * 是否为纯数字
+     * @param ch 字符
+     * @return 结果
+     * @since 0.1.157
+     */
+    public static boolean isNumber(char ch) {
+        return '0' <= ch && ch <= '9';
+    }
+
+    /**
+     * 是否不为纯数字
+     * @param ch 字符
+     * @return 结果
+     * @since 0.1.157
+     */
+    public static boolean isNotNumber(char ch) {
+        return !isNumber(ch);
+    }
+
+    /**
      * 是否为 ascii 码
      * @param c 字符
      * @return 结果

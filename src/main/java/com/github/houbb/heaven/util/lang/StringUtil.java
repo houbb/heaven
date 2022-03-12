@@ -245,6 +245,21 @@ public final class StringUtil {
     }
 
     /**
+     * 是否全部为数组
+     * @param string 字符串
+     * @return 结果
+     * @since 0.1.157
+     */
+    public static boolean isNumber(final String string) {
+        return isCharsCondition(string, new ICondition<Character>() {
+            @Override
+            public boolean condition(Character character) {
+                return CharUtil.isNumber(character);
+            }
+        });
+    }
+
+    /**
      * 字符串是否全部满足某一个条件
      *
      * @param string    原始字符串

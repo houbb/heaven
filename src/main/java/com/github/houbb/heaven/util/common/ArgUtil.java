@@ -75,6 +75,25 @@ public final class ArgUtil {
 
 
     /**
+     * 断言指定长度是否等于某个值
+     * 1.空值校验则认为长度为0；
+     * 2.想对空值校验,请使用判断非空。
+     * @param string 字符串
+     * @param len 期望长度
+     * @param desc 描述
+     * @since 0.1.157
+     */
+    public static void assertEqualsLen(String string,
+                                          int len,
+                                          String desc) {
+        if(isNotEqualsLen(string, len)) {
+            String errorMsg = buildErrorMsg(len, string.length(), desc);
+            throw new IllegalArgumentException(errorMsg);
+        }
+    }
+
+
+    /**
      * 指定长度是否等于某个值
      * 1.空值校验则认为长度为0；
      * 2.想对空值校验,请使用判断非空。
