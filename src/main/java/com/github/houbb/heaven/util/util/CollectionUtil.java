@@ -16,6 +16,7 @@ import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
+import java.security.SecureRandom;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -918,6 +919,123 @@ public final class CollectionUtil {
         if(CollectionUtil.isNotEmpty(addCollection)) {
             collection.addAll(addCollection);
         }
+    }
+
+    /**
+     * 随机一个元素
+     * loop 实现，性能比较差
+     * @param collection 集合
+     * @param <T> 泛型
+     * @return 结果
+     * @since 0.1.158
+     */
+    public static <T> T random(Collection<T> collection) {
+        if(CollectionUtil.isEmpty(collection)) {
+            return null;
+        }
+
+        // 迭代随机
+        Iterator<T> iterator = collection.iterator();
+
+        int limit = collection.size();
+        Random random = new SecureRandom();
+        int randomIndex = random.nextInt(limit);
+
+        int countIndex = 0;
+        while (iterator.hasNext()) {
+            T next = iterator.next();
+
+            if(countIndex >= randomIndex) {
+                return next;
+            }
+
+            countIndex++;
+        }
+
+        return null;
+    }
+
+    /**
+     * 内存分页
+     * @param list 列表
+     * @param pageNum 从1开始
+     * @param pageSize 每一页大小
+     * @param <T> 泛型
+     * @return 结果
+     * @since 0.1.158
+     */
+    public static <T> List<T> pageList(List<T> list, int pageNum, int pageSize){
+        if(CollectionUtil.isEmpty(list)) {
+            return Collections.emptyList();
+        }
+
+        int startIndex = (pageNum - 1) * pageSize;
+        int endIndex = pageNum * pageSize;
+
+        // 最小值判断
+        if(startIndex < 0) {
+            startIndex = 0;
+        }
+
+        // 最大值判断
+        int size = list.size();
+        if(endIndex >= size) {
+            endIndex = size-1;
+        }
+
+        return Collections.unmodifiableList(list.subList(startIndex, endIndex));
+    }
+
+    /**
+     * 内存分页
+     *
+     * ps: 类似 mysql 的分页模式，性能越往后越差。
+     * @param collection 列表
+     * @param pageNum 从1开始
+     * @param pageSize 每一页大小
+     * @param <T> 泛型
+     * @return 结果
+     * @since 0.1.158
+     */
+    public static <T> List<T> pageList(Collection<T> collection, int pageNum, int pageSize){
+        if(CollectionUtil.isEmpty(collection)) {
+            return Collections.emptyList();
+        }
+
+        int startIndex = (pageNum - 1) * pageSize;
+        int endIndex = pageNum * pageSize;
+
+        // 最小值判断
+        if(startIndex < 0) {
+            startIndex = 0;
+        }
+
+        // 最大值判断
+        int size = collection.size();
+        if(endIndex >= size) {
+            endIndex = size-1;
+        }
+
+        // 跳过前面的元素
+        int realSize = endIndex - startIndex;
+        List<T> resultList = new ArrayList<>(realSize);
+
+        int indexCount = 0;
+
+        Iterator<T> iterator = collection.iterator();
+        while (iterator.hasNext()) {
+            T obj = iterator.next();
+            if(indexCount >= startIndex) {
+                resultList.add(obj);
+            }
+
+            indexCount++;
+            if(indexCount >= endIndex) {
+                break;
+            }
+        }
+
+        return resultList;
     }
 
 }
