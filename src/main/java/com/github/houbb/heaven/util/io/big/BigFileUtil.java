@@ -44,8 +44,25 @@ public final class BigFileUtil {
     public static void read(final String filePath,
                             final IBigFileStringHandler handler,
                             final String charsetName) {
+        read(filePath, handler, charsetName, 0);
+    }
+
+    /**
+     * 读取
+     * @param filePath 文件路径
+     * @param handler 处理类
+     * @param charsetName 编码
+     * @param posPointer 文件位置
+     * @since 0.1.159
+     */
+    public static void read(final String filePath,
+                            final IBigFileStringHandler handler,
+                            final String charsetName,
+                            final long posPointer) {
         try {
             RandomAccessFile raf = new RandomAccessFile(new File(filePath),"r");
+            raf.seek(posPointer);
+
             String s ;
             // 这里默认的编码是ISO-8859-1
             int index = 0;
@@ -99,9 +116,27 @@ public final class BigFileUtil {
     public static void segFile(final String filePath,
                                final int limitSize,
                                final String charsetName) {
+        segFile(filePath, limitSize, charsetName, 0);
+    }
+
+    /**
+     * 文件内容切分
+     * @param filePath 文件路径
+     * @param limitSize 文件大小
+     * @param charsetName 文件编码
+     * @since 0.1.159
+     */
+    public static void segFile(final String filePath,
+                               final int limitSize,
+                               final String charsetName,
+                               final long posPointer) {
         IBigFileStringHandler stringHandler = new BigFileStringHandlerSegment(limitSize);
 
-        read(filePath, stringHandler, charsetName);
+        read(filePath, stringHandler, charsetName, posPointer);
+    }
+
+    public static void main(String[] args) {
+        read("E:\\迅雷下载\\裤子\\1\\q绑\\6.9更新总库.txt");
     }
 
 }

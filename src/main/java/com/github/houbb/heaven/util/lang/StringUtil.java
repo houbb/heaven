@@ -2172,4 +2172,30 @@ public final class StringUtil {
         return list;
     }
 
+    /**
+     * 替換掉 emoji
+     * @param text 文本
+     * @param replacement 替換的内容
+     * @return 結果
+     * @since 0.1.160
+     */
+    public static String replaceEmoji(String text,
+                                      String replacement) {
+        if(StringUtil.isEmpty(text)) {
+            return text;
+        }
+
+        return text.replaceAll("[\\ud800\\udc00-\\udbff\\udfff\\ud800-\\udfff]", replacement);
+    }
+
+    /**
+     * 替換掉 emoji
+     * @param text 文本
+     * @return 結果
+     * @since 0.1.160
+     */
+    public static String replaceEmoji(String text) {
+        return replaceEmoji(text, "");
+    }
+
 }
