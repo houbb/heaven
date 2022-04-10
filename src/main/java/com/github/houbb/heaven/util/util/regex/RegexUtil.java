@@ -1,7 +1,10 @@
 package com.github.houbb.heaven.util.util.regex;
 
 import com.github.houbb.heaven.util.lang.StringUtil;
+import com.github.houbb.heaven.util.util.CollectionUtil;
 
+import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -278,6 +281,56 @@ public final class RegexUtil {
      */
     private static boolean isPatternMatch(final String string, final Pattern pattern) {
         return pattern.matcher(string).find();
+    }
+
+    /**
+     * 是否匹配
+     * @param pattern 正则
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.161
+     */
+    public static boolean match(final Pattern pattern,
+                                final String text) {
+        Matcher matcher = pattern.matcher(text);
+        return matcher.find();
+    }
+
+    /**
+     * 是否匹配
+     * @param regex 正则
+     * @param text 文本
+     * @return 结果
+     * @since 0.1.161
+     */
+    public static boolean match(final String regex,
+                                final String text) {
+        Pattern pattern = Pattern.compile(regex);
+        return match(pattern, text);
+    }
+
+    /**
+     * 是否拥有一个满足的正则
+     * @param textList 文本
+     * @param regex 正则
+     * @return 是否
+     * @since 0.1.161
+     */
+    public static boolean hasMatch(List<String> textList,
+                                   String regex) {
+        if(CollectionUtil.isEmpty(textList)) {
+            return false;
+        }
+
+        Pattern pattern = Pattern.compile(regex);
+
+        for(String tagName : textList) {
+            if(RegexUtil.match(pattern, tagName)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

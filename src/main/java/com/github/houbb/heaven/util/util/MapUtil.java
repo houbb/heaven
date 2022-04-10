@@ -5,7 +5,6 @@
 
 package com.github.houbb.heaven.util.util;
 
-import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.support.handler.IMapEntryHandler;
 import com.github.houbb.heaven.support.handler.IMapHandler;
@@ -201,6 +200,44 @@ public final class MapUtil {
         }
 
         return null;
+    }
+
+    /**
+     * 元素放置到 map 中
+     * @param listMap 列表
+     * @param key 键
+     * @param elem 元素
+     * @param <T> 泛型
+     * @since 0.1.161
+     */
+    public static <T> void putToListMap(Map<String, List<T>> listMap, String key,
+                                    T elem) {
+        List<T> list = listMap.get(key);
+        if(list == null) {
+            list = new ArrayList<>();
+        }
+        list.add(elem);
+
+        listMap.put(key, list);
+    }
+
+    /**
+     * 元素放置到 map 中
+     * @param setMap 列表
+     * @param key 键
+     * @param elem 元素
+     * @param <T> 泛型
+     * @since 0.1.161
+     */
+    public static <T> void putToSetMap(Map<String, Set<T>> setMap, String key,
+                                    T elem) {
+        Set<T> set = setMap.get(key);
+        if(set == null) {
+            set = new HashSet<>();
+        }
+        set.add(elem);
+
+        setMap.put(key, set);
     }
 
 }
