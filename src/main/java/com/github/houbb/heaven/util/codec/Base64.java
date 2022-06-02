@@ -15,13 +15,13 @@ public final class Base64 {
     /**
      * hex 数组
      */
-    private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
+    public static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
 
     /**
      * Base64 标准字符集合
      * @since 0.1.120
      */
-    private static final char[] ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".toCharArray();
+    public static final char[] ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".toCharArray();
 
     /**
      * 编码信息
