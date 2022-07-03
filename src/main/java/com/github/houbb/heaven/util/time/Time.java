@@ -1,7 +1,5 @@
 package com.github.houbb.heaven.util.time;
 
-import com.github.houbb.heaven.annotation.CommonEager;
-
 /**
  * 时间工具类
  * （1）便于后期拓展，可以使用统一的时钟服务。
