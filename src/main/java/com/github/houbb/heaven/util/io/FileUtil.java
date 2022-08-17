@@ -1306,4 +1306,105 @@ public final class FileUtil {
         }
     }
 
+    /**
+     * 获取对应的文件流 reader
+     *
+     * @param sourceFilePath 原始文件
+     * @return 结果
+     * @since 0.1.164
+     */
+    public static BufferedReader getBufferedReader(String sourceFilePath) {
+        try {
+            ArgUtil.notEmpty(sourceFilePath, "sourceFilePath");
+
+            Path path = Paths.get(sourceFilePath);
+            InputStream inputStream = Files.newInputStream(path);
+            InputStreamReader streamReader = new InputStreamReader(inputStream);
+            return new BufferedReader(streamReader);
+
+//            new BufferedReader(new FileReader(sourceFilePath))
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 关闭流
+     * @param bufferedReader 流
+     * @since 0.1.164
+     */
+    public static void closeBufferReader(BufferedReader bufferedReader) {
+        if(bufferedReader != null) {
+            try {
+                bufferedReader.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    /**
+     * 文件路径
+     * @param filePath 文件
+     * @return 结果
+     * @since 0.1.164
+     */
+    public static BufferedWriter getBufferedWriter(final String filePath) {
+        try {
+            ArgUtil.notEmpty(filePath, "filePath");
+
+            return new BufferedWriter(new FileWriter(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 关闭流
+     * @param bufferedWriter 流
+     * @since 0.1.164
+     */
+    public static void closeBufferedWriter(BufferedWriter bufferedWriter) {
+        if(bufferedWriter != null) {
+            try {
+                bufferedWriter.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    /**
+     * 排序后的文件内容去重
+     *
+     * 说明：针对无法内存一次加载的大文件，原始文件必须已经排序。
+     * @param sourceFile 原始文件
+     * @param targetFile 目标文件
+     * @since 0.1.164
+     */
+    public static void sortedUnique(final String sourceFile,
+                                    final String targetFile) {
+        String prefixLine = null;
+
+        try(BufferedReader sourceReader = getBufferedReader(sourceFile);
+            BufferedWriter resultWriter = getBufferedWriter(targetFile);) {
+            String sourceLine = sourceReader.readLine();
+
+            // 这里暂时不考虑重复行的问题（可以文件先去重复）
+            // 只能比较出左边在右边没有的，右边和左边的差异需要反过来对比一次。
+            while (sourceLine != null) {
+                // 和上一行对比
+                if(!sourceLine.equals(prefixLine)) {
+                    resultWriter.write(sourceLine);
+                    resultWriter.newLine();
+                }
+
+                prefixLine = sourceLine;
+                sourceLine = sourceReader.readLine();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
