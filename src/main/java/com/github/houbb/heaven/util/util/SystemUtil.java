@@ -39,4 +39,32 @@ public final class SystemUtil {
         return System.getProperty(key);
     }
 
+    /**
+     * 是否为 windows 系统
+     * @return 是否
+     * @since 0.1.165
+     */
+    public static boolean isWindowsOs() {
+        String os = System.getProperty("os.name");
+        if(os.toLowerCase().startsWith("win")){
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 根据不同的系统，返回对应的基本路径
+     * @param baseDir 目录
+     * @return 基本路径
+     * @since 0.1.165
+     */
+    public static String getBaseDir(final String baseDir) {
+        if(isWindowsOs()) {
+            return "D:\\file\\"+baseDir+"\\";
+        }
+
+        return "/app/file/"+baseDir+"/";
+    }
+
 }

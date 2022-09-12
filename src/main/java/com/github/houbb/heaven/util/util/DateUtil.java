@@ -6,14 +6,14 @@
 package com.github.houbb.heaven.util.util;
 
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
+import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -103,6 +103,29 @@ public final class DateUtil {
             return null;
         }
         return new SimpleDateFormat(format).format(date);
+    }
+
+    /**
+     * 格式化日期
+     * @param date 日期
+     * @param format 格式化
+     * @return 结果
+     * @since 0.1.165
+     */
+    public static String formatDate(final Date date, final String format) {
+        return getDateFormat(date, format);
+    }
+
+
+    /**
+     * 对日期进行转换
+     * @param string 字符串
+     * @param format 格式
+     * @return 结果
+     * @since 0.1.65
+     */
+    public static Date parseDate(final String string, final String format) {
+        return getFormatDate(string, format);
     }
 
     /**
@@ -511,6 +534,143 @@ public final class DateUtil {
      */
     public static boolean isPm() {
         return !isAm();
+    }
+
+    /**
+     * 日期缩短
+     * 12.25
+     * 3.25
+     * @param yyyyMMddStr 原始格式
+     * @return 格式化之后的
+     * @since 0.1.165
+     */
+    public static String slimDate(String yyyyMMddStr) {
+        Date date = getFormatDate(yyyyMMddStr, PURE_DATE_FORMAT);
+        String slimDate = getDateFormat(date, "MM.dd");
+
+        // 移除0
+        if(slimDate.startsWith("0")) {
+            return slimDate.substring(1);
+        }
+        return slimDate;
+    }
+
+    /**
+     * 获取两个日期中的所有日期,并转换为表后缀
+     *
+     * @param begin 格式:yyyyMMdd
+     * @param end   格式:yyyyMMdd
+     * @return 格式: yyyyMMdd
+     * @since 0.1.165
+     */
+    public static List<String> getDateRangeList(String begin, String end) {
+        Date bDate = getFormatDate(begin, PURE_DATE_FORMAT);//yyyy-MM-dd
+        Date eDate = getFormatDate(end, PURE_DATE_FORMAT);
+        List<Date> dateList = getDateRangeList(bDate, eDate);//创建日期范围生成器
+
+        List<String> resultList = new ArrayList<>(dateList.size());
+        for (Date dt : dateList) {
+            String dateStr = getDateFormat(dt, PURE_DATE_FORMAT);
+            resultList.add(dateStr);
+        }
+        return resultList;
+    }
+
+    /**
+     * 获取日期列表
+     * @param startDate 开始日期
+     * @param endDate 结束日期
+     * @return 结果
+     * @since 0.1.165
+     */
+    public static List<Date> getDateRangeList(final Date startDate, final Date endDate) {
+        ArgUtil.notNull(startDate, "startDate");
+        ArgUtil.notNull(endDate, "endDate");
+
+        List<Date> resultList = new ArrayList<>();
+        if(startDate.compareTo(endDate) > 0) {
+            return resultList;
+        }
+
+        // 添加第一个元素
+        resultList.add(startDate);
+
+        for(int i = 1; i < Integer.MAX_VALUE; i++) {
+            Date nowDate = addDay(startDate, i);
+
+            if(nowDate.compareTo(endDate) <= 0) {
+                resultList.add(nowDate);
+            } else {
+                break;
+            }
+        }
+
+        return resultList;
+    }
+
+    /**
+     * 获取差异的时间
+     * @param date 日期
+     * @param differ 差异
+     * @return 结果
+     * @since 0.1.165
+     */
+    public static String getDifferDate(Date date, int differ) {
+        Date differDate = DateUtil.addDay(date, differ);
+
+        return DateUtil.getDateFormat(differDate, DateUtil.PURE_DATE_FORMAT);
+    }
+
+    /**
+     * 变化格式
+     * @param dateOld 原始日期
+     * @param oldFormat 原始格式
+     * @param newFormat 新格式
+     * @return 结果
+     * @since 0.1.165
+     */
+    public static String changeFormat(final String dateOld, String oldFormat, String newFormat) {
+        if(StringUtil.isEmpty(dateOld)) {
+            return dateOld;
+        }
+
+        // 转换
+        Date date = parseDate(dateOld, oldFormat);
+        return formatDate(date, newFormat);
+    }
+
+    /**
+     * 两个时间之间相差距离多少天
+     *
+     * @param str1 时间参数 1 yyyyMMdd
+     * @param str2 时间参数 2 yyyyMMdd
+     * @return 相差天数
+     * @since 0.1.165
+     */
+    public static long getDistanceDays(String str1, String str2) {
+        Date one = parseDate(str1, PURE_DATE_FORMAT);
+        Date two = parseDate(str2, PURE_DATE_FORMAT);
+        return getDistanceDays(one, two);
+    }
+
+    /**
+     * 获取相差的天数
+     * @param one 日期1
+     * @param two 日期2
+     * @return 结果
+     * @since 0.1.165
+     */
+    public static long getDistanceDays(Date one, Date two) {
+        long time1 = one.getTime();
+        long time2 = two.getTime();
+        long diff;
+
+        if (time1 < time2) {
+            diff = time2 - time1;
+        } else {
+            diff = time1 - time2;
+        }
+        return diff / (1000 * 60 * 60 * 24);
     }
 
 }

@@ -3,6 +3,9 @@ package com.github.houbb.heaven.util.util;
 import com.github.houbb.heaven.util.codec.Base64;
 import com.github.houbb.heaven.util.common.ArgUtil;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 /**
  * 数字工具类
  *
@@ -76,6 +79,29 @@ public final class NumUtil {
 
         //因为是从最后开始读的，所以这里要反转
         return buf.reverse().toString();
+    }
+
+    /**
+     * 1、同比计算公式：同比增长率＝（本期数－同期数）／同期数×100%。
+     *
+     * 2、环比计算公式：环比增长率＝（本期数－上期数）／上期数×100%。
+     *
+     * @param before 上一期
+     * @param now 本期
+     * @return 结果
+     * @since 0.1.165
+     */
+    public static String chainRatio(int before, int now) {
+        if(before <= 0) {
+            return "--";
+        }
+
+        double differ = (now - before) * 1.0;
+        double result = differ / (before * 1.0) * 100;
+
+        // 保留最后2位
+        NumberFormat numberFormat = new DecimalFormat("#0.00");
+        return numberFormat.format(result);
     }
 
 }
