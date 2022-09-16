@@ -5,7 +5,6 @@
 
 package com.github.houbb.heaven.util.util;
 
-import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.constant.PunctuationConst;
 import com.github.houbb.heaven.support.condition.ICondition;
 import com.github.houbb.heaven.support.filler.IFiller;
@@ -350,7 +349,7 @@ public final class CollectionUtil {
      * @return 结果
      * @since 0.1.6
      */
-    public static String join(final Collection<String> stringCollection,
+    public static String join(final Collection<?> stringCollection,
                               final String connector) {
         return StringUtil.join(stringCollection, connector);
     }
@@ -362,7 +361,7 @@ public final class CollectionUtil {
      * @return 结果
      * @since 0.1.46
      */
-    public static String join(final Collection<String> stringCollection) {
+    public static String join(final Collection<?> stringCollection) {
         return StringUtil.join(stringCollection, PunctuationConst.COMMA);
     }
 
