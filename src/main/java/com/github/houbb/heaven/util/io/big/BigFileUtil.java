@@ -124,6 +124,7 @@ public final class BigFileUtil {
      * @param filePath 文件路径
      * @param limitSize 文件大小
      * @param charsetName 文件编码
+     * @param posPointer 指针
      * @since 0.1.159
      */
     public static void segFile(final String filePath,
