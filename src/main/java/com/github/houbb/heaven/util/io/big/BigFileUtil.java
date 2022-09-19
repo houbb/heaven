@@ -136,8 +136,4 @@ public final class BigFileUtil {
         read(filePath, stringHandler, charsetName, posPointer);
     }
 
-    public static void main(String[] args) {
-        read("E:\\迅雷下载\\裤子\\1\\q绑\\6.9更新总库.txt");
-    }
-
 }

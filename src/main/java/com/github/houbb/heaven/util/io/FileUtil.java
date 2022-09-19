@@ -1298,6 +1298,10 @@ public final class FileUtil {
     public static void base64ToFile(String base64Code,String targetPath) {
         FileUtil.createFile(targetPath);
 
+        // base64 前端传过来，可能会有前缀 xxx,
+        if(base64Code.contains(",")) {
+            base64Code = base64Code.split(",")[1];
+        }
         try(FileOutputStream out = new FileOutputStream(targetPath);) {
             byte[] buffer = new BASE64Decoder().decodeBuffer(base64Code);
             out.write(buffer);
