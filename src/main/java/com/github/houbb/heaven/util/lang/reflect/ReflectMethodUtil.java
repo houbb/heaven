@@ -5,8 +5,10 @@
 
 package com.github.houbb.heaven.util.lang.reflect;
 
+import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.annotation.reflect.Param;
 import com.github.houbb.heaven.constant.MethodConst;
+import com.github.houbb.heaven.constant.PunctuationConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
@@ -487,6 +489,29 @@ public final class ReflectMethodUtil {
      */
     public static String buildGetMethodName(final String propertyName) {
         return buildGetMethodName(String.class, propertyName);
+    }
+
+    /**
+     * 方法全名此处应该考虑不同的参数问题。
+     *
+     * @param method 方法
+     * @return 完整的方法名称
+     * @since 0.1.168
+     */
+    public static String getMethodFullName(Method method) {
+        if(method == null) {
+            return "null";
+        }
+
+        final String className = method.getDeclaringClass().getName();
+        Class[] types = method.getParameterTypes();
+        StringBuilder nameBuilder = new StringBuilder(className + "." + method.getName());
+        if (ObjectUtil.isNotEmpty(types)) {
+            for (Class parameter : types) {
+                nameBuilder.append(PunctuationConst.COLON).append(parameter.getName());
+            }
+        }
+        return nameBuilder.toString();
     }
 
 }
