@@ -4,7 +4,7 @@
 
     <groupId>com.github.houbb</groupId>
     <artifactId>heaven</artifactId>
-    <version>0.1.168</version>
+    <version>0.1.169</version>
 
     <properties>
         <!--============================== All Plugins START ==============================-->
