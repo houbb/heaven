@@ -11,7 +11,9 @@ import java.text.NumberFormat;
  *
  * @author binbin.hou
  * @since 0.1.162
+ * @see com.github.houbb.heaven.util.lang.NumUtil
  */
+@Deprecated
 public final class NumUtil {
 
     private NumUtil(){}

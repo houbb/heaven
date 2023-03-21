@@ -673,4 +673,43 @@ public final class DateUtil {
         return diff / (1000 * 60 * 60 * 24);
     }
 
+    /**
+     * 日历转日期
+     *
+     * @param calendar 日历
+     * @return 结果
+     * @since 0.2.0
+     */
+    public static Date toDate(Calendar calendar) {
+        if(calendar == null) {
+            return null;
+        }
+
+        return calendar.getTime();
+    }
+
+    /**
+     * 对象转 Date
+     * @param object 对象
+     * @return 结果
+     * @since 0.2.0
+     */
+    public static Date toDate(final Object object) {
+        if(object == null) {
+            return null;
+        }
+
+        if(object instanceof Date) {
+            return (Date) object;
+        }
+
+        if(object instanceof Calendar) {
+            Calendar calendar = (Calendar) object;
+            return toDate(calendar);
+        }
+
+        // 不支持的类别转换
+        throw new ClassCastException();
+    }
+
 }
