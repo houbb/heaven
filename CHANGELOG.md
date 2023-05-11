@@ -1161,3 +1161,10 @@
 |:---|:---|:---|:---|:--|
 | 1 | A | 新增 NumUtil.toBigDecimal  | 2023-03-21 21:12:17 | |
 | 2 | A | 新增 DateUtil.toDate  | 2023-03-21 21:12:17 | |
+
+# release_0.2.1
+
+| 序号 | 变更类型 | 说明 | 时间 | 备注 |
+|:---|:---|:---|:---|:--|
+| 1 | O | 新增 CollectionUtil.filterList  | 2023-05-11 21:12:17 | |
+| 2 | O | 新增 CollectionUtil.conditionList  | 2023-05-11 21:12:17 | |

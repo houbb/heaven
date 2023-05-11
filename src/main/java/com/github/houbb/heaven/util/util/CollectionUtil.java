@@ -257,7 +257,7 @@ public final class CollectionUtil {
      * @return 过滤后的结果
      * @since 0.0.6
      */
-    public static <T> List<T> filterList(final List<T> list, final IFilter<T> filter) {
+    public static <T> List<T> filterList(final Collection<T> list, final IFilter<T> filter) {
         if (isEmpty(list)) {
             return Collections.emptyList();
         }
@@ -282,7 +282,7 @@ public final class CollectionUtil {
      * @return 过滤后的结果
      * @since 0.0.6
      */
-    public static <T> List<T> conditionList(final List<T> list, final ICondition<T> condition) {
+    public static <T> List<T> conditionList(final Collection<T> list, final ICondition<T> condition) {
         if (isEmpty(list)) {
             return Collections.emptyList();
         }
