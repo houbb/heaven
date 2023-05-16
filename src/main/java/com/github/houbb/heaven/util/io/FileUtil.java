@@ -11,6 +11,7 @@ import com.github.houbb.heaven.constant.FileTypeConst;
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.handler.IMapHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
+import com.github.houbb.heaven.util.io.filewalker.AllFileVisitor;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
@@ -1459,6 +1460,43 @@ public final class FileUtil {
             return Collections.emptyList();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 获取所有的文件列表，包含递归
+     * @param dir 文件夹
+     * @return 结果
+     * @since 0.2.2
+     */
+    public static List<Path> getAllFilePathList(String dir) {
+        try {
+            AllFileVisitor allFileVisitor = new AllFileVisitor();
+            Files.walkFileTree(Paths.get(dir), allFileVisitor);
+            return allFileVisitor.getPathList();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 获取所有的文件列表
+     * @param dir 文件夹
+     * @param fileList 文件列表
+     * @since 0.2.2
+     */
+    public static void getAllFileList(File dir, List<File> fileList) {
+        if(dir.isDirectory()) {
+            File[] files = dir.listFiles();
+            if(ArrayUtil.isNotEmpty(files)) {
+                for(File childFile : files) {
+                    // 递归
+                    getAllFileList(childFile, fileList);
+                }
+            }
+        } else {
+            // 文件
+            fileList.add(dir);
         }
     }
 
