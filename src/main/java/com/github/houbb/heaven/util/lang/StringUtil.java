@@ -1487,6 +1487,55 @@ public final class StringUtil {
 
     /**
      * 拆分为列表
+     * @param string 字符串
+     * @param c 字符
+     * @return 结果
+     * @since 0.2.3
+     */
+    public static List<String> splitToList(final String string, final char c) {
+        if (StringUtil.isEmpty(string)){
+            return Collections.emptyList();
+        }
+
+        char[] chars = string.toCharArray();
+        return splitToList(chars, c);
+    }
+
+    /**
+     * 拆分为列表
+     * @param chars 字符串
+     * @param c 字符
+     * @return 结果
+     * @since 0.2.3
+     */
+    public static List<String> splitToList(char[] chars, final char c) {
+        if (ArrayPrimitiveUtil.isEmpty(chars)){
+            return Collections.emptyList();
+        }
+
+        List<String> resultList = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for(char cs : chars) {
+            // 符合拆分条件
+            if(c == cs) {
+                resultList.add(stringBuilder.toString());
+                stringBuilder.setLength(0);
+            } else {
+                stringBuilder.append(cs);
+            }
+        }
+
+        // 如果还有
+        if(stringBuilder.length() > 0) {
+            resultList.add(stringBuilder.toString());
+        }
+
+        return resultList;
+    }
+
+    /**
+     * 拆分为列表
      *
      * @param string 字符串
      * @return 字符串列表
