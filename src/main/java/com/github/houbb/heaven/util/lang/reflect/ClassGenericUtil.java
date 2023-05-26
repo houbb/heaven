@@ -121,4 +121,24 @@ public final class ClassGenericUtil {
         return getGenericSupperClass(clazz, 0);
     }
 
+    /**
+     * 获取运行时泛型的类型
+     * @param wrapper 包装类
+     * @param <T> 泛型
+     * @return 类别
+     * @since 0.2.5
+     */
+    public static <T> Type getGenericRuntimeType(Wrapper<T> wrapper) {
+        Type type = wrapper.getClass().getGenericSuperclass();
+        if (type == null) {
+            return null;
+        }
+
+        if (type instanceof ParameterizedType) {
+            Type[] types = ((ParameterizedType)type).getActualTypeArguments();
+            return types[0];
+        }
+        return null;
+    }
+
 }

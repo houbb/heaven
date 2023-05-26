@@ -5,6 +5,8 @@
 
 package com.github.houbb.heaven.util.lang.reflect;
 
+import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Map;
@@ -45,6 +47,21 @@ public final class PrimitiveUtil {
      * @since 0.1.37
      */
     private static final Map<Class, Object> PRIMITIVE_DEFAULT_MAP = new HashMap<>();
+
+    /**
+     * 私有类别
+     * @since 0.2.5
+     */
+    private static final Map primitiveTypeMap = new HashMap<Class, String>(8) {{
+        put(boolean.class, "Z");
+        put(char.class, "C");
+        put(byte.class, "B");
+        put(short.class, "S");
+        put(int.class, "I");
+        put(long.class, "J");
+        put(float.class, "F");
+        put(double.class, "D");
+    }};
 
     static {
         /**
@@ -110,6 +127,38 @@ public final class PrimitiveUtil {
      */
     public static Object getDefaultValue(final Class clazz) {
         return PRIMITIVE_DEFAULT_MAP.get(clazz);
+    }
+
+    /**
+     * 校验私有类别的数组
+     * @param genericArrayType 泛型
+     * @return 结果
+     */
+    public static Type checkPrimitiveArray(GenericArrayType genericArrayType) {
+        Type clz = genericArrayType;
+        Type genericComponentType = genericArrayType.getGenericComponentType();
+
+        String prefix = "[";
+        while (genericComponentType instanceof GenericArrayType) {
+            genericComponentType = ((GenericArrayType) genericComponentType)
+                    .getGenericComponentType();
+            prefix += prefix;
+        }
+
+        if (genericComponentType instanceof Class<?>) {
+            Class<?> ck = (Class<?>) genericComponentType;
+            if (ck.isPrimitive()) {
+                try {
+                    String postfix = (String) primitiveTypeMap.get(ck);
+                    if (postfix != null) {
+                        clz = Class.forName(prefix + postfix);
+                    }
+                } catch (ClassNotFoundException ignored) {
+                }
+            }
+        }
+
+        return clz;
     }
 
 }
