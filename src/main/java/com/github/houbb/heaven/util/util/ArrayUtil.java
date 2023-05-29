@@ -9,6 +9,7 @@ import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassGenericUtil;
+import com.github.houbb.heaven.util.lang.reflect.PrimitiveUtil;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -422,6 +423,51 @@ public final class ArrayUtil {
         }
 
         return newArray;
+    }
+
+    /**
+     * 最后索引
+     *
+     * @param chars 数组
+     * @param startIndex 开始位置
+     * @param endIndex 结束位置
+     * @param c 字符
+     * @return 结果
+     * @since 0.2.6
+     */
+    public static int lastIndexOf(char[] chars,
+                                  char c,
+                                  int startIndex,
+                                  int endIndex) {
+        if(chars == null
+                || chars.length == 0) {
+            return -1;
+        }
+
+        for(int i = endIndex; i >= startIndex; i--) {
+            if(chars[i] == c) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * 最后索引
+     *
+     * @param chars 数组
+     * @param c 字符
+     * @return 结果
+     * @since 0.2.6
+     */
+    public static int lastIndexOf(char[] chars,
+                                  char c) {
+        if(ArrayPrimitiveUtil.isEmpty(chars)) {
+            return -1;
+        }
+
+        return lastIndexOf(chars, c, 0, chars.length-1);
     }
 
 }
