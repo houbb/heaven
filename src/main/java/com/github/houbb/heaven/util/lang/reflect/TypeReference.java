@@ -53,7 +53,7 @@ public class TypeReference<T> {
 
     /**
      * @since 1.2.9
-     * @param actualTypeArguments
+     * @param actualTypeArguments 类别
      */
     protected TypeReference(Type... actualTypeArguments){
         Class<?> thisClass = this.getClass();
@@ -128,7 +128,7 @@ public class TypeReference<T> {
     }
     
     /**
-     * Gets underlying {@code Type} instance.
+     * @return Gets underlying {@code Type} instance.
      */
     public Type getType() {
         return type;
