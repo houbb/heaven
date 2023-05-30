@@ -451,16 +451,21 @@ public final class CollectionUtil {
      * 获取第一个元素
      * 1. 避免 NPE
      *
-     * @param list 列表
+     * @param collection 列表
      * @param <E>  泛型
      * @return 结果
      * @since 0.1.10
      */
-    public static <E> E getFirst(final List<E> list) {
-        if (CollectionUtil.isEmpty(list)) {
+    public static <E> E getFirst(final Collection<E> collection) {
+        if (CollectionUtil.isEmpty(collection)) {
             return null;
         }
-        return list.get(0);
+
+        for(E e : collection) {
+            return e;
+        }
+
+        return null;
     }
 
     /**
