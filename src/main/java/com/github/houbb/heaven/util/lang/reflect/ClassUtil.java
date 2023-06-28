@@ -12,6 +12,7 @@ import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.guava.Guavas;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
+import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
@@ -429,6 +430,25 @@ public final class ClassUtil {
             }
         }
         return false;
+    }
+
+    /**
+     * 获取类简称
+     * @param classFullName 类全称
+     * @return 结果
+     * @since 0.2.8
+     */
+    public static String getClassSimpleName(String classFullName) {
+        if (StringUtil.isEmpty(classFullName)) {
+            return classFullName;
+        }
+
+        if(classFullName.contains(".")) {
+            String[] subStrings = classFullName.split("\\.");
+            return subStrings[subStrings.length-1];
+        }
+
+        return classFullName;
     }
 
 }

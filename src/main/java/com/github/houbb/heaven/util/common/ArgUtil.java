@@ -9,9 +9,11 @@ import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
+import com.github.houbb.heaven.util.util.MapUtil;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * 参数工具类
@@ -367,6 +369,19 @@ public final class ArgUtil {
 
         for(Object object : collection) {
             ArgUtil.notNull(object, name + " element ");
+        }
+    }
+
+    /**
+     * 禁止为空，并且判断其中元素不准为空
+     * @param map 集合
+     * @param name 名称
+     * @since 0.2.8
+     */
+    public static void notEmpty(final Map map,
+                                final String name) {
+        if(MapUtil.isEmpty(map)) {
+            throw new IllegalArgumentException(name + " excepted is not empty!");
         }
     }
 
