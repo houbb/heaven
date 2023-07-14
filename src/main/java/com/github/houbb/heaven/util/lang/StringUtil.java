@@ -5,6 +5,7 @@
 
 package com.github.houbb.heaven.util.lang;
 
+import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.constant.CharConst;
 import com.github.houbb.heaven.constant.CharsetConst;
 import com.github.houbb.heaven.constant.PunctuationConst;
@@ -2245,6 +2246,26 @@ public final class StringUtil {
      */
     public static String replaceEmoji(String text) {
         return replaceEmoji(text, "");
+    }
+
+    /**
+     * 获取对应的集合
+     * @param text 文本
+     * @return 结果
+     * @since 1.17.0
+     */
+    public static Set<Character> getCharSet(final String text) {
+        if(StringUtil.isEmpty(text)) {
+            return Collections.emptySet();
+        }
+
+        char[] chars = text.toCharArray();
+        Set<Character> characterSet = new HashSet<Character>(chars.length);
+        for(int i = 0; i < chars.length; i++) {
+            characterSet.add(chars[i]);
+        }
+
+        return characterSet;
     }
 
 }
