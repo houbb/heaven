@@ -369,4 +369,95 @@ public final class ObjectUtil {
         return valueOne.equals(valueTwo);
     }
 
+    /**
+     * 最大字段大小
+     * @param object 大小
+     * @return 结果
+     * @since 0.4.0
+     */
+    public static int getMaxFieldSize(final Object object) {
+        if(object == null) {
+            return 0;
+        }
+
+        Class<?> clazzType = object.getClass();
+        if(!ClassTypeUtil.isJavaBean(clazzType)) {
+            return 1;
+        }
+
+        int max = 1;
+        // 所有字段
+        List<Field> fieldList = ClassUtil.getAllFieldList(clazzType);
+
+        for(Field field : fieldList) {
+            try {
+                Object fieldValue = field.get(object);
+                int size = getObjectCollectionSize(fieldValue);
+                max = Math.max(max, size);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return max;
+    }
+
+    /**
+     * 获取对象集合大小
+     * @param object 集合
+     * @return 结果
+     * @since 0.4.0
+     */
+    public static int getObjectCollectionSize(final Object object) {
+        if(object == null) {
+            return 0;
+        }
+
+        if(object instanceof Collection) {
+            Collection<?> collection = (Collection<?>) object;
+            return collection.size();
+        }
+
+        if(object instanceof Object[]) {
+            Object[] objects = (Object[]) object;
+            return objects.length;
+        }
+
+        //8 大基本类型
+        if(object instanceof boolean[]) {
+            boolean[] booleans = (boolean[]) object;
+            return booleans.length;
+        }
+        if(object instanceof byte[]) {
+            byte[] bytes = (byte[]) object;
+            return bytes.length;
+        }
+        if(object instanceof short[]) {
+            short[] shorts = (short[]) object;
+            return shorts.length;
+        }
+        if(object instanceof int[]) {
+            int[] ints = (int[]) object;
+            return ints.length;
+        }
+        if(object instanceof long[]) {
+            long[] longs = (long[]) object;
+            return longs.length;
+        }
+        if(object instanceof float[]) {
+            float[] floats = (float[]) object;
+            return floats.length;
+        }
+        if(object instanceof double[]) {
+            double[] doubles = (double[]) object;
+            return doubles.length;
+        }
+        if(object instanceof char[]) {
+            char[] chars = (char[]) object;
+            return chars.length;
+        }
+
+        return 1;
+    }
+
 }
