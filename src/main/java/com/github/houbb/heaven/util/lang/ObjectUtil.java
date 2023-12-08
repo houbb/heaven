@@ -5,12 +5,10 @@
 
 package com.github.houbb.heaven.util.lang;
 
-import com.github.houbb.heaven.annotation.CommonEager;
 import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
 import com.github.houbb.heaven.util.lang.reflect.ReflectFieldUtil;
-import com.github.houbb.heaven.util.util.ArrayPrimitiveUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
@@ -458,6 +456,61 @@ public final class ObjectUtil {
         }
 
         return 1;
+    }
+
+    /**
+     * 根据路径获取对应的值信息
+     * @param object 对象
+     * @param path 路径属性值
+     * @return 结果
+     * @since 0.5.0
+     */
+    public static Object getValueByPath(Object object, String path) {
+        if(object == null
+            || StringUtil.isEmpty(path)) {
+            return null;
+        }
+        String[] pathSegments = path.split("\\.");
+
+        Object currentObject = object;
+
+        for (String segment : pathSegments) {
+            if (currentObject == null) {
+                return null;  // Stop if any intermediate object is null
+            }
+            currentObject = ReflectFieldUtil.getValue(segment, currentObject);
+        }
+
+        return currentObject;
+    }
+
+    /**
+     * 根据 path 获取对应的值
+     *
+     * @param map 对象
+     * @param path 路径
+     * @return 结果值
+     * @since 0.5.0
+     */
+    public static Object getValueByPath(Map<String, ?> map, String path) {
+        if(MapUtil.isEmpty(map)
+            || StringUtil.isEmpty(path)) {
+            return null;
+        }
+
+        String[] pathSegments = path.split("\\.");
+
+        Object currentObject = map;
+        for (String segment : pathSegments) {
+            if (currentObject == null || !(currentObject instanceof Map)) {
+                return null;  // Stop if any intermediate object is null or not a Map
+            }
+
+            Map<String, Object> currentMap = (Map<String, Object>) currentObject;
+            currentObject = currentMap.get(segment);
+        }
+
+        return currentObject;
     }
 
 }

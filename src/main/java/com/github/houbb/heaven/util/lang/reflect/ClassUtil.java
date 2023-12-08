@@ -122,6 +122,34 @@ public final class ClassUtil {
         });
     }
 
+    /**
+     * 根据字段名称，获取对应的 Field
+     * @param clazz 类
+     * @param fieldName 字段名称
+     * @return 结果
+     * @since 0.5.0
+     */
+    public static Field getField(final Class<?> clazz,
+                                 final String fieldName) {
+        if(clazz == null
+            || StringUtil.isEmpty(fieldName)) {
+            return null;
+        }
+
+        List<Field> fieldList = getAllFieldList(clazz);
+        if(CollectionUtil.isEmpty(fieldList)) {
+            return null;
+        }
+
+        for(Field field : fieldList) {
+            if(fieldName.equals(field.getName())) {
+                return field;
+            }
+        }
+
+        return null;
+    }
+
 
     /**
      * bean 转换为 map
