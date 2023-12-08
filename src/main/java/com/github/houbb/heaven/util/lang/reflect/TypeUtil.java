@@ -4,7 +4,6 @@ import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.support.tuple.impl.Pair;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
-import sun.reflect.generics.reflectiveObjects.WildcardTypeImpl;
 
 import java.lang.reflect.*;
 import java.util.*;
@@ -315,19 +314,19 @@ public final class TypeUtil {
             // 判断是否为通配符(?)
             Type type = types[paramIndex];
             if(ClassTypeUtil.isWildcardGenericType(type)) {
-                WildcardTypeImpl wildcardType = (WildcardTypeImpl)type;
-
-                //lower
-                Type[] lowerBounds = wildcardType.getLowerBounds();
-                if(ArrayUtil.isNotEmpty(lowerBounds)) {
-                    return (Class<?>)lowerBounds[0];
-                }
-
-                //upper
-                Type[] upperBounds = wildcardType.getUpperBounds();
-                if(ArrayUtil.isNotEmpty(upperBounds)) {
-                    return (Class<?>)upperBounds[0];
-                }
+//                WildcardTypeImpl wildcardType = (WildcardTypeImpl)type;
+//
+//                //lower
+//                Type[] lowerBounds = wildcardType.getLowerBounds();
+//                if(ArrayUtil.isNotEmpty(lowerBounds)) {
+//                    return (Class<?>)lowerBounds[0];
+//                }
+//
+//                //upper
+//                Type[] upperBounds = wildcardType.getUpperBounds();
+//                if(ArrayUtil.isNotEmpty(upperBounds)) {
+//                    return (Class<?>)upperBounds[0];
+//                }
 
                 // 默认返回 object 对象类型
                 return Object.class;

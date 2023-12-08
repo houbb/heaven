@@ -14,4 +14,12 @@ public class StringUtilTest {
         List<String> stringList = StringUtil.splitToList(ipList, '.');
         Assert.assertEquals("[127, 0, 0, 1]", stringList.toString());
     }
+
+    @Test
+    public void toCharSetTest() {
+        final String text = "123456789";
+
+        Assert.assertEquals("[1, 2, 3, 4, 5, 6, 7, 8, 9]", StringUtil.toCharSet(text).toString());
+    }
+
 }

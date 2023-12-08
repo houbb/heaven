@@ -2,8 +2,6 @@ package com.github.houbb.heaven.util.lang.reflect;
 
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
-import com.sun.org.apache.xpath.internal.Arg;
-import sun.reflect.generics.reflectiveObjects.WildcardTypeImpl;
 
 import java.lang.reflect.*;
 import java.util.Collection;
@@ -207,7 +205,7 @@ public final class ClassTypeUtil {
      */
     public static boolean isWildcardGenericType(final Type type) {
         final Class clazz = type.getClass();
-        return WildcardTypeImpl.class.equals(clazz);
+        return "sun.reflect.generics.reflectiveObjects.WildcardTypeImpl".equals(clazz.getName());
     }
 
     /**

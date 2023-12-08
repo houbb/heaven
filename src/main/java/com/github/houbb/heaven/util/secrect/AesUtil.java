@@ -2,13 +2,12 @@ package com.github.houbb.heaven.util.secrect;
 
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.util.common.ArgUtil;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.util.internal.Base64;
 
 /**
  * AES 加解密工具类
@@ -44,7 +43,7 @@ public final class AesUtil {
             byte[] encrypted = cipher.doFinal(sourceText.getBytes());
 
             //此处使用BASE64做转码功能，同时能起到2次加密的作用。
-            return new BASE64Encoder().encode(encrypted);
+            return Base64.getEncoder().encodeToString(encrypted);
         } catch (Exception e) {
             throw new CommonRuntimeException(e);
         }
@@ -70,7 +69,7 @@ public final class AesUtil {
                     .getBytes());
             cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
             //先用base64解密
-            byte[] encrypted1 = new BASE64Decoder().decodeBuffer(sourceText);
+            byte[] encrypted1 = Base64.getDecoder().decode(sourceText);
             byte[] original = cipher.doFinal(encrypted1);
 
             return new String(original);

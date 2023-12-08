@@ -15,14 +15,13 @@ import com.github.houbb.heaven.util.io.filewalker.AllFileVisitor;
 import com.github.houbb.heaven.util.lang.StringUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.nio.file.*;
 import java.util.*;
+import java.util.internal.Base64;
 
 /**
  * 文件工具类
@@ -1281,7 +1280,7 @@ public final class FileUtil {
         try(FileInputStream inputFile = new FileInputStream(file)) {
             byte[] buffer = new byte[(int)file.length()];
             inputFile.read(buffer);
-            String plainText = new BASE64Encoder().encode(buffer);
+            String plainText = Base64.getEncoder().encodeToString(buffer);
 
             return plainText.replaceAll("\r", "")
                     .replaceAll("\n", "");
@@ -1304,7 +1303,7 @@ public final class FileUtil {
             base64Code = base64Code.split(",")[1];
         }
         try(FileOutputStream out = new FileOutputStream(targetPath);) {
-            byte[] buffer = new BASE64Decoder().decodeBuffer(base64Code);
+            byte[] buffer = Base64.getDecoder().decode(base64Code);
             out.write(buffer);
         } catch (IOException e) {
             throw new RuntimeException(e);

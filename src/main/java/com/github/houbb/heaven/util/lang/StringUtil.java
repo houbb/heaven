@@ -1605,6 +1605,27 @@ public final class StringUtil {
     }
 
     /**
+     * 转换为 char set
+     *
+     * @param string 字符串
+     * @return 字符串列表
+     * @since 0.6.0
+     */
+    public static Set<Character> toCharSet(final String string) {
+        if (StringUtil.isEmpty(string)) {
+            return Guavas.newHashSet();
+        }
+
+        char[] chars = string.toCharArray();
+        Set<Character> set = new HashSet<>();
+        for(char c : chars) {
+            set.add(c);
+        }
+
+        return set;
+    }
+
+    /**
      * 将字符串中的全角字符转为半角
      *
      * @param string 字符串
