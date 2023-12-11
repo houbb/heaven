@@ -423,6 +423,134 @@ public final class ArrayPrimitiveUtil {
 
     /**
      * 是否包含
+     * @param arrays 原始字符
+     * @param val 目标
+     * @return 结果
+     * @since 0.7.0
+     */
+    public static boolean contains(final boolean[] arrays, final boolean val) {
+        if(ArrayPrimitiveUtil.isEmpty(arrays)) {
+            return false;
+        }
+
+        for (boolean va : arrays) {
+            if (va == val) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * 是否包含
+     * @param arrays 原始字符
+     * @param val 目标
+     * @return 结果
+     * @since 0.7.0
+     */
+    public static boolean contains(final byte[] arrays, final byte val) {
+        if(ArrayPrimitiveUtil.isEmpty(arrays)) {
+            return false;
+        }
+
+        for (byte va : arrays) {
+            if (va == val) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * 是否包含
+     * @param arrays 原始字符
+     * @param val 目标
+     * @return 结果
+     * @since 0.7.0
+     */
+    public static boolean contains(final short[] arrays, final short val) {
+        if(ArrayPrimitiveUtil.isEmpty(arrays)) {
+            return false;
+        }
+        for (short va : arrays) {
+            if (va == val) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * 是否包含
+     * @param arrays 原始字符
+     * @param val 目标
+     * @return 结果
+     * @since 0.7.0
+     */
+    public static boolean contains(final int[] arrays, final int val) {
+        if(ArrayPrimitiveUtil.isEmpty(arrays)) {
+            return false;
+        }
+        for (int va : arrays) {
+            if (va == val) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * 是否包含
+     * @param arrays 原始字符
+     * @param val 目标
+     * @return 结果
+     * @since 0.7.0
+     */
+    public static boolean contains(final long[] arrays, final long val) {
+        if(ArrayPrimitiveUtil.isEmpty(arrays)) {
+            return false;
+        }
+        for (long va : arrays) {
+            if (va == val) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * 是否包含
+     * @param arrays 原始字符
+     * @param val 目标
+     * @return 结果
+     * @since 0.7.0
+     */
+    public static boolean contains(final float[] arrays, final float val) {
+        if(ArrayPrimitiveUtil.isEmpty(arrays)) {
+            return false;
+        }
+        for (float va : arrays) {
+            if (va == val) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * 是否包含
+     * @param arrays 原始字符
+     * @param val 目标
+     * @return 结果
+     * @since 0.7.0
+     */
+    public static boolean contains(final double[] arrays, final double val) {
+        if(ArrayPrimitiveUtil.isEmpty(arrays)) {
+            return false;
+        }
+        for (double va : arrays) {
+            if (va == val) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * 是否包含
      * @param chars 原始字符
      * @param c 目标
      * @return 结果

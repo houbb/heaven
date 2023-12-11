@@ -9,9 +9,11 @@ import com.github.houbb.heaven.support.handler.IHandler;
 import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
 import com.github.houbb.heaven.util.lang.reflect.ReflectFieldUtil;
+import com.github.houbb.heaven.util.util.ArrayPrimitiveUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.heaven.util.util.MapUtil;
+import com.github.houbb.heaven.util.util.regex.RegexUtil;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -511,6 +513,226 @@ public final class ObjectUtil {
         }
 
         return currentObject;
+    }
+
+    /**
+     * 大于
+     * @param leftVal 坐值
+     * @param rightVal 右值
+     * @return 结果
+     * @since 0.7.0
+     */
+    public static boolean gt(final Object leftVal, final Object rightVal) {
+        if(leftVal instanceof Comparable && rightVal instanceof Comparable) {
+            Comparable leftC = (Comparable) leftVal;
+            Comparable rightC = (Comparable) rightVal;
+
+            return leftC.compareTo(rightC) > 0;
+        }
+
+        return false;
+    }
+
+    /**
+     * 大于等于
+     * @param leftVal 坐值
+     * @param rightVal 右值
+     * @return 结果
+     * @since 0.7.0
+     */
+    public static boolean gte(final Object leftVal, final Object rightVal) {
+        if(leftVal instanceof Comparable && rightVal instanceof Comparable) {
+            Comparable leftC = (Comparable) leftVal;
+            Comparable rightC = (Comparable) rightVal;
+
+            return leftC.compareTo(rightC) >= 0;
+        }
+
+        return false;
+    }
+
+    /**
+     * 小于
+     * @param leftVal 坐值
+     * @param rightVal 右值
+     * @return 结果
+     * @since 0.7.0
+     */
+    public static boolean lt(final Object leftVal, final Object rightVal) {
+        if(leftVal instanceof Comparable && rightVal instanceof Comparable) {
+            Comparable leftC = (Comparable) leftVal;
+            Comparable rightC = (Comparable) rightVal;
+
+            return leftC.compareTo(rightC) < 0;
+        }
+
+        return false;
+    }
+
+    /**
+     * 小于等于
+     * @param leftVal 坐值
+     * @param rightVal 右值
+     * @return 结果
+     * @since 0.7.0
+     */
+    public static boolean lte(final Object leftVal, final Object rightVal) {
+        if(leftVal instanceof Comparable && rightVal instanceof Comparable) {
+            Comparable leftC = (Comparable) leftVal;
+            Comparable rightC = (Comparable) rightVal;
+
+            return leftC.compareTo(rightC) <= 0;
+        }
+
+        return false;
+    }
+
+    /**
+     * 是否包含
+     * @param leftVal 左边
+     * @param rightVal 右边
+     * @return 是否
+     * @since 0.7.0
+     */
+    public static boolean contains(final Object leftVal, final Object rightVal) {
+        if(leftVal == null) {
+            return false;
+        }
+
+        // string
+        if(leftVal instanceof String && rightVal instanceof String) {
+            String leftStr = (String) leftVal;
+            String rightStr = (String) leftVal;
+
+            return leftStr.contains(rightStr);
+        }
+        // 对象集合
+        if(leftVal instanceof Collection) {
+            Collection leftColl = (Collection) leftVal;
+            return CollectionUtil.contains(leftColl, rightVal);
+        }
+        // 数组
+        if(leftVal instanceof Object[]) {
+            Object[] array = (Object[]) leftVal;
+            return ArrayUtil.contains(array, rightVal);
+        }
+
+        //8 大基本类型
+        if(leftVal instanceof boolean[] && rightVal instanceof Boolean) {
+            boolean[] arrays = (boolean[]) leftVal;
+            Boolean rightP = (Boolean) rightVal;
+            return ArrayPrimitiveUtil.contains(arrays, rightP);
+        }
+        if(leftVal instanceof byte[] && rightVal instanceof Byte) {
+            byte[] arrays = (byte[]) leftVal;
+            Byte rightP = (Byte) rightVal;
+            return ArrayPrimitiveUtil.contains(arrays, rightP);
+        }
+        if(leftVal instanceof short[] && rightVal instanceof Short) {
+            short[] arrays = (short[]) leftVal;
+            Short rightP = (Short) rightVal;
+            return ArrayPrimitiveUtil.contains(arrays, rightP);
+        }
+        if(leftVal instanceof int[] && rightVal instanceof Integer) {
+            int[] arrays = (int[]) leftVal;
+            Integer rightP = (Integer) rightVal;
+            return ArrayPrimitiveUtil.contains(arrays, rightP);
+        }
+        if(leftVal instanceof long[] && rightVal instanceof Long) {
+            long[] arrays = (long[]) leftVal;
+            Long rightP = (Long) rightVal;
+            return ArrayPrimitiveUtil.contains(arrays, rightP);
+        }
+        if(leftVal instanceof float[] && rightVal instanceof Float) {
+            float[] arrays = (float[]) leftVal;
+            Float rightP = (Float) rightVal;
+            return ArrayPrimitiveUtil.contains(arrays, rightP);
+        }
+        if(leftVal instanceof double[] && rightVal instanceof Double) {
+            double[] arrays = (double[]) leftVal;
+            Double rightP = (Double) rightVal;
+            return ArrayPrimitiveUtil.contains(arrays, rightP);
+        }
+        if(leftVal instanceof char[] && rightVal instanceof Character) {
+            char[] arrays = (char[]) leftVal;
+            Character rightP = (Character) rightVal;
+            return ArrayPrimitiveUtil.contains(arrays, rightP);
+        }
+
+        return false;
+    }
+
+    /**
+     * 是否以 ... 开头
+     * @param leftVal 左边
+     * @param rightVal 右边
+     * @return 是否
+     * @since 0.7.0
+     */
+    public static boolean startWith(final Object leftVal, final Object rightVal) {
+        if(leftVal == null
+            || rightVal == null) {
+            return false;
+        }
+
+        if(leftVal instanceof String && rightVal instanceof String) {
+            String leftStr = (String) leftVal;
+            String rightStr = (String) rightVal;
+            return leftStr.startsWith(rightStr);
+        }
+
+        // 值
+        String leftStr = leftVal.toString();
+        String rightStr = rightVal.toString();
+
+        return leftStr.startsWith(rightStr);
+    }
+
+    /**
+     * 是否以 ... 开头
+     * @param leftVal 左边
+     * @param rightVal 右边
+     * @return 是否
+     * @since 0.7.0
+     */
+    public static boolean endWith(final Object leftVal, final Object rightVal) {
+        if(leftVal == null
+                || rightVal == null) {
+            return false;
+        }
+
+        if(leftVal instanceof String && rightVal instanceof String) {
+            String leftStr = (String) leftVal;
+            String rightStr = (String) rightVal;
+            return leftStr.endsWith(rightStr);
+        }
+
+        // 值
+        String leftStr = leftVal.toString();
+        String rightStr = rightVal.toString();
+
+        return leftStr.endsWith(rightStr);
+    }
+
+    /**
+     * 是否符合正则
+     * @param value 值
+     * @return 结果
+     * @since 0.7.0
+     */
+    public static boolean matchRegex(final Object value,
+                                     final String regex) {
+        if(value == null) {
+            return false;
+        }
+
+        if(value instanceof String) {
+            String string = (String) value;
+            return RegexUtil.match(regex, string);
+        }
+
+        String text = value.toString();
+        return RegexUtil.match(text, regex);
     }
 
 }

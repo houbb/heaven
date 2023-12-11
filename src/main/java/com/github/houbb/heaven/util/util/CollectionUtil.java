@@ -1042,4 +1042,24 @@ public final class CollectionUtil {
         return resultList;
     }
 
+    /**
+     * 是否包含
+     * @param collection 集合
+     * @param value 值
+     * @return 结果
+     * @since 0.7.0
+     */
+    public static boolean contains(final Collection<?> collection, final Object value) {
+        if(CollectionUtil.isEmpty(collection)) {
+            return false;
+        }
+
+        for(Object obj : collection){
+            if(obj.equals(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
