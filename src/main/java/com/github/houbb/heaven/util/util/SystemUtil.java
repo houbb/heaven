@@ -67,4 +67,13 @@ public final class SystemUtil {
         return "/app/file/"+baseDir+"/";
     }
 
+    /**
+     * 获取临时文件夹
+     * @return 文件夹
+     * @since 0.9.0
+     */
+    public static String getTempDir() {
+        return System.getProperty("java.io.tmpdir");
+    }
+
 }
