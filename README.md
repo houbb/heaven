@@ -40,7 +40,7 @@ maven 3.x+
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>heaven</artifactId>
-    <version>0.7.0</version>
+    <version>0.8.0</version>
 </dependency>
 ```
 
@@ -48,6 +48,9 @@ maven 3.x+
 
 > [文档目录](doc/gen/heaven-索引.md)
 
+# ROAD-MAP
+
+- [ ] 添加基于 gen-case 的测试用例
 
 # 中间件等工具开源矩阵
 

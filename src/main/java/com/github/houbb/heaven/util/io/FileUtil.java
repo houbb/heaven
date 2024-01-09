@@ -916,6 +916,40 @@ public final class FileUtil {
     }
 
     /**
+     * 递归删除文件（包含子文件+文件夹）
+     *
+     * @param filePath 文件信息
+     * @since 0.8.0
+     */
+    public static void deleteFileRecursive(final String filePath) {
+        ArgUtil.notEmpty(filePath, "filePath");
+
+        File dir = new File(filePath);
+
+        File[] list = dir.listFiles();  //无法做到list多层文件夹数据
+        if (list != null) {
+            for (File temp : list) {     //先去递归删除子文件夹及子文件
+                deleteFileRecursive(temp.getAbsolutePath());   //注意这里是递归调用
+            }
+        }
+
+        //再删除自己本身的文件夹
+        dir.delete();
+    }
+
+    /**
+     * 递归删除文件（包含子文件+文件夹）
+     *
+     * @param file 文件信息
+     * @since 0.8.0
+     */
+    public static void deleteFileRecursive(final File file) {
+        ArgUtil.notNull(file, "file");
+
+        deleteFileRecursive(file.getAbsolutePath());
+    }
+
+    /**
      * 创建临时文件
      *
      * @param name   文件名称
