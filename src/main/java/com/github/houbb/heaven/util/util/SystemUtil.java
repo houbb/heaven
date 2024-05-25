@@ -67,6 +67,7 @@ public final class SystemUtil {
         return "/app/file/"+baseDir+"/";
     }
 
+
     /**
      * 获取临时文件夹
      * @return 文件夹
@@ -74,6 +75,37 @@ public final class SystemUtil {
      */
     public static String getTempDir() {
         return System.getProperty("java.io.tmpdir");
+    }
+
+    /**
+     * 根据不同的系统，返回对应的基本路径
+     * @return 基本路径
+     * @since 0.10.0
+     */
+    public static String getBaseDir() {
+        if(isWindowsOs()) {
+            return "D:\\file\\";
+        }
+
+        return "/app/file/";
+    }
+
+    /**
+     * 获取当前工作目录的路径
+     * @return 工作目录的路径
+     * @since 0.10.0
+     */
+    public static String getCurrentWorkingDirectory() {
+        return System.getProperty("user.dir");
+    }
+
+    /**
+     * 获取类路径的路径
+     * @return 路径
+     * @since 0.10.0
+     */
+    public static String getClassPath() {
+        return System.getProperty("java.class.path");
     }
 
 }

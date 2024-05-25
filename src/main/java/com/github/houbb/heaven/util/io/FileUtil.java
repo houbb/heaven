@@ -1533,4 +1533,27 @@ public final class FileUtil {
         }
     }
 
+    /**
+     * 构建完整的路径。
+     * 给定一个前缀和路径，此方法将两者结合形成一个完整的URL或文件路径。
+     * 如果前缀末尾没有斜杠，则会在两者之间添加一个斜杠，确保路径的正确拼接。
+     *
+     * @param prefix 路径前缀。例如，http://example.com或C:\Users。
+     * @param path 相对路径。例如，path/to/resource或test.txt。
+     * @return 拼接后的完整路径。确保路径正确连接，不会因缺少斜杠而导致路径错误。
+     * @since 0.10.0
+     */
+    public static String buildFullPath(String prefix, String path) {
+        // 检查前缀是否已以斜杠结尾，如果是，则直接拼接路径；如果不是，则在前缀后添加斜杠再拼接路径
+        if(path.startsWith("/")) {
+            path = path.substring(1);
+        }
+
+        if(prefix.endsWith("/")) {
+            return prefix + path;
+        } else {
+            return prefix + "/" + path;
+        }
+    }
+
 }

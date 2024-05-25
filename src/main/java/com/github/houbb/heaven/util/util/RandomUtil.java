@@ -131,4 +131,27 @@ public final class RandomUtil {
         return list.get(index);
     }
 
+    /**
+     * 随机数
+     * @param base 基础
+     * @param bound 限制
+     * @return 结果
+     * @since 0.10.0
+     */
+    public static int random(int base, int bound) {
+        final Random random = ThreadLocalRandom.current();
+        int index = random.nextInt(bound);
+        return base + index;
+    }
+
+    /**
+     * 随机数
+     * @param bound 限制
+     * @return 结果
+     * @since 0.10.0
+     */
+    public static int random(int bound) {
+        return random(0, bound);
+    }
+
 }
