@@ -26,6 +26,7 @@ public class ResourceUtil {
 
     /**
      * 获取指定类加载器的资源路径
+     * @param clazz 类
      * @return 路径
      * @since 0.10.0
      */
@@ -35,6 +36,7 @@ public class ResourceUtil {
 
     /**
      * 获取指定类的根路径
+     * @param clazz 类
      * @return 路径
      * @since 0.10.0
      */
@@ -44,6 +46,7 @@ public class ResourceUtil {
 
     /**
      * 获取指定类的路径
+     * @param clazz 类
      * @return 路径
      * @since 0.10.0
      */
