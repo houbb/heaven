@@ -153,6 +153,18 @@ public final class CharUtil {
     }
 
     /**
+     * 是否为网址字符
+     * @param c 字符
+     * @return 是否
+     *
+     * @since 0.0.12
+     */
+    public static boolean isUrlChar(final char c) {
+        return CharUtil.isDigitOrLetter(c)
+                || '-' == c || '.' == c;
+    }
+
+    /**
      * 是否为中文
      * @param ch 中文
      * @return 是否

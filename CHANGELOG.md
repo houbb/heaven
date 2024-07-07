@@ -1274,3 +1274,9 @@
 | 3  | A    | FileUtil#buildFullPath                | 2024-5-25 14:04:30 | 文件方法  |
 | 4  | A    | RandomUtil#random(int,int)            | 2024-5-25 14:04:30 | 随机数字  |
 | 5  | A    | SystemUtil#getCurrentWorkingDirectory | 2024-5-25 14:04:30 | 系统方法  |
+
+# release_0.10.0
+
+| 序号 | 变更类型 | 说明        | 时间                 | 备注     |
+|:---|:-----|:----------|:-------------------|:-------|
+| 1  | A    | CharUtil#isUrlChar | 2024-5-25 14:04:30 | 字符串工具类 |
