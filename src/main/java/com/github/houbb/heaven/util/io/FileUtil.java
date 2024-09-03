@@ -21,7 +21,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.nio.file.*;
 import java.util.*;
-import java.util.internal.Base64;
 
 /**
  * 文件工具类
@@ -1554,6 +1553,10 @@ public final class FileUtil {
         } else {
             return prefix + "/" + path;
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(FileUtil.fileToBase64("C:\\Users\\dh\\Pictures\\Screenshots\\config.png"));
     }
 
 }

@@ -2,12 +2,12 @@ package com.github.houbb.heaven.util.secrect;
 
 import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 import com.github.houbb.heaven.util.common.ArgUtil;
+import com.github.houbb.heaven.util.util.internal.Base64;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.util.internal.Base64;
 
 /**
  * AES 加解密工具类
