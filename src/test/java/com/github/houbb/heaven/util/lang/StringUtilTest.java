@@ -22,4 +22,11 @@ public class StringUtilTest {
         Assert.assertEquals("[1, 2, 3, 4, 5, 6, 7, 8, 9]", StringUtil.toCharSet(text).toString());
     }
 
+    @Test
+    public void subWithLenTest() {
+        final String text = "123456789�";
+
+        Assert.assertEquals("123456789�", StringUtil.subWithBytes(text, 10));
+    }
+
 }

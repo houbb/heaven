@@ -2289,4 +2289,45 @@ public final class StringUtil {
         return characterSet;
     }
 
+    /**
+     * 按照字节数的长度截断
+     * @param text 文本
+     * @param bytesLen 字节长度
+     * @return 结果
+     * @since 0.13.0
+     */
+    public static String subWithBytes(final String text,
+                                      final int bytesLen,
+                                      final String charset) {
+        if(StringUtil.isEmpty(text)) {
+            return text;
+        }
+
+        try {
+            // 长度校验
+            byte[] bytes = text.getBytes(charset);
+
+            // 长度判断
+            if(bytes.length <= bytesLen) {
+                return text;
+            }
+
+            return new String(bytes, 0, bytesLen, charset);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 按照字节数的长度截断
+     * @param text 文本
+     * @param bytesLen 字节长度
+     * @return 结果
+     * @since 0.13.0
+     */
+    public static String subWithBytes(final String text,
+                                      final int bytesLen) {
+        return subWithBytes(text, bytesLen, "UTF-8");
+    }
+
 }
